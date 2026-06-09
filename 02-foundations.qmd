@@ -1,0 +1,16 @@
+# Foundations
+
+::: {.epigraph}
+To consult the statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of.
+--- Ronald A. Fisher
+:::
+
+Statistics textbooks often introduce ANOVA as a procedure: a set of steps to follow, a table to fill in, a $p$-value to report. This part takes a different approach.
+
+Before touching a single formula, we ask a more fundamental question: *what is ANOVA actually doing, and why does it work?*
+
+Chapter 1 builds the answer from the ground up. Starting from the simple observation that **variation in data has identifiable sources**, it shows how **ANOVA decomposes total variation into components that can be compared** and why the ratio of those components is a meaningful test of whether group means differ. It also shows that ANOVA is not a standalone procedure but a special case of the linear model, a connection that will pay dividends throughout the rest of the book.
+
+Chapter 2 is devoted entirely to assumptions. This is unusual for an introductory treatment, but the emphasis is deliberate. In our experience, assumption violations are the single most common source of invalid conclusions in the biological literature, not because researchers are careless, but because the consequences of violations are rarely taught with the clarity they deserve. By the end of Chapter 2, you will know not just *what* the assumptions are, but *why* they matter, *how badly* each one can distort your results when violated, and *what to do* when they are.
+
+These two chapters form the foundation on which everything else in the book is built. The time spent here will not be wasted.

@@ -1,0 +1,549 @@
+# Datasets and R Packages {#sec-appendix-b}
+
+This appendix documents all datasets and R packages used throughout
+the book. All datasets are simulated with fixed random seeds for
+full reproducibility — every reader running the code will obtain
+identical results. All datasets are saved as `.rds` files in the
+`RDS/` directory of the book's companion repository and can be
+loaded directly into R without re-running the simulation code.
+
+The companion repository is available at:
+**[https://github.com/Ebedthan/maov_data](https://github.com/Ebedthan/maov_data)**
+
+## B.1 Datasets
+
+### How to Load the Datasets
+
+Each dataset can be loaded directly from the repository once you have cloned it locally:
+
+```r
+# Load any dataset by name
+systolic <- readRDS("RDS/systolic.rds")
+gxe <- readRDS("RDS/gxe.rds")
+cardiac_recovery <- readRDS("RDS/cardiac_recovery.rds")
+cardiac_recovery_wide <- readRDS("RDS/cardiac_recovery_wide.rds")
+grazing <- readRDS("RDS/grazing.rds")
+irrigation <- readRDS("RDS/irrigation.rds")
+physio <- readRDS("RDS/physio.rds")
+birds <- readRDS("RDS/birds.rds")
+```
+
+Or regenerate any dataset from scratch by running the corresponding simulation chunk. All chunks use `set.seed(42)` for reproducibility.
+
+### Dataset 1: Antihypertensive Drug Trial {#sec-systolic}
+
+**File:** `RDS/systolic.rds`
+
+**Used in:** Chapter [-@sec-chap3] (One-Way ANOVA), Chapter [-@sec-chap4] (Multiple Comparisons)
+
+**Description:** A simulated randomised controlled trial investigating the effect of antihypertensive treatment on systolic blood pressure in patients with mild hypertension. Patients are randomly assigned to one of three groups: placebo, low-dose drug, or high-dose drug, and systolic blood pressure (mmHg) is measured after eight weeks of treatment.
+
+**Design:** One-way completely randomised design. Three treatment groups, 20 patients per group, $N = 60$ observations total.
+
+**Variables:**
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `bp` | Numeric | Systolic blood pressure (mmHg) |
+| `group` | Factor | Treatment group (Placebo / Low dose / High dose) |
+
+**True parameters:** group means 150, 140, and 128 mmHg; common within-group SD = 12 mmHg.
+
+```{r systolic-data}
+#| cache: true
+set.seed(42)
+
+n         <- 20
+groups    <- c("Placebo", "Low dose", "High dose")
+means     <- c(150, 140, 128)
+sd_common <- 12
+
+group    <- factor(rep(groups, each = n), levels = groups)
+bp       <- c(rnorm(n, mean = means[1], sd = sd_common),
+              rnorm(n, mean = means[2], sd = sd_common),
+              rnorm(n, mean = means[3], sd = sd_common))
+systolic <- data.frame(bp, group)
+
+saveRDS(systolic, "RDS/systolic.rds")
+summary(systolic)
+```
+
+
+### Dataset 2: Genotype × Environment Wheat Trial {#sec-gxe}
+
+**File:** `RDS/gxe.rds`
+
+**Used in:** Chapter [-@sec-chap5] (Two-Way ANOVA and Factorial Designs)
+
+**Description:** A simulated multi-environment wheat trial designed to demonstrate genotype × environment interaction (G×E). Four wheat varieties are grown across three rainfall environments (dry, moderate, wet), with five replicate plots per variety-environment combination. Two varieties are environment-specific specialists (Var B thrives in wet conditions; Var C in dry conditions), while two are stable generalists (Var A and Var D), producing a clear crossover interaction.
+
+**Design:** Two-way factorial design (variety × environment) with replication. $4 \times 3 \times 5 = 60$ observations total.
+
+**Variables:**
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `variety` | Factor | Wheat variety (Var A / Var B / Var C / Var D) |
+| `env` | Factor | Growing environment (Dry / Moderate / Wet) |
+| `rep` | Integer | Replicate number within each cell (1—5) |
+| `yield` | Numeric | Plot yield (g/plot) |
+
+**True parameters:** cell means range from 40 (Var B in dry) to 65 (Var B in wet); within-cell SD = 5 g/plot.
+
+```{r gxe-data}
+#| cache: true
+#| warning: false
+#| message: false
+set.seed(42)
+
+n_rep     <- 5
+varieties <- c("Var A", "Var B", "Var C", "Var D")
+envs      <- c("Dry", "Moderate", "Wet")
+
+cell_means <- matrix(
+  c(50, 52, 51,
+    40, 52, 65,
+    62, 53, 41,
+    50, 51, 50),
+  nrow = 4, byrow = TRUE,
+  dimnames = list(varieties, envs)
+)
+
+gxe        <- expand.grid(variety = varieties,
+                           env     = envs,
+                           rep     = seq_len(n_rep))
+gxe$yield  <- mapply(function(v, e) {
+  rnorm(1, mean = cell_means[v, e], sd = 5)
+}, as.character(gxe$variety), as.character(gxe$env))
+gxe$variety <- factor(gxe$variety, levels = varieties)
+gxe$env     <- factor(gxe$env,     levels = envs)
+
+saveRDS(gxe, "RDS/gxe.rds")
+summary(gxe)
+```
+
+
+### Dataset 3: Cardiac Rehabilitation Trial {#sec-cardiac-recovery}
+
+**Files:** `RDS/cardiac_recovery.rds` (long format), `RDS/cardiac_recovery_wide.rds` (wide format)
+**Used in:** Chapter [-@sec-chap6] (Repeated Measures ANOVA), Chapter [-@sec-chap9] (Mixed-Effects Models)
+
+**Description:** A simulated longitudinal clinical trial following 40 patients recovering from cardiac surgery. Patients are randomly assigned to either a standard rehabilitation programme (control) or an intensive cardiac rehabilitation programme (intervention). Resting heart rate (bpm) is measured at baseline and at weeks 4, 8, and 12. The intensive programme produces a steeper decline in heart rate, creating a significant group-by-time interaction.
+
+**Design:** Mixed repeated measures design. Two between-subjects groups (20 patients per group) crossed with four within-subject time points. Total: 160 observations in long format.
+
+**Variables (long format):**
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `hr` | Numeric | Resting heart rate (bpm) |
+| `group` | Factor | Rehabilitation programme (Control / Intervention) |
+| `time` | Factor | Measurement time point (0 / 4 / 8 / 12 weeks) |
+| `subject` | Factor | Patient identifier (1—40) |
+
+**True parameters:** control trajectory (82, 80, 78, 77 bpm); intervention trajectory (82, 76, 71, 68 bpm); within-subject covariance with moderate temporal correlation.
+
+```{r cardiac-data}
+#| cache: true
+library(MASS)
+set.seed(42)
+
+n_group            <- 20
+k                  <- 4
+times              <- c(0, 4, 8, 12)
+groups             <- c("Control", "Intervention")
+means_control      <- c(82, 80, 78, 77)
+means_intervention <- c(82, 76, 71, 68)
+
+sigma_within <- matrix(c(16,8,6,4, 8,16,8,6,
+                          6,8,16,8, 4,6,8,16), nrow = 4)
+
+df_control      <- as.data.frame(
+  mvrnorm(n_group, mu = means_control,      Sigma = sigma_within))
+df_intervention <- as.data.frame(
+  mvrnorm(n_group, mu = means_intervention, Sigma = sigma_within))
+names(df_control) <- names(df_intervention) <- paste0("t", 1:k)
+
+df_wide          <- rbind(df_control, df_intervention)
+df_wide$subject  <- factor(1:(2 * n_group))
+df_wide$group    <- factor(rep(groups, each = n_group),
+                            levels = groups)
+
+cardiac_recovery_wide <- df_wide
+cardiac_recovery      <- reshape(
+  df_wide, varying = paste0("t", 1:k),
+  v.names = "hr", timevar = "time", times = times,
+  direction = "long")
+cardiac_recovery$time    <- factor(cardiac_recovery$time)
+cardiac_recovery$subject <- factor(cardiac_recovery$subject)
+
+saveRDS(cardiac_recovery,      "RDS/cardiac_recovery.rds")
+saveRDS(cardiac_recovery_wide, "RDS/cardiac_recovery_wide.rds")
+summary(cardiac_recovery)
+```
+
+### Dataset 4: Grazing Effects on Plant Species Richness {#sec-grazing}
+
+**File:** `RDS/grazing.rds`
+
+**Used in:** Chapter [-@sec-chap7] (Split-Plot and Nested Designs)
+
+**Description:** A simulated ecological experiment investigating the effect of grazing intensity on plant species richness in a grassland. Three grazing treatments (ungrazed, light, heavy) are applied to six large paddocks (two per treatment). Within each paddock, species richness is counted in four quadrats, creating a nested structure where quadrats are subsamples within paddocks and paddocks are the true experimental units.
+
+**Design:** Nested design with two levels. Three treatments × 2 paddocks per treatment × 4 quadrats per paddock = 24 observations.
+
+**Variables:**
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `richness` | Integer | Plant species richness per quadrat |
+| `treatment` | Factor | Grazing intensity (Ungrazed / Light / Heavy) |
+| `paddock` | Factor | Paddock identifier (U1, U2, L1, L2, H1, H2) |
+
+**True parameters:** treatment means 12, 9, and 6 species per quadrat (ungrazed to heavy); paddock SD = 2; quadrat SD = 1.
+
+```{r grazing-data}
+#| cache: true
+set.seed(42)
+
+n_treatments    <- 3
+n_paddocks      <- 2
+n_quadrats      <- 4
+treatment_means <- c(12, 9, 6)
+paddock_sd      <- 2
+quadrat_sd      <- 1
+
+grazing <- do.call(rbind, lapply(seq_len(n_treatments), function(t) {
+  do.call(rbind, lapply(seq_len(n_paddocks), function(p) {
+    paddock_effect <- rnorm(1, 0, paddock_sd)
+    data.frame(
+      richness  = round(rnorm(n_quadrats,
+                              mean = treatment_means[t] +
+                                     paddock_effect,
+                              sd   = quadrat_sd)),
+      treatment = factor(c("Ungrazed", "Light", "Heavy")[t],
+                         levels = c("Ungrazed", "Light", "Heavy")),
+      paddock   = factor(paste0(c("U","L","H")[t], p))
+    )
+  }))
+}))
+
+saveRDS(grazing, "RDS/grazing.rds")
+summary(grazing)
+```
+
+
+### Dataset 5: Irrigation × Fertiliser Split-Plot Trial {#sec-irrig}
+
+**File:** `RDS/irrigation.rds`
+
+**Used in:** Chapter [-@sec-chap7] (Split-Plot and Nested Designs)
+
+**Description:** A simulated agricultural split-plot experiment testing the effects of irrigation regime and fertiliser type on wheat yield. Irrigation (rainfed vs irrigated) is the whole-plot factor applied to entire fields; fertiliser type (none, nitrogen, phosphorus) is the sub-plot factor applied to individual plots within each field. The design correctly reflects the practical constraint that irrigation infrastructure cannot be changed within a field, creating two different error terms for the two factors.
+
+**Design:** Split-plot design. Two irrigation treatments × 3 fields per treatment × 3 fertiliser types per field = 18 observations.
+
+**Variables:**
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `yield` | Numeric | Wheat yield (g/plot) |
+| `irrigation` | Factor | Irrigation regime (Rainfed / Irrigated) |
+| `fertiliser` | Factor | Fertiliser type (None / Nitrogen / Phosphorus) |
+| `field` | Factor | Field identifier (R1—R3 rainfed, I1—I3 irrigated) |
+
+**True parameters:** cell means range from 30 (rainfed, no fertiliser) to 55 (irrigated, nitrogen); field SD = 4; plot SD = 2.
+
+```{r irrigation-data}
+#| cache: true
+set.seed(42)
+
+irrigation <- c("Rainfed", "Irrigated")
+fertiliser <- c("None", "Nitrogen", "Phosphorus")
+n_fields   <- 3
+
+cell_means <- matrix(
+  c(30, 38, 35, 42, 55, 50), nrow = 2, byrow = TRUE,
+  dimnames = list(irrigation, fertiliser))
+
+df_agr <- do.call(rbind, lapply(seq_along(irrigation), function(i) {
+  do.call(rbind, lapply(seq_len(n_fields), function(f) {
+    field_effect <- rnorm(1, 0, 4)
+    data.frame(
+      yield      = sapply(fertiliser, function(fert)
+        rnorm(1, mean = cell_means[i, fert] + field_effect, sd = 2)),
+      irrigation = irrigation[i],
+      fertiliser = fertiliser,
+      field      = factor(paste0(substr(irrigation[i], 1, 1), f))
+    )
+  }))
+}))
+
+df_agr$irrigation <- factor(df_agr$irrigation,
+                              levels = c("Rainfed", "Irrigated"))
+df_agr$fertiliser <- factor(df_agr$fertiliser, levels = fertiliser)
+
+saveRDS(df_agr, "RDS/irrigation.rds")
+summary(df_agr)
+```
+
+### Dataset 6: Physiotherapy Protocol: Three-Level Nested Trial {#sec-physio}
+
+**File:** `RDS/physio.rds`
+
+**Used in:** Chapter [-@sec-chap9] (Mixed-Effects Models)
+
+**Description:** A simulated national health study investigating the effect of a new physiotherapy protocol on functional recovery scores following knee replacement surgery. Patients are recruited from 15 hospitals distributed across 3 regions, with 8-12 patients per hospital. The three-level nested structure (patients within hospitals within regions) requires a mixed-effects model with two nested random intercepts to produce valid inference about the treatment effect.
+
+**Design:** Three-level nested observational study. 3 regions × 5 hospitals per region × 8-12 patients per hospital. Total: 148 patients.
+
+**Variables:**
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `recovery` | Numeric | Functional recovery score (0—100) |
+| `treatment` | Factor | Protocol (Control / Treatment) |
+| `hospital` | Factor | Hospital identifier (H11—H35) |
+| `region` | Factor | Region identifier (R1 / R2 / R3) |
+
+**True parameters:** treatment effect = 7 points; region SD = 4; hospital-within-region SD = 3; patient-level SD = 8.
+
+```{r physio-data}
+#| cache: true
+#| message: false
+#| warning: false
+set.seed(42)
+
+n_regions        <- 3
+n_hospitals      <- 5
+n_patients       <- c(8, 9, 10, 11, 12)
+treatment_effect <- 7
+
+df_nested <- do.call(rbind, lapply(seq_len(n_regions), function(r) {
+  region_effect <- rnorm(1, 0, 4)
+  do.call(rbind, lapply(seq_len(n_hospitals), function(h) {
+    hospital_effect <- rnorm(1, 0, 3)
+    n_pat   <- sample(n_patients, 1)
+    treatment <- rep(c("Control", "Treatment"), length.out = n_pat)
+    data.frame(
+      recovery  = rnorm(n_pat,
+                        mean = 60 + region_effect +
+                               hospital_effect +
+                               treatment_effect *
+                               (treatment == "Treatment"),
+                        sd   = 8),
+      treatment = factor(treatment,
+                         levels = c("Control", "Treatment")),
+      hospital  = factor(paste0("H", r, h)),
+      region    = factor(paste0("R", r))
+    )
+  }))
+}))
+
+saveRDS(df_nested, "RDS/physio.rds")
+summary(df_nested)
+```
+
+---
+
+### Dataset 7: Bird Abundance in Forest Landscapes {#sec-birds}
+
+**File:** `RDS/birds.rds`
+
+**Used in:** Chapter [-@sec-chap11] (Generalised Linear Mixed Models)
+
+**Description:** A simulated ecological survey of bird abundance across three landscape types (agricultural matrix, fragmented forest, and continuous forest). The focal species is a forest interior specialist that is genuinely absent from many agricultural sites (structural zeros), creating a zero-inflated count response that motivates the use of negative binomial and zero-inflated GLMMs. Five transects are surveyed within each of 24 sites (8 per landscape type).
+
+**Design:** Hierarchical count survey. 3 landscape types × 8 sites per landscape × 5 transects per site = 120 observations.
+
+**Variables:**
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `count` | Integer | Number of individuals detected per transect |
+| `landscape` | Factor | Landscape type (Agricultural / Fragmented / Continuous) |
+| `site` | Factor | Site identifier (Agr1—Agr8, Fra1—Fra8, Con1—Con8) |
+| `transect` | Factor | Transect number within site (1—5) |
+
+**True parameters:** structural absence probabilities of 0.70 (agricultural), 0.30 (fragmented), and 0.00 (continuous); expected log-counts of 1.2, 2.2, and 3.2 given presence; negative binomial size = 2; site SD = 0.5 on log scale.
+
+```{r birds-data}
+#| cache: true
+set.seed(42)
+
+n_landscapes    <- 3
+n_sites         <- 8
+n_transects     <- 5
+landscape_names <- c("Agricultural", "Fragmented", "Continuous")
+zi_prob         <- c(0.70, 0.30, 0.00)
+lambda_log      <- c(1.2, 2.2, 3.2)
+site_sd         <- 0.5
+
+df_birds <- do.call(rbind, lapply(
+  seq_len(n_landscapes), function(l) {
+  do.call(rbind, lapply(seq_len(n_sites), function(s) {
+    site_effect  <- rnorm(1, 0, site_sd)
+    site_absent  <- rbinom(1, 1, prob = zi_prob[l])
+    counts <- if (site_absent == 1) {
+      rep(0, n_transects)
+    } else {
+      rnbinom(n_transects,
+              mu   = exp(lambda_log[l] + site_effect),
+              size = 2)
+    }
+    data.frame(
+      count     = counts,
+      landscape = factor(landscape_names[l],
+                         levels = landscape_names),
+      site      = factor(paste0(
+        substr(landscape_names[l], 1, 3), s)),
+      transect  = factor(1:n_transects)
+    )
+  }))
+}))
+
+saveRDS(df_birds, "RDS/birds.rds")
+summary(df_birds)
+```
+
+
+### Dataset Summary Table
+
+| Dataset | File | Design | $N$ | Response | Chapter |
+|---------|------|--------|-----|----------|---------|
+| Antihypertensive trial | `systolic.rds` | One-way CRD | 60 | Blood pressure (mmHg) | 3, 4 |
+| G×E wheat trial | `gxe.rds` | Two-way factorial | 60 | Yield (g/plot) | 5 |
+| Cardiac rehabilitation | `cardiac_recovery.rds` | Repeated measures | 160 | Heart rate (bpm) | 6, 9 |
+| Grazing richness | `grazing.rds` | Nested | 24 | Species richness | 7 |
+| Irrigation × fertiliser | `irrigation.rds` | Split-plot | 18 | Yield (g/plot) | 7 |
+| Physiotherapy trial | `physio.rds` | Three-level nested | 148 | Recovery score | 9 |
+| Bird abundance | `birds.rds` | Count survey | 120 | Individual count | 11 |
+
+
+
+## B.2 R Packages
+
+All analyses in this book were conducted in R v3.6.0 [@R2026]. The following packages are required to reproduce all code in the book. Install them all at once with:
+
+```{r}
+packages <- c(
+  # Core modelling
+  "lme4", "lmerTest", "nlme", "glmmTMB", "ordinal",
+  # Model diagnostics and comparison
+  "DHARMa", "MuMIn", "pbkrtest", "car",
+  # Post-hoc comparisons and effect sizes
+  "emmeans", "effectsize", "multcomp",
+  # Power analysis
+  "pwr", "simr",
+  # Non-parametric and robust methods
+  "WRS2", "PMCMRplus", "dunn.test",
+  # Data manipulation and visualisation
+  "ggplot2", "patchwork", "ggsignif",
+  # Parallel computation
+  "future", "furrr", "purrr",
+  # Utilities
+  "here", "MASS", "scales"
+)
+```
+
+```r
+install.packages(packages)
+```
+
+The table below lists each package with its primary use in the
+book, its current version on CRAN, and the citation to use when
+reporting analyses.
+
+| Package | Primary use | Citation |
+|---------|-------------|---------|
+| `lme4` | Linear mixed models | @Bates2015 |
+| `lmerTest` | P-values for mixed models (Satterthwaite/KR) | @Kuznetsova2017 |
+| `nlme` | Mixed models with covariance structures | @Pinheiro2000 |
+| `glmmTMB` | GLMMs, zero-inflation, negative binomial | @Brooks2017 |
+| `ordinal` | Cumulative link mixed models | @Christensen2019 |
+| `DHARMa` | Simulation-based GLMM diagnostics | @Hartig2022 |
+| `MuMIn` | Model selection, AIC, $R^2$ for mixed models | @Barton2023 |
+| `pbkrtest` | Kenward-Roger degrees of freedom | @Halekoh2014 |
+| `car` | Type II/III ANOVA, Levene's test | @Fox2019 |
+| `emmeans` | Estimated marginal means, post-hoc tests | @Lenth2023 |
+| `effectsize` | $\eta^2$, $\omega^2$, Cohen's $f$ | @Ben-Shachar2020 |
+| `multcomp` | Planned contrasts, general linear hypotheses | @Hothorn2008 |
+| `pwr` | Analytical power analysis | @Cohen1988 |
+| `simr` | Simulation-based power for mixed models | @Green2016 |
+| `WRS2` | Robust ANOVA methods | @Mair2020 |
+| `PMCMRplus` | Friedman post-hoc tests | @Pohlert2022 |
+| `dunn.test` | Dunn's post-hoc test after Kruskal-Wallis | @Dinno2017 |
+| `ggplot2` | Data visualisation | @Wickham2016 |
+| `patchwork` | Combining ggplot2 panels | @Pedersen2020 |
+| `ggsignif` | Significance annotations on plots | @Ahlmann2021 |
+| `future` | Parallel computation backend | @Bengtsson2021 |
+| `furrr` | Parallel `purrr`-style mapping | @Vaughan2022 |
+| `purrr` | Functional programming tools | @Wickham2023 |
+| `here` | Reproducible file paths | @Müller2020 |
+| `MASS` | Multivariate normal simulation | @Venables2002 |
+
+### Checking Your Package Versions
+
+To verify that all required packages are installed and check
+their versions:
+
+```{r}
+#| cache: true
+#| warning: false
+#| message: false
+# Check all required packages
+pkg_status <- sapply(packages, function(p) {
+  if (requireNamespace(p, quietly = TRUE)) {
+    as.character(packageVersion(p))
+  } else {
+    "NOT INSTALLED"
+  }
+})
+
+pkg_df <- data.frame(
+  Package = names(pkg_status),
+  Version = pkg_status,
+  row.names = NULL
+)
+print(pkg_df)
+```
+
+### Generating Package Citations
+
+```{r generate-packages-bib}
+#| eval: false
+#| echo: false
+# Run this chunk manually when packages are updated
+# Tools > Run Chunk, or set eval: true once then back to false
+
+packages <- c(
+  # Core modelling
+  "lme4", "lmerTest", "nlme", "glmmTMB", "ordinal",
+  # Model diagnostics and comparison
+  "DHARMa", "MuMIn", "pbkrtest", "car",
+  # Post-hoc comparisons and effect sizes
+  "emmeans", "effectsize", "multcomp",
+  # Power analysis
+  "pwr", "simr",
+  # Non-parametric and robust methods
+  "WRS2", "PMCMRplus", "dunn.test",
+  # Data manipulation and visualisation
+  "ggplot2", "patchwork", "ggsignif",
+  # Parallel computation
+  "future", "furrr", "purrr",
+  # Utilities
+  "here", "MASS", "scales"
+)
+
+knitr::write_bib(packages, file = here::here("packages.bib"))
+```
+
+## Package References
+
+The following references correspond to the R packages listed
+in the table above. Citations were generated automatically
+using `knitr::write_bib()` and reflect the package versions
+installed at the time of writing.
+
+::: {#refs}
+:::

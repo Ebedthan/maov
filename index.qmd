@@ -1,0 +1,42 @@
+# Preface {.unnumbered}
+
+## Why another analysis of variance book?
+
+There are many excellent books on analysis of variance, data modelling, and
+probability models. But I felt the need to write my own. Why? I see three
+problems.
+
+First, many courses assign a huge textbook. It might be possible for the
+strongest and most motivated students to become familiar with the range of
+topics covered in these books, but truly mastering them is another matter
+entirely. A book that tries to cover everything often ends up covering nothing
+deeply enough.
+
+Second, and drawing directly from the first point, students typically encounter
+analysis of variance as one chapter among many in a book that tries to present
+everything at once. This framing misleads students about the method: it invites
+them to skim over it rather than understand it, and to treat it as a recipe
+rather than a tool with conditions of use.
+
+Third, analysis of variance is a powerful tool, but I have too many times seen
+it misused, misinterpreted, and misreported, or applied through outdated and
+inappropriate workflows. In most cases, this does not come from carelessness. It
+comes from the fact that the method was never really understood in the first
+place.
+
+This book is my answer to these problems.
+
+## How to use this book
+
+This book is tool-oriented and built around a modern R stack. It is designed to
+be read in order, at least for the first time.
+
+**Start with the foundations.** The first two chapters are the heart of the book. Do not rush past them. They are what will tell you *when* you can use ANOVA, *when* you cannot, and *what to do* when you are not sure. A reader who masters Part I will make fewer analytical mistakes than one who jumps straight to the models.
+
+**Then work through the classical models.** Part II covers the ANOVA designs you will encounter most often, each with worked examples and R code. I particularly invite you to pay careful attention to the last chapter of this section, on nested and split-plot designs. Biological and ecological data are very often hierarchical in structure, and understanding how that hierarchy should be modelled, rather than ignored, is one of the most practically useful things this book can teach.
+
+**Move on to the modern framework**. Part III introduces mixed-effects models and generalised linear mixed models. If you have read this far, you have already encountered the core reason why: Chapter 2 showed that the most damaging violations of ANOVA assumptions, non-independence, pseudoreplication, nested structures, and random effects, cannot be fixed by transforming your data or switching to a non-parametric test. They require a richer model, one that can represent the actual structure of how your data were collected. Mixed-effects models are that richer model. They are not a separate topic bolted onto ANOVA, they are the natural destination of the logic you have already been following. ANOVA, as you now know, is a special case of the linear model. Mixed-effects models are simply the next step in the same direction: a linear model that can also account for the random variation introduced by subjects, plots, cages, clinics, or any other grouping structure in your data. By the end of Part III, the goal is that this framework becomes how you think about your analyses, not an advanced topic you feel you should know about but have never quite understood.
+
+**Close with good practice.** Part IV on experimental design and reproducibility completes the stack. An analysis that cannot be reproduced or reported clearly is an analysis that cannot be trusted. This final part makes sure yours can be both.
+
+Each chapter includes R code that you can run directly. The book was written using Quarto, and all code chunks are fully reproducible. When you see a chunk, run it, modify it, break it, and fix it. That is how the material becomes yours.

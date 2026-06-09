@@ -1,0 +1,364 @@
+# Decision Trees for Model Selection {#sec-appendix-c}
+
+This appendix collects all the decision frameworks introduced throughout the book into a single reference. Each diagram is designed to be consulted when starting a new analysis, before opening R, to help identify the appropriate model, check the relevant assumptions, and choose the right error term or distribution family for the data at hand.
+
+
+## Choosing the Right ANOVA Design
+
+The first question in any analysis is whether the data structure matches the intended model. This tree guides the choice of design based on the number of factors, the relationship between experimental units, and the nature of the response.
+
+```{mermaid}
+%%| label: fig-design-choice
+%%| fig-cap: "Decision tree for choosing the appropriate ANOVA design or model based on the structure of the data. Start at the top and follow the branches that describe your study."
+
+flowchart TD
+    A[Start:\nHow is your data structured?] --> B{How many\nfactors?}
+
+    B -- One --> C{Independent\nobservations?}
+    B -- Two or more --> D{Balanced\ncells?}
+    B -- Repeated or\nnested --> E{Same unit\nmeasured twice?}
+
+    C -- Yes --> F[One-way ANOVA\nChapter 3]
+    C -- No --> G{Clustering\nor nesting?}
+
+    G -- Nesting --> H[Nested ANOVA\nChapter 7]
+    G -- Clustering --> I[Linear Mixed\nModel\nChapter 9]
+
+    D -- Yes --> J[Two-way\nfactorial ANOVA\nChapter 5]
+    D -- No --> K[Two-way ANOVA\nType III SS\nChapter 5]
+
+    E -- Yes --> L{One or two\nlevel factors?}
+    E -- No --> M{Hard-to-change\nfactor?}
+
+    L -- One --> N[Repeated Measures\nANOVA\nChapter 6]
+    L -- Two --> O[Mixed Repeated\nMeasures\nChapter 6]
+
+    M -- Yes --> P[Split-Plot\nDesign\nChapter 7]
+    M -- No --> Q[Factorial ANOVA\nwith blocking\nChapter 5]
+
+    style A fill:#555555,color:#ffffff
+    style F fill:#81B29A,color:#ffffff
+    style H fill:#81B29A,color:#ffffff
+    style I fill:#81B29A,color:#ffffff
+    style J fill:#81B29A,color:#ffffff
+    style K fill:#81B29A,color:#ffffff
+    style N fill:#81B29A,color:#ffffff
+    style O fill:#81B29A,color:#ffffff
+    style P fill:#81B29A,color:#ffffff
+    style Q fill:#81B29A,color:#ffffff
+    style B fill:#F6AE2D,color:#ffffff
+    style C fill:#F6AE2D,color:#ffffff
+    style D fill:#F6AE2D,color:#ffffff
+    style E fill:#F6AE2D,color:#ffffff
+    style G fill:#F6AE2D,color:#ffffff
+    style L fill:#F6AE2D,color:#ffffff
+    style M fill:#F6AE2D,color:#ffffff
+```
+
+
+## Checking ANOVA Assumptions
+
+Once the design is chosen, the assumptions must be checked before interpreting results. This tree follows the hierarchy of assumptions established in Chapter [-@sec-chap2]: independence first, homoscedasticity second, normality third.
+
+```{mermaid}
+%%| label: fig-assumption-check
+%%| fig-cap: "Decision tree for checking ANOVA assumptions and choosing remedies when they are violated. The order of checks matters: independence must be addressed first, as no other remedy is valid if observations are not independent."
+
+flowchart TD
+    A[Fit the model\nextract residuals] --> B{Are observations\nindependent?}
+
+    B -- No --> C[Identify the\nclustering structure]
+    B -- Yes --> D{Homoscedasticity:\nLevene test +\nresidual boxplot}
+
+    C --> E[Mixed model\nor aggregate to\ntrue replicates\nChapter 9]
+
+    D -- Violated --> F{Equal group\nsizes?}
+    D -- OK --> G{Normality:\nQ-Q plot +\nShapiro-Wilk}
+
+    F -- Yes --> H[Mild violation:\nproceed with\ncaution]
+    F -- No --> I[Welch ANOVA\nor transform\nChapter 10]
+
+    G -- Outliers --> J[Investigate\noutliers:\ncorrect or report]
+    G -- Heavy tails --> K[Kruskal-Wallis\nor robust ANOVA\nChapter 10]
+    G -- OK --> L[Proceed with\nstandard ANOVA]
+
+    style A fill:#555555,color:#ffffff
+    style E fill:#81B29A,color:#ffffff
+    style H fill:#F6AE2D,color:#ffffff
+    style I fill:#81B29A,color:#ffffff
+    style J fill:#F6AE2D,color:#ffffff
+    style K fill:#81B29A,color:#ffffff
+    style L fill:#81B29A,color:#ffffff
+    style B fill:#2E86AB,color:#ffffff
+    style D fill:#2E86AB,color:#ffffff
+    style F fill:#2E86AB,color:#ffffff
+    style G fill:#2E86AB,color:#ffffff
+    style C fill:#E84855,color:#ffffff
+```
+
+
+## When Assumptions Fail: Choosing a Remedy
+
+When one or more assumptions are violated and cannot be fixed by a simple remedy, this tree guides the choice of alternative analysis. It extends the diagram in Section 10.4 to cover the full range of methods in the book.
+
+```{mermaid}
+%%| label: fig-assumption-failure
+%%| fig-cap: "Decision tree for choosing an analysis strategy when ANOVA assumptions are violated. The choice depends primarily on the type of response variable and the nature of the violation."
+
+flowchart TD
+    A[Assumption\nviolation detected] --> B{What type\nof response?}
+
+    B -- Continuous\npositive --> C{Multiplicative\nvariation?}
+    B -- Count data --> D{Overdispersed?}
+    B -- Proportion\nor binary --> E{Overdispersed\nor clustered?}
+    B -- Continuous\nunbounded --> F{Outliers or\nheavy tails?}
+    B -- Ordinal --> G[Cumulative link\nmixed model\nChapter 11]
+
+    C -- Yes --> H[Log transform\nor Gamma GLM\nChapter 10-11]
+    C -- No --> I[Square root\nor robust ANOVA\nChapter 10]
+
+    D -- Yes --> J[Negative\nBinomial GLMM\nChapter 11]
+    D -- No --> K[Poisson GLMM\nChapter 11]
+
+    E -- Yes --> L[Beta-Binomial\nor Binomial GLMM\nChapter 11]
+    E -- No --> M[Binomial GLM\nChapter 10]
+
+    F -- Outliers --> N[Robust ANOVA\nWRS2\nChapter 10]
+    F -- Heavy tails --> O[Permutation test\nor Kruskal-Wallis\nChapter 10]
+    F -- Neither --> P[Proceed with\nANOVA]
+
+    style A fill:#555555,color:#ffffff
+    style G fill:#81B29A,color:#ffffff
+    style H fill:#81B29A,color:#ffffff
+    style I fill:#81B29A,color:#ffffff
+    style J fill:#81B29A,color:#ffffff
+    style K fill:#81B29A,color:#ffffff
+    style L fill:#81B29A,color:#ffffff
+    style M fill:#81B29A,color:#ffffff
+    style N fill:#81B29A,color:#ffffff
+    style O fill:#81B29A,color:#ffffff
+    style P fill:#81B29A,color:#ffffff
+    style B fill:#F6AE2D,color:#ffffff
+    style C fill:#2E86AB,color:#ffffff
+    style D fill:#2E86AB,color:#ffffff
+    style E fill:#2E86AB,color:#ffffff
+    style F fill:#2E86AB,color:#ffffff
+```
+
+
+## Choosing a Multiple Comparison Procedure
+
+After a significant ANOVA F test, the choice of post-hoc procedure depends on whether comparisons were planned in advance and what type of error rate control is appropriate for the scientific context.
+
+```{mermaid}
+%%| label: fig-posthoc-choice
+%%| fig-cap: "Decision tree for choosing a multiple comparison procedure after a significant one-way ANOVA. The key distinction is between planned contrasts specified before data collection and exploratory post-hoc comparisons chosen after seeing the data."
+
+flowchart TD
+    A[Significant\nANOVA] --> B{Comparisons\nplanned in advance?}
+
+    B -- Yes --> C{How many\ncontrasts?}
+    B -- No --> D{Goal of\ncomparisons?}
+
+    C -- Few\nk-1 or fewer --> E[Planned contrasts\nno correction\nChapter 4]
+    C -- Many --> F[Holm or\nBenjamini-Hochberg\nChapter 4]
+
+    D -- All pairwise --> G{Equal group\nsizes?}
+    D -- vs control only --> H[Dunnett\nChapter 4]
+    D -- Exploratory\nmany groups --> I[Benjamini-Hochberg\nFDR control\nChapter 4]
+
+    G -- Yes --> J[Tukey HSD\nChapter 4]
+    G -- No --> K[Tukey HSD\nor Holm\nChapter 4]
+
+    style A fill:#555555,color:#ffffff
+    style E fill:#81B29A,color:#ffffff
+    style F fill:#81B29A,color:#ffffff
+    style H fill:#81B29A,color:#ffffff
+    style I fill:#81B29A,color:#ffffff
+    style J fill:#81B29A,color:#ffffff
+    style K fill:#81B29A,color:#ffffff
+    style B fill:#F6AE2D,color:#ffffff
+    style C fill:#2E86AB,color:#ffffff
+    style D fill:#2E86AB,color:#ffffff
+    style G fill:#2E86AB,color:#ffffff
+```
+
+
+## Choosing Between Fixed and Random Effects
+
+This tree addresses the distinction between fixed and random effects introduced in Chapter 2 and developed in Chapters [-@sec-chap7] and [-@sec-chap9]. The decision has direct consequences for the model fitted,
+the inference drawn, and the scope of conclusions.
+
+```{mermaid}
+%%| label: fig-fixed-random
+%%| fig-cap: "Decision tree for classifying factors as fixed or random effects. The key question is whether the factor levels are the specific entities of interest or a random sample from a larger population."
+
+flowchart TD
+    A[Factor to\nclassify] --> B{Are these levels the\nspecific entities\nof interest?}
+
+    B -- Yes --> C{Do conclusions\napply only to\nthese levels?}
+    B -- No --> D{Are levels a\nrandom sample from\na population?}
+
+    C -- Yes --> E[Fixed effect\nEstimate group means\nChapter 2]
+    C -- No --> F[Reconsider:\nare some levels\nrepresentative?]
+
+    D -- Yes --> G[Random effect\nEstimate variance\nComponent\nChapter 9]
+    D -- Unclear --> H{Would you want\nconclusions to\ngeneralise?}
+
+    H -- Yes --> G
+    H -- No --> E
+
+    F --> I{Mix of fixed\nand random?}
+    I -- Yes --> J[Mixed model\nwith both\nChapter 9]
+    I -- No --> E
+
+    style A fill:#555555,color:#ffffff
+    style E fill:#81B29A,color:#ffffff
+    style G fill:#81B29A,color:#ffffff
+    style J fill:#81B29A,color:#ffffff
+    style B fill:#F6AE2D,color:#ffffff
+    style C fill:#F6AE2D,color:#ffffff
+    style D fill:#F6AE2D,color:#ffffff
+    style H fill:#F6AE2D,color:#ffffff
+    style F fill:#2E86AB,color:#ffffff
+    style I fill:#2E86AB,color:#ffffff
+```
+
+
+## GLMM Distribution and Link Function Selection
+
+When the response is non-normal, this tree guides the choice of distribution family and link function for a generalised linear mixed model.
+
+```{mermaid}
+%%| label: fig-glmm-family
+%%| fig-cap: "Decision tree for selecting the response distribution and link function in a GLMM. Start from the nature of the response variable and follow the branches to the recommended model family."
+
+flowchart TD
+    A[What is the\nnature of your\nresponse?] --> B{Count data\nnon-negative\ninteger?}
+    A --> C{Proportion or\nbinary?}
+    A --> D{Positive\ncontinuous?}
+    A --> E{Ordered\ncategories?}
+    A --> F{Continuous\nnormal-ish?}
+
+    B -- Yes --> G{Overdispersed?\nratio >> 1}
+    G -- Yes --> H{Excess\nzeros?}
+    G -- No --> I[Poisson GLMM\nlog link\nChapter 11]
+    H -- Yes --> J[Zero-inflated\nNegative Binomial\nglmmTMB\nChapter 11]
+    H -- No --> K[Negative Binomial\nGLMM\nglmmTMB\nChapter 11]
+
+    C -- Binary 0/1 --> L[Binomial GLMM\nlogit link\nChapter 11]
+    C -- Proportion k/n --> M{Overdispersed?}
+    M -- Yes --> N[Beta-Binomial\nglmmTMB\nChapter 11]
+    M -- No --> L
+
+    D -- Constant CV --> O[Gamma GLMM\nlog link\nChapter 11]
+    D -- Log-normal --> P[Gaussian GLMM\nlog link\nor log-transform\nChapter 10-11]
+
+    E --> Q[Cumulative Link\nMixed Model\nordinal\nChapter 11]
+
+    F --> R[Linear Mixed\nModel\nlme4\nChapter 9]
+
+    style A fill:#555555,color:#ffffff
+    style I fill:#81B29A,color:#ffffff
+    style J fill:#81B29A,color:#ffffff
+    style K fill:#81B29A,color:#ffffff
+    style L fill:#81B29A,color:#ffffff
+    style N fill:#81B29A,color:#ffffff
+    style O fill:#81B29A,color:#ffffff
+    style P fill:#81B29A,color:#ffffff
+    style Q fill:#81B29A,color:#ffffff
+    style R fill:#81B29A,color:#ffffff
+    style B fill:#F6AE2D,color:#ffffff
+    style C fill:#F6AE2D,color:#ffffff
+    style D fill:#F6AE2D,color:#ffffff
+    style E fill:#F6AE2D,color:#ffffff
+    style F fill:#F6AE2D,color:#ffffff
+    style G fill:#2E86AB,color:#ffffff
+    style H fill:#2E86AB,color:#ffffff
+    style M fill:#2E86AB,color:#ffffff
+```
+
+
+## Model Selection Strategy for GLMMs
+
+This tree operationalises the two-stage model selection strategy described in Section [-@sec-model-selection-aic], establishing the random effects structure first, then selecting fixed effects by model comparison.
+
+```{mermaid}
+%%| label: fig-model-selection
+%%| fig-cap: "Decision tree for GLMM model selection following the two-stage strategy: random effects structure first, fixed effects second. AIC comparisons use ML estimation; final parameters are reported from REML."
+
+flowchart TD
+    A[Start:\nSpecify maximal\nrandom effects\nfrom design] --> B{Are all random\neffects justified\nby design?}
+
+    B -- Yes --> C[Fit maximal\nrandom effects\nmodel with REML]
+    B -- No --> D[Remove unjustified\nrandom effects\nfrom model]
+    D --> C
+
+    C --> E{Check random\neffects variance\ncomponents}
+    E -- Near zero --> F[Consider\nsimplifying\nrandom structure]
+    E -- Reasonable --> G[Fix random\neffects structure]
+
+    G --> H[Refit with ML\nfor fixed effects\ncomparison]
+    H --> I{Compare candidate\nfixed effect\nmodels by AIC}
+
+    I -- ΔAIC > 2 --> J[Select lower\nAIC model]
+    I -- ΔAIC < 2 --> K[Models equivalent:\nconsider averaging\nor simpler model]
+
+    J --> L[Refit winning\nmodel with REML\nfor final estimates]
+    K --> L
+
+    L --> M[Check DHARMa\ndiagnostics]
+    M -- Problems --> N[Reconsider\ndistribution\nor structure]
+    M -- Clean --> O[Report results]
+
+    style A fill:#555555,color:#ffffff
+    style C fill:#2E86AB,color:#ffffff
+    style G fill:#2E86AB,color:#ffffff
+    style H fill:#2E86AB,color:#ffffff
+    style J fill:#81B29A,color:#ffffff
+    style K fill:#F6AE2D,color:#ffffff
+    style L fill:#81B29A,color:#ffffff
+    style O fill:#81B29A,color:#ffffff
+    style N fill:#E84855,color:#ffffff
+    style B fill:#F6AE2D,color:#ffffff
+    style E fill:#F6AE2D,color:#ffffff
+    style I fill:#F6AE2D,color:#ffffff
+    style M fill:#F6AE2D,color:#ffffff
+    style D fill:#E84855,color:#ffffff
+    style F fill:#E84855,color:#ffffff
+```
+
+## Quick Reference: R Functions by Task
+
+The following table maps each analytical task to the primary R function used in this book, the package it comes from, and the chapter where it is introduced.
+
+| Task | Function | Package | Chapter |
+|------|----------|---------|---------|
+| One-way ANOVA | `aov()` | base R | [-@sec-chap3] |
+| Two-way ANOVA (Type III) | `Anova()` | `car` | [-@sec-chap5] |
+| Repeated measures ANOVA | `aov()` with `Error()` | base R | [-@sec-chap6] |
+| Sphericity test | `summary(Anova(...), multivariate=FALSE)` | `car` | [-@sec-chap6] |
+| Linear mixed model | `lmer()` | `lme4` | [-@sec-chap9] |
+| P-values for LMM | `anova(..., ddf="Kenward-Roger")` | `lmerTest` | [-@sec-chap9] |
+| Poisson GLMM | `glmer(..., family=poisson)` | `lme4` | [-@sec-chap11] |
+| Negative binomial GLMM | `glmmTMB(..., family=nbinom2)` | `glmmTMB` | [-@sec-chap11] |
+| Zero-inflated GLMM | `glmmTMB(..., ziformula=~1)` | `glmmTMB` | [-@sec-chap11] |
+| Binomial GLMM | `glmer(..., family=binomial)` | `lme4` | [-@sec-chap11] |
+| Gamma GLMM | `glmmTMB(..., family=Gamma)` | `glmmTMB` | [-@sec-chap11] |
+| Ordinal mixed model | `clmm()` | `ordinal` | [-@sec-chap11] |
+| GLMM diagnostics | `simulateResiduals()` | `DHARMa` | [-@sec-chap11] |
+| Post-hoc comparisons | `emmeans()` | `emmeans` | [-@sec-chap4] |
+| Tukey HSD | `TukeyHSD()` | base R | [-@sec-chap4] |
+| Planned contrasts | `glht()` | `multcomp` | [-@sec-chap4] |
+| Effect sizes | `omega_squared()` | `effectsize` | [-@sec-chap3] |
+| Mixed model R² | `r.squaredGLMM()` | `MuMIn` | [-@sec-chap9] |
+| Levene's test | `leveneTest()` | `car` | [-@sec-chap2] |
+| Kruskal-Wallis | `kruskal.test()` | base R | [-@sec-chap10] |
+| Friedman test | `friedman.test()` | base R | [-@sec-chap10] |
+| Robust ANOVA | `t1way()` | `WRS2` | [-@sec-chap10] |
+| Analytical power | `pwr.anova.test()` | `pwr` | [-@sec-chap3] |
+| Simulation power | `powerSim()` | `simr` | [-@sec-chap12] |
+| Power curve | `powerCurve()` | `simr` | [-@sec-chap12] |
+| Model comparison | `anova()` | base R | [-@sec-chap8] |
+| AIC comparison | `AIC()` | base R | [-@sec-chap11] |
+| Model selection table | `model.sel()` | `MuMIn` | [-@sec-chap11] |

@@ -1,0 +1,89 @@
+project:
+  type: book
+
+book:
+  title: "Modern Analysis of Variance"
+  author: "Anicet Ebou"
+  date: "2026-05-01"
+  reader-mode: true
+
+  page-footer:
+    left: |
+      Modern Analysis of Variance by Anicet Ebou.
+  site-url: https://ebedthan.github.io/maov/
+  repo-url: https://github.com/Ebedthan/maov/
+  repo-branch: main
+  repo-actions: [issue, edit]
+
+  chapters:
+    - index.qmd
+    - part: 02-foundations.qmd
+      chapters:
+        - 02a-what-is-anova.qmd
+        - 02b-assumptions.qmd
+    - part: 03-classical-anova.qmd
+      chapters:
+        - 03a-one-way.qmd
+        - 03b-multiple-comparisons.qmd
+        - 03c-two-way.qmd
+        - 03d-repeated-measures.qmd
+        - 03e-split-plot-nested.qmd
+    - part: 04-modern-framework.qmd
+      chapters:
+        - 04a-anova-as-lm.qmd
+        - 04b-mixed-effects.qmd
+        - 04c-when-assumptions-fail.qmd
+        - 04d-glmm.qmd
+    - part: 05-good-practice.qmd
+      chapters:
+        - 05a-experimental-design.qmd
+        - 05b-reporting.qmd
+        - 05c-reproducible-analysis.qmd
+  appendices:
+    - appendix-a-math.qmd
+    - appendix-b-packages.qmd
+    - appendix-c-decision-tree.qmd
+  references: references.qmd
+bibliography:
+  - references.bib
+  - packages.bib
+
+format:
+  html:
+    theme: [cosmo, custom.scss]
+    author-meta: "Anicet Ebou"
+    callout-appearance: simple
+    code-link: true
+    number-sections: true
+  pdf:
+    pdf-engine: xelatex
+    number-sections: true
+    documentclass: scrbook
+    classoption: [oneside]
+    papersize: a4
+    fontsize: 11pt
+    linestretch: 1.5
+    toc: true
+    toc-depth: 2
+    lof: true
+    lot: true
+    colorlinks: true
+    cite-method: natbib
+    mermaid-format: png
+
+knitr:
+  opts_chunk:
+    comment: "#>"
+    fig.align: "center"
+    out.width: "90%"
+    tidy: false
+    width: 72
+    
+execute:
+  cache: true
+
+crossref:
+  chapters: true
+  fig-title: "Figure"
+
+editor: source

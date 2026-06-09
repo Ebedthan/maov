@@ -1,0 +1,2389 @@
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 05:17
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**index.tex
+(./index.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-05-26>
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/koma-script/scrbook.cls
+Document Class: scrbook 2026/02/02 v3.49.2 KOMA-Script document class (book)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2026/02/02 v3.49.2 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2026/02/02 v3.49.2 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2026/02/02 v3.49.2 KOMA-Script package (file load hooks)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2026/02/02 v3.49.2 KOMA-Script package (using LaTeX hooks)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2026/02/02 v3.49.2 KOMA-Script package (logo)
+))) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2026-05-17 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line 370.
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/koma-script/tocbasic.sty
+Package: tocbasic 2026/02/02 v3.49.2 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip49
+\scr@dte@tocline@numbox=\box53
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 143.
+Package scrbook Info: You've used standard option `11pt'.
+(scrbook)             This is correct!
+(scrbook)             Internally I'm using `fontsize=11pt'.
+(scrbook)             If you'd like to set the option with \KOMAoptions,
+(scrbook)             you'd have to use `fontsize=11pt' there
+(scrbook)             instead of `11pt', too.
+Class scrbook Info: You've used standard option `oneside'.
+(scrbook)           This is correct!
+(scrbook)           Internally I'm using `twoside=false'.
+(scrbook)           If you'd like to set the option with \KOMAoptions,
+(scrbook)           you'd have to use `twoside=false' there
+(scrbook)           instead of `oneside', too.
+Class scrbook Info: File `scrsize11pt.clo' used to setup font sizes on input line 2713.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
+File: scrsize11pt.clo 2026/02/02 v3.49.2 KOMA-Script font size class option (11pt)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/koma-script/typearea.sty
+Package: typearea 2026/02/02 v3.49.2 KOMA-Script package (type area)
+\ta@bcor=\skip50
+\ta@div=\count273
+Package typearea Info: You've used standard option `a4paper'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `paper=a4'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `paper=a4' there
+(typearea)             instead of `a4paper', too.
+Package typearea Info: You've used standard option `oneside'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `twoside=false'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `twoside=false' there
+(typearea)             instead of `oneside', too.
+\ta@hblk=\skip51
+\ta@vblk=\skip52
+\ta@temp=\skip53
+\footheight=\skip54
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 10
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 597.50793pt
+(typearea)              \textwidth      = 418.25555pt
+(typearea)              DIV departure   = -6%
+(typearea)              \evensidemargin = 17.3562pt
+(typearea)              \oddsidemargin  = 17.3562pt
+(typearea)             \paperheight     = 845.04694pt
+(typearea)              \textheight     = 595.80026pt
+(typearea)              \topmargin      = -25.16531pt
+(typearea)              \headheight     = 17.0pt
+(typearea)              \headsep        = 20.40001pt
+(typearea)              \topskip        = 11.0pt
+(typearea)              \footskip       = 47.6pt
+(typearea)              \baselineskip   = 13.6pt
+(typearea)              on input line 1810.
+)
+\c@part=\count274
+\c@chapter=\count275
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@subparagraph=\count280
+\scr@dte@chapter@maxnumwidth=\skip55
+Class scrbook Info: using compatibility default `afterindent=bysign'
+(scrbook)           for `\chapter on input line 5945.
+\scr@dte@section@maxnumwidth=\skip56
+Class scrbook Info: using compatibility default `runin=bysign'
+(scrbook)           for `\section on input line 5956.
+Class scrbook Info: using compatibility default `afterindent=bysign'
+(scrbook)           for `\section on input line 5956.
+\scr@dte@part@maxnumwidth=\skip57
+Class scrbook Info: using compatibility default `afterindent=true'
+(scrbook)           for `\part on input line 5965.
+\scr@dte@subsection@maxnumwidth=\skip58
+Class scrbook Info: using compatibility default `runin=bysign'
+(scrbook)           for `\subsection on input line 5975.
+Class scrbook Info: using compatibility default `afterindent=bysign'
+(scrbook)           for `\subsection on input line 5975.
+\scr@dte@subsubsection@maxnumwidth=\skip59
+Class scrbook Info: using compatibility default `runin=bysign'
+(scrbook)           for `\subsubsection on input line 5985.
+Class scrbook Info: using compatibility default `afterindent=bysign'
+(scrbook)           for `\subsubsection on input line 5985.
+\scr@dte@paragraph@maxnumwidth=\skip60
+Class scrbook Info: using compatibility default `runin=bysign'
+(scrbook)           for `\paragraph on input line 5996.
+Class scrbook Info: using compatibility default `afterindent=bysign'
+(scrbook)           for `\paragraph on input line 5996.
+\scr@dte@subparagraph@maxnumwidth=\skip61
+Class scrbook Info: using compatibility default `runin=bysign'
+(scrbook)           for `\subparagraph on input line 6006.
+Class scrbook Info: using compatibility default `afterindent=bysign'
+(scrbook)           for `\subparagraph on input line 6006.
+\abovecaptionskip=\skip62
+\belowcaptionskip=\skip63
+\c@pti@nb@sid@b@x=\box54
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 7242.
+\scr@dte@figure@maxnumwidth=\skip64
+\c@figure=\count281
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 7255.
+\scr@dte@table@maxnumwidth=\skip65
+\c@table=\count282
+Class scrbook Info: Redefining `\numberline' on input line 7426.
+\bibindent=\dimen150
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2026/05/19 v2.18d AMS math features
+\@mathmargin=\skip66
+For additional information on amsmath, use the `?' option.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks18
+\ex@=\dimen151
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen152
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count283
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count284
+\leftroot@=\count285
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count286
+\DOTSCASE@=\count287
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box55
+\strutbox@=\box56
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen153
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count288
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count289
+\dotsspace@=\muskip17
+\c@parentequation=\count290
+\dspbrk@lvl=\count291
+\tag@help=\toks19
+\row@=\count292
+\column@=\count293
+\maxfields@=\count294
+\andhelp@=\toks20
+\eqnshift@=\dimen154
+\alignsep@=\dimen155
+\tagshift@=\dimen156
+\tagwidth@=\dimen157
+\totwidth@=\dimen158
+\lineht@=\dimen159
+\@envbody=\toks21
+\multlinegap=\skip67
+\multlinetaggap=\skip68
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2965.
+LaTeX Info: Redefining \] on input line 2966.
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/home/ediman/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2026-05-26 L3 programming layer (loader) 
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2026-02-18 L3 backend support: XeTeX
+\g__graphics_track_int=\count295
+\g__pdfannot_backend_int=\count296
+\g__pdfannot_backend_link_int=\count297
+))
+Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
+Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2025-10-09 L3 Experimental document command parser
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2025-10-09 LaTeX2e option processing using LaTeX3 keys
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
+Package: fontspec 2025/09/29 v2.9g Font selection for XeLaTeX and LuaLaTeX
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+Package: fontspec-xetex 2025/09/29 v2.9g Font selection for XeLaTeX and LuaLaTeX
+\l__fontspec_script_int=\count298
+\l__fontspec_language_int=\count299
+\l__fontspec_strnum_int=\count300
+\l__fontspec_tmp_int=\count301
+\l__fontspec_tmpa_int=\count302
+\l__fontspec_tmpb_int=\count303
+\l__fontspec_tmpc_int=\count304
+\l__fontspec_em_int=\count305
+\l__fontspec_emdef_int=\count306
+\l__fontspec_strong_int=\count307
+\l__fontspec_strongdef_int=\count308
+\l__fontspec_tmpa_dim=\dimen160
+\l__fontspec_tmpb_dim=\dimen161
+\l__fontspec_tmpc_dim=\dimen162
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
+Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
+LaTeX Encoding Info:    Redeclaring text command \capitalcedilla (encoding TS1) on input line 49.
+LaTeX Encoding Info:    Redeclaring text command \capitalogonek (encoding TS1) on input line 52.
+LaTeX Encoding Info:    Redeclaring text command \capitalgrave (encoding TS1) on input line 55.
+LaTeX Encoding Info:    Redeclaring text command \capitalacute (encoding TS1) on input line 56.
+LaTeX Encoding Info:    Redeclaring text command \capitalcircumflex (encoding TS1) on input line 57.
+LaTeX Encoding Info:    Redeclaring text command \capitaltilde (encoding TS1) on input line 58.
+LaTeX Encoding Info:    Redeclaring text command \capitaldieresis (encoding TS1) on input line 59.
+LaTeX Encoding Info:    Redeclaring text command \capitalhungarumlaut (encoding TS1) on input line 60.
+LaTeX Encoding Info:    Redeclaring text command \capitalring (encoding TS1) on input line 61.
+LaTeX Encoding Info:    Redeclaring text command \capitalcaron (encoding TS1) on input line 62.
+LaTeX Encoding Info:    Redeclaring text command \capitalbreve (encoding TS1) on input line 63.
+LaTeX Encoding Info:    Redeclaring text command \capitalmacron (encoding TS1) on input line 64.
+LaTeX Encoding Info:    Redeclaring text command \capitaldotaccent (encoding TS1) on input line 65.
+LaTeX Encoding Info:    Redeclaring text command \t (encoding TS1) on input line 66.
+LaTeX Encoding Info:    Redeclaring text command \capitaltie (encoding TS1) on input line 67.
+LaTeX Encoding Info:    Redeclaring text command \newtie (encoding TS1) on input line 68.
+LaTeX Encoding Info:    Redeclaring text command \capitalnewtie (encoding TS1) on input line 69.
+LaTeX Encoding Info:    Redeclaring text symbol \textcapitalcompwordmark (encoding TS1) on input line 70.
+LaTeX Encoding Info:    Redeclaring text symbol \textascendercompwordmark (encoding TS1) on input line 71.
+LaTeX Encoding Info:    Redeclaring text symbol \textquotestraightbase (encoding TS1) on input line 72.
+LaTeX Encoding Info:    Redeclaring text symbol \textquotestraightdblbase (encoding TS1) on input line 73.
+LaTeX Encoding Info:    Redeclaring text symbol \texttwelveudash (encoding TS1) on input line 74.
+LaTeX Encoding Info:    Redeclaring text symbol \textthreequartersemdash (encoding TS1) on input line 75.
+LaTeX Encoding Info:    Redeclaring text symbol \textleftarrow (encoding TS1) on input line 76.
+LaTeX Encoding Info:    Redeclaring text symbol \textrightarrow (encoding TS1) on input line 77.
+LaTeX Encoding Info:    Redeclaring text symbol \textblank (encoding TS1) on input line 78.
+LaTeX Encoding Info:    Redeclaring text symbol \textdollar (encoding TS1) on input line 79.
+LaTeX Encoding Info:    Redeclaring text symbol \textquotesingle (encoding TS1) on input line 80.
+LaTeX Encoding Info:    Redeclaring text command \textasteriskcentered (encoding TS1) on input line 81.
+LaTeX Encoding Info:    Redeclaring text symbol \textdblhyphen (encoding TS1) on input line 92.
+LaTeX Encoding Info:    Redeclaring text symbol \textfractionsolidus (encoding TS1) on input line 93.
+LaTeX Encoding Info:    Redeclaring text symbol \textzerooldstyle (encoding TS1) on input line 94.
+LaTeX Encoding Info:    Redeclaring text symbol \textoneoldstyle (encoding TS1) on input line 95.
+LaTeX Encoding Info:    Redeclaring text symbol \texttwooldstyle (encoding TS1) on input line 96.
+LaTeX Encoding Info:    Redeclaring text symbol \textthreeoldstyle (encoding TS1) on input line 97.
+LaTeX Encoding Info:    Redeclaring text symbol \textfouroldstyle (encoding TS1) on input line 98.
+LaTeX Encoding Info:    Redeclaring text symbol \textfiveoldstyle (encoding TS1) on input line 99.
+LaTeX Encoding Info:    Redeclaring text symbol \textsixoldstyle (encoding TS1) on input line 100.
+LaTeX Encoding Info:    Redeclaring text symbol \textsevenoldstyle (encoding TS1) on input line 101.
+LaTeX Encoding Info:    Redeclaring text symbol \texteightoldstyle (encoding TS1) on input line 102.
+LaTeX Encoding Info:    Redeclaring text symbol \textnineoldstyle (encoding TS1) on input line 103.
+LaTeX Encoding Info:    Redeclaring text symbol \textlangle (encoding TS1) on input line 104.
+LaTeX Encoding Info:    Redeclaring text symbol \textminus (encoding TS1) on input line 105.
+LaTeX Encoding Info:    Redeclaring text symbol \textrangle (encoding TS1) on input line 106.
+LaTeX Encoding Info:    Redeclaring text symbol \textmho (encoding TS1) on input line 107.
+LaTeX Encoding Info:    Redeclaring text symbol \textbigcircle (encoding TS1) on input line 108.
+LaTeX Encoding Info:    Redeclaring text command \textcircled (encoding TS1) on input line 109.
+LaTeX Encoding Info:    Redeclaring text symbol \textohm (encoding TS1) on input line 115.
+LaTeX Encoding Info:    Redeclaring text symbol \textlbrackdbl (encoding TS1) on input line 116.
+LaTeX Encoding Info:    Redeclaring text symbol \textrbrackdbl (encoding TS1) on input line 117.
+LaTeX Encoding Info:    Redeclaring text symbol \textuparrow (encoding TS1) on input line 118.
+LaTeX Encoding Info:    Redeclaring text symbol \textdownarrow (encoding TS1) on input line 119.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciigrave (encoding TS1) on input line 120.
+LaTeX Encoding Info:    Redeclaring text symbol \textborn (encoding TS1) on input line 121.
+LaTeX Encoding Info:    Redeclaring text symbol \textdivorced (encoding TS1) on input line 122.
+LaTeX Encoding Info:    Redeclaring text symbol \textdied (encoding TS1) on input line 123.
+LaTeX Encoding Info:    Redeclaring text symbol \textleaf (encoding TS1) on input line 124.
+LaTeX Encoding Info:    Redeclaring text symbol \textmarried (encoding TS1) on input line 125.
+LaTeX Encoding Info:    Redeclaring text symbol \textmusicalnote (encoding TS1) on input line 126.
+LaTeX Encoding Info:    Redeclaring text symbol \texttildelow (encoding TS1) on input line 127.
+LaTeX Encoding Info:    Redeclaring text symbol \textdblhyphenchar (encoding TS1) on input line 128.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciibreve (encoding TS1) on input line 129.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciicaron (encoding TS1) on input line 130.
+LaTeX Encoding Info:    Redeclaring text symbol \textacutedbl (encoding TS1) on input line 131.
+LaTeX Encoding Info:    Redeclaring text symbol \textgravedbl (encoding TS1) on input line 132.
+LaTeX Encoding Info:    Redeclaring text symbol \textdagger (encoding TS1) on input line 133.
+LaTeX Encoding Info:    Redeclaring text symbol \textdaggerdbl (encoding TS1) on input line 134.
+LaTeX Encoding Info:    Redeclaring text symbol \textbardbl (encoding TS1) on input line 135.
+LaTeX Encoding Info:    Redeclaring text symbol \textperthousand (encoding TS1) on input line 136.
+LaTeX Encoding Info:    Redeclaring text symbol \textbullet (encoding TS1) on input line 137.
+LaTeX Encoding Info:    Redeclaring text symbol \textcelsius (encoding TS1) on input line 138.
+LaTeX Encoding Info:    Redeclaring text symbol \textdollaroldstyle (encoding TS1) on input line 139.
+LaTeX Encoding Info:    Redeclaring text symbol \textcentoldstyle (encoding TS1) on input line 140.
+LaTeX Encoding Info:    Redeclaring text symbol \textflorin (encoding TS1) on input line 141.
+LaTeX Encoding Info:    Redeclaring text symbol \textcolonmonetary (encoding TS1) on input line 142.
+LaTeX Encoding Info:    Redeclaring text symbol \textwon (encoding TS1) on input line 143.
+LaTeX Encoding Info:    Redeclaring text symbol \textnaira (encoding TS1) on input line 144.
+LaTeX Encoding Info:    Redeclaring text symbol \textguarani (encoding TS1) on input line 145.
+LaTeX Encoding Info:    Redeclaring text symbol \textpeso (encoding TS1) on input line 146.
+LaTeX Encoding Info:    Redeclaring text symbol \textlira (encoding TS1) on input line 147.
+LaTeX Encoding Info:    Redeclaring text symbol \textrecipe (encoding TS1) on input line 148.
+LaTeX Encoding Info:    Redeclaring text symbol \textinterrobang (encoding TS1) on input line 149.
+LaTeX Encoding Info:    Redeclaring text symbol \textinterrobangdown (encoding TS1) on input line 150.
+LaTeX Encoding Info:    Redeclaring text symbol \textdong (encoding TS1) on input line 151.
+LaTeX Encoding Info:    Redeclaring text symbol \texttrademark (encoding TS1) on input line 152.
+LaTeX Encoding Info:    Redeclaring text symbol \textpertenthousand (encoding TS1) on input line 153.
+LaTeX Encoding Info:    Redeclaring text symbol \textpilcrow (encoding TS1) on input line 154.
+LaTeX Encoding Info:    Redeclaring text symbol \textbaht (encoding TS1) on input line 155.
+LaTeX Encoding Info:    Redeclaring text symbol \textnumero (encoding TS1) on input line 156.
+LaTeX Encoding Info:    Redeclaring text symbol \textdiscount (encoding TS1) on input line 157.
+LaTeX Encoding Info:    Redeclaring text symbol \textestimated (encoding TS1) on input line 158.
+LaTeX Encoding Info:    Redeclaring text symbol \textopenbullet (encoding TS1) on input line 159.
+LaTeX Encoding Info:    Redeclaring text symbol \textservicemark (encoding TS1) on input line 160.
+LaTeX Encoding Info:    Redeclaring text symbol \textlquill (encoding TS1) on input line 161.
+LaTeX Encoding Info:    Redeclaring text symbol \textrquill (encoding TS1) on input line 162.
+LaTeX Encoding Info:    Redeclaring text symbol \textcent (encoding TS1) on input line 163.
+LaTeX Encoding Info:    Redeclaring text symbol \textsterling (encoding TS1) on input line 164.
+LaTeX Encoding Info:    Redeclaring text symbol \textcurrency (encoding TS1) on input line 165.
+LaTeX Encoding Info:    Redeclaring text symbol \textyen (encoding TS1) on input line 166.
+LaTeX Encoding Info:    Redeclaring text symbol \textbrokenbar (encoding TS1) on input line 167.
+LaTeX Encoding Info:    Redeclaring text symbol \textsection (encoding TS1) on input line 168.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciidieresis (encoding TS1) on input line 169.
+LaTeX Encoding Info:    Redeclaring text symbol \textcopyright (encoding TS1) on input line 170.
+LaTeX Encoding Info:    Redeclaring text symbol \textordfeminine (encoding TS1) on input line 171.
+LaTeX Encoding Info:    Redeclaring text symbol \textcopyleft (encoding TS1) on input line 172.
+LaTeX Encoding Info:    Redeclaring text symbol \textlnot (encoding TS1) on input line 173.
+LaTeX Encoding Info:    Redeclaring text symbol \textcircledP (encoding TS1) on input line 174.
+LaTeX Encoding Info:    Redeclaring text symbol \textregistered (encoding TS1) on input line 175.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciimacron (encoding TS1) on input line 176.
+LaTeX Encoding Info:    Redeclaring text symbol \textdegree (encoding TS1) on input line 177.
+LaTeX Encoding Info:    Redeclaring text symbol \textpm (encoding TS1) on input line 178.
+LaTeX Encoding Info:    Redeclaring text symbol \texttwosuperior (encoding TS1) on input line 179.
+LaTeX Encoding Info:    Redeclaring text symbol \textthreesuperior (encoding TS1) on input line 180.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciiacute (encoding TS1) on input line 181.
+LaTeX Encoding Info:    Redeclaring text symbol \textmu (encoding TS1) on input line 182.
+LaTeX Encoding Info:    Redeclaring text symbol \textparagraph (encoding TS1) on input line 183.
+LaTeX Encoding Info:    Redeclaring text symbol \textperiodcentered (encoding TS1) on input line 184.
+LaTeX Encoding Info:    Redeclaring text symbol \textreferencemark (encoding TS1) on input line 185.
+LaTeX Encoding Info:    Redeclaring text symbol \textonesuperior (encoding TS1) on input line 186.
+LaTeX Encoding Info:    Redeclaring text symbol \textordmasculine (encoding TS1) on input line 187.
+LaTeX Encoding Info:    Redeclaring text symbol \textsurd (encoding TS1) on input line 188.
+LaTeX Encoding Info:    Redeclaring text symbol \textonequarter (encoding TS1) on input line 189.
+LaTeX Encoding Info:    Redeclaring text symbol \textonehalf (encoding TS1) on input line 190.
+LaTeX Encoding Info:    Redeclaring text symbol \textthreequarters (encoding TS1) on input line 191.
+LaTeX Encoding Info:    Redeclaring text symbol \texteuro (encoding TS1) on input line 192.
+LaTeX Encoding Info:    Redeclaring text symbol \texttimes (encoding TS1) on input line 193.
+LaTeX Encoding Info:    Redeclaring text symbol \textdiv (encoding TS1) on input line 194.
+))
+\g__um_fam_int=\count309
+\g__um_fonts_used_int=\count310
+\l__um_primecount_int=\count311
+\g__um_primekern_muskip=\muskip18
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2026/03/01 v3.2d Micro-typographical refinements (RS)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count312
+)
+\MT@toks=\toks23
+\MT@tempbox=\box57
+\MT@count=\count313
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1084.
+LaTeX Info: Redefining \leftprotrusion on input line 1085.
+\MT@prot@toks=\toks24
+LaTeX Info: Redefining \rightprotrusion on input line 1104.
+LaTeX Info: Redefining \textls on input line 1449.
+\MT@outer@kern=\dimen163
+LaTeX Info: Redefining \microtypecontext on input line 2053.
+LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
+\MT@listname@count=\count314
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/microtype-xetex.def
+File: microtype-xetex.def 2026/03/01 v3.2d Definitions specific to xetex (RS)
+LaTeX Info: Redefining \lsstyle on input line 443.
+LaTeX Info: Redefining \lslig on input line 451.
+\MT@outer@space=\skip69
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2026/03/01 v3.2d microtype main configuration file (RS)
+)
+LaTeX Info: Redefining \microtypesetup on input line 3065.
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 274.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2025/11/01 v5.0p Graphics/color driver for xetex
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2026-05-17 v3.0m Driver-dependent file (DPC,SPQR)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/xcolor/svgnam.def
+File: svgnam.def 2024/09/29 v3.02 Predefined colors according to SVG 1.1 (UK)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/xcolor/x11nam.def
+File: x11nam.def 2024/09/29 v3.02 Predefined colors according to Unix/X11 (UK)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2026/04/16 4.6a verbatim text (tvz,hv)
+\FV@CodeLineNo=\count315
+\FV@InFile=\read2
+\FV@TabBox=\box58
+\c@FancyVerbLine=\count316
+\FV@StepNumber=\count317
+\FV@OutFile=\write3
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip70
+\fb@frw=\dimen164
+\fb@frh=\dimen165
+\FrameRule=\dimen166
+\FrameSep=\dimen167
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2026-01-28 v4.27 Multi-page Table package (DPC)
+\LTleft=\skip71
+\LTright=\skip72
+\LTpre=\skip73
+\LTpost=\skip74
+\LTchunksize=\count318
+\LTcapwidth=\dimen168
+\LT@head=\box59
+\LT@firsthead=\box60
+\LT@foot=\box61
+\LT@lastfoot=\box62
+\LT@gbox=\box63
+\LT@cols=\count319
+\LT@rows=\count320
+\c@LT@tables=\count321
+\c@LT@chunks=\count322
+\LT@p@ftn=\toks25
+)
+Class scrbook Info: longtable captions redefined on input line 113.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen169
+\lightrulewidth=\dimen170
+\cmidrulewidth=\dimen171
+\belowrulesep=\dimen172
+\belowbottomsep=\dimen173
+\aboverulesep=\dimen174
+\abovetopsep=\dimen175
+\cmidrulesep=\dimen176
+\cmidrulekern=\dimen177
+\defaultaddspace=\dimen178
+\@cmidla=\count323
+\@cmidlb=\count324
+\@aboverulesep=\dimen179
+\@belowrulesep=\dimen180
+\@thisruleclass=\count325
+\@lastruleclass=\count326
+\@thisrulewidth=\dimen181
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2026/02/24 v2.7b Tabular extension package (FMi)
+\col@sep=\dimen182
+\ar@mcellbox=\box64
+\extrarowheight=\dimen183
+\NC@list=\toks26
+\extratabsurround=\skip75
+\backup@length=\skip76
+\ar@cellbox=\box65
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count327
+\calc@Bcount=\count328
+\calc@Adimen=\dimen184
+\calc@Bdimen=\dimen185
+\calc@Askip=\skip77
+\calc@Bskip=\skip78
+LaTeX Info: Redefining \setlength on input line 86.
+LaTeX Info: Redefining \addtolength on input line 87.
+\calc@Ccount=\count329
+\calc@Cskip=\skip79
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box66
+\fn@width=\dimen186
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2026-05-17 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2026-05-17 v1.4h Standard LaTeX Graphics (DPC,SPQR)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 106.
+)
+\Gin@req@height=\dimen187
+\Gin@req@width=\dimen188
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2026/05/28 version 6.10.0 text color boxes
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks27
+\pgfutil@tempdima=\dimen189
+\pgfutil@tempdimb=\dimen190
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box67
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
+))
+Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks28
+\pgfkeys@temptoks=\toks29
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks30
+))
+\pgf@x=\dimen191
+\pgf@y=\dimen192
+\pgf@xa=\dimen193
+\pgf@ya=\dimen194
+\pgf@xb=\dimen195
+\pgf@yb=\dimen196
+\pgf@xc=\dimen197
+\pgf@yc=\dimen198
+\pgf@xd=\dimen199
+\pgf@yd=\dimen256
+\w@pgf@writea=\write4
+\r@pgf@reada=\read3
+\c@pgf@counta=\count330
+\c@pgf@countb=\count331
+\c@pgf@countc=\count332
+\c@pgf@countd=\count333
+\t@pgf@toka=\toks31
+\t@pgf@tokb=\toks32
+\t@pgf@tokc=\toks33
+\pgf@sys@id@count=\count334
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
+)
+Driver file for pgf: pgfsys-xetex.def
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-xetex.def
+File: pgfsys-xetex.def 2025-08-29 v3.1.11a (3.1.11a)
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvipdfmx.def
+File: pgfsys-dvipdfmx.def 2025-08-29 v3.1.11a (3.1.11a)
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
+)
+\pgfsys@objnum=\count335
+))) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfsyssoftpath@smallbuffer@items=\count336
+\pgfsyssoftpath@bigbuffer@items=\count337
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen257
+\pgfmath@count=\count338
+\pgfmath@box=\box68
+\pgfmath@toks=\toks34
+\pgfmath@stack@operand=\toks35
+\pgfmath@stack@operation=\toks36
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count339
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@picminx=\dimen258
+\pgf@picmaxx=\dimen259
+\pgf@picminy=\dimen260
+\pgf@picmaxy=\dimen261
+\pgf@pathminx=\dimen262
+\pgf@pathmaxx=\dimen263
+\pgf@pathminy=\dimen264
+\pgf@pathmaxy=\dimen265
+\pgf@xx=\dimen266
+\pgf@xy=\dimen267
+\pgf@yx=\dimen268
+\pgf@yy=\dimen269
+\pgf@zx=\dimen270
+\pgf@zy=\dimen271
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@path@lastx=\dimen272
+\pgf@path@lasty=\dimen273
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@shorten@end@additional=\dimen274
+\pgf@shorten@start@additional=\dimen275
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfpic=\box69
+\pgf@hbox=\box70
+\pgf@layerbox@main=\box71
+\pgf@picture@serial@count=\count340
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgflinewidth=\dimen276
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@pt@x=\dimen277
+\pgf@pt@y=\dimen278
+\pgf@pt@temp=\dimen279
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowsep=\dimen280
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@max=\dimen281
+\pgf@sys@shading@range@num=\count341
+\pgf@shadingcount=\count342
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfexternal@startupbox=\box72
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfnodeparttextbox=\box73
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@nodesepstart=\dimen282
+\pgf@nodesepend=\dimen283
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
+\pgffor@iter=\dimen284
+\pgffor@skip=\dimen285
+\pgffor@stack=\toks37
+\pgffor@toks=\toks38
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@plot@mark@count=\count343
+\pgfplotmarksize=\dimen286
+)
+\tikz@lastx=\dimen287
+\tikz@lasty=\dimen288
+\tikz@lastxsaved=\dimen289
+\tikz@lastysaved=\dimen290
+\tikz@lastmovetox=\dimen291
+\tikz@lastmovetoy=\dimen292
+\tikzleveldistance=\dimen293
+\tikzsiblingdistance=\dimen294
+\tikz@figbox=\box74
+\tikz@figbox@bg=\box75
+\tikz@tempbox=\box76
+\tikz@tempbox@bg=\box77
+\tikztreelevel=\count344
+\tikznumberofchildren=\count345
+\tikznumberofcurrentchild=\count346
+\tikz@fig@count=\count347
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfmatrixcurrentrow=\count348
+\pgfmatrixcurrentcolumn=\count349
+\pgf@matrix@numberofcolumns=\count350
+)
+\tikz@expandcount=\count351
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks39
+\verbatim@line=\toks40
+\verbatim@in@stream=\read4
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\tcb@titlebox=\box78
+\tcb@upperbox=\box79
+\tcb@lowerbox=\box80
+\tcb@phantombox=\box81
+\c@tcbbreakpart=\count352
+\c@tcblayer=\count353
+\c@tcolorbox@number=\count354
+\l__tcobox_tmpa_box=\box82
+\l__tcobox_tmpa_dim=\dimen295
+\tcb@temp=\box83
+\tcb@temp=\box84
+\tcb@temp=\box85
+\tcb@temp=\box86
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.10.0'
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/tikzfill/tikzfill.image.sty
+Package: tikzfill.image 2026/04/23 v1.2.0 Image filling library for TikZ
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/tikzfill/tikzlibraryfill.image.code.tex
+File: tikzlibraryfill.image.code.tex 2026/04/23 v1.2.0 Image filling library
+\l__tikzfill_tmpa_dim=\dimen296
+\l__tikzfill_tmpb_dim=\dimen297
+\l__tikzfill_img_box=\box87
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.10.0'
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.10.0'
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/pdfcol/pdfcol.sty
+Package: pdfcol 2022-09-21 v1.7 Handle new color stacks for pdfTeX (HO)
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdfcol Info: Interface disabled because of missing PDF mode of pdfTeX.
+)
+Package pdfcol Info: pdfTeX's color stacks are not available.
+\tcb@testbox=\box88
+\tcb@totalupperbox=\box89
+\tcb@totallowerbox=\box90
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/fontawesome5/fontawesome5.sty
+Package: fontawesome5 2022/05/02 v5.15.4 Font Awesome 5
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/fontawesome5/fontawesome5-utex-helper.sty
+Package: fontawesome5-utex-helper 2022/05/02 v5.15.4 uTeX helper for fontawesome5
+LaTeX Font Info:    Trying to load font information for TU+fontawesomefree on input line 69.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/fontawesome5/tufontawesomefree.fd)
+LaTeX Font Info:    Trying to load font information for TU+fontawesomebrands on input line 70.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/fontawesome5/tufontawesomebrands.fd))) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
+Package: bookmark 2026-05-21 v1.32 PDF bookmarks (HO)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2026-04-24 v7.01q Hypertext links for LaTeX
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count355
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+\@linkdim=\dimen298
+\Hy@linkcounter=\count356
+\Hy@pagecounter=\count357
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2026-04-24 v7.01q Hyperref: PDFDocEncoding definition (HO)
+) (/home/ediman/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count358
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2026-04-24 v7.01q Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4070.
+Package hyperref Info: Hyper figures OFF on input line 4199.
+Package hyperref Info: Link nesting OFF on input line 4204.
+Package hyperref Info: Hyper index ON on input line 4207.
+Package hyperref Info: Plain pages OFF on input line 4214.
+Package hyperref Info: Backreferencing OFF on input line 4219.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4466.
+\c@Hy@tempcnt=\count359
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip19
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4805.
+\XeTeXLinkMargin=\dimen299
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count360
+\Field@Width=\dimen300
+\Fld@charsize=\dimen301
+Package hyperref Info: Hyper figures OFF on input line 6091.
+Package hyperref Info: Link nesting OFF on input line 6096.
+Package hyperref Info: Hyper index ON on input line 6099.
+Package hyperref Info: backreferencing OFF on input line 6106.
+Package hyperref Info: Link coloring OFF on input line 6111.
+Package hyperref Info: Link coloring with OCG OFF on input line 6116.
+Package hyperref Info: PDF/A mode OFF on input line 6121.
+\Hy@abspage=\count361
+\c@Item=\count362
+\c@Hfootnote=\count363
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
+File: hxetex.def 2026-04-24 v7.01q Hyperref driver for XeTeX
+\pdfm@box=\box91
+\c@Hy@AnnotLevel=\count364
+\HyField@AnnotCount=\count365
+\Fld@listcount=\count366
+\c@bookmark@seq@number=\count367
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+(/home/ediman/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
+)
+\Hy@SectionHShift=\skip80
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/bookmark/bkm-xetex.def
+File: bkm-xetex.def 2026-05-21 v1.32 bookmark driver for xetex (HO)
+\BKM@id=\count368
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+Package tocbasic Info: Loading of class-dependent code for package caption3
+(tocbasic)             prevented on line 50.
+
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen302
+\captionmargin=\dimen303
+\caption@leftmargin=\dimen304
+\caption@rightmargin=\dimen305
+\caption@width=\dimen306
+\caption@indent=\dimen307
+\caption@parindent=\dimen308
+\caption@hangindent=\dimen309
+)
+\c@caption@flags=\count369
+\c@continuedfloat=\count370
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count371
+\float@exts=\toks41
+\float@box=\box92
+\@float@everytoks=\toks42
+\@floatcapt=\box93
+)
+\@float@every@codelisting=\toks43
+\c@codelisting=\count372
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count373
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count374
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip81
+\bibsep=\skip82
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count375
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 214.
+No file index.aux.
+\openout1 = `index.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+Package scrbase Info: activating english \partname on input line 221.
+Package scrbase Info: activating english \chaptername on input line 221.
+Package scrbase Info: activating english \appendixname on input line 221.
+Package scrbase Info: activating english \figurename on input line 221.
+Package scrbase Info: activating english \tablename on input line 221.
+Package scrbase Info: activating english \contentsname on input line 221.
+Package scrbase Info: activating english \listfigurename on input line 221.
+Package scrbase Info: activating english \listtablename on input line 221.
+Package scrbase Info: activating english \bibname on input line 221.
+Package scrbase Info: activating english \indexname on input line 221.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 221.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 221.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 221.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 221.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 221.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 221.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 221.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(0)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 221.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(1)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <9.3075->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6.57-9.3075>s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 221.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 221.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 221.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 221.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 221.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(2)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=1.0001,FontAdjustment={\fontdimen
+(fontspec)             8\font =7.41315pt\relax \fontdimen 9\font
+(fontspec)             =4.3143pt\relax \fontdimen 10\font =4.8618pt\relax
+(fontspec)             \fontdimen 11\font =7.5117pt\relax \fontdimen 12\font
+(fontspec)             =3.77776pt\relax \fontdimen 13\font =3.97485pt\relax
+(fontspec)             \fontdimen 14\font =3.97485pt\relax \fontdimen 15\font
+(fontspec)             =3.16455pt\relax \fontdimen 16\font =2.70465pt\relax
+(fontspec)             \fontdimen 17\font =2.70465pt\relax \fontdimen 18\font
+(fontspec)             =2.7375pt\relax \fontdimen 19\font =2.19pt\relax
+(fontspec)             \fontdimen 22\font =2.7375pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <9.3075->s*[1.000096766517402]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6.57-9.3075>s*[1.000096766517402]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.000096766517402]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.000096766517402]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 221.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 221.
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 221.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 221.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(3)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=0.9999,FontAdjustment={\fontdimen
+(fontspec)             8\font =0.438pt\relax \fontdimen 9\font =2.19pt\relax
+(fontspec)             \fontdimen 10\font =1.82864pt\relax \fontdimen 11\font
+(fontspec)             =1.21545pt\relax \fontdimen 12\font =6.56999pt\relax
+(fontspec)             \fontdimen 13\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <9.3075->s*[0.9998967671640342]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6.57-9.3075>s*[0.9998967671640342]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9998967671640342]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9998967671640342]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 221.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 221.
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 221.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 221.
+LaTeX Info: Redefining \microtypecontext on input line 221.
+Package microtype Info: Applying patch `item' on input line 221.
+Package microtype Info: Applying patch `toc' on input line 221.
+Package microtype Info: Applying patch `eqnum' on input line 221.
+Package microtype Info: Applying patch `footnote' on input line 221.
+Package microtype Info: Applying patch `verbatim' on input line 221.
+LaTeX Info: Redefining \microtypesetup on input line 221.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/mt-LatinModernRoman.cfg
+File: mt-LatinModernRoman.cfg 2026/02/26 v1.2 microtype config. file: Latin Modern Roman (RS)
+)
+Package hyperref Info: Link coloring ON on input line 221.
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+[1
+
+
+
+
+]
+Package tocbasic Info: character protrusion at toc deactivated on input line 229.
+No file index.toc.
+\tf@toc=\write5
+\openout5 = `index.toc'.
+
+[2
+
+
+]
+Package tocbasic Info: character protrusion at lof deactivated on input line 231.
+No file index.lof.
+\tf@lof=\write6
+\openout6 = `index.lof'.
+
+[3
+
+
+]
+Package tocbasic Info: character protrusion at lot deactivated on input line 232.
+No file index.lot.
+\tf@lot=\write7
+\openout7 = `index.lot'.
+
+[4
+
+
+] [1
+
+
+
+] [2] [3]
+part I.
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `partprefix' that is an alias of element `partnumber'
+(scrkbase)              on input line 325.
+[4
+
+
+]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.665pt on input line 332.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.475pt on input line 332.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 332.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.95099pt on input line 332.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.66568pt on input line 332.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.4755pt on input line 332.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 10.94882pt on input line 332.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.66417pt on input line 332.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.47441pt on input line 332.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 332.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 332.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+) [5]
+chapter 1.
+File: img/fig1.png Graphic file (type bmp)
+<img/fig1.png>
+[6
+
+
+] [7]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 1.1 on input line 429.
+
+[8] [9]
+Overfull \hbox (78.92787pt too wide) detected at line 487
+[][] [] [] [][][][] [] [][][] [] [] [] [] [] [][][][][][]
+ []
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 495.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 495.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 495.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 12.0011pt on input line 495.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.00073pt on input line 495.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.00055pt on input line 495.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 11.99872pt on input line 495.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.99915pt on input line 495.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.99936pt on input line 495.
+[10]
+
+Package natbib Warning: Citation `fisher1919xv' on page 11 undefined on input line 554.
+
+[11]
+
+Package natbib Warning: Citation `fisher1970statistical' on page 12 undefined on input line 569.
+
+
+Package natbib Warning: Citation `fisher1970statistical' on page 12 undefined on input line 575.
+
+
+Package natbib Warning: Citation `fisher1935design' on page 12 undefined on input line 583.
+
+[12]
+
+Package natbib Warning: Citation `snedecor1934' on page 13 undefined on input line 597.
+
+
+Package natbib Warning: Citation `montgomery2017design' on page 13 undefined on input line 610.
+
+[13] [14]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 1.2 on input line 687.
+
+[15] [16] [17] [18] [19] [20]
+chapter 2.
+[21
+
+
+]
+
+Package natbib Warning: Citation `hurlbert1984' on page 22 undefined on input line 950.
+
+[22]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 977.
+
+Underfull \vbox (badness 10000) detected at line 1007
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1007
+ []
+
+[23] [24] [25] [26]
+File: 02b-assumptions_files/figure-pdf/fig-pval-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-pval-1.pdf>
+[27] [28] [29] [30] [31] [32]
+File: 02b-assumptions_files/figure-pdf/fig-homoscedasticity-plot-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-homoscedasticity-plot-1.pdf>
+[33] [34] [35] [36] [37] [38] [39]
+Underfull \vbox (badness 10000) detected at line 1627
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1627
+ []
+
+[40]
+File: 02b-assumptions_files/figure-pdf/fig-residuals-vs-raw-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-residuals-vs-raw-1.pdf>
+[41] [42] (/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/mt-TU-empty.cfg
+File: mt-TU-empty.cfg 2021/06/22 v1.1 microtype config. file: fonts with nonstandard glyph set (RS)
+)
+
+LaTeX Warning: Reference `sec-ftest-normality-maths' on page 43 undefined on input line 1674.
+
+[43]
+File: 02b-assumptions_files/figure-pdf/fig-extract-residuals-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-extract-residuals-1.pdf>
+[44] [45]
+Underfull \vbox (badness 10000) detected at line 1795
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1795
+ []
+
+[46] [47]
+File: 02b-assumptions_files/figure-pdf/fig-normality-robustness-plot-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-normality-robustness-plot-1.pdf>
+[48] [49] [50]
+File: 02b-assumptions_files/figure-pdf/fig-qq-plot-example-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-qq-plot-example-1.pdf>
+[51] [52]
+
+LaTeX Warning: Reference `sec-homoscedasticity' on page 53 undefined on input line 2054.
+
+[53] [54]
+File: 02b-assumptions_files/figure-pdf/fig-additivity-check-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-additivity-check-1.pdf>
+[55] [56] [57] [58] [59] [60] [61]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 2.1 on input line 2390.
+
+[62]
+
+LaTeX Warning: Reference `sec-independence' on page 63 undefined on input line 2446.
+
+[63] [64]
+Underfull \vbox (badness 10000) detected at line 2515
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2515
+ []
+
+[65]
+Overfull \vbox (1.96713pt too high) detected at line 2550
+ []
+
+[66]
+File: 02b-assumptions_files/figure-pdf/fig-assumptions-comparison-plot-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-assumptions-comparison-plot-1.pdf>
+
+LaTeX Warning: Reference `sec-fix-rand' on page 67 undefined on input line 2576.
+
+[67]
+File: 02b-assumptions_files/figure-latex/mermaid-figure-1.png Graphic file (type bmp)
+<02b-assumptions_files/figure-latex/mermaid-figure-1.png>
+
+Overfull \hbox (74.59465pt too wide) in paragraph at lines 2613--2614
+ [][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 278.11647pt on input line 2620.
+
+[68] [69]
+
+LaTeX Warning: Reference `sec-add-lin' on page 70 undefined on input line 2654.
+
+[70]
+Underfull \vbox (badness 10000) detected at line 2730
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2730
+ []
+
+[71]
+File: 02b-assumptions_files/figure-pdf/fig-residual-diagnostics-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-residual-diagnostics-1.pdf>
+[72] [73] [74]
+File: 02b-assumptions_files/figure-pdf/fig-shapiro-trap-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/fig-shapiro-trap-1.pdf>
+[75] [76] [77]
+Overfull \hbox (12.9006pt too wide) in paragraph at lines 2943--2943
+[]\TU/lmtt/m/n/10.95 #> Large n: flagging trivial variance differences (sd = 1, 1.1, 1.2): 0.552[] 
+ []
+
+[78] [79]
+Underfull \vbox (badness 10000) detected at line 3064
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3064
+ []
+
+[80]
+Underfull \vbox (badness 10000) detected at line 3064
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3064
+ []
+
+[81]
+Overfull \vbox (1.41493pt too high) detected at line 3084
+ []
+
+[82]
+File: 02b-assumptions_files/figure-pdf/unnamed-chunk-11-1.pdf Graphic file (type pdf)
+<use 02b-assumptions_files/figure-pdf/unnamed-chunk-11-1.pdf>
+[83] [84] [85]
+part II.
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `partprefix' that is an alias of element `partnumber'
+(scrkbase)              on input line 3146.
+[86
+
+
+] [87]
+chapter 3.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 14.4pt on input line 3173.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 3173.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 3173.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 14.4013pt on input line 3173.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.00092pt on input line 3173.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.00064pt on input line 3173.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 14.39845pt on input line 3173.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.99893pt on input line 3173.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.99925pt on input line 3173.
+[88
+
+
+]
+
+LaTeX Warning: Reference `sec-why-residuals-not-raw-data' on page 89 undefined on input line 3199.
+
+[89] [90] [91]
+
+LaTeX Warning: Reference `sec-systolic' on page 92 undefined on input line 3334.
+
+[92]
+File: 03a-one-way_files/figure-pdf/fig-clinical-plot-1.pdf Graphic file (type pdf)
+<use 03a-one-way_files/figure-pdf/fig-clinical-plot-1.pdf>
+[93]
+
+LaTeX Warning: Reference `sec-chap2' on page 94 undefined on input line 3408.
+
+File: 03a-one-way_files/figure-pdf/clinical-diagnostics-1.pdf Graphic file (type pdf)
+<use 03a-one-way_files/figure-pdf/clinical-diagnostics-1.pdf>
+[94] [95] [96] [97]
+Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
+[98]
+Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
+Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
+Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
+Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
+[99]
+File: 03a-one-way_files/figure-pdf/fig-pvalue-misleading-1.pdf Graphic file (type pdf)
+<use 03a-one-way_files/figure-pdf/fig-pvalue-misleading-1.pdf>
+[100] [101] [102]
+
+Package natbib Warning: Citation `Cohen1988' on page 103 undefined on input line 3743.
+
+[103]
+
+Package natbib Warning: Citation `Cohen1988' on page 104 undefined on input line 3784.
+
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 3787.
+[104]
+Overfull \hbox (7.15186pt too wide) in paragraph at lines 3834--3834
+[]\TU/lmtt/m/n/10.95 #> For one-way between subjects designs, partial eta squared is equivalent[] 
+ []
+
+[105] [106] [107] [108]
+File: 03a-one-way_files/figure-pdf/fig-power-curve-1.pdf Graphic file (type pdf)
+<use 03a-one-way_files/figure-pdf/fig-power-curve-1.pdf>
+[109] [110] [111]
+chapter 4.
+[112
+
+
+] [113]
+Underfull \vbox (badness 10000) detected at line 4178
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4178
+ []
+
+[114]
+File: 03b-multiple-comparisons_files/figure-pdf/fig-multiple-testing-sim-1.pdf Graphic file (type pdf)
+<use 03b-multiple-comparisons_files/figure-pdf/fig-multiple-testing-sim-1.pdf>
+[115] [116]
+
+LaTeX Warning: Reference `sec-chap3' on page 117 undefined on input line 4244.
+
+[117] [118]
+File: 03b-multiple-comparisons_files/figure-pdf/fig-tukey-plot-1.pdf Graphic file (type pdf)
+<use 03b-multiple-comparisons_files/figure-pdf/fig-tukey-plot-1.pdf>
+[119] [120] [121] [122]
+
+Package natbib Warning: Citation `Benjamini1995' on page 123 undefined on input line 4463.
+
+[123] [124] [125]
+Underfull \vbox (badness 10000) detected at line 4634
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4634
+ []
+
+[126]
+Underfull \vbox (badness 10000) detected at line 4634
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4634
+ []
+
+[127]
+File: 03b-multiple-comparisons_files/figure-pdf/fig-fdr-vs-fwer-sim-1.pdf Graphic file (type pdf)
+<use 03b-multiple-comparisons_files/figure-pdf/fig-fdr-vs-fwer-sim-1.pdf>
+[128] [129] [130] [131] [132] [133]
+File: 03b-multiple-comparisons_files/figure-latex/mermaid-figure-1.png Graphic file (type bmp)
+<03b-multiple-comparisons_files/figure-latex/mermaid-figure-1.png>
+
+Overfull \hbox (217.0017pt too wide) in paragraph at lines 4878--4879
+ [][] 
+ []
+
+[134] [135]
+chapter 5.
+[136
+
+
+]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 5.1 on input line 4977.
+
+[137] [138]
+
+LaTeX Warning: Reference `sec-unbalanced' on page 139 undefined on input line 5050.
+
+[139] [140]
+File: 03c-two-way_files/figure-pdf/fig-factorial-design-diagram-1.pdf Graphic file (type pdf)
+<use 03c-two-way_files/figure-pdf/fig-factorial-design-diagram-1.pdf>
+[141] [142] [143] [144]
+Underfull \vbox (badness 10000) detected at line 5285
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5285
+ []
+
+[145]
+File: 03c-two-way_files/figure-pdf/fig-interaction-scenarios-1.pdf Graphic file (type pdf)
+<use 03c-two-way_files/figure-pdf/fig-interaction-scenarios-1.pdf>
+[146]
+File: 03c-two-way_files/figure-pdf/fig-interaction-plot-raw-1.pdf Graphic file (type pdf)
+<use 03c-two-way_files/figure-pdf/fig-interaction-plot-raw-1.pdf>
+[147] [148] [149] [150] [151] [152] [153] [154]
+
+LaTeX Warning: Reference `sec-gxe' on page 155 undefined on input line 5674.
+
+[155]
+File: 03c-two-way_files/figure-pdf/fig-gxe-plot-1.pdf Graphic file (type pdf)
+<use 03c-two-way_files/figure-pdf/fig-gxe-plot-1.pdf>
+[156] [157] [158]
+File: 03c-two-way_files/figure-pdf/gxe-diagnostics-1.pdf Graphic file (type pdf)
+<use 03c-two-way_files/figure-pdf/gxe-diagnostics-1.pdf>
+[159]
+Overfull \hbox (70.38809pt too wide) in paragraph at lines 5822--5822
+[]\TU/lmtt/m/n/10.95 #> Shapiro-Wilk p = 0.0211 -> Evidence of non-normality. Check Q-Q plot for outliers.[] 
+ []
+
+
+LaTeX Warning: Reference `sec-chap2' on page 160 undefined on input line 5838.
+
+[160] [161] [162] [163]
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 5972--5972
+[]\TU/lmtt/m/n/10.95 #> P value adjustment: tukey method for comparing a family of 4 estimates[] 
+ []
+
+[164]
+chapter 6.
+[165
+
+
+] [166] [167]
+
+LaTeX Warning: Reference `sec-chap9' on page 168 undefined on input line 6135.
+
+
+LaTeX Warning: Reference `sec-sphericity' on page 168 undefined on input line 6138.
+
+
+LaTeX Warning: Reference `sec-pseudoreplication' on page 168 undefined on input line 6149.
+
+[168] [169]
+Underfull \vbox (badness 10000) detected at line 6244
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 6244
+ []
+
+[170] [171] [172] [173] [174]
+
+LaTeX Warning: Reference `sec-cardiac-recovery' on page 175 undefined on input line 6417.
+
+
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 6432--6432
+[]\TU/lmtt/m/n/10.95 #>  1      :  4   Control     :80   0 :40   Min.   :58.80   Min.   : 1.00[] 
+ []
+
+
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 6433--6433
+[]\TU/lmtt/m/n/10.95 #>  2      :  4   Intervention:80   4 :40   1st Qu.:71.66   1st Qu.:10.75[] 
+ []
+
+
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 6434--6434
+[]\TU/lmtt/m/n/10.95 #>  3      :  4                     8 :40   Median :77.09   Median :20.50[] 
+ []
+
+
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 6435--6435
+[]\TU/lmtt/m/n/10.95 #>  4      :  4                     12:40   Mean   :76.32   Mean   :20.50[] 
+ []
+
+
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 6436--6436
+[]\TU/lmtt/m/n/10.95 #>  5      :  4                             3rd Qu.:80.38   3rd Qu.:30.25[] 
+ []
+
+
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 6437--6437
+[]\TU/lmtt/m/n/10.95 #>  6      :  4                             Max.   :93.61   Max.   :40.00[] 
+ []
+
+[175]
+File: 03d-repeated-measures_files/figure-pdf/fig-rm-plot-1.pdf Graphic file (type pdf)
+<use 03d-repeated-measures_files/figure-pdf/fig-rm-plot-1.pdf>
+[176] [177] [178] [179] [180] [181] [182] [183] [184]
+chapter 7.
+[185
+
+
+] [186] [187] [188]
+File: 03e-split-plot-nested_files/figure-latex/mermaid-figure-1.png Graphic file (type bmp)
+<03e-split-plot-nested_files/figure-latex/mermaid-figure-1.png>
+[189]
+
+Package natbib Warning: Citation `hurlbert1984' on page 190 undefined on input line 6983.
+
+[190] [191] [192] [193] [194] [195]
+
+LaTeX Warning: Reference `sec-grazing' on page 196 undefined on input line 7189.
+
+[196] [197]
+Overfull \vbox (0.59796pt too high) detected at line 7294
+ []
+
+[198]
+File: 03e-split-plot-nested_files/figure-pdf/unnamed-chunk-4-1.pdf Graphic file (type pdf)
+<use 03e-split-plot-nested_files/figure-pdf/unnamed-chunk-4-1.pdf>
+[199]
+
+LaTeX Warning: Reference `sec-irrig' on page 200 undefined on input line 7352.
+
+[200] [201] [202] [203]
+File: 03e-split-plot-nested_files/figure-pdf/fig-agriculture-plot-1.pdf Graphic file (type pdf)
+<use 03e-split-plot-nested_files/figure-pdf/fig-agriculture-plot-1.pdf>
+[204] [205] [206] [207]
+part III.
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `partprefix' that is an alias of element `partnumber'
+(scrkbase)              on input line 7611.
+[208
+
+
+] [209]
+chapter 8.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 7640.
+[210
+
+
+] [211] [212] [213] [214] [215] [216] [217]
+
+LaTeX Warning: Reference `sec-type3' on page 218 undefined on input line 7990.
+
+[218] [219] [220]
+Overfull \hbox (7.15186pt too wide) in paragraph at lines 8165--8165
+[]\TU/lmtt/m/n/10.95 #>        1        2        3        4        5        6        7        8[] 
+ []
+
+
+Overfull \hbox (7.15186pt too wide) in paragraph at lines 8166--8166
+[]\TU/lmtt/m/n/10.95 #> 20.57576 20.57576 20.57576 20.57576 20.57576 20.57576 20.57576 20.57576[] 
+ []
+
+
+LaTeX Warning: Reference `sec-within-group' on page 221 undefined on input line 8173.
+
+[221] [222] [223]
+File: 04a-anova-as-lm_files/figure-pdf/fig-connection-plot-1.pdf Graphic file (type pdf)
+<use 04a-anova-as-lm_files/figure-pdf/fig-connection-plot-1.pdf>
+[224]
+
+LaTeX Warning: Reference `sec-unbalanced' on page 225 undefined on input line 8290.
+
+[225] [226] [227] [228]
+chapter 9.
+[229
+
+
+] [230] [231] [232] [233]
+Underfull \vbox (badness 10000) detected at line 8638
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 8638
+ []
+
+[234]
+File: 04b-mixed-effects_files/figure-pdf/fig-random-effects-plot-1.pdf Graphic file (type pdf)
+<use 04b-mixed-effects_files/figure-pdf/fig-random-effects-plot-1.pdf>
+[235]
+
+Package natbib Warning: Citation `Bates2015' on page 236 undefined on input line 8689.
+
+
+Package natbib Warning: Citation `Pinheiro2000' on page 236 undefined on input line 8689.
+
+
+Underfull \hbox (badness 1394) in paragraph at lines 8711--8715
+\TU/lmtt/m/n/10.95 lme4 \TU/lmr/m/n/10.95 extends R’s standard model formula with a notation for random effects:
+ []
+
+[236] [237] [238] [239] [240] [241]
+
+LaTeX Warning: Reference `sec-rim' on page 242 undefined on input line 8947.
+
+[242] [243]
+File: 04b-mixed-effects_files/figure-pdf/fig-random-effects-extraction-1.pdf Graphic file (type pdf)
+<use 04b-mixed-effects_files/figure-pdf/fig-random-effects-extraction-1.pdf>
+
+Underfull \hbox (badness 2495) in paragraph at lines 9016--9021
+\TU/lmr/m/n/10.95 Users fitting their first mixed model in R are often surprised to find that
+ []
+
+[244]
+
+Package natbib Warning: Citation `Kuznetsova2017' on page 245 undefined on input line 9033.
+
+
+Package natbib Warning: Citation `satterthwaite1946' on page 245 undefined on input line 9038.
+
+[245] [246]
+
+LaTeX Warning: Reference `sec-reml-ml' on page 247 undefined on input line 9102.
+
+
+LaTeX Warning: Reference `sec-type3' on page 247 undefined on input line 9105.
+
+
+Package natbib Warning: Citation `Kenward1997' on page 247 undefined on input line 9116.
+
+[247] [248]
+
+LaTeX Warning: Reference `sec-physio' on page 249 undefined on input line 9210.
+
+[249] [250]
+File: 04b-mixed-effects_files/figure-pdf/fig-nested-plot-1.pdf Graphic file (type pdf)
+<use 04b-mixed-effects_files/figure-pdf/fig-nested-plot-1.pdf>
+[251] [252] [253] [254]
+File: 04b-mixed-effects_files/figure-pdf/nested-diagnostics-1.pdf Graphic file (type pdf)
+<use 04b-mixed-effects_files/figure-pdf/nested-diagnostics-1.pdf>
+File: 04b-mixed-effects_files/figure-pdf/nested-diagnostics-2.pdf Graphic file (type pdf)
+<use 04b-mixed-effects_files/figure-pdf/nested-diagnostics-2.pdf>
+[255]
+File: 04b-mixed-effects_files/figure-pdf/nested-diagnostics-3.pdf Graphic file (type pdf)
+<use 04b-mixed-effects_files/figure-pdf/nested-diagnostics-3.pdf>
+[256] [257] [258] [259] [260] [261] [262]
+
+Package natbib Warning: Citation `Bates2015' on page 263 undefined on input line 9739.
+
+
+Package natbib Warning: Citation `Kenward1997' on page 263 undefined on input line 9740.
+
+
+Package natbib Warning: Citation `Kuznetsova2017' on page 263 undefined on input line 9741.
+
+[263] [264]
+
+LaTeX Warning: Reference `sec-cardiac-recovery' on page 265 undefined on input line 9789.
+
+[265] [266]
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 9857--9857
+[]\TU/lmtt/m/n/10.95 #>                          Estimate Std. Error       df t value Pr(>|t|)[] 
+ []
+
+
+Overfull \hbox (24.3981pt too wide) in paragraph at lines 9858--9858
+[]\TU/lmtt/m/n/10.95 #> (Intercept)               80.9464     0.9572  85.6600  84.562  < 2e-16 ***[] 
+ []
+
+
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 9859--9859
+[]\TU/lmtt/m/n/10.95 #> groupIntervention          0.2611     1.3537  85.6600   0.193  0.84752[] 
+ []
+
+
+Overfull \hbox (12.9006pt too wide) in paragraph at lines 9860--9860
+[]\TU/lmtt/m/n/10.95 #> time4                     -2.1052     0.9495 114.0000  -2.217  0.02859 *[] 
+ []
+
+
+Overfull \hbox (18.64935pt too wide) in paragraph at lines 9861--9861
+[]\TU/lmtt/m/n/10.95 #> time8                     -3.0179     0.9495 114.0000  -3.179  0.00191 **[] 
+ []
+
+
+Overfull \hbox (24.3981pt too wide) in paragraph at lines 9862--9862
+[]\TU/lmtt/m/n/10.95 #> time12                    -3.9646     0.9495 114.0000  -4.176 5.84e-05 ***[] 
+ []
+
+
+Overfull \hbox (12.9006pt too wide) in paragraph at lines 9863--9863
+[]\TU/lmtt/m/n/10.95 #> groupIntervention:time4   -2.5790     1.3428 114.0000  -1.921  0.05727 .[] 
+ []
+
+
+Overfull \hbox (24.3981pt too wide) in paragraph at lines 9864--9864
+[]\TU/lmtt/m/n/10.95 #> groupIntervention:time8   -7.4799     1.3428 114.0000  -5.571 1.72e-07 ***[] 
+ []
+
+
+Overfull \hbox (24.3981pt too wide) in paragraph at lines 9865--9865
+[]\TU/lmtt/m/n/10.95 #> groupIntervention:time12  -9.7825     1.3428 114.0000  -7.285 4.48e-11 ***[] 
+ []
+
+[267] [268] [269] [270]
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 10041--10041
+[]\TU/lmtt/m/n/10.95 #>              npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)[] 
+ []
+
+
+Overfull \hbox (18.64935pt too wide) in paragraph at lines 10043--10043
+[]\TU/lmtt/m/n/10.95 #> rm_rslope_ml    8 870.27 894.87 -427.14    854.27 12.517  2   0.001914 **[] 
+ []
+
+[271] [272]
+Overfull \hbox (7.15186pt too wide) in paragraph at lines 10091--10091
+[]\TU/lmtt/m/n/10.95 #>            Model df      AIC      BIC    logLik   Test  L.Ratio p-value[] 
+ []
+
+
+Overfull \hbox (7.15186pt too wide) in paragraph at lines 10093--10093
+[]\TU/lmtt/m/n/10.95 #> fit_ar1_ml     2 11 870.8304 904.6573 -424.4152 1 vs 2 14.26045   2e-04[] 
+ []
+
+[273] [274]
+chapter 10.
+[275
+
+
+] [276]
+File: 04c-when-assumptions-fail_files/figure-pdf/fig-log-transform-demo-1.pdf Graphic file (type pdf)
+<use 04c-when-assumptions-fail_files/figure-pdf/fig-log-transform-demo-1.pdf>
+[277] [278] [279] [280] [281] [282] [283]
+
+Package natbib Warning: Citation `Warton2011' on page 284 undefined on input line 10504.
+
+[284] [285] [286] [287] [288]
+Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
+Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ┼ (U+253C) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
+Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
+Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
+Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
+[289]
+Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
+Missing character: There is no ≤ (U+2264) in font [lmmono10-regular]:!
+Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
+
+Overfull \hbox (93.76633pt too wide) in paragraph at lines 10750--10750
+[]\TU/lmtt/m/n/10.95 #> Reject Ho if adjusted p ≤ FWER/2 with stopping rule, where (unadjusted) p = Pr(Z ≥ |z|)[] 
+ []
+
+[290] [291]
+
+LaTeX Warning: Reference `sec-repeat-mixed' on page 292 undefined on input line 10852.
+
+[292] [293]
+File: 04c-when-assumptions-fail_files/figure-pdf/fig-permutation-plot-1.pdf Graphic file (type pdf)
+<use 04c-when-assumptions-fail_files/figure-pdf/fig-permutation-plot-1.pdf>
+[294]
+
+Package natbib Warning: Citation `Mair2020' on page 295 undefined on input line 10956.
+
+[295] [296] [297]
+Overfull \hbox (76.13684pt too wide) in paragraph at lines 11071--11071
+[]\TU/lmtt/m/n/10.95 #> WRS2::rmanova(y = df_rm_out$y, groups = df_rm_out$time, blocks = df_rm_out$subject,[] 
+ []
+
+[298]
+Overfull \hbox (64.63934pt too wide) in paragraph at lines 11094--11094
+[]\TU/lmtt/m/n/10.95 #> WRS2::rmmcp(y = df_rm_out$y, groups = df_rm_out$time, blocks = df_rm_out$subject,[] 
+ []
+
+[299]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 10.95pt on input line 11162.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 7.665pt on input line 11162.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 5.475pt on input line 11162.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 10.95099pt on input line 11162.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 7.66568pt on input line 11162.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 5.4755pt on input line 11162.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 10.94882pt on input line 11162.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 7.66417pt on input line 11162.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 5.47441pt on input line 11162.
+
+LaTeX Warning: Reference `sec-matrix-notation' on page 300 undefined on input line 11170.
+
+[300]
+Overfull \hbox (60.08752pt too wide) in paragraph at lines 11210--11211
+[]|\TU/lmtt/m/n/10.95 MASS::negative.binomial|  
+ []
+
+
+Overfull \hbox (42.84128pt too wide) in paragraph at lines 11215--11216
+[]|\TU/lmtt/m/n/10.95 gaussian(link="log")|  
+ []
+
+[301] [302]
+Overfull \hbox (18.64935pt too wide) in paragraph at lines 11320--11320
+[]\TU/lmtt/m/n/10.95 #> glm.nb(formula = counts ~ group, data = df_glm, init.theta = 37871.48654,[] 
+ []
+
+[303]
+Overfull \hbox (30.14685pt too wide) in paragraph at lines 11331--11331
+[]\TU/lmtt/m/n/10.95 #> (Dispersion parameter for Negative Binomial(37871.49) family taken to be 1)[] 
+ []
+
+[304] [305] [306]
+Overfull \hbox (87.63434pt too wide) in paragraph at lines 11459--11459
+[]\TU/lmtt/m/n/10.95 #> glm(formula = cbind(n_disease, n_healthy) ~ group, family = binomial(link = "logit"),[] 
+ []
+
+[307] [308] [309]
+File: 04c-when-assumptions-fail_files/figure-pdf/fig-glm-vs-transform-1.pdf Graphic file (type pdf)
+<use 04c-when-assumptions-fail_files/figure-pdf/fig-glm-vs-transform-1.pdf>
+[310]
+File: 04c-when-assumptions-fail_files/figure-latex/mermaid-figure-1.png Graphic file (type bmp)
+<04c-when-assumptions-fail_files/figure-latex/mermaid-figure-1.png>
+
+Overfull \hbox (289.9599pt too wide) in paragraph at lines 11612--11613
+ [][] 
+ []
+
+[311] [312] [313]
+chapter 11.
+
+LaTeX Warning: Reference `sec-glm-intro' on page 314 undefined on input line 11643.
+
+[314
+
+
+]
+
+LaTeX Warning: Reference `sec-matrix-notation' on page 315 undefined on input line 11679.
+
+
+LaTeX Warning: Reference `sec-random-effects-distribution' on page 315 undefined on input line 11681.
+
+[315] [316] [317] [318] [319]
+Overfull \hbox (173.86557pt too wide) in paragraph at lines 11919--11919
+[]\TU/lmtt/m/n/10.95 #> This is DHARMa 0.5.0. For overview type []?DHARMa[]. For recent changes, type news(package = []DHARMa[])[] 
+ []
+
+
+Overfull \hbox (1904.23895pt too wide) in paragraph at lines 11921--11921
+[]\TU/lmtt/m/n/10.95 #> Note that the default setting in simulateResiduals was changed to conditional simulations since version 0.5.0. This is likely to change residual calculations for all hierarchical (in particular random effect) models. If you want to switch back to the old package version defaults, please use the argument simulateREs = "user-specified" in simulateResiduals(). For more details, see ?simulateREsiduals.[] 
+ []
+
+[320]
+File: 04d-glmm_files/figure-pdf/overdispersion-check-1.pdf Graphic file (type pdf)
+<use 04d-glmm_files/figure-pdf/overdispersion-check-1.pdf>
+[321]
+File: 04d-glmm_files/figure-pdf/overdispersion-check-2.pdf Graphic file (type pdf)
+<use 04d-glmm_files/figure-pdf/overdispersion-check-2.pdf>
+
+Package natbib Warning: Citation `Hartig2022' on page 322 undefined on input line 11966.
+
+[322] [323] [324]
+File: 04d-glmm_files/figure-pdf/nb-glmm-1.pdf Graphic file (type pdf)
+<use 04d-glmm_files/figure-pdf/nb-glmm-1.pdf>
+[325] [326] [327] [328] [329] [330] [331]
+Underfull \vbox (badness 10000) detected at line 12377
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12377
+ []
+
+[332] [333] [334] [335] [336] [337] [338] [339] [340] [341] [342] [343] [344]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 11.1 on input line 12866.
+
+[345] [346] [347] [348]
+Overfull \hbox (12.9006pt too wide) in paragraph at lines 13010--13010
+[]\TU/lmtt/m/n/10.95 #>               Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(>Chisq)[] 
+ []
+
+
+Overfull \hbox (35.8956pt too wide) in paragraph at lines 13012--13012
+[]\TU/lmtt/m/n/10.95 #> fit_max_re     4 439.04 447.42 -215.52   431.04 12.167      1  0.0004864 ***[] 
+ []
+
+[349] [350]
+Overfull \hbox (35.8956pt too wide) in paragraph at lines 13107--13107
+[]\TU/lmtt/m/n/10.95 #>                cnd((Int)) dsp((Int)) cnd(trt) df   logLik  AICc delta weight[] 
+ []
+
+
+Overfull \hbox (35.8956pt too wide) in paragraph at lines 13108--13108
+[]\TU/lmtt/m/n/10.95 #> Treatment           2.726          +        +  4 -215.520 439.8  0.00  0.993[] 
+ []
+
+
+Overfull \hbox (35.8956pt too wide) in paragraph at lines 13109--13109
+[]\TU/lmtt/m/n/10.95 #> Intercept only      3.372          +           3 -221.604 449.6  9.87  0.007[] 
+ []
+
+[351] [352]
+
+Package natbib Warning: Citation `Akaike1974' on page 353 undefined on input line 13180.
+
+[353]
+Underfull \vbox (badness 10000) detected at line 13258
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 13258
+ []
+
+[354] [355] [356]
+File: 04d-glmm_files/figure-pdf/fig-aic-overfit-plot-1.pdf Graphic file (type pdf)
+<use 04d-glmm_files/figure-pdf/fig-aic-overfit-plot-1.pdf>
+[357] [358] [359]
+Overfull \hbox (30.14685pt too wide) in paragraph at lines 13427--13427
+[]\TU/lmtt/m/n/10.95 #>      nbinom2(link = "log"), REML = FALSE, ziformula = ~0, dispformula = ~1)[] 
+ []
+
+
+Overfull \hbox (24.3981pt too wide) in paragraph at lines 13440--13440
+[]\TU/lmtt/m/n/10.95 #>                           Estimate Std. Error Adjusted SE z value Pr(>|z|)[] 
+ []
+
+
+Overfull \hbox (35.8956pt too wide) in paragraph at lines 13441--13441
+[]\TU/lmtt/m/n/10.95 #> cond((Int))                -1.3413     0.8008      0.8091   1.658   0.0974 .[] 
+ []
+
+
+Overfull \hbox (41.64433pt too wide) in paragraph at lines 13442--13442
+[]\TU/lmtt/m/n/10.95 #> cond(landscapeFragmented)   2.5937     0.9842      0.9944   2.608   0.0091 **[] 
+ []
+
+
+Overfull \hbox (47.39308pt too wide) in paragraph at lines 13443--13443
+[]\TU/lmtt/m/n/10.95 #> cond(landscapeContinuous)   4.1385     1.0185      1.0287   4.023 5.74e-05 ***[] 
+ []
+
+
+Overfull \hbox (24.3981pt too wide) in paragraph at lines 13446--13446
+[]\TU/lmtt/m/n/10.95 #>                           Estimate Std. Error Adjusted SE z value Pr(>|z|)[] 
+ []
+
+
+Overfull \hbox (35.8956pt too wide) in paragraph at lines 13447--13447
+[]\TU/lmtt/m/n/10.95 #> cond((Int))                -1.3413     0.8008      0.8091   1.658  0.09738 .[] 
+ []
+
+
+Overfull \hbox (41.64433pt too wide) in paragraph at lines 13448--13448
+[]\TU/lmtt/m/n/10.95 #> cond(landscapeFragmented)   2.6024     0.9743      0.9847   2.643  0.00822 **[] 
+ []
+
+[360]
+Overfull \hbox (47.39308pt too wide) in paragraph at lines 13449--13449
+[]\TU/lmtt/m/n/10.95 #> cond(landscapeContinuous)   4.1524     0.9915      1.0020   4.144 3.41e-05 ***[] 
+ []
+
+
+LaTeX Warning: Reference `sec-birds' on page 361 undefined on input line 13480.
+
+[361] [362] [363]
+File: 04d-glmm_files/figure-pdf/fig-ecology-glmm-plot-1.pdf Graphic file (type pdf)
+<use 04d-glmm_files/figure-pdf/fig-ecology-glmm-plot-1.pdf>
+[364]
+File: 04d-glmm_files/figure-pdf/ecology-nb-first-1.pdf Graphic file (type pdf)
+<use 04d-glmm_files/figure-pdf/ecology-nb-first-1.pdf>
+[365]
+File: 04d-glmm_files/figure-pdf/ecology-nb-first-2.pdf Graphic file (type pdf)
+<use 04d-glmm_files/figure-pdf/ecology-nb-first-2.pdf>
+[366] [367] [368] [369] [370] [371]
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 13890--13890
+[]\TU/lmtt/m/n/10.95 #> fit_zinb_birds: count ~ landscape + (1 | site), zi=~landscape, disp=~1[] 
+ []
+
+
+Overfull \hbox (18.64935pt too wide) in paragraph at lines 13891--13891
+[]\TU/lmtt/m/n/10.95 #>                Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(>Chisq)[] 
+ []
+
+
+Overfull \hbox (18.64935pt too wide) in paragraph at lines 13893--13893
+[]\TU/lmtt/m/n/10.95 #> fit_zinb_birds  8 651.74 674.04 -317.87   635.74 0.6395      3     0.8873[] 
+ []
+
+[372]
+Overfull \hbox (41.64435pt too wide) in paragraph at lines 13941--13941
+[]\TU/lmtt/m/n/10.95 #> Caution: You lose important information if you filter this package[]s results.[] 
+ []
+
+[373]
+Overfull \hbox (1.4031pt too wide) in paragraph at lines 13977--13977
+[]\TU/lmtt/m/n/10.95 #> P value adjustment: tukey method for comparing a family of 3 estimates[] 
+ []
+
+[374] [375]
+Overfull \hbox (70.38809pt too wide) in paragraph at lines 14039--14039
+[]\TU/lmtt/m/n/10.95 #> Warning: the null model is only correct if all the variables it uses are identical[] 
+ []
+
+[376]
+
+Package natbib Warning: Citation `Brooks2017' on page 377 undefined on input line 14079.
+
+[377] [378]
+part IV.
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `partprefix' that is an alias of element `partnumber'
+(scrkbase)              on input line 14147.
+[379
+
+
+]
+chapter 12.
+[380
+
+
+]
+
+LaTeX Warning: Reference `sec-chap1' on page 381 undefined on input line 14193.
+
+[381] [382]
+
+LaTeX Warning: Reference `sec-pseudoreplication' on page 383 undefined on input line 14280.
+
+
+LaTeX Warning: Reference `sec-power-analysis' on page 383 undefined on input line 14288.
+
+
+LaTeX Warning: Reference `sec-sample-size-power' on page 383 undefined on input line 14288.
+
+[383]
+File: img/fig2.png Graphic file (type bmp)
+<img/fig2.png>
+[384] [385] [386] [387] [388] [389] [390] [391] [392] [393] [394] [395]
+
+LaTeX Warning: Reference `sec-pseudoreplication' on page 396 undefined on input line 14763.
+
+
+LaTeX Warning: Reference `sec-pseudoreplication2' on page 396 undefined on input line 14764.
+
+[396]
+Overfull \vbox (1.786pt too high) detected at line 14828
+ []
+
+[397]
+File: 05a-experimental-design_files/figure-pdf/fig-confounding-demo-1.pdf Graphic file (type pdf)
+<use 05a-experimental-design_files/figure-pdf/fig-confounding-demo-1.pdf>
+[398]
+
+LaTeX Warning: Reference `sec-pseudoreplication' on page 399 undefined on input line 14857.
+
+
+LaTeX Warning: Reference `sec-pseudoreplication2' on page 399 undefined on input line 14857.
+
+[399]
+
+LaTeX Warning: Reference `sec-unbalanced' on page 400 undefined on input line 14874.
+
+[400] [401] [402]
+
+Package natbib Warning: Citation `Green2016' on page 403 undefined on input line 15006.
+
+[403]
+
+LaTeX Warning: Reference `sec-chap9' on page 404 undefined on input line 15040.
+
+
+LaTeX Warning: Reference `sec-physio' on page 404 undefined on input line 15040.
+
+[404]
+! Text line contains an invalid character.
+l.15073 ...                                   |^^H
+                                                  ^^H^^H^^H^^H^^H^^H^^H^^H^^...
+A funny symbol that I can't read has just been input.
+Continue, and I'll forget that it ever happened.
+
+ 
+Here is how much of TeX's memory you used:
+ 40587 strings out of 469775
+ 850705 string characters out of 5467461
+ 1546978 words of memory out of 5000000
+ 68883 multiletter control sequences out of 15000+600000
+ 639755 words of font info for 139 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 108i,10n,114p,11208b,1042s stack positions out of 10000i,1000n,20000p,200000b,200000s
+Output written on index.pdf (408 pages).
