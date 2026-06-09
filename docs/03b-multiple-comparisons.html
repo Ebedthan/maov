@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Anicet Ebou">
+<title>4&nbsp; Multiple Comparisons – Modern Analysis of Variance</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03c-two-way.html" rel="next">
+<link href="./03a-one-way.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="site_libs/quarto-diagram/mermaid.min.js"></script><script src="site_libs/quarto-diagram/mermaid-init.js"></script><link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-classical-anova.html">Classical ANOVA Models</a></li><li class="breadcrumb-item"><a href="./03b-multiple-comparisons.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Comparisons</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Analysis of Variance</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Ebedthan/maov/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02a-what-is-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is ANOVA, Really ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02b-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Assumptions</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03-classical-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical ANOVA Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03a-one-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03b-multiple-comparisons.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03c-two-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03d-repeated-measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03e-split-plot-nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Split-Plot and Nested Designs</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04-modern-framework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Modern Framework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04a-anova-as-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANOVA as a Linear Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04b-mixed-effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed-Effects Models: Beyond Classical ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04c-when-assumptions-fail.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">When Assumptions Fail, What to Do ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04d-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Generalised Linear Mixed Models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./05-good-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Good Practice and Reproductibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05a-experimental-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Experimental Design Principles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05b-reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reporting ANOVA Results</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05c-reproducible-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducible Analysis with R</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Maths of the Book</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets and R Packages</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-decision-tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Decision Trees for Model Selection</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#the-multiple-testing-problem" id="toc-the-multiple-testing-problem" class="nav-link active" data-scroll-target="#the-multiple-testing-problem"><span class="header-section-number">4.1</span> The Multiple Testing Problem</a>
+  <ul class="collapse">
+<li><a href="#one-test-one-risk" id="toc-one-test-one-risk" class="nav-link" data-scroll-target="#one-test-one-risk"><span class="header-section-number">4.1.1</span> One Test, One Risk</a></li>
+  <li><a href="#many-tests-compounding-risk" id="toc-many-tests-compounding-risk" class="nav-link" data-scroll-target="#many-tests-compounding-risk"><span class="header-section-number">4.1.2</span> Many Tests, Compounding Risk</a></li>
+  <li><a href="#two-ways-to-define-the-error-rate" id="toc-two-ways-to-define-the-error-rate" class="nav-link" data-scroll-target="#two-ways-to-define-the-error-rate"><span class="header-section-number">4.1.3</span> Two Ways to Define the Error Rate</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#post-hoc-tests-tukey-bonferroni-holm-and-dunnett" id="toc-post-hoc-tests-tukey-bonferroni-holm-and-dunnett" class="nav-link" data-scroll-target="#post-hoc-tests-tukey-bonferroni-holm-and-dunnett"><span class="header-section-number">4.2</span> Post-Hoc Tests: Tukey, Bonferroni, Holm, and Dunnett</a>
+  <ul class="collapse">
+<li><a href="#the-general-principle" id="toc-the-general-principle" class="nav-link" data-scroll-target="#the-general-principle"><span class="header-section-number">4.2.1</span> The General Principle</a></li>
+  <li><a href="#tukeys-honest-significant-difference-hsd" id="toc-tukeys-honest-significant-difference-hsd" class="nav-link" data-scroll-target="#tukeys-honest-significant-difference-hsd"><span class="header-section-number">4.2.2</span> Tukey’s Honest Significant Difference (HSD)</a></li>
+  <li><a href="#bonferroni-correction" id="toc-bonferroni-correction" class="nav-link" data-scroll-target="#bonferroni-correction"><span class="header-section-number">4.2.3</span> Bonferroni Correction</a></li>
+  <li><a href="#holms-method" id="toc-holms-method" class="nav-link" data-scroll-target="#holms-method"><span class="header-section-number">4.2.4</span> Holm’s Method</a></li>
+  <li><a href="#dunnetts-test" id="toc-dunnetts-test" class="nav-link" data-scroll-target="#dunnetts-test"><span class="header-section-number">4.2.5</span> Dunnett’s Test</a></li>
+  <li><a href="#benjamini-hochberg-controlling-the-false-discovery-rate" id="toc-benjamini-hochberg-controlling-the-false-discovery-rate" class="nav-link" data-scroll-target="#benjamini-hochberg-controlling-the-false-discovery-rate"><span class="header-section-number">4.2.6</span> Benjamini-Hochberg: Controlling the False Discovery Rate</a></li>
+  <li><a href="#when-to-use-bh-vs-fwer-controlling-methods" id="toc-when-to-use-bh-vs-fwer-controlling-methods" class="nav-link" data-scroll-target="#when-to-use-bh-vs-fwer-controlling-methods"><span class="header-section-number">4.2.7</span> When to Use BH vs FWER-Controlling Methods</a></li>
+  <li><a href="#comparing-the-methods" id="toc-comparing-the-methods" class="nav-link" data-scroll-target="#comparing-the-methods"><span class="header-section-number">4.2.8</span> Comparing the Methods</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#planned-contrasts-vs-exploratory-comparisons" id="toc-planned-contrasts-vs-exploratory-comparisons" class="nav-link" data-scroll-target="#planned-contrasts-vs-exploratory-comparisons"><span class="header-section-number">4.3</span> Planned Contrasts vs Exploratory Comparisons</a>
+  <ul class="collapse">
+<li><a href="#a-distinction-that-changes-the-rules" id="toc-a-distinction-that-changes-the-rules" class="nav-link" data-scroll-target="#a-distinction-that-changes-the-rules"><span class="header-section-number">4.3.1</span> A Distinction That Changes the Rules</a></li>
+  <li><a href="#planned-contrasts" id="toc-planned-contrasts" class="nav-link" data-scroll-target="#planned-contrasts"><span class="header-section-number">4.3.2</span> Planned Contrasts</a></li>
+  <li><a href="#exploratory-post-hoc-comparisons" id="toc-exploratory-post-hoc-comparisons" class="nav-link" data-scroll-target="#exploratory-post-hoc-comparisons"><span class="header-section-number">4.3.3</span> Exploratory Post-Hoc Comparisons</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#practical-guidance-when-to-correct-and-when-not-to" id="toc-practical-guidance-when-to-correct-and-when-not-to" class="nav-link" data-scroll-target="#practical-guidance-when-to-correct-and-when-not-to"><span class="header-section-number">4.4</span> Practical Guidance: When to Correct and When Not To</a>
+  <ul class="collapse">
+<li><a href="#correct-when-you-are-searching" id="toc-correct-when-you-are-searching" class="nav-link" data-scroll-target="#correct-when-you-are-searching"><span class="header-section-number">4.4.1</span> Correct When You Are Searching</a></li>
+  <li><a href="#do-not-correct-pre-specified-planned-contrasts" id="toc-do-not-correct-pre-specified-planned-contrasts" class="nav-link" data-scroll-target="#do-not-correct-pre-specified-planned-contrasts"><span class="header-section-number">4.4.2</span> Do Not Correct Pre-Specified Planned Contrasts</a></li>
+  <li><a href="#consider-the-consequences-of-each-error-type" id="toc-consider-the-consequences-of-each-error-type" class="nav-link" data-scroll-target="#consider-the-consequences-of-each-error-type"><span class="header-section-number">4.4.3</span> Consider the Consequences of Each Error Type</a></li>
+  <li><a href="#always-report-what-you-did" id="toc-always-report-what-you-did" class="nav-link" data-scroll-target="#always-report-what-you-did"><span class="header-section-number">4.4.4</span> Always Report What You Did</a></li>
+  <li><a href="#a-decision-guide" id="toc-a-decision-guide" class="nav-link" data-scroll-target="#a-decision-guide"><span class="header-section-number">4.4.5</span> A Decision Guide</a></li>
+  <li><a href="#the-bottom-line" id="toc-the-bottom-line" class="nav-link" data-scroll-target="#the-bottom-line"><span class="header-section-number">4.4.6</span> The Bottom Line</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/03b-multiple-comparisons.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-classical-anova.html">Classical ANOVA Models</a></li><li class="breadcrumb-item"><a href="./03b-multiple-comparisons.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Comparisons</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-chap4" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Comparisons</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>The <span class="math inline">\(F\)</span> test in ANOVA answers a single, global question: do the group means differ? When the answer is yes, the natural follow-up is: <em>which</em> groups differ from <em>which</em>? This is where multiple comparisons enter the picture and where a surprising number of otherwise careful analyses go wrong.</p>
+<p>The problem is not the comparisons themselves, it is doing many of them at once without accounting for the fact that <strong>when you ask many questions of the same data, chance alone will eventually hand you a significant answer</strong>.</p>
+<p>This chapter explains why, introduces the main corrections available in R, and gives practical guidance on when each is appropriate.</p>
+<section id="the-multiple-testing-problem" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="the-multiple-testing-problem">
+<span class="header-section-number">4.1</span> The Multiple Testing Problem</h2>
+<section id="one-test-one-risk" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="one-test-one-risk">
+<span class="header-section-number">4.1.1</span> One Test, One Risk</h3>
+<p>When you perform a single hypothesis test at <span class="math inline">\(\alpha = 0.05\)</span>, <em>you accept</em> a 5% probability of a false positive which is 5% probability of declaring a difference significant when none truly exists. This is the Type I error rate, and it is exactly what <span class="math inline">\(\alpha\)</span> controls.</p>
+</section><section id="many-tests-compounding-risk" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="many-tests-compounding-risk">
+<span class="header-section-number">4.1.2</span> Many Tests, Compounding Risk</h3>
+<p>Now suppose the ANOVA is significant and you want to compare all pairs of groups. With <span class="math inline">\(k = 3\)</span> groups, there are three pairwise comparisons: Placebo vs Low dose, Placebo vs High dose, and Low dose vs High dose.</p>
+<p>If you run each as a separate <span class="math inline">\(t\)</span>-test at <span class="math inline">\(\alpha = 0.05\)</span>, the probability of making <em>at least one</em> false positive across the three tests is no longer 5%. Assuming the tests are independent, the probability of making no false positives across <span class="math inline">\(m\)</span> tests is <span class="math inline">\((1 - \alpha)^m\)</span>, so the probability of at least one false positive is:</p>
+<p><span class="math display">\[P(\text{at least one false positive}) = 1 - (1 - \alpha)^m\]</span></p>
+<p>For three tests: <span class="math inline">\(1 - (1 - 0.05)^3 = 0.143\)</span>. For five tests: <span class="math inline">\(0.226\)</span>. For ten tests: <span class="math inline">\(0.401\)</span>. <em>The more comparisons you make, the more likely you are to find something significant by chance alone</em>.</p>
+<p>This inflated error rate across a family of tests is called the <strong>familywise error rate (FWER)</strong>, and controlling it is the central goal of multiple comparison procedures.</p>
+<p>The simulation below makes this concrete. We generate data where all groups truly have the same mean, no differences exist, and count how often at least one pairwise <span class="math inline">\(t\)</span>-test returns <span class="math inline">\(p &lt; 0.05\)</span>:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/futureverse/furrr">furrr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">n_sim</span> <span class="op">&lt;-</span> <span class="fl">5000</span></span>
+<span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">20</span>   <span class="co"># observations per group</span></span>
+<span></span>
+<span><span class="co"># Range of group numbers to test</span></span>
+<span><span class="va">k_vals</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">:</span><span class="fl">10</span></span>
+<span></span>
+<span><span class="va">fwer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html">future_map_dbl</a></span><span class="op">(</span><span class="va">k_vals</span>, <span class="kw">function</span><span class="op">(</span><span class="va">k</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># inner loop is sequential, parallelism at the k level only</span></span>
+<span>  <span class="va">at_least_one_fp</span> <span class="op">&lt;-</span> <span class="fu">map_lgl</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n_sim</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">y</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">k</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span></span>
+<span>    <span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">k</span><span class="op">)</span>, each <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">df</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">group</span><span class="op">)</span></span>
+<span>    <span class="va">pairs</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span>    <span class="va">p_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">pairs</span>, <span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>,</span>
+<span>             data      <span class="op">=</span> <span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">group</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">g</span>, <span class="op">]</span>,</span>
+<span>             var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
+<span>    <span class="op">}</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">p_vals</span> <span class="op">&lt;</span> <span class="va">alpha</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">at_least_one_fp</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span>, .options <span class="op">=</span> <span class="fu"><a href="https://furrr.futureverse.org/reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Theoretical FWER</span></span>
+<span><span class="va">m_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="va">k_vals</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">fwer_theory</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span><span class="op">^</span><span class="va">m_vals</span></span>
+<span></span>
+<span><span class="va">fwer_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  k <span class="op">=</span> <span class="va">k_vals</span>,</span>
+<span>  m <span class="op">=</span> <span class="va">m_vals</span>,</span>
+<span>  fwer_sim <span class="op">=</span> <span class="va">fwer</span>,</span>
+<span>  fwer_theory <span class="op">=</span> <span class="va">fwer_theory</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">fwer_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">k</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">fwer_theory</span>, linetype <span class="op">=</span> <span class="st">"Theoretical"</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"#2E86AB"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">fwer_sim</span>, shape <span class="op">=</span> <span class="st">"Simulated"</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"#E84855"</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="va">alpha</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">"red"</span>, linewidth <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="va">k_vals</span>, sec.axis <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/sec_axis.html">sec_axis</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="va">.</span>, <span class="fl">2</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"Number of pairwise comparisons"</span>, breaks <span class="op">=</span> <span class="va">m_vals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_linetype_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Theoretical"</span> <span class="op">=</span> <span class="st">"solid"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Simulated"</span>   <span class="op">=</span> <span class="fl">16</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Number of groups (k)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Familywise error rate"</span>,</span>
+<span>    linetype <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    shape <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"inside"</span>, legend.position.inside <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.85</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="fig-multiple-testing-sim" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-multiple-testing-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03b-multiple-comparisons_files/figure-html/fig-multiple-testing-sim-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multiple-testing-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Familywise error rate as a function of the number of pairwise comparisons, when each test is run at alpha = 0.05 without correction. The dashed red line marks the nominal 5% level. With ten groups (45 pairwise comparisons), the probability of at least one false positive exceeds 90%.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>With just four groups and six pairwise comparisons, the familywise error rate already exceeds 25%. With ten groups and 45 pairwise comparisons, it approaches 90%.</p>
+<p>An analyst running uncorrected pairwise <span class="math inline">\(t\)</span>-tests after a significant ANOVA is operating in a regime where false positives are virtually guaranteed, not occasionally, but as a matter of arithmetic.</p>
+</section><section id="two-ways-to-define-the-error-rate" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="two-ways-to-define-the-error-rate">
+<span class="header-section-number">4.1.3</span> Two Ways to Define the Error Rate</h3>
+<p>Not everyone agrees that the familywise error rate is always the right quantity to control. Two alternative perspectives are worth knowing.</p>
+<p>The <strong>familywise error rate (FWER)</strong> asks: what is the probability of making <em>any</em> false positive in this family of tests? Controlling FWER at 0.05 means that across all your comparisons, the probability of even a single false positive is at most 5%. This is a conservative criterion, appropriate when any false positive would be costly, for example, in clinical trials where a falsely declared effective treatment might be adopted into practice.</p>
+<p>The <strong>false discovery rate (FDR)</strong> asks a softer question: among all comparisons declared significant, what proportion are expected to be false positives? Controlling FDR at 5% means that, on average, no more than 5% of your significant results are false positives. This is less conservative than FWER control and is more appropriate in exploratory research where missing real effects (false negatives) is considered as costly as generating false positives.</p>
+<p>In the context of post-hoc comparisons following a one-way ANOVA, <em>FWER control is the norm</em>. FDR control becomes more relevant in high-dimensional settings such as genomics, where thousands of tests are performed simultaneously.</p>
+</section></section><section id="post-hoc-tests-tukey-bonferroni-holm-and-dunnett" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="post-hoc-tests-tukey-bonferroni-holm-and-dunnett">
+<span class="header-section-number">4.2</span> Post-Hoc Tests: Tukey, Bonferroni, Holm, and Dunnett</h2>
+<section id="the-general-principle" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="the-general-principle">
+<span class="header-section-number">4.2.1</span> The General Principle</h3>
+<p>All post-hoc correction methods work by raising the bar for significance, either by reducing the <span class="math inline">\(\alpha\)</span> threshold applied to each individual test, or by adjusting the <span class="math inline">\(p\)</span>-values themselves upward. They differ in how conservatively they do this, and consequently in the balance they strike between controlling false positives and maintaining power to detect true differences.</p>
+<p>We will illustrate all methods using the blood pressure clinical trial from Chapter <a href="03a-one-way.html" class="quarto-xref"><span>3</span></a>.</p>
+</section><section id="tukeys-honest-significant-difference-hsd" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="tukeys-honest-significant-difference-hsd">
+<span class="header-section-number">4.2.2</span> Tukey’s Honest Significant Difference (HSD)</h3>
+<p>Tukey’s HSD is the most widely used post-hoc test for pairwise comparisons following ANOVA. It controls the familywise error rate exactly at <span class="math inline">\(\alpha\)</span> for all pairwise comparisons simultaneously, using the studentised range distribution rather than the <span class="math inline">\(t\)</span>-distribution. It is called “honest” because, unlike uncorrected pairwise <span class="math inline">\(t\)</span>-tests, it does not overstate the evidence.</p>
+<p>Tukey’s HSD is the right default when:</p>
+<ul>
+<li>You want all pairwise comparisons.</li>
+<li>Your groups have approximately equal sample sizes.</li>
+<li>You want tight control of the familywise error rate.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tukey_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">fit</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tukey_res</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;   Tukey multiple comparisons of means
+#&gt;     95% family-wise confidence level
+#&gt; 
+#&gt; Fit: aov(formula = bp ~ group, data = systolic)
+#&gt; 
+#&gt; $group
+#&gt;                          diff       lwr        upr     p adj
+#&gt; Low dose-Placebo   -15.554942 -26.10178  -5.008100 0.0022255
+#&gt; High dose-Placebo  -24.313969 -34.86081 -13.767127 0.0000023
+#&gt; High dose-Low dose  -8.759027 -19.30587   1.787815 0.1218054</code></pre>
+</div>
+</div>
+<p>The output gives, for each pair of groups, the estimated difference in means, a 95% confidence interval for that difference, and an adjusted <span class="math inline">\(p\)</span>-value. A confidence interval that does not include zero corresponds to a significant difference.</p>
+<p>It is almost always more informative to plot these intervals than to read the table:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tukey_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">tukey_res</span><span class="op">$</span><span class="va">group</span><span class="op">)</span></span>
+<span><span class="va">tukey_df</span><span class="op">$</span><span class="va">comparison</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">tukey_df</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">tukey_df</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"diff"</span>, <span class="st">"lwr"</span>, <span class="st">"upr"</span>, <span class="st">"p_adj"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tukey_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">comparison</span>, y <span class="op">=</span> <span class="va">diff</span>, ymin <span class="op">=</span> <span class="va">lwr</span>, ymax <span class="op">=</span> <span class="va">upr</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">"red"</span>, linewidth <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.15</span>, colour <span class="op">=</span> <span class="st">"#2E86AB"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span>, colour <span class="op">=</span> <span class="st">"#2E86AB"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Difference in mean blood pressure (mmHg)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-tukey-plot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-tukey-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03b-multiple-comparisons_files/figure-html/fig-tukey-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tukey-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Tukey HSD confidence intervals for all pairwise comparisons of mean blood pressure. Intervals that do not cross the vertical dashed line at zero indicate significant differences after correction for multiple comparisons. Both active treatments differ significantly from placebo.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="bonferroni-correction" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="bonferroni-correction">
+<span class="header-section-number">4.2.3</span> Bonferroni Correction</h3>
+<p>The Bonferroni correction is the simplest multiple comparison adjustment: divide <span class="math inline">\(\alpha\)</span> by the number of comparisons <span class="math inline">\(m\)</span>, and declare a result significant only if its <span class="math inline">\(p\)</span>-value falls below <span class="math inline">\(\alpha / m\)</span>. Equivalently, multiply each <span class="math inline">\(p\)</span>-value by <span class="math inline">\(m\)</span> and compare to the original <span class="math inline">\(\alpha\)</span>.</p>
+<p><span class="math display">\[\alpha_{\text{Bonferroni}} = \frac{\alpha}{m}\]</span></p>
+<p>For three pairwise comparisons at <span class="math inline">\(\alpha = 0.05\)</span>, each individual test must reach <span class="math inline">\(p &lt; 0.0167\)</span> to be declared significant.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/pairwise.t.test.html">pairwise.t.test</a></span><span class="op">(</span><span class="va">systolic</span><span class="op">$</span><span class="va">bp</span>, <span class="va">systolic</span><span class="op">$</span><span class="va">group</span>, p.adjust.method <span class="op">=</span> <span class="st">"bonferroni"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt;  Pairwise comparisons using t tests with pooled SD 
+#&gt; 
+#&gt; data:  systolic$bp and systolic$group 
+#&gt; 
+#&gt;           Placebo Low dose
+#&gt; Low dose  0.0023  -       
+#&gt; High dose 2.3e-06 0.1513  
+#&gt; 
+#&gt; P value adjustment method: bonferroni</code></pre>
+</div>
+</div>
+<p>The Bonferroni correction is simple, transparent, and works for any collection of tests: they do not even need to be pairwise comparisons. Its weakness is that it is conservative: it treats all tests as independent when in fact pairwise comparisons from the same dataset are correlated. This means it overcorrects, throwing away real power unnecessarily. When all pairwise comparisons are of interest, Tukey’s HSD is preferred because it accounts for the correlation structure and is therefore less conservative.</p>
+</section><section id="holms-method" class="level3" data-number="4.2.4"><h3 data-number="4.2.4" class="anchored" data-anchor-id="holms-method">
+<span class="header-section-number">4.2.4</span> Holm’s Method</h3>
+<p>Holm’s method is a sequential adaptation of Bonferroni that is uniformly more powerful while still controlling the familywise error rate. It works by ordering the <span class="math inline">\(p\)</span>-values from smallest to largest and applying a decreasing threshold:</p>
+<ol type="1">
+<li>Sort the <span class="math inline">\(m\)</span> <span class="math inline">\(p\)</span>-values: <span class="math inline">\(p_{(1)} \leq p_{(2)} \leq \cdots \leq p_{(m)}\)</span>.</li>
+<li>Compare <span class="math inline">\(p_{(1)}\)</span> to <span class="math inline">\(\alpha / m\)</span>, <span class="math inline">\(p_{(2)}\)</span> to <span class="math inline">\(\alpha / (m-1)\)</span>, and so on.</li>
+<li>Stop at the first <span class="math inline">\(p_{(i)}\)</span> that exceeds its threshold. Declare all tests from <span class="math inline">\(p_{(i)}\)</span> onward non-significant.</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/pairwise.t.test.html">pairwise.t.test</a></span><span class="op">(</span><span class="va">systolic</span><span class="op">$</span><span class="va">bp</span>, <span class="va">systolic</span><span class="op">$</span><span class="va">group</span>, p.adjust.method <span class="op">=</span> <span class="st">"holm"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt;  Pairwise comparisons using t tests with pooled SD 
+#&gt; 
+#&gt; data:  systolic$bp and systolic$group 
+#&gt; 
+#&gt;           Placebo Low dose
+#&gt; Low dose  0.0016  -       
+#&gt; High dose 2.3e-06 0.0504  
+#&gt; 
+#&gt; P value adjustment method: holm</code></pre>
+</div>
+</div>
+<p>Holm’s method should be preferred over Bonferroni in virtually every situation. It is strictly more powerful, equally simple to explain, and controls the FWER exactly. The only reason to use Bonferroni is when the simplicity of a single threshold is important for communication, for instance, when reporting to a non-statistical audience.</p>
+</section><section id="dunnetts-test" class="level3" data-number="4.2.5"><h3 data-number="4.2.5" class="anchored" data-anchor-id="dunnetts-test">
+<span class="header-section-number">4.2.5</span> Dunnett’s Test</h3>
+<p>Dunnett’s test is designed for a specific and common situation: you have a control group and you want to compare each treatment group to the control, but you are not interested in treatment-vs-treatment comparisons. By restricting the family of comparisons to control-vs-treatment only, Dunnett’s test is more powerful than Tukey’s HSD for this specific set of comparisons.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("DescTools") if needed</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://andrisignorell.github.io/DescTools/">DescTools</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/DunnettTest.html">DunnettTest</a></span><span class="op">(</span><span class="va">bp</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">systolic</span>, control <span class="op">=</span> <span class="st">"Placebo"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt;   Dunnett's test for comparing several treatments with a control :  
+#&gt;     95% family-wise confidence level
+#&gt; 
+#&gt; $Placebo
+#&gt;                        diff    lwr.ci     upr.ci    pval    
+#&gt; Low dose-Placebo  -15.55494 -25.49637  -5.613511  0.0015 ** 
+#&gt; High dose-Placebo -24.31397 -34.25540 -14.372538 1.6e-06 ***
+#&gt; 
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>With <span class="math inline">\(k = 3\)</span> groups, Dunnett’s test makes only 2 comparisons instead of Tukey’s 3, and the narrower family means a less severe correction, each comparison can be more sensitive.</p>
+</section><section id="benjamini-hochberg-controlling-the-false-discovery-rate" class="level3" data-number="4.2.6"><h3 data-number="4.2.6" class="anchored" data-anchor-id="benjamini-hochberg-controlling-the-false-discovery-rate">
+<span class="header-section-number">4.2.6</span> Benjamini-Hochberg: Controlling the False Discovery Rate</h3>
+<p>Bonferroni, Holm, and Tukey all control the <strong>familywise error rate</strong> i.e.&nbsp;the probability of making even a single false positive. This is a strict criterion, and its strictness has a cost: as the number of comparisons grows, these methods become increasingly conservative, discarding more and more true positives in order to guarantee that no false positives slip through.</p>
+<p>The <strong>Benjamini-Hochberg (BH) procedure</strong> <span class="citation" data-cites="Benjamini1995">(<a href="references.html#ref-Benjamini1995" role="doc-biblioref">Benjamini and Hochberg 1995</a>)</span> takes a different stance. Rather than asking “what is the probability of any false positive?”, it asks “among all the comparisons I declare significant, what fraction are expected to be false positives?” This fraction is called the <strong>false discovery rate (FDR)</strong>, and controlling it at 5% means that, on average, no more than 5% of your significant results are wrong, not that no false positives exist at all.</p>
+<p>The procedure is straightforward:</p>
+<ol type="1">
+<li>Sort the <span class="math inline">\(m\)</span> <span class="math inline">\(p\)</span>-values from smallest to largest: <span class="math inline">\(p_{(1)} \leq p_{(2)} \leq \cdots \leq p_{(m)}\)</span>.</li>
+<li>Find the largest <span class="math inline">\(i\)</span> such that <span class="math inline">\(p_{(i)} \leq \frac{i}{m} \cdot \alpha\)</span>.</li>
+<li>Declare all tests up to and including rank <span class="math inline">\(i\)</span> significant.</li>
+</ol>
+<p>In R it is simply another option in <code>p.adjust</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/pairwise.t.test.html">pairwise.t.test</a></span><span class="op">(</span><span class="va">systolic</span><span class="op">$</span><span class="va">bp</span>, <span class="va">systolic</span><span class="op">$</span><span class="va">group</span>, p.adjust.method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt;  Pairwise comparisons using t tests with pooled SD 
+#&gt; 
+#&gt; data:  systolic$bp and systolic$group 
+#&gt; 
+#&gt;           Placebo Low dose
+#&gt; Low dose  0.0012  -       
+#&gt; High dose 2.3e-06 0.0504  
+#&gt; 
+#&gt; P value adjustment method: BH</code></pre>
+</div>
+</div>
+<p>The BH procedure is <strong>uniformly more powerful than Holm and Bonferroni</strong>: it will declare more comparisons significant for the same data because it tolerates a small, controlled fraction of false positives rather than holding the false positive count to zero.</p>
+</section><section id="when-to-use-bh-vs-fwer-controlling-methods" class="level3" data-number="4.2.7"><h3 data-number="4.2.7" class="anchored" data-anchor-id="when-to-use-bh-vs-fwer-controlling-methods">
+<span class="header-section-number">4.2.7</span> When to Use BH vs FWER-Controlling Methods</h3>
+<p>The choice between FDR and FWER control is not a technical question, it is a scientific one and it hinges on the consequences of each type of error in your specific context.</p>
+<p><strong>Use FWER control (Tukey, Holm) when:</strong></p>
+<ul>
+<li>Any single false positive would be costly or misleading. A falsely declared effective drug in a clinical trial, for example, could lead to harmful treatment decisions.</li>
+<li>The number of comparisons is small (as is typical after a one-way ANOVA with a handful of groups).</li>
+<li>The analysis is confirmatory: you are testing a small number of pre-specified hypotheses and need strong guarantees.</li>
+</ul>
+<p><strong>Use FDR control (Benjamini-Hochberg) when:</strong></p>
+<ul>
+<li>Missing real effects is considered as costly as generating false positives: the balance of errors matters, not just one direction.</li>
+<li>The number of comparisons is large, and FWER control would be so conservative as to be nearly useless.</li>
+<li>The analysis is exploratory: you are screening many comparisons to identify candidates for further investigation, and a small fraction of false positives among your hits is acceptable.</li>
+</ul>
+<p>The BH procedure is the dominant method in genomics and other high-dimensional fields, where tens of thousands of tests are performed simultaneously and FWER control would require astronomically small individual <span class="math inline">\(p\)</span>-value thresholds. In the context of a one-way ANOVA with three to six groups, the practical difference between Holm and BH will often be small with the same comparisons will reach significance. But as the number of groups grows, or when ANOVA is used as part of a larger screening pipeline, BH becomes the more sensible default.</p>
+<p>The simulation below illustrates the power advantage of BH over Holm when there are many comparisons and a mix of true and null effects:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/futureverse/furrr">furrr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">n_sim</span> <span class="op">&lt;-</span> <span class="fl">5000</span></span>
+<span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">15</span></span>
+<span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">k_true</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span><span class="va">true_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">delta</span>, <span class="va">k_true</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">k</span> <span class="op">-</span> <span class="va">k_true</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Comparisons are G2:G10 vs G1</span></span>
+<span><span class="co"># G2:G5 vs G1: both elevated by delta, truly NULL (4 comparisons)</span></span>
+<span><span class="co"># G6:G10 vs G1: G1 elevated, others, not truly DIFFERENT (5 comparisons)</span></span>
+<span><span class="va">truly_different</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="va">k_true</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>,   <span class="co"># G2:G5 vs G1</span></span>
+<span>                     <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>,  <span class="va">k</span> <span class="op">-</span> <span class="va">k_true</span><span class="op">)</span><span class="op">)</span>    <span class="co"># G6:G10 vs G1</span></span>
+<span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html">future_map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n_sim</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">true_means</span>, <span class="kw">function</span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, mean <span class="op">=</span> <span class="va">m</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">k</span><span class="op">)</span>, each <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">df_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">group</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">p_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"G"</span>, <span class="fl">2</span><span class="op">:</span><span class="va">k</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>,</span>
+<span>           data <span class="op">=</span> <span class="va">df_s</span><span class="op">[</span><span class="va">df_s</span><span class="op">$</span><span class="va">group</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"G1"</span>, <span class="va">g</span><span class="op">)</span>, <span class="op">]</span>,</span>
+<span>           var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">p_holm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p_raw</span>, method <span class="op">=</span> <span class="st">"holm"</span><span class="op">)</span></span>
+<span>  <span class="va">p_bh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">p_raw</span>, method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    power_holm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">p_holm</span> <span class="op">&lt;</span> <span class="va">alpha</span><span class="op">)</span><span class="op">[</span> <span class="va">truly_different</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    power_bh <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">p_bh</span> <span class="op">&lt;</span> <span class="va">alpha</span><span class="op">)</span><span class="op">[</span> <span class="va">truly_different</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    fpr_holm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">p_holm</span> <span class="op">&lt;</span> <span class="va">alpha</span><span class="op">)</span><span class="op">[</span><span class="op">!</span><span class="va">truly_different</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    fpr_bh <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">p_bh</span> <span class="op">&lt;</span> <span class="va">alpha</span><span class="op">)</span><span class="op">[</span><span class="op">!</span><span class="va">truly_different</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span>, .options <span class="op">=</span> <span class="fu"><a href="https://furrr.futureverse.org/reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">summary_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Power\n(true effects detected)"</span>, <span class="st">"False positive rate\n(null effects declared significant)"</span><span class="op">)</span>,</span>
+<span>  Holm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="st">"power_holm"</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="st">"fpr_holm"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  BH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="st">"power_bh"</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="st">"fpr_bh"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">summary_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Power\n(true effects detected)"</span>, <span class="st">"False positive rate\n(null effects declared significant)"</span><span class="op">)</span>,</span>
+<span>  Holm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="st">"power_holm"</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="st">"fpr_holm"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  BH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="st">"power_bh"</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="st">"fpr_bh"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
+<span><span class="va">summary_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">summary_df</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Holm"</span>, <span class="st">"BH"</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"method"</span>, values_to <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">summary_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">method</span>, y <span class="op">=</span> <span class="va">value</span>, fill <span class="op">=</span> <span class="va">method</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.5</span>, alpha <span class="op">=</span> <span class="fl">0.85</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.05</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">"red"</span>, linewidth <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">metric</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BH"</span> <span class="op">=</span> <span class="st">"#2E86AB"</span>, <span class="st">"Holm"</span> <span class="op">=</span> <span class="st">"#E84855"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span>, fill <span class="op">=</span> <span class="st">"Method"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="fig-fdr-vs-fwer-sim" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fdr-vs-fwer-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03b-multiple-comparisons_files/figure-html/fig-fdr-vs-fwer-sim-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fdr-vs-fwer-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: Power and false positive rate for Holm (FWER) and Benjamini-Hochberg (FDR) correction across 5000 simulations with k = 10 groups, half of which truly differ from the others. BH detects more true positives (higher power) while keeping the false discovery rate at the nominal 5% level. Holm controls the familywise error rate more tightly but misses more real effects.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="comparing-the-methods" class="level3" data-number="4.2.8"><h3 data-number="4.2.8" class="anchored" data-anchor-id="comparing-the-methods">
+<span class="header-section-number">4.2.8</span> Comparing the Methods</h3>
+<p>The table below summarises the key properties of each method:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 18%">
+<col style="width: 29%">
+<col style="width: 29%">
+</colgroup>
+<thead><tr class="header">
+<th>Method</th>
+<th>Controls</th>
+<th>Best used when</th>
+<th>Relative power</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Tukey HSD</td>
+<td>FWER</td>
+<td>All pairwise, equal <span class="math inline">\(n\)</span>
+</td>
+<td>High for pairwise</td>
+</tr>
+<tr class="even">
+<td>Bonferroni</td>
+<td>FWER</td>
+<td>Any tests, simple communication</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<td>Holm</td>
+<td>FWER</td>
+<td>Any tests, better than Bonferroni</td>
+<td>Moderate–High</td>
+</tr>
+<tr class="even">
+<td>Dunnett</td>
+<td>FWER</td>
+<td>Each treatment vs one control</td>
+<td>Highest for control comparisons</td>
+</tr>
+<tr class="odd">
+<td>Benjamini-Hochberg</td>
+<td>FDR</td>
+<td>Many comparisons, exploratory work</td>
+<td>Highest</td>
+</tr>
+</tbody>
+</table></section></section><section id="planned-contrasts-vs-exploratory-comparisons" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="planned-contrasts-vs-exploratory-comparisons">
+<span class="header-section-number">4.3</span> Planned Contrasts vs Exploratory Comparisons</h2>
+<section id="a-distinction-that-changes-the-rules" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="a-distinction-that-changes-the-rules">
+<span class="header-section-number">4.3.1</span> A Distinction That Changes the Rules</h3>
+<p>Not all comparisons are created equal. There is a fundamental difference between comparisons that were specified before looking at the data, <strong>planned contrasts</strong>, and comparisons chosen after seeing which groups look most different, <strong>exploratory post-hoc comparisons</strong>.</p>
+<p>This distinction matters because the multiple testing problem is, at its core, a problem of searching. <em>When you specify your comparisons in advance, you are not searching, you are testing a specific hypothesis</em>. The number of tests you could have run but did not is irrelevant to the interpretation of the one you did run. When you search the data for interesting differences after the fact, every comparison you could have made is part of the implicit search, and the familywise error rate must reflect the size of that search.</p>
+</section><section id="planned-contrasts" class="level3" data-number="4.3.2"><h3 data-number="4.3.2" class="anchored" data-anchor-id="planned-contrasts">
+<span class="header-section-number">4.3.2</span> Planned Contrasts</h3>
+<p>A planned contrast is a specific, theoretically motivated comparison written down before data collection. For example:</p>
+<ul>
+<li>“We expect nitrogen fertiliser to increase plant height relative to the control, based on prior studies.”</li>
+<li>“We expect the average of the two drug doses to differ from placebo.”</li>
+</ul>
+<p>Planned contrasts can be specified as linear combinations of group means.</p>
+<p>A contrast is a vector of coefficients <span class="math inline">\(c_j\)</span> such that <span class="math inline">\(\sum_{j=1}^k c_j = 0\)</span>. For example, to compare the nitrogen group mean to the average of the control and phosphorus groups:</p>
+<p><span class="math display">\[L = \bar{y}_{\text{nitrogen}} - \frac{1}{2}(\bar{y}_{\text{control}} + \bar{y}_{\text{phosphorus}})\]</span></p>
+<p>with coefficients <span class="math inline">\(c = (-0.5, 1, -0.5)\)</span> for control, nitrogen and phosphorus respectively.</p>
+<p>In R, planned contrasts are specified directly in the model:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compare high dose to placebo (planned a priori)</span></span>
+<span><span class="co"># and low dose to placebo (planned a priori)</span></span>
+<span><span class="co"># using the multcomp package</span></span>
+<span></span>
+<span><span class="co"># install.packages("multcomp") if needed</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://multcomp.R-forge.R-project.org">multcomp</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define contrast matrix: each row is one contrast</span></span>
+<span><span class="co"># Groups are ordered as: High dose, Low dose, Placebo</span></span>
+<span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span></span>
+<span>  <span class="st">"High dose vs Placebo"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,  <span class="fl">0</span>,  <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  <span class="st">"Low dose vs Placebo"</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>,  <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">planned</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/glht.html">glht</a></span><span class="op">(</span><span class="va">fit</span>, linfct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/glht.html">mcp</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">K</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">planned</span>, test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/methods.html">adjusted</a></span><span class="op">(</span><span class="st">"none"</span><span class="op">)</span><span class="op">)</span>  <span class="co"># no correction for planned contrasts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt;   Simultaneous Tests for General Linear Hypotheses
+#&gt; 
+#&gt; Multiple Comparisons of Means: User-defined Contrasts
+#&gt; 
+#&gt; 
+#&gt; Fit: aov(formula = bp ~ group, data = systolic)
+#&gt; 
+#&gt; Linear Hypotheses:
+#&gt;                           Estimate Std. Error t value Pr(&gt;|t|)    
+#&gt; High dose vs Placebo == 0  -24.314      4.383  -5.548 7.82e-07 ***
+#&gt; Low dose vs Placebo == 0    -8.759      4.383  -1.999   0.0504 .  
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; (Adjusted p values reported -- none method)</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">planned</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt;   Simultaneous Confidence Intervals
+#&gt; 
+#&gt; Multiple Comparisons of Means: User-defined Contrasts
+#&gt; 
+#&gt; 
+#&gt; Fit: aov(formula = bp ~ group, data = systolic)
+#&gt; 
+#&gt; Quantile = 2.2682
+#&gt; 95% family-wise confidence level
+#&gt;  
+#&gt; 
+#&gt; Linear Hypotheses:
+#&gt;                           Estimate lwr      upr     
+#&gt; High dose vs Placebo == 0 -24.3140 -34.2551 -14.3728
+#&gt; Low dose vs Placebo == 0   -8.7590 -18.7002   1.1821</code></pre>
+</div>
+</div>
+<p>Notice <code>adjusted("none")</code> because these contrasts were planned in advance and are limited in number, no correction for multiple comparisons is applied. The tests stand on their own as independent, pre-specified hypotheses.</p>
+<p>This is the important practical payoff of planning your comparisons in advance: you preserve the full <span class="math inline">\(\alpha = 0.05\)</span> for each test, rather than spending part of it on the correction overhead.</p>
+</section><section id="exploratory-post-hoc-comparisons" class="level3" data-number="4.3.3"><h3 data-number="4.3.3" class="anchored" data-anchor-id="exploratory-post-hoc-comparisons">
+<span class="header-section-number">4.3.3</span> Exploratory Post-Hoc Comparisons</h3>
+<p>When you look at the data first and then decide which groups to compare, you are in exploratory territory. This is not wrong: exploration is a legitimate and important part of science but it requires honest accounting. The comparisons must be treated as a family, and the familywise error rate must be controlled. Tukey’s HSD or Holm’s method is appropriate here.</p>
+<p>The clearest sign that you are in exploratory territory is when your choice of comparisons is guided by the data: “the nitrogen group looks highest, so let me compare it to everything else.” Any comparison motivated by looking at the results first is post-hoc, regardless of whether it feels like something you would have planned.</p>
+</section></section><section id="practical-guidance-when-to-correct-and-when-not-to" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="practical-guidance-when-to-correct-and-when-not-to">
+<span class="header-section-number">4.4</span> Practical Guidance: When to Correct and When Not To</h2>
+<p>The multiple comparisons literature contains genuine disagreement among statisticians, and students are sometimes given conflicting advice. The following principles represent a pragmatic, widely accepted position.</p>
+<section id="correct-when-you-are-searching" class="level3" data-number="4.4.1"><h3 data-number="4.4.1" class="anchored" data-anchor-id="correct-when-you-are-searching">
+<span class="header-section-number">4.4.1</span> Correct When You Are Searching</h3>
+<p>If the comparisons were not specified in advance, correction is necessary. The more comparisons you make, the more aggressively you should correct. Tukey’s HSD is the right default for all pairwise comparisons following a one-way ANOVA. Holm’s method is appropriate when the set of comparisons is more varied.</p>
+</section><section id="do-not-correct-pre-specified-planned-contrasts" class="level3" data-number="4.4.2"><h3 data-number="4.4.2" class="anchored" data-anchor-id="do-not-correct-pre-specified-planned-contrasts">
+<span class="header-section-number">4.4.2</span> Do Not Correct Pre-Specified Planned Contrasts</h3>
+<p>If you specified a small number of theoretically motivated comparisons before data collection, correction is not required and is arguably incorrect, because you would be penalising yourself for tests you might have run but did not. Keep the number of planned contrasts modest (as a rough guide, no more than <span class="math inline">\(k - 1\)</span> contrasts for <span class="math inline">\(k\)</span> groups) and specify them in your analysis plan before opening the data.</p>
+</section><section id="consider-the-consequences-of-each-error-type" class="level3" data-number="4.4.3"><h3 data-number="4.4.3" class="anchored" data-anchor-id="consider-the-consequences-of-each-error-type">
+<span class="header-section-number">4.4.3</span> Consider the Consequences of Each Error Type</h3>
+<p>Multiple comparison corrections reduce false positives at the cost of increasing false negatives; they make it harder to detect real effects. In some contexts, missing a real effect is more costly than generating a false positive; in others, the reverse is true. A screening experiment designed to identify candidate treatments for further investigation might accept more false positives in exchange for fewer missed effects. For example, a confirmatory clinical trial must be conservative about false positives because a falsely declared effective treatment may ultimately be adopted into clinical practice. Let the scientific context, not habit, guide your choice of correction.</p>
+</section><section id="always-report-what-you-did" class="level3" data-number="4.4.4"><h3 data-number="4.4.4" class="anchored" data-anchor-id="always-report-what-you-did">
+<span class="header-section-number">4.4.4</span> Always Report What You Did</h3>
+<p>Whatever correction you apply, or do not apply, should be stated explicitly. Report the uncorrected <span class="math inline">\(p\)</span>-values alongside the corrected ones when space allows. A reader who knows you used Tukey’s HSD can evaluate your decision; a reader who does not know what correction was applied cannot.</p>
+</section><section id="a-decision-guide" class="level3" data-number="4.4.5"><h3 data-number="4.4.5" class="anchored" data-anchor-id="a-decision-guide">
+<span class="header-section-number">4.4.5</span> A Decision Guide</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-comparison-decision-tree" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-comparison-decision-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-comparison-decision-tree">flowchart TD
+    A[Significant ANOVA] --&gt; B{Comparisons planned\nin advance?}
+
+    B -- Yes --&gt; C{How many\ncontrasts?}
+    B -- No --&gt; D{All pairwise\ncomparisons?}
+
+    C -- Few --&gt; E[Planned contrasts\nno correction]
+    C -- Many --&gt; F[Holm or\nBenjamini-Hochberg]
+
+    D -- All pairs --&gt; G[Tukey HSD\nor Holm]
+    D -- vs control only --&gt; H[Dunnett]
+    D -- Exploratory\nmany groups --&gt; I[Benjamini-Hochberg\nFDR control]
+
+    style A fill:#555555,color:#ffffff
+    style B fill:#F6AE2D,color:#ffffff
+    style C fill:#2E86AB,color:#ffffff
+    style D fill:#2E86AB,color:#ffffff
+    style E fill:#81B29A,color:#ffffff
+    style F fill:#81B29A,color:#ffffff
+    style G fill:#81B29A,color:#ffffff
+    style H fill:#81B29A,color:#ffffff
+    style I fill:#81B29A,color:#ffffff
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comparison-decision-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: A decision guide for selecting a multiple comparison approach after a significant one-way ANOVA.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="the-bottom-line" class="level3" data-number="4.4.6"><h3 data-number="4.4.6" class="anchored" data-anchor-id="the-bottom-line">
+<span class="header-section-number">4.4.6</span> The Bottom Line</h3>
+<p>Multiple comparison corrections are not bureaucratic box-ticking. They exist because data can be made to say almost anything if you ask enough questions of them. The discipline of specifying comparisons in advance, or of honestly accounting for the number of comparisons made post-hoc, is what separates a trustworthy analysis from one that has been, perhaps unknowingly, optimised to produce significant results.</p>
+<p>At the same time, correction is not always necessary, and overcorrecting is a real error with real costs and can cause you to dismiss effects that are genuine. The goal is calibration: matching the stringency of your error control to the scientific context, the number of comparisons, and the consequences of being wrong in either direction.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Benjamini1995" class="csl-entry" role="listitem">
+Benjamini, Yoav, and Yosef Hochberg. 1995. <span>“Controlling the <span>False Discovery Rate</span>: <span>A Practical</span> and <span>Powerful Approach</span> to <span>Multiple Testing</span>.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 57 (1): 289–300. <a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x">https://doi.org/10.1111/j.2517-6161.1995.tb02031.x</a>.
+</div>
+</div>
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ebedthan\.github\.io\/maov\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./03a-one-way.html" class="pagination-link" aria-label="One-Way ANOVA">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03c-two-way.html" class="pagination-link" aria-label="Two-Way ANOVA and Factorial Designs">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Modern Analysis of Variance by Anicet Ebou.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/03b-multiple-comparisons.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>
