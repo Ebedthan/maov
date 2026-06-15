@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: docs
 
 book:
   title: "Modern Analysis of Variance"
@@ -56,8 +57,8 @@ format:
     code-link: true
     number-sections: true
   pdf:
-    pdf-engine: xelatex
     number-sections: true
+    pdf-engine: xelatex
     documentclass: scrbook
     classoption: [oneside]
     papersize: a4
@@ -65,11 +66,17 @@ format:
     linestretch: 1.5
     toc: true
     toc-depth: 2
-    lof: true
-    lot: true
+    lof: true        # list of figures
+    lot: true        # list of tables
     colorlinks: true
+    keep-tex: false
     cite-method: natbib
     mermaid-format: png
+    mainfont: "Libertinus Serif"
+    sansfont: "Libertinus Sans"
+    monofont: "JuliaMono"
+    monofontoptions:
+      - Scale=0.8
 
 knitr:
   opts_chunk:

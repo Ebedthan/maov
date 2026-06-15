@@ -2,10 +2,9 @@
 
 ## The variance decomposition idea
 
-Imagine you are investigating whether the type of fertiliser applied to wheat plants affects how tall they grow. You have 12 identical pots of wheat seedlings. Four pots receive no fertiliser (control), four receive a nitrogen-based fertiliser, and four receive a phosphorus-based fertiliser. After six weeks, you measure 
-the height of each plant.
+Imagine you are investigating whether the type of fertiliser applied to wheat plants affects how tall they grow. You have 12 identical pots of wheat seedlings. Four pots receive no fertiliser (control), four receive a nitrogen-based fertiliser, and four receive a phosphorus-based fertiliser. After six weeks, you measure the height of each plant.
 
-![Figure 1. Fertiliser experiment](img/fig1.png)
+![Figure 1. Fertiliser experiment. Seedling growth observed after 6 weeks. The pots received same soils and were treated equally except from fertiliser they received.](img/fig1.png)
 
 Your starting assumption is that *there is no difference in mean plant height among  the three groups.* The alternative is that at least one fertiliser produces a different mean height.
 

@@ -23,6 +23,9 @@
 \usepackage{lmodern}
 \ifPDFTeX\else  
     % xetex/luatex font selection
+    \setmainfont[]{Libertinus Serif}
+    \setsansfont[]{Libertinus Sans}
+    \setmonofont[Scale=0.8]{JuliaMono}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -297,16 +300,16 @@ teach.
 \textbf{Move on to the modern framework}. Part III introduces
 mixed-effects models and generalised linear mixed models. If you have
 read this far, you have already encountered the core reason why: Chapter
-2 showed that the most damaging violations of ANOVA assumptions,
-non-independence, pseudoreplication, nested structures, and random
-effects, cannot be fixed by transforming your data or switching to a
+2 showed that the most damaging violations of ANOVA assumptions
+(non-independence, pseudoreplication, nested structures, and random
+effects) cannot be fixed by transforming your data or switching to a
 non-parametric test. They require a richer model, one that can represent
 the actual structure of how your data were collected. Mixed-effects
 models are that richer model. They are not a separate topic bolted onto
 ANOVA, they are the natural destination of the logic you have already
-been following. ANOVA, as you now know, is a special case of the linear
-model. Mixed-effects models are simply the next step in the same
-direction: a linear model that can also account for the random variation
+been following. ANOVA is just a special case of the linear model and
+mixed-effects models are simply the next step in the same direction
+i.e.~a linear model that can also account for the random variation
 introduced by subjects, plots, cages, clinics, or any other grouping
 structure in your data. By the end of Part III, the goal is that this
 framework becomes how you think about your analyses, not an advanced
@@ -319,39 +322,42 @@ This final part makes sure yours can be both.
 
 Each chapter includes R code that you can run directly. The book was
 written using Quarto, and all code chunks are fully reproducible. When
-you see a chunk, run it, modify it, break it, and fix it. That is how
-the material becomes yours.
+you see a chunk, run it, modify it, break it, and fix it. That is how, I
+believe, the material becomes yours.
 
 \part{Foundations}
 
 To consult the statistician after an experiment is finished is often
 merely to ask him to conduct a post mortem examination. He can perhaps
-say what the experiment died of. --- Ronald A. Fisher
+say what the experiment died of.
 
-Statistics textbooks often introduce ANOVA as a procedure: a set of
-steps to follow, a table to fill in, a \(p\)-value to report. This part
-takes a different approach.
+--- Ronald A. Fisher
+
+Statistics textbooks often introduce Analysis of Variance (from here and
+onward called by its abbreviation ANOVA) as a procedure: a set of steps
+to follow, a table to fill in, a \(p\)-value to report. This part takes
+a different approach.
 
 Before touching a single formula, we ask a more fundamental question:
 \emph{what is ANOVA actually doing, and why does it work?}
 
 Chapter 1 builds the answer from the ground up. Starting from the simple
-observation that \textbf{variation in data has identifiable sources}, it
-shows how \textbf{ANOVA decomposes total variation into components that
-can be compared} and why the ratio of those components is a meaningful
-test of whether group means differ. It also shows that ANOVA is not a
-standalone procedure but a special case of the linear model, a
+observation that \textbf{variation in data has identifiable sources}. It
+shows how ANOVA \textbf{decomposes total variation into components that
+can be compared} and why \textbf{the ratio of those components is a
+meaningful test of whether group means differ}. It also shows that ANOVA
+is not a standalone procedure but a special case of the linear model, a
 connection that will pay dividends throughout the rest of the book.
 
 Chapter 2 is devoted entirely to assumptions. This is unusual for an
-introductory treatment, but the emphasis is deliberate. In our
+introductory treatment, but the emphasis is deliberate. In my
 experience, assumption violations are the single most common source of
-invalid conclusions in the biological literature, not because
-researchers are careless, but because the consequences of violations are
-rarely taught with the clarity they deserve. By the end of Chapter 2,
-you will know not just \emph{what} the assumptions are, but \emph{why}
-they matter, \emph{how badly} each one can distort your results when
-violated, and \emph{what to do} when they are.
+invalid conclusions in the biological literature. This happens not
+because researchers are careless, but because the consequences of
+violations are rarely taught with the clarity they deserve. By the end
+of Chapter 2, you will know not just \emph{what} the assumptions are,
+but \emph{why} they matter, \emph{how badly} each one can distort your
+results when violated, and \emph{what to do} when they are.
 
 These two chapters form the foundation on which everything else in the
 book is built. The time spent here will not be wasted.
@@ -373,7 +379,9 @@ fertiliser. After six weeks, you measure the height of each plant.
 
 }
 
-\caption{Figure 1. Fertiliser experiment}
+\caption{Figure 1. Fertiliser experiment. Seedling growth observed after
+6 weeks. The pots received same soils and were treated equally except
+from fertiliser they received.}
 
 \end{figure}%
 
@@ -1667,7 +1675,7 @@ hypothesis, and therefore allows us to compute a \(p\)-value, was
 derived under the assumption that the residuals are normally
 distributed.
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Show me the maths!}, opacityback=0, bottomtitle=1mm, leftrule=.75mm, breakable, toprule=.15mm, colframe=quarto-callout-tip-color-frame, titlerule=0mm, rightrule=.15mm, toptitle=1mm, arc=.35mm, colback=white, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, coltitle=black, bottomrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Show me the maths!}, arc=.35mm, colback=white, titlerule=0mm, opacityback=0, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm]
 
 Want to understand the precise mathematical chain that connects normal
 residuals to the F distribution? See
@@ -9191,7 +9199,7 @@ differences matter most with small numbers of groups which is a common
 situation in biology, where experiments often have 5-15 clusters. When
 in doubt, use Kenward-Roger and note the method in your methods section.
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Show me the maths!}, opacityback=0, bottomtitle=1mm, leftrule=.75mm, breakable, toprule=.15mm, colframe=quarto-callout-tip-color-frame, titlerule=0mm, rightrule=.15mm, toptitle=1mm, arc=.35mm, colback=white, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, coltitle=black, bottomrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Show me the maths!}, arc=.35mm, colback=white, titlerule=0mm, opacityback=0, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm]
 
 For the mathematical derivation of both the Satterthwaite and
 Kenward-Roger degree of freedom approximations, see
@@ -11163,7 +11171,7 @@ A GLM has three components:
   combination of predictors as in the normal linear model.
 \end{enumerate}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Show me the maths!}, opacityback=0, bottomtitle=1mm, leftrule=.75mm, breakable, toprule=.15mm, colframe=quarto-callout-tip-color-frame, titlerule=0mm, rightrule=.15mm, toptitle=1mm, arc=.35mm, colback=white, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6, coltitle=black, bottomrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Show me the maths!}, arc=.35mm, colback=white, titlerule=0mm, opacityback=0, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm]
 
 Found \(\eta_i = \mathbf{x}_i^T \boldsymbol{\beta}\), the bold symbols
 and superscript \(T\) unfamiliar, We have you covered! See
@@ -14104,7 +14112,7 @@ variance (\(\hat{\sigma}_{\text
 structure was essential for valid inference.
 \end{quote}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Going Further}, opacityback=0, bottomtitle=1mm, leftrule=.75mm, breakable, toprule=.15mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, rightrule=.15mm, toptitle=1mm, arc=.35mm, colback=white, left=2mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, coltitle=black, bottomrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Going Further}, arc=.35mm, colback=white, titlerule=0mm, opacityback=0, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm]
 
 This chapter does not aim to present thoroughly GLMMs or hierarchical
 models but to present its usefulness and when it should be used.
@@ -15056,16 +15064,12 @@ treatment effect of 5 recovery points with 80\% power.
 \NormalTok{)}
 
 \CommentTok{\# Step 2: Set the treatment effect to the minimum}
-\CommentTok{\# biologically meaningful difference — here, 5 recovery points}
+\CommentTok{\# biologically meaningful difference; here, 5 recovery points}
 \FunctionTok{fixef}\NormalTok{(fit\_pilot)[}\StringTok{"treatmentTreatment"}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{5}
 
 \CommentTok{\# Step 3a: Estimate power at the current sample size}
 \CommentTok{\# Power curve across patients per hospital}
-\NormalTok{power\_current }\OtherTok{\textless{}{-}} \FunctionTok{powerSim}\NormalTok{(}
-\NormalTok{  fit\_pilot,}
-  \AttributeTok{test =} \FunctionTok{fixed}\NormalTok{(}\StringTok{"treatmentTreatment"}\NormalTok{, }\AttributeTok{method =} \StringTok{"t"}\NormalTok{),}
-  \AttributeTok{nsim =} \DecValTok{100}
-\NormalTok{)}
+\NormalTok{power\_current }\OtherTok{\textless{}{-}} \FunctionTok{powerSim}\NormalTok{(fit\_pilot, }\AttributeTok{test =} \FunctionTok{fixed}\NormalTok{(}\StringTok{"treatmentTreatment"}\NormalTok{, }\AttributeTok{method =} \StringTok{"t"}\NormalTok{), }\AttributeTok{nsim =} \DecValTok{100}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -15088,7 +15092,7 @@ treatment effect of 5 recovery points with 80\% power.
 #> 
 #> Based on 100 simulations, (0 errors, 0 warnings, 0 messages)
 #> 
-#> Time elapsed: 0 h 0 m 12 s
+#> Time elapsed: 0 h 0 m 10 s
 \end{verbatim}
 
 \begin{Shaded}
@@ -15137,7 +15141,7 @@ treatment effect of 5 recovery points with 80\% power.
 #> 
 #> (0 errors, 0 warnings, 1 message)
 #> 
-#> Time elapsed: 0 h 1 m 0 s
+#> Time elapsed: 0 h 0 m 46 s
 \end{verbatim}
 
 \begin{Shaded}
@@ -15210,7 +15214,7 @@ intervals around the power estimates based on 100 simulations.}
 #> 
 #> (0 errors, 0 warnings, 6 messages)
 #> 
-#> Time elapsed: 0 h 0 m 51 s
+#> Time elapsed: 0 h 0 m 39 s
 \end{verbatim}
 
 \begin{Shaded}
@@ -15503,10 +15507,10 @@ calculation must use the corrected alpha, not the nominal 0.05.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Sample size needed per group with correction}
-\FunctionTok{pwr.t.test}\NormalTok{(}\AttributeTok{d         =} \FloatTok{0.5}\NormalTok{,}
+\FunctionTok{pwr.t.test}\NormalTok{(}\AttributeTok{d =} \FloatTok{0.5}\NormalTok{,}
            \AttributeTok{sig.level =}\NormalTok{ alpha\_corrected,}
-           \AttributeTok{power     =} \FloatTok{0.80}\NormalTok{,}
-           \AttributeTok{type      =} \StringTok{"two.sample"}\NormalTok{)}
+           \AttributeTok{power =} \FloatTok{0.80}\NormalTok{,}
+           \AttributeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -15593,7 +15597,7 @@ A design that passes all of these checks will not guarantee a
 significant result, nothing can do that, but it will guarantee that
 whatever result emerges is worth trusting.
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Going Further}, opacityback=0, bottomtitle=1mm, leftrule=.75mm, breakable, toprule=.15mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, rightrule=.15mm, toptitle=1mm, arc=.35mm, colback=white, left=2mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, coltitle=black, bottomrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Going Further}, arc=.35mm, colback=white, titlerule=0mm, opacityback=0, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm]
 
 \begin{itemize}
 \item
@@ -17647,7 +17651,7 @@ versions:
 #> 14       simr      1.0.9
 #> 15       WRS2      1.1.7
 #> 16  PMCMRplus     1.9.12
-#> 17  dunn.test      1.4.0
+#> 17  dunn.test      1.4.1
 #> 18    ggplot2      4.0.3
 #> 19  patchwork      1.3.2
 #> 20   ggsignif      0.6.4

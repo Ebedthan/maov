@@ -300,7 +300,7 @@ The ANOVA framework, sums of squares, $F$ tests, post-hoc comparisons, is a powe
 
 **ANOVA struggles with non-normal responses.** When the response is a count, a proportion, or a survival time, the normality assumption __fails structurally__, not just approximately. The generalised linear model extends the linear model framework to handle these response types through a link function and a distributional family. There is no natural ANOVA equivalent.
 
-**ANOVA struggles with random effects and hierarchical data.** As Chapters [-@sec-repeated] and [-@sec-split-plot] showed, repeated measures and nested designs require careful specification of error terms which a process that becomes unwieldy with more than two levels of nesting. The linear mixed model handles more seamingly arbitrarily complex hierarchical structures as a natural extension of the linear model framework.
+**ANOVA struggles with random effects and hierarchical data.** As Chapters [-@sec-chap6] and [-@sec-chap7] showed, repeated measures and nested designs require careful specification of error terms which a process that becomes unwieldy with more than two levels of nesting. The linear mixed model handles more seamingly arbitrarily complex hierarchical structures as a natural extension of the linear model framework.
 
 ### The Linear Model as a Unifying Framework
 

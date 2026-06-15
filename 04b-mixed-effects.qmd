@@ -1,6 +1,6 @@
 # Mixed-Effects Models: Beyond Classical ANOVA {#sec-chap9}
 
-The repeated measures and split-plot designs of Chapters [-@sec-repeated] and [-@sec-split-plot] introduced the idea that not all sources of variation in biological data are equal. Some variation is systematic and of direct scientific interest like the effect of a treatment, a drug, a genotype. Some variation is structural and must be accounted for but is not itself the focus like the fact that patients differ from one another, that plots within the same field are more similar than plots in different fields, that repeated measurements on the same individual are correlated.
+The repeated measures and split-plot designs of Chapters [-@sec-chap6] and [-@sec-chap7] introduced the idea that not all sources of variation in biological data are equal. Some variation is systematic and of direct scientific interest like the effect of a treatment, a drug, a genotype. Some variation is structural and must be accounted for but is not itself the focus like the fact that patients differ from one another, that plots within the same field are more similar than plots in different fields, that repeated measurements on the same individual are correlated.
 
 Classical ANOVA handles these structural sources of variation through explicit error terms like the `Error()` specification in `aov()`. This works well for simple, balanced designs with one or two levels of nesting. It becomes unwieldy, and eventually impossible, when the hierarchical structure is more complex, when data are missing, when the design is unbalanced, or when you want to make inferences that generalise beyond the specific levels of a grouping factor that happen to appear in your data.
 
@@ -17,7 +17,7 @@ Random effects are not merely a statistical convenience, they are the correct mo
 
 **Situation 2: Repeated measurements.** When the same individual is measured multiple times at different time points, under different
 conditions, or in different locations, the repeated measurements on
-the same individual are correlated. Chapter [-@sec-repeated] handled this with repeated measures ANOVA. Mixed models handle it more flexibly: the individual is modelled as a random effect, and the covariance structure of the repeated measurements can be specified explicitly. Mixed models also handle missing data gracefully, which repeated measures ANOVA cannot.
+the same individual are correlated. Chapter [-@sec-chap6] handled this with repeated measures ANOVA. Mixed models handle it more flexibly: the individual is modelled as a random effect, and the covariance structure of the repeated measurements can be specified explicitly. Mixed models also handle missing data gracefully, which repeated measures ANOVA cannot.
 
 **Situation 3: Generalising beyond the observed levels.** If the levels of a grouping factor in your study are a random sample from a larger population like hospitals drawn from a healthcare system, farms drawn from a region or batches drawn from a production run and you want your conclusions to generalise to that larger population, the grouping factor must be treated as random. A fixed effect estimates the mean of each specific level observed; a random effect estimates the distribution of levels in the population.
 
@@ -337,7 +337,7 @@ Both methods give similar results with large, balanced datasets. The differences
 
 ::: {.callout-tip}
 ## Show me the maths!
-For the mathematical derivation of both the Satterthwaite and Kenward-Roger degree of freedom approximations, see @sec-df-approximations in Appendix A.
+For the mathematical derivation of both the Satterthwaite and Kenward-Roger degree of freedom approximations, see @sec-ftest-normality-maths in Appendix A.
 :::
 
 
@@ -562,7 +562,7 @@ A complete report of the three-level nested analysis:
 
 ### The Connection to Chapter 6
 
-Chapter [-@sec-repeated] analysed repeated measures data using `aov()` with an `Error()` term which is the classical approach that has been standard in biology for decades. That approach works well for balanced designs with complete data, but it has three important limitations that become apparent in practice: it cannot handle missing observations, it assumes a specific covariance structure (compound symmetry, closely related to sphericity), and it becomes unwieldy with more than two levels of nesting.
+Chapter [-@sec-chap6] analysed repeated measures data using `aov()` with an `Error()` term which is the classical approach that has been standard in biology for decades. That approach works well for balanced designs with complete data, but it has three important limitations that become apparent in practice: it cannot handle missing observations, it assumes a specific covariance structure (compound symmetry, closely related to sphericity), and it becomes unwieldy with more than two levels of nesting.
 
 Mixed-effects models handle all three limitations naturally. And because the repeated measures model is already a mixed model in disguise, subjects are a random effect, time is a fixed effect, the transition requires no new conceptual machinery. It is simply a matter of fitting the same model with `lmer()` instead of `aov()`.
 
@@ -726,4 +726,4 @@ The decision between `aov()` and `lmer()` for repeated measures data can be guid
 | Non-compound-symmetry covariance | `nlme` with explicit correlation structure |
 | Sphericity clearly violated | `lmer()` no sphericity assumption needed |
 
-The broader message is the one that runs through this entire chapter: the classical ANOVA approach and the mixed-effects approach are not competing traditions: they are the same model expressed in different frameworks, with the mixed-effects framework being strictly more general. Mastering `lmer()` does not replace what you learned in Chapter [-@sec-repeated]; it extends it, and the extension becomes essential the moment your data depart from the idealised balanced, complete, compound-symmetric structure that classical repeated measures ANOVA requires.
+The broader message is the one that runs through this entire chapter: the classical ANOVA approach and the mixed-effects approach are not competing traditions: they are the same model expressed in different frameworks, with the mixed-effects framework being strictly more general. Mastering `lmer()` does not replace what you learned in Chapter [-@sec-chap6]; it extends it, and the extension becomes essential the moment your data depart from the idealised balanced, complete, compound-symmetric structure that classical repeated measures ANOVA requires.

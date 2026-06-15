@@ -1,6 +1,6 @@
 # Generalised Linear Mixed Models {#sec-chap11}
 
-Chapter [-@sec-assump] (@sec-glm-intro) introduced generalised linear models as the correct framework for non-normal responses, counts, proportions, binary outcomes, and positive continuous measurements. Chapter [-@sec-mem] introduced mixed-effects models as the correct framework for hierarchical, clustered, and repeated-measures data. Both extensions were motivated by the same underlying principle: choose a model whose structure matches the data-generating process.
+Chapter [-@sec-chap2] (@sec-glm-intro) introduced generalised linear models as the correct framework for non-normal responses, counts, proportions, binary outcomes, and positive continuous measurements. Chapter [-@sec-chap9] introduced mixed-effects models as the correct framework for hierarchical, clustered, and repeated-measures data. Both extensions were motivated by the same underlying principle: choose a model whose structure matches the data-generating process.
 
 Biological data frequently require both extensions simultaneously. Species abundance counts are non-negative integers (a Poisson or negative binomial response) and they are collected from plots nested within sites nested within regions. Disease incidence is a proportion (a binomial response) but patients are clustered within hospitals. Seed germination is binary (viable or non viable), but seeds are clustered within maternal plants, and maternal plants are nested within populations.
 
@@ -74,7 +74,7 @@ cat("\nIncidence rate ratios (exp of coefficients):\n")
 print(exp(fixef(fit_pois_glmm)))
 ```
 
-The Poisson GLMM summary output has the same three-section structure as the linear mixed model summaries seen in Chapter [-@sec-mem], with one important difference: the fixed effects are tested with $z$ statistics rather than $t$ statistics, because the Poisson GLMM is fitted by maximum likelihood and the reference distribution is asymptotically normal rather than t-distributed.
+The Poisson GLMM summary output has the same three-section structure as the linear mixed model summaries seen in Chapter [-@sec-chap9], with one important difference: the fixed effects are tested with $z$ statistics rather than $t$ statistics, because the Poisson GLMM is fitted by maximum likelihood and the reference distribution is asymptotically normal rather than $t$-distributed.
 
 **Random effects:** the site-level variance is $\hat{\sigma}^2_b = 0.229$ (SD = 0.479). This is the variance in log-expected counts across sites, after accounting for treatment. Exponentiated, the standard deviation of 0.479 on the log scale implies that sites at one standard deviation above the mean have $e^{0.479} \approx 1.61$ times the expected count of an average site, and sites one standard deviation below have $1 / 1.61 \approx 0.62$ times the average. The site-level clustering is real and non-trivial and ignoring it would have produced underestimated standard errors for the treatment effect.
 

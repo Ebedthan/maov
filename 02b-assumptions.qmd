@@ -726,7 +726,7 @@ After log transformation, the group standard deviations should no longer increas
 
 In one-way ANOVA with a single treatment factor, additivity is an assumption about the relationship between the treatment and the error term. It becomes a richer and more consequential assumption in two-way and factorial designs, where it governs whether the effects of two factors combine additively or interact. 
 
-A significant interaction term in a two-way ANOVA is, in a precise sense, evidence of non-additivity: the effect of one factor depends on the level of the other. This will be discussed fully in the chapter on factorial designs (@sec-two-way).
+A significant interaction term in a two-way ANOVA is, in a precise sense, evidence of non-additivity: the effect of one factor depends on the level of the other. This will be discussed fully in the chapter on factorial designs (@sec-chap5).
 
 
 ## Fixed vs. random effects: A distinction that matters {#sec-fix-rand}
@@ -847,7 +847,7 @@ Ask yourself one question: **are the groups in your study the specific entities 
 | 8 patients randomly selected from a hospital | Random effects |
 | Plots nested within fields, fields are a random sample | Mixed model |
 
-When both fixed and random effects are present in the same model, for example, a fixed treatment applied across randomly selected sites, the appropriate tool is a **linear mixed-effects model**, which we will return to in a later chapter (@sec-mem).
+When both fixed and random effects are present in the same model, for example, a fixed treatment applied across randomly selected sites, the appropriate tool is a **linear mixed-effects model**, which we will return to in a later chapter (@sec-chap9).
 
 
 ## What happens when assumptions fail? Consequences for inference

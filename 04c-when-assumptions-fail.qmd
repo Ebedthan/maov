@@ -593,7 +593,7 @@ A complete result report reads:
 
 ### GLMs vs Transformations: A Direct Comparison
 
-```{r glm-vs-transform}
+```{r}
 #| cache: true
 #| fig-cap: "Comparison of three approaches to analysing count data: ANOVA on raw counts (top left), ANOVA on log-transformed counts (top right), and a Poisson GLM (bottom). The Poisson GLM produces the most appropriate residual structure — the Q-Q plot is closest to the diagonal — because it models the data-generating process directly rather than approximating it through a transformation."
 #| label: fig-glm-vs-transform

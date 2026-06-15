@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 05:17
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.15)  15 JUN 2026 16:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -420,7 +420,544 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
+)
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif scale = 1.004661224781475.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif scale = 1.004661224781475.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif scale = 1.004661224781475.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/B scale = 0.9308822334383718.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/B scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/B scale = 0.9308822334383718.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/B scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/I scale = 1.004661224781475.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/I scale = 1.004661224781475.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/BI scale = 0.9685383336308211.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/BI scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/BI scale = 0.9685383336308211.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/BI scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'LibertinusSerif(0)' created for font
+(fontspec)             'Libertinus Serif' with options
+(fontspec)             [Scale=MatchLowercase,Ligatures=TeX,Scale=1].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->s*[1]"Libertinus
+(fontspec)             Serif/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Serif/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->s*[1]"Libertinus
+(fontspec)             Serif/B/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Serif/B/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->s*[1]"Libertinus
+(fontspec)             Serif/I/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Serif/I/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Serif/BI/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Serif/BI/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(0)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 27.
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/B scale = 0.9265633135596026.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/B scale = 0.9265633135596026.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/BI scale = 0.9640447045634606.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Serif/BI scale = 0.9640447045634606.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'LibertinusSerif(1)' created for font
+(fontspec)             'Libertinus Serif' with options [Scale=MatchLowercase].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->s*[1]"Libertinus
+(fontspec)             Serif/OT:script=latn;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Serif/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9265633135596026]"Libertinus
+(fontspec)             Serif/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[0.9265633135596026]"Libertinus
+(fontspec)             Serif/B/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->s*[1]"Libertinus
+(fontspec)             Serif/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Serif/I/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[0.9640447045634606]"Libertinus
+(fontspec)             Serif/BI/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[0.9640447045634606]"Libertinus
+(fontspec)             Serif/BI/OT:script=latn;language=dflt;+smcp;"
+
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/LibertinusSerif(1)/m/n on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/lmr/m/it --> TU/LibertinusSerif(1)/m/it on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/lmr/bx/n --> TU/LibertinusSerif(1)/b/n on input line 27.
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans scale = 0.9326064960951938.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans scale = 0.9326064960951938.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans scale = 0.9326064960951938.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/B scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/B scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/BI scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/BI scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'LibertinusSans(0)' created for font
+(fontspec)             'Libertinus Sans' with options
+(fontspec)             [Scale=MatchLowercase,Ligatures=TeX].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9326064960951938]"Libertinus
+(fontspec)             Sans/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->s*[0.9326064960951938]"Libertinus
+(fontspec)             Sans/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->s*[1]"Libertinus
+(fontspec)             Sans/B/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Sans/B/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->s*[1]"Libertinus
+(fontspec)             Sans/I/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Sans/I/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Sans/BI/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Sans/BI/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans scale = 0.9326064960951938.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans scale = 0.9326064960951938.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans scale = 0.9326064960951938.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/B scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/B scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/BI scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Libertinus Sans/BI scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'LibertinusSans(1)' created for font
+(fontspec)             'Libertinus Sans' with options [Scale=MatchLowercase].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9326064960951938]"Libertinus
+(fontspec)             Sans/OT:script=latn;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->s*[0.9326064960951938]"Libertinus
+(fontspec)             Sans/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->s*[1]"Libertinus
+(fontspec)             Sans/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Sans/B/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->s*[1]"Libertinus
+(fontspec)             Sans/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Sans/I/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Sans/BI/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"Libertinus
+(fontspec)             Sans/BI/OT:script=latn;language=dflt;+smcp;"
+
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/lmss/m/n --> TU/LibertinusSans(1)/m/n on input line 28.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/lmss/bx/n --> TU/LibertinusSans(1)/b/n on input line 28.
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/B scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/B scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/B scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/B scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/I scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/I scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/I scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/I scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/BI scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/BI scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/BI scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/BI scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'JuliaMono(0)' created for font 'JuliaMono'
+(fontspec)             with options
+(fontspec)             [Scale=MatchLowercase,WordSpace={1,0,0},HyphenChar=None,PunctuationSpace=WordSpace,Scale=0.8].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/OT:script=latn;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
+(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
+(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
+(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/B/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
+(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
+(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
+(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/I/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
+(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
+(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
+(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/BI/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/BI/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
+(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
+(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
+(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/B scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/B scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/B scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/B scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/I scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/I scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/I scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/I scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/BI scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/BI scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/BI scale = 0.779998074447924.
+
+
+Package fontspec Info: 
+(fontspec)             JuliaMono/BI scale = 0.8.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'JuliaMono(1)' created for font 'JuliaMono'
+(fontspec)             with options [Scale=MatchLowercase,Scale=0.8].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/OT:script=latn;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/B/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/I/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/BI/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[0.8]"JuliaMono/BI/OT:script=latn;language=dflt;+smcp;"
+
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/lmtt/m/n --> TU/JuliaMono(1)/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/lmtt/m/n --> TU/JuliaMono(1)/b/n on input line 29.
+(/home/ediman/.TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
 (/home/ediman/.TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
@@ -510,7 +1047,7 @@ Package: longtable 2026-01-28 v4.27 Multi-page Table package (DPC)
 \c@LT@chunks=\count322
 \LT@p@ftn=\toks25
 )
-Class scrbook Info: longtable captions redefined on input line 113.
+Class scrbook Info: longtable captions redefined on input line 116.
 (/home/ediman/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen169
@@ -948,65 +1485,51 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count375
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 214.
+Package hyperref Info: Option `colorlinks' set `true' on input line 217.
 No file index.aux.
 \openout1 = `index.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-Package scrbase Info: activating english \partname on input line 221.
-Package scrbase Info: activating english \chaptername on input line 221.
-Package scrbase Info: activating english \appendixname on input line 221.
-Package scrbase Info: activating english \figurename on input line 221.
-Package scrbase Info: activating english \tablename on input line 221.
-Package scrbase Info: activating english \contentsname on input line 221.
-Package scrbase Info: activating english \listfigurename on input line 221.
-Package scrbase Info: activating english \listtablename on input line 221.
-Package scrbase Info: activating english \bibname on input line 221.
-Package scrbase Info: activating english \indexname on input line 221.
-LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 221.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 221.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 221.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 221.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 221.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 221.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 221.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 224.
+LaTeX Font Info:    ... okay on input line 224.
+Package scrbase Info: activating english \partname on input line 224.
+Package scrbase Info: activating english \chaptername on input line 224.
+Package scrbase Info: activating english \appendixname on input line 224.
+Package scrbase Info: activating english \figurename on input line 224.
+Package scrbase Info: activating english \tablename on input line 224.
+Package scrbase Info: activating english \contentsname on input line 224.
+Package scrbase Info: activating english \listfigurename on input line 224.
+Package scrbase Info: activating english \listtablename on input line 224.
+Package scrbase Info: activating english \bibname on input line 224.
+Package scrbase Info: activating english \indexname on input line 224.
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
@@ -1018,31 +1541,31 @@ Package fontspec Info:
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             <->s*[0.9953571832716339]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             <->s*[0.9953571832716339]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 221.
+(Font)              scaled to size 10.8992pt on input line 224.
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
-
-
-Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
@@ -1054,191 +1577,200 @@ Package fontspec Info:
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <9.3075->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6.57-9.3075>s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             <9.3075->s*[0.9953571832716339]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6.57-9.3075>s*[0.9953571832716339]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9953571832716339]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             <->s*[0.9953571832716339]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 221.
+(Font)              scaled to size 10.8992pt on input line 224.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 221.
+(Font)              `operators' in the math version `normal' on input line 224.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 221.
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 224.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 221.
+(Font)              `operators' in the math version `bold' on input line 224.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 221.
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 224.
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
-
-
-Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 1.000096766517402.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9954567189899611.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 1.000096766517402.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9954567189899611.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 1.000096766517402.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9954567189899611.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 1.000096766517402.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9954567189899611.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 1.000096766517402.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9954567189899611.
 
 
 Package fontspec Info: 
 (fontspec)             Font family 'latinmodern-math.otf(2)' created for font
 (fontspec)             'latinmodern-math.otf' with options
 (fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=1.0001,FontAdjustment={\fontdimen
-(fontspec)             8\font =7.41315pt\relax \fontdimen 9\font
-(fontspec)             =4.3143pt\relax \fontdimen 10\font =4.8618pt\relax
-(fontspec)             \fontdimen 11\font =7.5117pt\relax \fontdimen 12\font
-(fontspec)             =3.77776pt\relax \fontdimen 13\font =3.97485pt\relax
-(fontspec)             \fontdimen 14\font =3.97485pt\relax \fontdimen 15\font
-(fontspec)             =3.16455pt\relax \fontdimen 16\font =2.70465pt\relax
-(fontspec)             \fontdimen 17\font =2.70465pt\relax \fontdimen 18\font
-(fontspec)             =2.7375pt\relax \fontdimen 19\font =2.19pt\relax
-(fontspec)             \fontdimen 22\font =2.7375pt\relax \fontdimen 20\font
+(fontspec)             8\font =7.37875pt\relax \fontdimen 9\font
+(fontspec)             =4.29428pt\relax \fontdimen 10\font =4.83925pt\relax
+(fontspec)             \fontdimen 11\font =7.47685pt\relax \fontdimen 12\font
+(fontspec)             =3.76022pt\relax \fontdimen 13\font =3.9564pt\relax
+(fontspec)             \fontdimen 14\font =3.9564pt\relax \fontdimen 15\font
+(fontspec)             =3.14987pt\relax \fontdimen 16\font =2.69211pt\relax
+(fontspec)             \fontdimen 17\font =2.69211pt\relax \fontdimen 18\font
+(fontspec)             =2.72481pt\relax \fontdimen 19\font =2.17984pt\relax
+(fontspec)             \fontdimen 22\font =2.72481pt\relax \fontdimen 20\font
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax }].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <9.3075->s*[1.000096766517402]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6.57-9.3075>s*[1.000096766517402]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.000096766517402]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             <9.3075->s*[0.9954567189899611]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6.57-9.3075>s*[0.9954567189899611]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9954567189899611]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1.000096766517402]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             <->s*[0.9954567189899611]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 221.
+(Font)              `symbols' in the math version `normal' on input line 224.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 221.
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 224.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 221.
+(Font)              `symbols' in the math version `bold' on input line 224.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 221.
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 224.
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
-
-
-Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9998967671640342.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9952576475533067.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9998967671640342.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9952576475533067.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9998967671640342.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9952576475533067.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9998967671640342.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9999967668407183.
+(fontspec)             latinmodern-math scale = 0.9952576475533067.
 
 
 Package fontspec Info: 
-(fontspec)             latinmodern-math scale = 0.9998967671640342.
+(fontspec)             latinmodern-math scale = 0.9953571832716339.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9952576475533067.
 
 
 Package fontspec Info: 
 (fontspec)             Font family 'latinmodern-math.otf(3)' created for font
 (fontspec)             'latinmodern-math.otf' with options
 (fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=0.9999,FontAdjustment={\fontdimen
-(fontspec)             8\font =0.438pt\relax \fontdimen 9\font =2.19pt\relax
-(fontspec)             \fontdimen 10\font =1.82864pt\relax \fontdimen 11\font
-(fontspec)             =1.21545pt\relax \fontdimen 12\font =6.56999pt\relax
-(fontspec)             \fontdimen 13\font =0pt\relax }].
+(fontspec)             8\font =0.43597pt\relax \fontdimen 9\font
+(fontspec)             =2.17984pt\relax \fontdimen 10\font =1.82016pt\relax
+(fontspec)             \fontdimen 11\font =1.20981pt\relax \fontdimen 12\font
+(fontspec)             =6.53952pt\relax \fontdimen 13\font =0pt\relax }].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <9.3075->s*[0.9998967671640342]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6.57-9.3075>s*[0.9998967671640342]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9998967671640342]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             <9.3075->s*[0.9952576475533067]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6.57-9.3075>s*[0.9952576475533067]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9952576475533067]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[0.9998967671640342]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             <->s*[0.9952576475533067]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `normal' on input line 221.
+(Font)              `largesymbols' in the math version `normal' on input line 224.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 221.
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 224.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 221.
+(Font)              `largesymbols' in the math version `bold' on input line 224.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 221.
-LaTeX Info: Redefining \microtypecontext on input line 221.
-Package microtype Info: Applying patch `item' on input line 221.
-Package microtype Info: Applying patch `toc' on input line 221.
-Package microtype Info: Applying patch `eqnum' on input line 221.
-Package microtype Info: Applying patch `footnote' on input line 221.
-Package microtype Info: Applying patch `verbatim' on input line 221.
-LaTeX Info: Redefining \microtypesetup on input line 221.
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 224.
+LaTeX Info: Redefining \microtypecontext on input line 224.
+Package microtype Info: Applying patch `item' on input line 224.
+Package microtype Info: Applying patch `toc' on input line 224.
+Package microtype Info: Applying patch `eqnum' on input line 224.
+Package microtype Info: Applying patch `footnote' on input line 224.
+Package microtype Info: Applying patch `verbatim' on input line 224.
+LaTeX Info: Redefining \microtypesetup on input line 224.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of spacing.
 Package microtype Info: No adjustment of kerning.
-(/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/mt-LatinModernRoman.cfg
-File: mt-LatinModernRoman.cfg 2026/02/26 v1.2 microtype config. file: Latin Modern Roman (RS)
-)
-Package hyperref Info: Link coloring ON on input line 221.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `LibertinusSerif' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package hyperref Info: Link coloring ON on input line 224.
 
 Package hyperref Warning: Rerun to get /PageLabels entry.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Font shape `TU/LibertinusSans(0)/m/n' will be
+(Font)              scaled to size 10.21198pt on input line 227.
 Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmss' (encoding: TU).
+(microtype)             `LibertinusSans' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
+LaTeX Font Info:    Font shape `TU/LibertinusSans(0)/b/n' will be
+(Font)              scaled to size 10.95pt on input line 227.
+LaTeX Font Info:    Font shape `TU/LibertinusSans(0)/b/n' will be
+(Font)              scaled to size 20.74pt on input line 227.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(0)/m/n' will be
+(Font)              scaled to size 14.4pt on input line 227.
 [1
 
 
 
 
 ]
-Package tocbasic Info: character protrusion at toc deactivated on input line 229.
+Package tocbasic Info: character protrusion at toc deactivated on input line 232.
 No file index.toc.
 \tf@toc=\write5
 \openout5 = `index.toc'.
@@ -1247,7 +1779,7 @@ No file index.toc.
 
 
 ]
-Package tocbasic Info: character protrusion at lof deactivated on input line 231.
+Package tocbasic Info: character protrusion at lof deactivated on input line 234.
 No file index.lof.
 \tf@lof=\write6
 \openout6 = `index.lof'.
@@ -1256,7 +1788,7 @@ No file index.lof.
 
 
 ]
-Package tocbasic Info: character protrusion at lot deactivated on input line 232.
+Package tocbasic Info: character protrusion at lot deactivated on input line 235.
 No file index.lot.
 \tf@lot=\write7
 \openout7 = `index.lot'.
@@ -1264,46 +1796,60 @@ No file index.lot.
 [4
 
 
-] [1
+]
+LaTeX Font Info:    Font shape `TU/LibertinusSans(0)/b/n' will be
+(Font)              scaled to size 14.4pt on input line 247.
+[1
 
 
 
-] [2] [3]
+]
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(0)/b/n' will be
+(Font)              scaled to size 10.95pt on input line 285.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(0)/m/it' will be
+(Font)              scaled to size 10.95pt on input line 287.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(0)/m/sl' in size <10.95> not available
+(Font)              Font shape `TU/LibertinusSerif(0)/m/it' tried instead on input line 322.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(0)/m/it' will be
+(Font)              scaled to size 10.95pt on input line 322.
+[2] [3]
 part I.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 325.
+(scrkbase)              on input line 328.
+LaTeX Font Info:    Font shape `TU/LibertinusSans(0)/b/n' will be
+(Font)              scaled to size 24.88pt on input line 328.
 [4
 
 
 ]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.665pt on input line 332.
+(Font)              scaled to size 7.62943pt on input line 338.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.475pt on input line 332.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 332.
+(Font)              scaled to size 5.4496pt on input line 338.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 338.
 (/home/ediman/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.95099pt on input line 332.
+(Font)              scaled to size 10.90019pt on input line 338.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.66568pt on input line 332.
+(Font)              scaled to size 7.63013pt on input line 338.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.4755pt on input line 332.
+(Font)              scaled to size 5.4501pt on input line 338.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 10.94882pt on input line 332.
+(Font)              scaled to size 10.89803pt on input line 338.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.66417pt on input line 332.
+(Font)              scaled to size 7.62862pt on input line 338.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.47441pt on input line 332.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 332.
+(Font)              scaled to size 5.44902pt on input line 338.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 338.
 (/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 332.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 338.
 (/home/ediman/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1316,58 +1862,64 @@ File: img/fig1.png Graphic file (type bmp)
 
 
 ] [7]
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(0)/m/n' will be
+(Font)              scaled to size 7.665pt on input line 414.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(0)/m/n' will be
+(Font)              scaled to size 5.475pt on input line 414.
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 1.1 on input line 429.
+(longtable)                in table 1.1 on input line 437.
 
+LaTeX Font Info:    Font shape `TU/LibertinusSans(0)/b/n' will be
+(Font)              scaled to size 12.0pt on input line 443.
 [8] [9]
-Overfull \hbox (78.92787pt too wide) detected at line 487
+Overfull \hbox (70.92401pt too wide) detected at line 495
 [][] [] [] [][][][] [] [][][] [] [] [] [] [] [][][][][][]
  []
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 495.
+(Font)              scaled to size 11.94434pt on input line 503.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 495.
+(Font)              scaled to size 7.96289pt on input line 503.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 495.
+(Font)              scaled to size 5.97217pt on input line 503.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.0011pt on input line 495.
+(Font)              scaled to size 11.94543pt on input line 503.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00073pt on input line 495.
+(Font)              scaled to size 7.96362pt on input line 503.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 495.
+(Font)              scaled to size 5.97272pt on input line 503.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.99872pt on input line 495.
+(Font)              scaled to size 11.94305pt on input line 503.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 495.
+(Font)              scaled to size 7.96204pt on input line 503.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 495.
+(Font)              scaled to size 5.97153pt on input line 503.
 [10]
 
-Package natbib Warning: Citation `fisher1919xv' on page 11 undefined on input line 554.
+Package natbib Warning: Citation `fisher1919xv' on page 11 undefined on input line 562.
 
 [11]
 
-Package natbib Warning: Citation `fisher1970statistical' on page 12 undefined on input line 569.
+Package natbib Warning: Citation `fisher1970statistical' on page 12 undefined on input line 577.
 
 
-Package natbib Warning: Citation `fisher1970statistical' on page 12 undefined on input line 575.
+Package natbib Warning: Citation `fisher1970statistical' on page 12 undefined on input line 583.
 
 
-Package natbib Warning: Citation `fisher1935design' on page 12 undefined on input line 583.
+Package natbib Warning: Citation `fisher1935design' on page 12 undefined on input line 591.
 
 [12]
 
-Package natbib Warning: Citation `snedecor1934' on page 13 undefined on input line 597.
+Package natbib Warning: Citation `snedecor1934' on page 13 undefined on input line 605.
 
 
-Package natbib Warning: Citation `montgomery2017design' on page 13 undefined on input line 610.
+Package natbib Warning: Citation `montgomery2017design' on page 13 undefined on input line 618.
 
 [13] [14]
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 1.2 on input line 687.
+(longtable)                in table 1.2 on input line 695.
 
 [15] [16] [17] [18] [19] [20]
 chapter 2.
@@ -1376,1014 +1928,777 @@ chapter 2.
 
 ]
 
-Package natbib Warning: Citation `hurlbert1984' on page 22 undefined on input line 950.
+Package natbib Warning: Citation `hurlbert1984' on page 22 undefined on input line 958.
 
+LaTeX Font Info:    Font shape `TU/JuliaMono(0)/m/n' will be
+(Font)              scaled to size 8.76003pt on input line 971.
+LaTeX Font Info:    Font shape `TU/JuliaMono(0)/b/n' will be
+(Font)              scaled to size 8.76003pt on input line 985.
 [22]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 977.
-
-Underfull \vbox (badness 10000) detected at line 1007
+Underfull \vbox (badness 10000) detected at line 1015
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1007
+Underfull \vbox (badness 10000) detected at line 1015
  []
 
-[23] [24] [25] [26]
+[23] [24]
+Underfull \vbox (badness 10000) detected at line 1088
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1088
+ []
+
+[25] [26]
 File: 02b-assumptions_files/figure-pdf/fig-pval-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-pval-1.pdf>
-[27] [28] [29] [30] [31] [32]
+[27]
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(0)/b/it' will be
+(Font)              scaled to size 10.95pt on input line 1210.
+[28] [29] [30] [31] [32]
 File: 02b-assumptions_files/figure-pdf/fig-homoscedasticity-plot-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-homoscedasticity-plot-1.pdf>
-[33] [34] [35] [36] [37] [38] [39]
-Underfull \vbox (badness 10000) detected at line 1627
+[33] [34] [35] [36] [37] [38]
+Underfull \vbox (badness 10000) detected at line 1635
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1627
+Underfull \vbox (badness 10000) detected at line 1635
  []
 
-[40]
+[39]
 File: 02b-assumptions_files/figure-pdf/fig-residuals-vs-raw-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-residuals-vs-raw-1.pdf>
-[41] [42] (/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/mt-TU-empty.cfg
+[40] [41] (/home/ediman/.TinyTeX/texmf-dist/tex/latex/microtype/mt-TU-empty.cfg
 File: mt-TU-empty.cfg 2021/06/22 v1.1 microtype config. file: fonts with nonstandard glyph set (RS)
 )
 
-LaTeX Warning: Reference `sec-ftest-normality-maths' on page 43 undefined on input line 1674.
+LaTeX Warning: Reference `sec-ftest-normality-maths' on page 42 undefined on input line 1682.
 
-[43]
+[42]
 File: 02b-assumptions_files/figure-pdf/fig-extract-residuals-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-extract-residuals-1.pdf>
-[44] [45]
-Underfull \vbox (badness 10000) detected at line 1795
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1795
- []
-
-[46] [47]
+[43] [44] [45]
 File: 02b-assumptions_files/figure-pdf/fig-normality-robustness-plot-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-normality-robustness-plot-1.pdf>
-[48] [49] [50]
+[46] [47] [48]
 File: 02b-assumptions_files/figure-pdf/fig-qq-plot-example-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-qq-plot-example-1.pdf>
-[51] [52]
+[49] [50] [51]
 
-LaTeX Warning: Reference `sec-homoscedasticity' on page 53 undefined on input line 2054.
+LaTeX Warning: Reference `sec-homoscedasticity' on page 52 undefined on input line 2062.
 
-[53] [54]
+[52]
 File: 02b-assumptions_files/figure-pdf/fig-additivity-check-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-additivity-check-1.pdf>
-[55] [56] [57] [58] [59] [60] [61]
+[53]
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 2124.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/m/n' will be
+(Font)              scaled to size 7.665pt on input line 2124.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/m/n' will be
+(Font)              scaled to size 5.475pt on input line 2124.
+[54] [55] [56] [57] [58] [59] [60]
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 2.1 on input line 2390.
+(longtable)                in table 2.1 on input line 2398.
 
+[61]
+
+LaTeX Warning: Reference `sec-independence' on page 62 undefined on input line 2454.
+
+LaTeX Font Info:    Font shape `TU/JuliaMono(0)/m/it' will be
+(Font)              scaled to size 8.76003pt on input line 2479.
 [62]
+Underfull \vbox (badness 10000) detected at line 2523
+ []
 
-LaTeX Warning: Reference `sec-independence' on page 63 undefined on input line 2446.
+
+Underfull \vbox (badness 10000) detected at line 2523
+ []
 
 [63] [64]
-Underfull \vbox (badness 10000) detected at line 2515
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2515
- []
-
-[65]
-Overfull \vbox (1.96713pt too high) detected at line 2550
- []
-
-[66]
 File: 02b-assumptions_files/figure-pdf/fig-assumptions-comparison-plot-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-assumptions-comparison-plot-1.pdf>
+[65]
 
-LaTeX Warning: Reference `sec-fix-rand' on page 67 undefined on input line 2576.
+LaTeX Warning: Reference `sec-fix-rand' on page 66 undefined on input line 2584.
 
-[67]
+[66]
 File: 02b-assumptions_files/figure-latex/mermaid-figure-1.png Graphic file (type bmp)
 <02b-assumptions_files/figure-latex/mermaid-figure-1.png>
 
-Overfull \hbox (74.59465pt too wide) in paragraph at lines 2613--2614
+Overfull \hbox (74.59465pt too wide) in paragraph at lines 2621--2622
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 278.11647pt on input line 2620.
+LaTeX Warning: Float too large for page by 278.11647pt on input line 2628.
 
-[68] [69]
+[67] [68]
 
-LaTeX Warning: Reference `sec-add-lin' on page 70 undefined on input line 2654.
+LaTeX Warning: Reference `sec-add-lin' on page 69 undefined on input line 2662.
+
+[69]
+Underfull \vbox (badness 10000) detected at line 2738
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2738
+ []
 
 [70]
-Underfull \vbox (badness 10000) detected at line 2730
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2730
- []
-
-[71]
 File: 02b-assumptions_files/figure-pdf/fig-residual-diagnostics-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-residual-diagnostics-1.pdf>
-[72] [73] [74]
+[71] [72] [73]
 File: 02b-assumptions_files/figure-pdf/fig-shapiro-trap-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/fig-shapiro-trap-1.pdf>
-[75] [76] [77]
-Overfull \hbox (12.9006pt too wide) in paragraph at lines 2943--2943
-[]\TU/lmtt/m/n/10.95 #> Large n: flagging trivial variance differences (sd = 1, 1.1, 1.2): 0.552[] 
- []
-
-[78] [79]
-Underfull \vbox (badness 10000) detected at line 3064
+[74] [75] [76] [77] [78]
+Underfull \vbox (badness 10000) detected at line 3072
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3064
+Underfull \vbox (badness 10000) detected at line 3072
+ []
+
+[79]
+Underfull \vbox (badness 10000) detected at line 3072
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3072
  []
 
 [80]
-Underfull \vbox (badness 10000) detected at line 3064
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3064
+Overfull \vbox (1.3887pt too high) detected at line 3092
  []
 
 [81]
-Overfull \vbox (1.41493pt too high) detected at line 3084
- []
-
-[82]
 File: 02b-assumptions_files/figure-pdf/unnamed-chunk-11-1.pdf Graphic file (type pdf)
 <use 02b-assumptions_files/figure-pdf/unnamed-chunk-11-1.pdf>
-[83] [84] [85]
+[82] [83] [84]
 part II.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 3146.
-[86
+(scrkbase)              on input line 3154.
+[85
 
 
-] [87]
+] [86]
 chapter 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 3173.
+(Font)              scaled to size 14.33319pt on input line 3181.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 3173.
+(Font)              scaled to size 9.95361pt on input line 3181.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 3173.
+(Font)              scaled to size 6.96753pt on input line 3181.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/m/n' will be
+(Font)              scaled to size 14.4pt on input line 3181.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 3181.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 3181.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 14.4013pt on input line 3173.
+(Font)              scaled to size 14.3345pt on input line 3181.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.00092pt on input line 3173.
+(Font)              scaled to size 9.95453pt on input line 3181.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00064pt on input line 3173.
+(Font)              scaled to size 6.96817pt on input line 3181.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 14.39845pt on input line 3173.
+(Font)              scaled to size 14.33165pt on input line 3181.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.99893pt on input line 3173.
+(Font)              scaled to size 9.95255pt on input line 3181.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 3173.
-[88
+(Font)              scaled to size 6.96678pt on input line 3181.
+[87
 
 
 ]
 
-LaTeX Warning: Reference `sec-why-residuals-not-raw-data' on page 89 undefined on input line 3199.
+LaTeX Warning: Reference `sec-why-residuals-not-raw-data' on page 88 undefined on input line 3207.
 
-[89] [90] [91]
+[88] [89]
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 3288.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 3288.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 3288.
 
-LaTeX Warning: Reference `sec-systolic' on page 92 undefined on input line 3334.
+LaTeX Warning: Reference `sec-systolic' on page 90 undefined on input line 3342.
 
-[92]
+[90] [91]
 File: 03a-one-way_files/figure-pdf/fig-clinical-plot-1.pdf Graphic file (type pdf)
 <use 03a-one-way_files/figure-pdf/fig-clinical-plot-1.pdf>
-[93]
+[92]
 
-LaTeX Warning: Reference `sec-chap2' on page 94 undefined on input line 3408.
+LaTeX Warning: Reference `sec-chap2' on page 93 undefined on input line 3416.
 
 File: 03a-one-way_files/figure-pdf/clinical-diagnostics-1.pdf Graphic file (type pdf)
 <use 03a-one-way_files/figure-pdf/clinical-diagnostics-1.pdf>
-[94] [95] [96] [97]
-Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
-[98]
-Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
-Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
-Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
-Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
-[99]
+[93] [94] [95]
+LaTeX Font Info:    Font shape `TU/LibertinusSans(0)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 3521.
+LaTeX Font Info:    Font shape `TU/LibertinusSans(0)/b/n' will be
+(Font)              scaled to size 7.0pt on input line 3521.
+[96] [97] [98]
 File: 03a-one-way_files/figure-pdf/fig-pvalue-misleading-1.pdf Graphic file (type pdf)
 <use 03a-one-way_files/figure-pdf/fig-pvalue-misleading-1.pdf>
-[100] [101] [102]
+[99] [100] [101]
 
-Package natbib Warning: Citation `Cohen1988' on page 103 undefined on input line 3743.
+Package natbib Warning: Citation `Cohen1988' on page 102 undefined on input line 3751.
 
-[103]
+[102]
 
-Package natbib Warning: Citation `Cohen1988' on page 104 undefined on input line 3784.
+Package natbib Warning: Citation `Cohen1988' on page 103 undefined on input line 3792.
 
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 3787.
-[104]
-Overfull \hbox (7.15186pt too wide) in paragraph at lines 3834--3834
-[]\TU/lmtt/m/n/10.95 #> For one-way between subjects designs, partial eta squared is equivalent[] 
+LaTeX Font Info:    Font shape `TU/JuliaMono(0)/b/n' will be
+(Font)              scaled to size 9.60004pt on input line 3795.
+
+Underfull \hbox (badness 2012) in paragraph at lines 3797--3799
+\TU/LibertinusSerif(0)/m/n/10.95 Rather than computing these by hand, the \TU/JuliaMono(0)/m/n/10.95 effectsize \TU/LibertinusSerif(0)/m/n/10.95 package provides clean, well-
  []
 
-[105] [106] [107] [108]
+[103] [104] [105] [106] [107]
 File: 03a-one-way_files/figure-pdf/fig-power-curve-1.pdf Graphic file (type pdf)
 <use 03a-one-way_files/figure-pdf/fig-power-curve-1.pdf>
-[109] [110] [111]
+[108] [109] [110]
 chapter 4.
-[112
+[111
 
 
-] [113]
-Underfull \vbox (badness 10000) detected at line 4178
+] [112]
+Underfull \vbox (badness 10000) detected at line 4186
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4178
+Underfull \vbox (badness 10000) detected at line 4186
  []
 
-[114]
+[113]
 File: 03b-multiple-comparisons_files/figure-pdf/fig-multiple-testing-sim-1.pdf Graphic file (type pdf)
 <use 03b-multiple-comparisons_files/figure-pdf/fig-multiple-testing-sim-1.pdf>
-[115] [116]
+[114] [115]
 
-LaTeX Warning: Reference `sec-chap3' on page 117 undefined on input line 4244.
+LaTeX Warning: Reference `sec-chap3' on page 116 undefined on input line 4252.
 
-[117] [118]
+[116] [117]
 File: 03b-multiple-comparisons_files/figure-pdf/fig-tukey-plot-1.pdf Graphic file (type pdf)
 <use 03b-multiple-comparisons_files/figure-pdf/fig-tukey-plot-1.pdf>
-[119] [120] [121] [122]
+[118] [119] [120]
 
-Package natbib Warning: Citation `Benjamini1995' on page 123 undefined on input line 4463.
+Package natbib Warning: Citation `Benjamini1995' on page 121 undefined on input line 4471.
 
-[123] [124] [125]
-Underfull \vbox (badness 10000) detected at line 4634
+[121] [122] [123]
+Underfull \vbox (badness 10000) detected at line 4642
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4634
+Underfull \vbox (badness 10000) detected at line 4642
  []
 
-[126]
-Underfull \vbox (badness 10000) detected at line 4634
+[124]
+Underfull \vbox (badness 10000) detected at line 4642
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4634
+Underfull \vbox (badness 10000) detected at line 4642
  []
 
-[127]
+[125]
 File: 03b-multiple-comparisons_files/figure-pdf/fig-fdr-vs-fwer-sim-1.pdf Graphic file (type pdf)
 <use 03b-multiple-comparisons_files/figure-pdf/fig-fdr-vs-fwer-sim-1.pdf>
-[128] [129] [130] [131] [132] [133]
+[126] [127] [128] [129] [130] [131]
 File: 03b-multiple-comparisons_files/figure-latex/mermaid-figure-1.png Graphic file (type bmp)
 <03b-multiple-comparisons_files/figure-latex/mermaid-figure-1.png>
 
-Overfull \hbox (217.0017pt too wide) in paragraph at lines 4878--4879
+Overfull \hbox (217.0017pt too wide) in paragraph at lines 4886--4887
  [][] 
  []
 
-[134] [135]
+[132] [133]
 chapter 5.
-[136
+[134
 
 
 ]
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 5.1 on input line 4977.
+(longtable)                in table 5.1 on input line 4985.
 
-[137] [138]
+[135] [136]
 
-LaTeX Warning: Reference `sec-unbalanced' on page 139 undefined on input line 5050.
+LaTeX Warning: Reference `sec-unbalanced' on page 137 undefined on input line 5058.
 
-[139] [140]
+[137]
 File: 03c-two-way_files/figure-pdf/fig-factorial-design-diagram-1.pdf Graphic file (type pdf)
 <use 03c-two-way_files/figure-pdf/fig-factorial-design-diagram-1.pdf>
-[141] [142] [143] [144]
-Underfull \vbox (badness 10000) detected at line 5285
+[138] [139] [140] [141] [142]
+Underfull \vbox (badness 10000) detected at line 5293
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5285
+Underfull \vbox (badness 10000) detected at line 5293
  []
 
-[145]
+[143]
 File: 03c-two-way_files/figure-pdf/fig-interaction-scenarios-1.pdf Graphic file (type pdf)
 <use 03c-two-way_files/figure-pdf/fig-interaction-scenarios-1.pdf>
-[146]
+[144]
 File: 03c-two-way_files/figure-pdf/fig-interaction-plot-raw-1.pdf Graphic file (type pdf)
 <use 03c-two-way_files/figure-pdf/fig-interaction-plot-raw-1.pdf>
-[147] [148] [149] [150] [151] [152] [153] [154]
+[145] [146] [147] [148] [149] [150] [151] [152]
 
-LaTeX Warning: Reference `sec-gxe' on page 155 undefined on input line 5674.
+LaTeX Warning: Reference `sec-gxe' on page 153 undefined on input line 5682.
 
-[155]
+[153]
 File: 03c-two-way_files/figure-pdf/fig-gxe-plot-1.pdf Graphic file (type pdf)
 <use 03c-two-way_files/figure-pdf/fig-gxe-plot-1.pdf>
-[156] [157] [158]
+[154] [155] [156]
 File: 03c-two-way_files/figure-pdf/gxe-diagnostics-1.pdf Graphic file (type pdf)
 <use 03c-two-way_files/figure-pdf/gxe-diagnostics-1.pdf>
-[159]
-Overfull \hbox (70.38809pt too wide) in paragraph at lines 5822--5822
-[]\TU/lmtt/m/n/10.95 #> Shapiro-Wilk p = 0.0211 -> Evidence of non-normality. Check Q-Q plot for outliers.[] 
+[157]
+Overfull \hbox (5.72969pt too wide) in paragraph at lines 5830--5830
+[]\TU/JuliaMono(0)/m/n/10.95 #> Shapiro-Wilk p = 0.0211 -> Evidence of non-normality. Check Q-Q plot for outliers.[] 
  []
 
 
-LaTeX Warning: Reference `sec-chap2' on page 160 undefined on input line 5838.
+LaTeX Warning: Reference `sec-chap2' on page 158 undefined on input line 5846.
 
-[160] [161] [162] [163]
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 5972--5972
-[]\TU/lmtt/m/n/10.95 #> P value adjustment: tukey method for comparing a family of 4 estimates[] 
- []
-
-[164]
+[158] [159] [160] [161] [162]
 chapter 6.
-[165
+[163
 
 
-] [166] [167]
+] [164] [165]
 
-LaTeX Warning: Reference `sec-chap9' on page 168 undefined on input line 6135.
-
-
-LaTeX Warning: Reference `sec-sphericity' on page 168 undefined on input line 6138.
+LaTeX Warning: Reference `sec-chap9' on page 166 undefined on input line 6143.
 
 
-LaTeX Warning: Reference `sec-pseudoreplication' on page 168 undefined on input line 6149.
+LaTeX Warning: Reference `sec-sphericity' on page 166 undefined on input line 6146.
 
-[168] [169]
-Underfull \vbox (badness 10000) detected at line 6244
+
+LaTeX Warning: Reference `sec-pseudoreplication' on page 166 undefined on input line 6157.
+
+[166] [167]
+Underfull \vbox (badness 10000) detected at line 6252
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6244
+Underfull \vbox (badness 10000) detected at line 6252
  []
 
-[170] [171] [172] [173] [174]
+[168] [169] [170] [171] [172]
 
-LaTeX Warning: Reference `sec-cardiac-recovery' on page 175 undefined on input line 6417.
+LaTeX Warning: Reference `sec-cardiac-recovery' on page 173 undefined on input line 6425.
 
-
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 6432--6432
-[]\TU/lmtt/m/n/10.95 #>  1      :  4   Control     :80   0 :40   Min.   :58.80   Min.   : 1.00[] 
- []
-
-
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 6433--6433
-[]\TU/lmtt/m/n/10.95 #>  2      :  4   Intervention:80   4 :40   1st Qu.:71.66   1st Qu.:10.75[] 
- []
-
-
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 6434--6434
-[]\TU/lmtt/m/n/10.95 #>  3      :  4                     8 :40   Median :77.09   Median :20.50[] 
- []
-
-
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 6435--6435
-[]\TU/lmtt/m/n/10.95 #>  4      :  4                     12:40   Mean   :76.32   Mean   :20.50[] 
- []
-
-
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 6436--6436
-[]\TU/lmtt/m/n/10.95 #>  5      :  4                             3rd Qu.:80.38   3rd Qu.:30.25[] 
- []
-
-
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 6437--6437
-[]\TU/lmtt/m/n/10.95 #>  6      :  4                             Max.   :93.61   Max.   :40.00[] 
- []
-
-[175]
+[173]
 File: 03d-repeated-measures_files/figure-pdf/fig-rm-plot-1.pdf Graphic file (type pdf)
 <use 03d-repeated-measures_files/figure-pdf/fig-rm-plot-1.pdf>
-[176] [177] [178] [179] [180] [181] [182] [183] [184]
+[174] [175] [176] [177] [178] [179] [180] [181] [182]
 chapter 7.
-[185
+[183
 
 
-] [186] [187] [188]
-File: 03e-split-plot-nested_files/figure-latex/mermaid-figure-1.png Graphic file (type bmp)
-<03e-split-plot-nested_files/figure-latex/mermaid-figure-1.png>
-[189]
-
-Package natbib Warning: Citation `hurlbert1984' on page 190 undefined on input line 6983.
-
-[190] [191] [192] [193] [194] [195]
-
-LaTeX Warning: Reference `sec-grazing' on page 196 undefined on input line 7189.
-
-[196] [197]
-Overfull \vbox (0.59796pt too high) detected at line 7294
+] [184]
+Overfull \vbox (0.86955pt too high) detected at line 6896
  []
 
-[198]
+[185] [186]
+File: 03e-split-plot-nested_files/figure-latex/mermaid-figure-1.png Graphic file (type bmp)
+<03e-split-plot-nested_files/figure-latex/mermaid-figure-1.png>
+[187] [188]
+
+Package natbib Warning: Citation `hurlbert1984' on page 189 undefined on input line 6991.
+
+[189] [190] [191] [192]
+
+LaTeX Warning: Reference `sec-grazing' on page 193 undefined on input line 7197.
+
+[193] [194] [195]
 File: 03e-split-plot-nested_files/figure-pdf/unnamed-chunk-4-1.pdf Graphic file (type pdf)
 <use 03e-split-plot-nested_files/figure-pdf/unnamed-chunk-4-1.pdf>
-[199]
+[196]
 
-LaTeX Warning: Reference `sec-irrig' on page 200 undefined on input line 7352.
+LaTeX Warning: Reference `sec-irrig' on page 197 undefined on input line 7360.
 
-[200] [201] [202] [203]
+[197] [198] [199] [200]
 File: 03e-split-plot-nested_files/figure-pdf/fig-agriculture-plot-1.pdf Graphic file (type pdf)
 <use 03e-split-plot-nested_files/figure-pdf/fig-agriculture-plot-1.pdf>
-[204] [205] [206] [207]
+[201] [202] [203] [204]
 part III.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 7611.
-[208
+(scrkbase)              on input line 7619.
+[205
 
 
-] [209]
+] [206]
 chapter 8.
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 7640.
-[210
+LaTeX Font Info:    Font shape `TU/JuliaMono(0)/b/n' will be
+(Font)              scaled to size 11.52003pt on input line 7648.
+[207
 
 
-] [211] [212] [213] [214] [215] [216] [217]
+] [208] [209] [210] [211] [212] [213] [214]
 
-LaTeX Warning: Reference `sec-type3' on page 218 undefined on input line 7990.
+LaTeX Warning: Reference `sec-type3' on page 215 undefined on input line 7998.
+
+[215] [216] [217]
+
+LaTeX Warning: Reference `sec-within-group' on page 218 undefined on input line 8181.
 
 [218] [219] [220]
-Overfull \hbox (7.15186pt too wide) in paragraph at lines 8165--8165
-[]\TU/lmtt/m/n/10.95 #>        1        2        3        4        5        6        7        8[] 
- []
-
-
-Overfull \hbox (7.15186pt too wide) in paragraph at lines 8166--8166
-[]\TU/lmtt/m/n/10.95 #> 20.57576 20.57576 20.57576 20.57576 20.57576 20.57576 20.57576 20.57576[] 
- []
-
-
-LaTeX Warning: Reference `sec-within-group' on page 221 undefined on input line 8173.
-
-[221] [222] [223]
 File: 04a-anova-as-lm_files/figure-pdf/fig-connection-plot-1.pdf Graphic file (type pdf)
 <use 04a-anova-as-lm_files/figure-pdf/fig-connection-plot-1.pdf>
-[224]
+[221]
 
-LaTeX Warning: Reference `sec-unbalanced' on page 225 undefined on input line 8290.
+LaTeX Warning: Reference `sec-unbalanced' on page 222 undefined on input line 8298.
 
-[225] [226] [227] [228]
+[222] [223] [224] [225]
 chapter 9.
-[229
+[226
 
 
-] [230] [231] [232] [233]
-Underfull \vbox (badness 10000) detected at line 8638
- []
-
-
-Underfull \vbox (badness 10000) detected at line 8638
- []
-
-[234]
+] [227] [228] [229] [230]
 File: 04b-mixed-effects_files/figure-pdf/fig-random-effects-plot-1.pdf Graphic file (type pdf)
 <use 04b-mixed-effects_files/figure-pdf/fig-random-effects-plot-1.pdf>
-[235]
+[231] [232]
 
-Package natbib Warning: Citation `Bates2015' on page 236 undefined on input line 8689.
-
-
-Package natbib Warning: Citation `Pinheiro2000' on page 236 undefined on input line 8689.
+Package natbib Warning: Citation `Bates2015' on page 233 undefined on input line 8697.
 
 
-Underfull \hbox (badness 1394) in paragraph at lines 8711--8715
-\TU/lmtt/m/n/10.95 lme4 \TU/lmr/m/n/10.95 extends R’s standard model formula with a notation for random effects:
+Package natbib Warning: Citation `Pinheiro2000' on page 233 undefined on input line 8697.
+
+[233] [234] [235]
+Underfull \hbox (badness 1043) in paragraph at lines 8831--8836
+[]\TU/LibertinusSerif(0)/b/n/10.95 Fixed effects: \TU/LibertinusSerif(0)/m/n/10.95 the coefficient table. The \TU/JuliaMono(0)/m/n/10.95 (Intercept) \TU/LibertinusSerif(0)/m/n/10.95 is the estimated mean outcome
  []
 
-[236] [237] [238] [239] [240] [241]
+[236] [237] [238]
 
-LaTeX Warning: Reference `sec-rim' on page 242 undefined on input line 8947.
+LaTeX Warning: Reference `sec-rim' on page 239 undefined on input line 8955.
 
-[242] [243]
+[239]
 File: 04b-mixed-effects_files/figure-pdf/fig-random-effects-extraction-1.pdf Graphic file (type pdf)
 <use 04b-mixed-effects_files/figure-pdf/fig-random-effects-extraction-1.pdf>
+[240] [241]
 
-Underfull \hbox (badness 2495) in paragraph at lines 9016--9021
-\TU/lmr/m/n/10.95 Users fitting their first mixed model in R are often surprised to find that
- []
+Package natbib Warning: Citation `Kuznetsova2017' on page 242 undefined on input line 9041.
+
+
+Package natbib Warning: Citation `satterthwaite1946' on page 242 undefined on input line 9046.
+
+[242]
+
+LaTeX Warning: Reference `sec-reml-ml' on page 243 undefined on input line 9110.
+
+
+LaTeX Warning: Reference `sec-type3' on page 243 undefined on input line 9113.
+
+[243]
+
+Package natbib Warning: Citation `Kenward1997' on page 244 undefined on input line 9124.
 
 [244]
 
-Package natbib Warning: Citation `Kuznetsova2017' on page 245 undefined on input line 9033.
-
-
-Package natbib Warning: Citation `satterthwaite1946' on page 245 undefined on input line 9038.
+LaTeX Warning: Reference `sec-physio' on page 245 undefined on input line 9218.
 
 [245] [246]
-
-LaTeX Warning: Reference `sec-reml-ml' on page 247 undefined on input line 9102.
-
-
-LaTeX Warning: Reference `sec-type3' on page 247 undefined on input line 9105.
-
-
-Package natbib Warning: Citation `Kenward1997' on page 247 undefined on input line 9116.
-
-[247] [248]
-
-LaTeX Warning: Reference `sec-physio' on page 249 undefined on input line 9210.
-
-[249] [250]
 File: 04b-mixed-effects_files/figure-pdf/fig-nested-plot-1.pdf Graphic file (type pdf)
 <use 04b-mixed-effects_files/figure-pdf/fig-nested-plot-1.pdf>
-[251] [252] [253] [254]
+[247] [248] [249] [250]
 File: 04b-mixed-effects_files/figure-pdf/nested-diagnostics-1.pdf Graphic file (type pdf)
 <use 04b-mixed-effects_files/figure-pdf/nested-diagnostics-1.pdf>
+[251]
 File: 04b-mixed-effects_files/figure-pdf/nested-diagnostics-2.pdf Graphic file (type pdf)
 <use 04b-mixed-effects_files/figure-pdf/nested-diagnostics-2.pdf>
-[255]
+[252]
 File: 04b-mixed-effects_files/figure-pdf/nested-diagnostics-3.pdf Graphic file (type pdf)
 <use 04b-mixed-effects_files/figure-pdf/nested-diagnostics-3.pdf>
-[256] [257] [258] [259] [260] [261] [262]
+[253] [254] [255] [256] [257] [258] [259]
 
-Package natbib Warning: Citation `Bates2015' on page 263 undefined on input line 9739.
-
-
-Package natbib Warning: Citation `Kenward1997' on page 263 undefined on input line 9740.
+Package natbib Warning: Citation `Bates2015' on page 260 undefined on input line 9747.
 
 
-Package natbib Warning: Citation `Kuznetsova2017' on page 263 undefined on input line 9741.
-
-[263] [264]
-
-LaTeX Warning: Reference `sec-cardiac-recovery' on page 265 undefined on input line 9789.
-
-[265] [266]
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 9857--9857
-[]\TU/lmtt/m/n/10.95 #>                          Estimate Std. Error       df t value Pr(>|t|)[] 
- []
+Package natbib Warning: Citation `Kenward1997' on page 260 undefined on input line 9748.
 
 
-Overfull \hbox (24.3981pt too wide) in paragraph at lines 9858--9858
-[]\TU/lmtt/m/n/10.95 #> (Intercept)               80.9464     0.9572  85.6600  84.562  < 2e-16 ***[] 
- []
+Package natbib Warning: Citation `Kuznetsova2017' on page 260 undefined on input line 9749.
 
+[260]
 
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 9859--9859
-[]\TU/lmtt/m/n/10.95 #> groupIntervention          0.2611     1.3537  85.6600   0.193  0.84752[] 
- []
+LaTeX Warning: Reference `sec-cardiac-recovery' on page 261 undefined on input line 9797.
 
-
-Overfull \hbox (12.9006pt too wide) in paragraph at lines 9860--9860
-[]\TU/lmtt/m/n/10.95 #> time4                     -2.1052     0.9495 114.0000  -2.217  0.02859 *[] 
- []
-
-
-Overfull \hbox (18.64935pt too wide) in paragraph at lines 9861--9861
-[]\TU/lmtt/m/n/10.95 #> time8                     -3.0179     0.9495 114.0000  -3.179  0.00191 **[] 
- []
-
-
-Overfull \hbox (24.3981pt too wide) in paragraph at lines 9862--9862
-[]\TU/lmtt/m/n/10.95 #> time12                    -3.9646     0.9495 114.0000  -4.176 5.84e-05 ***[] 
- []
-
-
-Overfull \hbox (12.9006pt too wide) in paragraph at lines 9863--9863
-[]\TU/lmtt/m/n/10.95 #> groupIntervention:time4   -2.5790     1.3428 114.0000  -1.921  0.05727 .[] 
- []
-
-
-Overfull \hbox (24.3981pt too wide) in paragraph at lines 9864--9864
-[]\TU/lmtt/m/n/10.95 #> groupIntervention:time8   -7.4799     1.3428 114.0000  -5.571 1.72e-07 ***[] 
- []
-
-
-Overfull \hbox (24.3981pt too wide) in paragraph at lines 9865--9865
-[]\TU/lmtt/m/n/10.95 #> groupIntervention:time12  -9.7825     1.3428 114.0000  -7.285 4.48e-11 ***[] 
- []
-
-[267] [268] [269] [270]
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 10041--10041
-[]\TU/lmtt/m/n/10.95 #>              npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)[] 
- []
-
-
-Overfull \hbox (18.64935pt too wide) in paragraph at lines 10043--10043
-[]\TU/lmtt/m/n/10.95 #> rm_rslope_ml    8 870.27 894.87 -427.14    854.27 12.517  2   0.001914 **[] 
- []
-
-[271] [272]
-Overfull \hbox (7.15186pt too wide) in paragraph at lines 10091--10091
-[]\TU/lmtt/m/n/10.95 #>            Model df      AIC      BIC    logLik   Test  L.Ratio p-value[] 
- []
-
-
-Overfull \hbox (7.15186pt too wide) in paragraph at lines 10093--10093
-[]\TU/lmtt/m/n/10.95 #> fit_ar1_ml     2 11 870.8304 904.6573 -424.4152 1 vs 2 14.26045   2e-04[] 
- []
-
-[273] [274]
+[261] [262] [263] [264] [265] [266] [267] [268] [269] [270]
 chapter 10.
-[275
+[271
 
 
-] [276]
+] [272]
 File: 04c-when-assumptions-fail_files/figure-pdf/fig-log-transform-demo-1.pdf Graphic file (type pdf)
 <use 04c-when-assumptions-fail_files/figure-pdf/fig-log-transform-demo-1.pdf>
-[277] [278] [279] [280] [281] [282] [283]
+[273] [274] [275] [276] [277] [278] [279]
 
-Package natbib Warning: Citation `Warton2011' on page 284 undefined on input line 10504.
+Package natbib Warning: Citation `Warton2011' on page 280 undefined on input line 10512.
 
-[284] [285] [286] [287] [288]
-Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
-Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ┼ (U+253C) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
-Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
-Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
-Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
-Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
-[289]
-Missing character: There is no │ (U+2502) in font [lmmono10-regular]:!
-Missing character: There is no ≤ (U+2264) in font [lmmono10-regular]:!
-Missing character: There is no ≥ (U+2265) in font [lmmono10-regular]:!
-
-Overfull \hbox (93.76633pt too wide) in paragraph at lines 10750--10750
-[]\TU/lmtt/m/n/10.95 #> Reject Ho if adjusted p ≤ FWER/2 with stopping rule, where (unadjusted) p = Pr(Z ≥ |z|)[] 
+[280] [281] [282] [283] [284]
+Overfull \hbox (25.00174pt too wide) in paragraph at lines 10758--10758
+[]\TU/JuliaMono(0)/m/n/10.95 #> Reject Ho if adjusted p ≤ FWER/2 with stopping rule, where (unadjusted) p = Pr(Z ≥ |z|)[] 
  []
 
-[290] [291]
+[285] [286]
 
-LaTeX Warning: Reference `sec-repeat-mixed' on page 292 undefined on input line 10852.
+LaTeX Warning: Reference `sec-repeat-mixed' on page 287 undefined on input line 10860.
 
-[292] [293]
+[287] [288]
 File: 04c-when-assumptions-fail_files/figure-pdf/fig-permutation-plot-1.pdf Graphic file (type pdf)
 <use 04c-when-assumptions-fail_files/figure-pdf/fig-permutation-plot-1.pdf>
+[289] [290]
+
+Package natbib Warning: Citation `Mair2020' on page 291 undefined on input line 10964.
+
+[291] [292]
+Overfull \hbox (17.9937pt too wide) in paragraph at lines 11079--11079
+[]\TU/JuliaMono(0)/m/n/10.95 #> WRS2::rmanova(y = df_rm_out$y, groups = df_rm_out$time, blocks = df_rm_out$subject,[] 
+ []
+
+[293]
+Overfull \hbox (7.48167pt too wide) in paragraph at lines 11102--11102
+[]\TU/JuliaMono(0)/m/n/10.95 #> WRS2::rmmcp(y = df_rm_out$y, groups = df_rm_out$time, blocks = df_rm_out$subject,[] 
+ []
+
 [294]
-
-Package natbib Warning: Citation `Mair2020' on page 295 undefined on input line 10956.
-
-[295] [296] [297]
-Overfull \hbox (76.13684pt too wide) in paragraph at lines 11071--11071
-[]\TU/lmtt/m/n/10.95 #> WRS2::rmanova(y = df_rm_out$y, groups = df_rm_out$time, blocks = df_rm_out$subject,[] 
+Underfull \hbox (badness 1783) in paragraph at lines 11143--11151
+\TU/LibertinusSerif(0)/m/n/10.95 All of the methods discussed so far, transformations, rank tests, robust ANOVA, are
  []
 
-[298]
-Overfull \hbox (64.63934pt too wide) in paragraph at lines 11094--11094
-[]\TU/lmtt/m/n/10.95 #> WRS2::rmmcp(y = df_rm_out$y, groups = df_rm_out$time, blocks = df_rm_out$subject,[] 
- []
-
-[299]
+[295]
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/b/n' will be
+(Font)              scaled to size 10.14581pt on input line 11170.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/b/n' will be
+(Font)              scaled to size 7.10207pt on input line 11170.
+LaTeX Font Info:    Font shape `TU/LibertinusSerif(1)/b/n' will be
+(Font)              scaled to size 5.0729pt on input line 11170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 11162.
+(Font)              scaled to size 10.8992pt on input line 11170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 7.665pt on input line 11162.
+(Font)              scaled to size 7.62943pt on input line 11170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 5.475pt on input line 11162.
+(Font)              scaled to size 5.4496pt on input line 11170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 10.95099pt on input line 11162.
+(Font)              scaled to size 10.90019pt on input line 11170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 7.66568pt on input line 11162.
+(Font)              scaled to size 7.63013pt on input line 11170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 5.4755pt on input line 11162.
+(Font)              scaled to size 5.4501pt on input line 11170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 10.94882pt on input line 11162.
+(Font)              scaled to size 10.89803pt on input line 11170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 7.66417pt on input line 11162.
+(Font)              scaled to size 7.62862pt on input line 11170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 5.47441pt on input line 11162.
+(Font)              scaled to size 5.44902pt on input line 11170.
 
-LaTeX Warning: Reference `sec-matrix-notation' on page 300 undefined on input line 11170.
+LaTeX Warning: Reference `sec-matrix-notation' on page 296 undefined on input line 11178.
 
-[300]
-Overfull \hbox (60.08752pt too wide) in paragraph at lines 11210--11211
-[]|\TU/lmtt/m/n/10.95 MASS::negative.binomial|  
+
+Overfull \hbox (48.75465pt too wide) in paragraph at lines 11218--11219
+[]|\TU/JuliaMono(0)/m/n/10.95 MASS::negative.binomial|  
  []
 
 
-Overfull \hbox (42.84128pt too wide) in paragraph at lines 11215--11216
-[]|\TU/lmtt/m/n/10.95 gaussian(link="log")|  
+Overfull \hbox (32.9866pt too wide) in paragraph at lines 11223--11224
+[]|\TU/JuliaMono(0)/m/n/10.95 gaussian(link="log")|  
  []
 
-[301] [302]
-Overfull \hbox (18.64935pt too wide) in paragraph at lines 11320--11320
-[]\TU/lmtt/m/n/10.95 #> glm.nb(formula = counts ~ group, data = df_glm, init.theta = 37871.48654,[] 
+[296] [297] [298] [299] [300] [301] [302]
+Overfull \hbox (25.00172pt too wide) in paragraph at lines 11467--11467
+[]\TU/JuliaMono(0)/m/n/10.95 #> glm(formula = cbind(n_disease, n_healthy) ~ group, family = binomial(link = "logit"),[] 
  []
 
-[303]
-Overfull \hbox (30.14685pt too wide) in paragraph at lines 11331--11331
-[]\TU/lmtt/m/n/10.95 #> (Dispersion parameter for Negative Binomial(37871.49) family taken to be 1)[] 
- []
-
-[304] [305] [306]
-Overfull \hbox (87.63434pt too wide) in paragraph at lines 11459--11459
-[]\TU/lmtt/m/n/10.95 #> glm(formula = cbind(n_disease, n_healthy) ~ group, family = binomial(link = "logit"),[] 
- []
-
-[307] [308] [309]
+[303] [304] [305]
 File: 04c-when-assumptions-fail_files/figure-pdf/fig-glm-vs-transform-1.pdf Graphic file (type pdf)
 <use 04c-when-assumptions-fail_files/figure-pdf/fig-glm-vs-transform-1.pdf>
-[310]
 File: 04c-when-assumptions-fail_files/figure-latex/mermaid-figure-1.png Graphic file (type bmp)
 <04c-when-assumptions-fail_files/figure-latex/mermaid-figure-1.png>
 
-Overfull \hbox (289.9599pt too wide) in paragraph at lines 11612--11613
+Overfull \hbox (289.9599pt too wide) in paragraph at lines 11620--11621
  [][] 
  []
 
-[311] [312] [313]
+[306] [307] [308]
 chapter 11.
 
-LaTeX Warning: Reference `sec-glm-intro' on page 314 undefined on input line 11643.
+LaTeX Warning: Reference `sec-glm-intro' on page 309 undefined on input line 11651.
 
-[314
+[309
 
 
 ]
 
-LaTeX Warning: Reference `sec-matrix-notation' on page 315 undefined on input line 11679.
+LaTeX Warning: Reference `sec-matrix-notation' on page 310 undefined on input line 11687.
 
 
-LaTeX Warning: Reference `sec-random-effects-distribution' on page 315 undefined on input line 11681.
+LaTeX Warning: Reference `sec-random-effects-distribution' on page 310 undefined on input line 11689.
 
-[315] [316] [317] [318] [319]
-Overfull \hbox (173.86557pt too wide) in paragraph at lines 11919--11919
-[]\TU/lmtt/m/n/10.95 #> This is DHARMa 0.5.0. For overview type []?DHARMa[]. For recent changes, type news(package = []DHARMa[])[] 
+[310] [311] [312] [313] [314]
+Overfull \hbox (96.83395pt too wide) in paragraph at lines 11927--11927
+[]\TU/JuliaMono(0)/m/n/10.95 #> This is DHARMa 0.5.0. For overview type []?DHARMa[]. For recent changes, type news(package = []DHARMa[])[] 
  []
 
 
-Overfull \hbox (1904.23895pt too wide) in paragraph at lines 11921--11921
-[]\TU/lmtt/m/n/10.95 #> Note that the default setting in simulateResiduals was changed to conditional simulations since version 0.5.0. This is likely to change residual calculations for all hierarchical (in particular random effect) models. If you want to switch back to the old package version defaults, please use the argument simulateREs = "user-specified" in simulateResiduals(). For more details, see ?simulateREsiduals.[] 
+Overfull \hbox (1607.0625pt too wide) in paragraph at lines 11929--11929
+[]\TU/JuliaMono(0)/m/n/10.95 #> Note that the default setting in simulateResiduals was changed to conditional simulations since version 0.5.0. This is likely to change residual calculations for all hierarchical (in particular random effect) models. If you want to switch back to the old package version defaults, please use the argument simulateREs = "user-specified" in simulateResiduals(). For more details, see ?simulateREsiduals.[] 
  []
 
-[320]
+[315]
 File: 04d-glmm_files/figure-pdf/overdispersion-check-1.pdf Graphic file (type pdf)
 <use 04d-glmm_files/figure-pdf/overdispersion-check-1.pdf>
-[321]
+[316]
 File: 04d-glmm_files/figure-pdf/overdispersion-check-2.pdf Graphic file (type pdf)
 <use 04d-glmm_files/figure-pdf/overdispersion-check-2.pdf>
 
-Package natbib Warning: Citation `Hartig2022' on page 322 undefined on input line 11966.
+Package natbib Warning: Citation `Hartig2022' on page 317 undefined on input line 11974.
 
-[322] [323] [324]
+[317] [318] [319]
 File: 04d-glmm_files/figure-pdf/nb-glmm-1.pdf Graphic file (type pdf)
 <use 04d-glmm_files/figure-pdf/nb-glmm-1.pdf>
-[325] [326] [327] [328] [329] [330] [331]
-Underfull \vbox (badness 10000) detected at line 12377
+[320] [321] [322] [323] [324] [325] [326]
+Underfull \vbox (badness 10000) detected at line 12385
  []
 
 
-Underfull \vbox (badness 10000) detected at line 12377
+Underfull \vbox (badness 10000) detected at line 12385
  []
 
-[332] [333] [334] [335] [336] [337] [338] [339] [340] [341] [342] [343] [344]
+[327] [328] [329] [330] [331] [332] [333] [334] [335] [336] [337] [338]
 
 Package longtable Warning: Column widths have changed
-(longtable)                in table 11.1 on input line 12866.
+(longtable)                in table 11.1 on input line 12874.
 
-[345] [346] [347] [348]
-Overfull \hbox (12.9006pt too wide) in paragraph at lines 13010--13010
-[]\TU/lmtt/m/n/10.95 #>               Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(>Chisq)[] 
+[339] [340] [341] [342] [343] [344] [345] [346]
+
+Package natbib Warning: Citation `Akaike1974' on page 347 undefined on input line 13188.
+
+[347] [348]
+Underfull \vbox (badness 10000) detected at line 13266
  []
 
 
-Overfull \hbox (35.8956pt too wide) in paragraph at lines 13012--13012
-[]\TU/lmtt/m/n/10.95 #> fit_max_re     4 439.04 447.42 -215.52   431.04 12.167      1  0.0004864 ***[] 
+Underfull \vbox (badness 10000) detected at line 13266
  []
 
 [349] [350]
-Overfull \hbox (35.8956pt too wide) in paragraph at lines 13107--13107
-[]\TU/lmtt/m/n/10.95 #>                cnd((Int)) dsp((Int)) cnd(trt) df   logLik  AICc delta weight[] 
- []
-
-
-Overfull \hbox (35.8956pt too wide) in paragraph at lines 13108--13108
-[]\TU/lmtt/m/n/10.95 #> Treatment           2.726          +        +  4 -215.520 439.8  0.00  0.993[] 
- []
-
-
-Overfull \hbox (35.8956pt too wide) in paragraph at lines 13109--13109
-[]\TU/lmtt/m/n/10.95 #> Intercept only      3.372          +           3 -221.604 449.6  9.87  0.007[] 
- []
-
-[351] [352]
-
-Package natbib Warning: Citation `Akaike1974' on page 353 undefined on input line 13180.
-
-[353]
-Underfull \vbox (badness 10000) detected at line 13258
- []
-
-
-Underfull \vbox (badness 10000) detected at line 13258
- []
-
-[354] [355] [356]
 File: 04d-glmm_files/figure-pdf/fig-aic-overfit-plot-1.pdf Graphic file (type pdf)
 <use 04d-glmm_files/figure-pdf/fig-aic-overfit-plot-1.pdf>
-[357] [358] [359]
-Overfull \hbox (30.14685pt too wide) in paragraph at lines 13427--13427
-[]\TU/lmtt/m/n/10.95 #>      nbinom2(link = "log"), REML = FALSE, ziformula = ~0, dispformula = ~1)[] 
- []
+[351] [352] [353] [354] [355]
 
+LaTeX Warning: Reference `sec-birds' on page 356 undefined on input line 13488.
 
-Overfull \hbox (24.3981pt too wide) in paragraph at lines 13440--13440
-[]\TU/lmtt/m/n/10.95 #>                           Estimate Std. Error Adjusted SE z value Pr(>|z|)[] 
- []
-
-
-Overfull \hbox (35.8956pt too wide) in paragraph at lines 13441--13441
-[]\TU/lmtt/m/n/10.95 #> cond((Int))                -1.3413     0.8008      0.8091   1.658   0.0974 .[] 
- []
-
-
-Overfull \hbox (41.64433pt too wide) in paragraph at lines 13442--13442
-[]\TU/lmtt/m/n/10.95 #> cond(landscapeFragmented)   2.5937     0.9842      0.9944   2.608   0.0091 **[] 
- []
-
-
-Overfull \hbox (47.39308pt too wide) in paragraph at lines 13443--13443
-[]\TU/lmtt/m/n/10.95 #> cond(landscapeContinuous)   4.1385     1.0185      1.0287   4.023 5.74e-05 ***[] 
- []
-
-
-Overfull \hbox (24.3981pt too wide) in paragraph at lines 13446--13446
-[]\TU/lmtt/m/n/10.95 #>                           Estimate Std. Error Adjusted SE z value Pr(>|z|)[] 
- []
-
-
-Overfull \hbox (35.8956pt too wide) in paragraph at lines 13447--13447
-[]\TU/lmtt/m/n/10.95 #> cond((Int))                -1.3413     0.8008      0.8091   1.658  0.09738 .[] 
- []
-
-
-Overfull \hbox (41.64433pt too wide) in paragraph at lines 13448--13448
-[]\TU/lmtt/m/n/10.95 #> cond(landscapeFragmented)   2.6024     0.9743      0.9847   2.643  0.00822 **[] 
- []
-
-[360]
-Overfull \hbox (47.39308pt too wide) in paragraph at lines 13449--13449
-[]\TU/lmtt/m/n/10.95 #> cond(landscapeContinuous)   4.1524     0.9915      1.0020   4.144 3.41e-05 ***[] 
- []
-
-
-LaTeX Warning: Reference `sec-birds' on page 361 undefined on input line 13480.
-
-[361] [362] [363]
+[356] [357]
 File: 04d-glmm_files/figure-pdf/fig-ecology-glmm-plot-1.pdf Graphic file (type pdf)
 <use 04d-glmm_files/figure-pdf/fig-ecology-glmm-plot-1.pdf>
-[364]
+[358] [359]
 File: 04d-glmm_files/figure-pdf/ecology-nb-first-1.pdf Graphic file (type pdf)
 <use 04d-glmm_files/figure-pdf/ecology-nb-first-1.pdf>
-[365]
 File: 04d-glmm_files/figure-pdf/ecology-nb-first-2.pdf Graphic file (type pdf)
 <use 04d-glmm_files/figure-pdf/ecology-nb-first-2.pdf>
-[366] [367] [368] [369] [370] [371]
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 13890--13890
-[]\TU/lmtt/m/n/10.95 #> fit_zinb_birds: count ~ landscape + (1 | site), zi=~landscape, disp=~1[] 
+[360] [361] [362] [363] [364] [365] [366] [367] [368] [369]
+Overfull \hbox (2.22572pt too wide) in paragraph at lines 14047--14047
+[]\TU/JuliaMono(0)/m/n/10.95 #> Warning: the null model is only correct if all the variables it uses are identical[] 
  []
 
+[370]
 
-Overfull \hbox (18.64935pt too wide) in paragraph at lines 13891--13891
-[]\TU/lmtt/m/n/10.95 #>                Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(>Chisq)[] 
- []
+Package natbib Warning: Citation `Brooks2017' on page 371 undefined on input line 14087.
 
-
-Overfull \hbox (18.64935pt too wide) in paragraph at lines 13893--13893
-[]\TU/lmtt/m/n/10.95 #> fit_zinb_birds  8 651.74 674.04 -317.87   635.74 0.6395      3     0.8873[] 
- []
-
-[372]
-Overfull \hbox (41.64435pt too wide) in paragraph at lines 13941--13941
-[]\TU/lmtt/m/n/10.95 #> Caution: You lose important information if you filter this package[]s results.[] 
- []
-
-[373]
-Overfull \hbox (1.4031pt too wide) in paragraph at lines 13977--13977
-[]\TU/lmtt/m/n/10.95 #> P value adjustment: tukey method for comparing a family of 3 estimates[] 
- []
-
-[374] [375]
-Overfull \hbox (70.38809pt too wide) in paragraph at lines 14039--14039
-[]\TU/lmtt/m/n/10.95 #> Warning: the null model is only correct if all the variables it uses are identical[] 
- []
-
-[376]
-
-Package natbib Warning: Citation `Brooks2017' on page 377 undefined on input line 14079.
-
-[377] [378]
+[371] [372]
 part IV.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 14147.
-[379
+(scrkbase)              on input line 14155.
+[373
 
 
 ]
 chapter 12.
-[380
+[374
 
 
 ]
 
-LaTeX Warning: Reference `sec-chap1' on page 381 undefined on input line 14193.
+LaTeX Warning: Reference `sec-chap1' on page 375 undefined on input line 14201.
 
-[381] [382]
+[375] [376]
 
-LaTeX Warning: Reference `sec-pseudoreplication' on page 383 undefined on input line 14280.
-
-
-LaTeX Warning: Reference `sec-power-analysis' on page 383 undefined on input line 14288.
+LaTeX Warning: Reference `sec-pseudoreplication' on page 377 undefined on input line 14288.
 
 
-LaTeX Warning: Reference `sec-sample-size-power' on page 383 undefined on input line 14288.
+LaTeX Warning: Reference `sec-power-analysis' on page 377 undefined on input line 14296.
 
-[383]
+
+LaTeX Warning: Reference `sec-sample-size-power' on page 377 undefined on input line 14296.
+
+[377]
 File: img/fig2.png Graphic file (type bmp)
 <img/fig2.png>
-[384] [385] [386] [387] [388] [389] [390] [391] [392] [393] [394] [395]
-
-LaTeX Warning: Reference `sec-pseudoreplication' on page 396 undefined on input line 14763.
-
-
-LaTeX Warning: Reference `sec-pseudoreplication2' on page 396 undefined on input line 14764.
-
-[396]
-Overfull \vbox (1.786pt too high) detected at line 14828
+[378] [379]
+Underfull \vbox (badness 10000) detected at line 14409
  []
 
-[397]
+
+Underfull \vbox (badness 10000) detected at line 14409
+ []
+
+[380] [381] [382] [383] [384] [385] [386] [387] [388]
+
+LaTeX Warning: Reference `sec-pseudoreplication' on page 389 undefined on input line 14771.
+
+
+LaTeX Warning: Reference `sec-pseudoreplication2' on page 389 undefined on input line 14772.
+
+[389]
+Overfull \vbox (1.11588pt too high) detected at line 14836
+ []
+
+[390]
 File: 05a-experimental-design_files/figure-pdf/fig-confounding-demo-1.pdf Graphic file (type pdf)
 <use 05a-experimental-design_files/figure-pdf/fig-confounding-demo-1.pdf>
-[398]
+[391]
 
-LaTeX Warning: Reference `sec-pseudoreplication' on page 399 undefined on input line 14857.
-
-
-LaTeX Warning: Reference `sec-pseudoreplication2' on page 399 undefined on input line 14857.
-
-[399]
-
-LaTeX Warning: Reference `sec-unbalanced' on page 400 undefined on input line 14874.
-
-[400] [401] [402]
-
-Package natbib Warning: Citation `Green2016' on page 403 undefined on input line 15006.
-
-[403]
-
-LaTeX Warning: Reference `sec-chap9' on page 404 undefined on input line 15040.
+LaTeX Warning: Reference `sec-pseudoreplication' on page 392 undefined on input line 14865.
 
 
-LaTeX Warning: Reference `sec-physio' on page 404 undefined on input line 15040.
+LaTeX Warning: Reference `sec-pseudoreplication2' on page 392 undefined on input line 14865.
 
-[404]
+
+LaTeX Warning: Reference `sec-unbalanced' on page 392 undefined on input line 14882.
+
+[392] [393] [394] [395]
+
+Package natbib Warning: Citation `Green2016' on page 396 undefined on input line 15014.
+
+
+LaTeX Warning: Reference `sec-chap9' on page 396 undefined on input line 15048.
+
+
+LaTeX Warning: Reference `sec-physio' on page 396 undefined on input line 15048.
+
+[396]
 ! Text line contains an invalid character.
-l.15073 ...                                   |^^H
+l.15077 ...                                   |^^H
                                                   ^^H^^H^^H^^H^^H^^H^^H^^H^^...
 A funny symbol that I can't read has just been input.
 Continue, and I'll forget that it ever happened.
 
  
 Here is how much of TeX's memory you used:
- 40587 strings out of 469775
- 850705 string characters out of 5467461
- 1546978 words of memory out of 5000000
- 68883 multiletter control sequences out of 15000+600000
- 639755 words of font info for 139 fonts, out of 8000000 for 9000
+ 40727 strings out of 469775
+ 857143 string characters out of 5467460
+ 1547588 words of memory out of 5000000
+ 69002 multiletter control sequences out of 15000+600000
+ 640027 words of font info for 173 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 108i,10n,114p,11208b,1042s stack positions out of 10000i,1000n,20000p,200000b,200000s
-Output written on index.pdf (408 pages).
+ 108i,10n,117p,11208b,969s stack positions out of 10000i,1000n,20000p,200000b,200000s
+Output written on index.pdf (400 pages).
