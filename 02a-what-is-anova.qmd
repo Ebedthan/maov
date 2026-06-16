@@ -59,7 +59,13 @@ Each group mean carries the effect of its treatment, but also the influence of a
 ### Among-Group Variation: The Signal
 
 If we compare each group mean to the grand mean, the control sits 3 cm
-*below* the grand mean, nitrogen sits 3 cm *above* it, and phosphorus sits right on it. Any displacement of a group mean from the grand mean can come from two sources: the effect of the treatment, and random error. If fertiliser has no effect whatsoever, the three group means will cluster close to the grand mean, displaced only by chance. If fertiliser genuinely matters, some means will be pulled far from the grand mean, and the spread among group means will be large. This spread is what we call **among-group variation**, and it is our window onto the treatment effect.
+*below* the grand mean ($\bar{x}_{\text{control}} = 3 \text{ cm} < \bar{x} = 6 \text{ cm}$), nitrogen sits 3 cm *above* it ($\bar{x}_{\text{nitrogen}} = 9 \text{ cm} > \bar{x} = 6 \text{ cm}$), and phosphorus sits right on it ($\bar{x}_{\text{phosphorus}} = 6 \text{ cm} = \bar{x} = 6 \text{ cm}$). 
+
+Any displacement of a group mean from the grand mean can come from two sources: the effect of the treatment, and random error. 
+
+- If fertiliser has no effect whatsoever, the three group means will cluster close to the grand mean, displaced only by chance. 
+
+- If fertiliser genuinely matters, some means will be pulled far from the grand mean, and the spread among group means will be large. This spread is what we call **among-group variation**, and it is our window onto the treatment effect.
 
 ### Within-Group Variation: The Noise {#sec-within-group}
 
@@ -67,8 +73,9 @@ Now look inside each group. Even though all four plants in the control group rec
 For the control group:
 
 $$s^2_{\text{control}}
-  = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x}_{\text{control}})^2
-  = \frac{(4-3)^2 + (5-3)^2 + (2-3)^2 + (1-3)^2}{3}
+  = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x}_{\text{control}})^2$$
+  
+$$= \frac{(4-3)^2 + (5-3)^2 + (2-3)^2 + (1-3)^2}{3}
   = \frac{1 + 4 + 1 + 4}{3}
   = 3.33 \text{ cm}^2$$
 
@@ -124,14 +131,11 @@ Although ANOVA was born from the needs of agricultural research, its logic prove
 
 The enduring power of ANOVA lies precisely in the simplicity of the idea Fisher identified at Rothamsted: that variation is not an obstacle to understanding, but a quantity that can be measured, partitioned, and interpreted.
 
-## ANOVA as a special case of linear models
+## ANOVA as a Special Case of Linear Models
 
-### The linear model idea
+### The Linear Model Idea
 
-You may have already encountered simple linear regression: the idea that you 
-can predict one variable from another using a straight line. For example, you 
-might predict plant height from the amount of rainfall received. The equation 
-looks like this:
+You may have already encountered simple linear regression: the idea that you can predict one variable from another using a straight line. For example, you might predict plant height from the amount of rainfall received. The equation looks like this:
 
 $$\text{Plant height} = \beta_0 + \beta_1 \times \text{Rainfall} + \varepsilon$$
 
@@ -139,9 +143,9 @@ where $\beta_0$ is the intercept (the expected height when rainfall is zero),  $
 
 This is called a **linear model**: we are modelling the response variable (plant height) as a linear combination of some predictor plus error.
 
-**ANOVA is in fact the same thing**. The only difference is that instead of a  continuous predictor like rainfall, _our predictor is a categorical variable_, a group label like *control*, *nitrogen*, or *phosphorus*. 
+**ANOVA is in fact the same thing**. The only difference is that instead of a  continuous predictor like rainfall, _our predictor is a categorical variable_ that is variable with group label like *control*, *nitrogen*, or *phosphorus*. 
 
-### Recoding groups as numbers: dummy variables
+### Recoding Groups as Numbers: Dummy Variables
 
 A computer cannot do arithmetic on the words "control" or "nitrogen", so we  recode the group labels as numbers. This is done using **dummy variables**  (also called indicator variables). The idea is simple: we pick one group as  the reference, say, the control, and then create one dummy variable for each  of the other groups.
 
@@ -182,12 +186,12 @@ $$\text{Plant height} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon$$
 
 The coefficients have a beautifully simple interpretation:
 
-- $\beta_0$ is the mean height of the **control** group (when $X_1 = 0$ and 
-$X_2 = 0$).
-- $\beta_1$ is the **difference** in mean height between the nitrogen group 
-and the control group.
-- $\beta_2$ is the **difference** in mean height between the phosphorus group 
-and the control group.
+- $\beta_0$ is the mean height of the **control** group (when $X_1 = 0$ and $X_2 = 0$).
+
+- $\beta_1$ is the **difference** in mean height between the nitrogen group and the control group.
+
+- $\beta_2$ is the **difference** in mean height between the phosphorus group and the control group.
+
 - $\varepsilon$ is the residual error for each individual plant.
 
 Let us check this with a concrete example. Suppose the estimated coefficients are:
@@ -201,9 +205,7 @@ Then the model predicts:
 - A **nitrogen** plant: $20 + 5 \times 1 + 2 \times 0 = 25$ cm
 - A **phosphorus** plant: $20 + 5 \times 0 + 2 \times 1 = 22$ cm
 
-In other words, nitrogen fertiliser is associated with plants that are on 
-average 5 cm taller than the control, and phosphorus with plants that are 
-2 cm taller.
+In other words, nitrogen fertiliser is associated with plants that are on  average 5 cm taller than the control, and phosphorus with plants that are  2 cm taller.
 
 ### The connection to the $F$ test
 
@@ -221,88 +223,44 @@ which simply says every plant has the same expected height (the grand mean) plus
 
 Recognising ANOVA as a linear model is more than a mathematical curiosity. It means that **ANOVA and regression are not two separate tools you need to learn independently, they are both special cases of a single unified framework, the general linear model**. Once you are comfortable with this framework, you can naturally extend your analyses to situations that mix categorical and continuous predictors (called ANCOVA), include multiple categorical factors (two-way ANOVA), or handle more complex experimental designs, all within exactly the same logic you have already learned here.
 
-## What ANOVA is **not**: common misconceptions
+## What ANOVA is **not**: Common Misconceptions
 
 ### ANOVA Does Not Tell You Which Groups Differ
 
 This is perhaps the most common source of confusion among newcomers. A significant $F$ test tells you that the group means are not all equal i.e that somewhere among your groups there is a real difference. It does not tell you *where* that difference lies.
 
-In our fertiliser example, a significant result tells you that fertiliser type matters, but it does not tell you whether nitrogen differs from the control, whether phosphorus differs from the control, or whether nitrogen and phosphorus differ from each other. Identifying which specific pairs of groups differ 
-requires additional **post-hoc tests**, such as Tukey's HSD or pairwise 
-$t$-tests with corrected significance thresholds, which are conducted after 
-the ANOVA, and only when the $F$ test is significant.
+In our fertiliser example, a significant result tells you that fertiliser type matters, but it does not tell you whether nitrogen differs from the control, whether phosphorus differs from the control, or whether nitrogen and phosphorus differ from each other. Identifying which specific pairs of groups differ requires additional **post-hoc tests**, such as Tukey's HSD or pairwise $t$-tests with corrected significance thresholds, which are conducted after the ANOVA, and only when the $F$ test is significant.
 
 ### A Non-Significant Result Does Not Mean the Groups Are Equal
 
-If your $F$ test returns $p > 0.05$, it is tempting to conclude that the 
-fertilisers have no effect on plant height. **This conclusion is not warranted.** 
-A non-significant result means only that *you did not find sufficient evidence of a difference given your data*. There are many reasons this can happen even 
-when a true difference exists:
+If your $F$ test returns $p > 0.05$, it is tempting to conclude that the  fertilisers have no effect on plant height. **This conclusion is not warranted.**  A non-significant result means only that *you did not find sufficient evidence of a difference given your data*. There are many reasons this can happen even when a true difference exists:
 
 - Your sample size may have been too small to detect a modest effect.
-- The within-group variation (error) may have been large, drowning out a 
-real treatment signal.
-- The effect of the treatment may be genuine but smaller than your experiment 
-was designed to detect.
+- The within-group variation (error) may have been large, drowning out a  real treatment signal.
+- The effect of the treatment may be genuine but smaller than your experiment  was designed to detect.
 
-**The absence of evidence is not evidence of absence.** A non-significant ANOVA 
-should prompt you to think about the **statistical power** of your experiment: its ability to detect an effect of a given size, rather than to simply 
-accept the null hypothesis.
+**The absence of evidence is not evidence of absence.** A non-significant ANOVA should prompt you to think about the **statistical power** of your experiment: its ability to detect an effect of a given size, rather than to simply accept the null hypothesis.
 
 ### ANOVA Does Not Require Equal Sample Sizes, But Imbalance Has Consequences
 
-It is a common belief that ANOVA requires the same number of observations in 
-each group. This is not strictly true: ANOVA can be performed on unbalanced 
-designs where group sizes differ. However, equal sample sizes are strongly 
-preferred. Balanced designs are more statistically efficient, more robust to 
-violations of the assumption of equal variances, and considerably simpler to 
-interpret. If your groups are very unequal in size, the results of the $F$ 
-test can become sensitive to assumptions you might not have checked carefully.
+It is a common belief that ANOVA requires the same number of observations in each group. This is not strictly true: ANOVA can be performed on unbalanced designs where group sizes differ. However, equal sample sizes are strongly preferred. Balanced designs are more statistically efficient, more robust to violations of the assumption of equal variances, and considerably simpler to interpret. If your groups are very unequal in size, the results of the $F$ test can become sensitive to assumptions you might not have checked carefully.
 
 ### ANOVA is not robust to all assumption violations
 
 ANOVA rests on three key assumptions:
 
 1. **Independence**: the observations are independent of one another.
-2. **Normality**: the residuals (errors) are approximately normally distributed 
-within each group.
-3. **Homogeneity of variance**: the variance within each group is approximately 
-the same (also called homoscedasticity).
+2. **Normality**: the residuals (errors) are approximately normally distributed within each group.
+3. **Homogeneity of variance**: the variance within each group is approximately the same (also called homoscedasticity).
 
-Students sometimes assume that ANOVA is so widely used that it must be safe 
-to apply in any situation. This is not the case. Of the three assumptions above, 
-independence is by far the most critical. Violating it, for example by 
-measuring the same plant twice and treating the two measurements as independent 
-observations, can severely inflate your false positive rate and lead to 
-entirely spurious conclusions. Violations of normality are generally less 
-serious, especially with larger sample sizes, thanks to the central limit 
-theorem. Violations of homogeneity of variance are intermediate in severity 
-and can be addressed with modified versions of the test, such as Welch's ANOVA.
+Students sometimes assume that ANOVA is so widely used that it must be safe to apply in any situation. **This is not the case**. Of the three assumptions above, independence is by far the most critical. Violating it, for example by measuring the same plant twice and treating the two measurements as independent observations, can severely inflate your false positive rate and lead to entirely spurious conclusions. Violations of normality are generally less serious, especially with larger sample sizes, thanks to the central limit theorem. Violations of homogeneity of variance are intermediate in severity and can be addressed with modified versions of the test, such as Welch's ANOVA.
 
 We will explore the assumptions of ANOVA in the following chapter.
 
-### ANOVA is not a test of means alone
+### ANOVA is Not a Test of Means Alone
 
-Although ANOVA is typically introduced as a way to compare means, what it 
-actually does is partition and compare *variances*. The $F$ ratio is a ratio 
-of two variance estimates, not a direct comparison of means. The connection 
-to means is real, a large among-group variance arises precisely because the 
-group means are far apart, but it is important to understand that ANOVA is 
-fundamentally a test about the structure of variation in your data. This is 
-why, as we saw in the previous section, ANOVA fits so naturally within the 
-linear model framework: both are concerned with explaining variation, not 
-merely comparing averages.
+Although ANOVA is typically introduced as a way to compare means, what it actually does is partition and compare *variances*. The $F$ ratio is a ratio of two variance estimates, not a direct comparison of means. The connection to means is real, a large among-group variance arises precisely because the group means are far apart, but it is important to understand that ANOVA is fundamentally a test about the structure of variation in your data. This is why, as we saw in the previous section, ANOVA fits so naturally within the linear model framework: both are concerned with explaining variation, not merely comparing averages.
 
-### ANOVA is not a substitute for good experimental design
+### ANOVA is not a Substitute for Good Experimental Design
 
-Finally, and perhaps most importantly, no statistical test can rescue a poorly 
-designed experiment. ANOVA assumes that your groups were formed by proper 
-randomisation, that your replicates are genuine independent observations, and 
-that sources of systematic bias have been controlled or accounted for. If 
-your four control plants were all placed on one side of the greenhouse and 
-your four nitrogen plants on the other, then any difference you observe might 
-reflect a light or temperature gradient rather than a fertiliser effect. ANOVA 
-will dutifully compute an $F$ statistic and a $p$-value in this situation,
-but the result will be meaningless. As Fisher himself understood from his years 
-at Rothamsted, the validity of the analysis begins not at the computer but at 
-the moment the experiment is designed.
+Finally, and perhaps most importantly, no statistical test can rescue a poorly designed experiment. ANOVA assumes that your groups were formed by proper randomisation, that your replicates are genuine independent observations, and that sources of systematic bias have been controlled or accounted for. If your four control plants were all placed on one side of the greenhouse and your four nitrogen plants on the other, then any difference you observe might reflect a light or temperature gradient rather than a fertiliser effect. ANOVA will dutifully compute an $F$ statistic and a $p$-value in this situation, but the result will be meaningless. As Fisher himself understood from his years at Rothamsted, the validity of the analysis begins not at the computer but at the moment the experiment is designed.

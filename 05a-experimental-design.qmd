@@ -503,7 +503,7 @@ fixef(fit_pilot)["treatmentTreatment"] <- 5
 
 # Step 3a: Estimate power at the current sample size
 # Power curve across patients per hospital
-power_current <- powerSim(fit_pilot, test = fixed("treatmentTreatment", method = "t"), nsim = 100)
+power_current <- powerSim(fit_pilot, test = fixed("treatmentTreatment", method = "t"), progress = FALSE, nsim = 100)
 print(power_current)
 ```
 
@@ -530,7 +530,8 @@ power_curve <- powerCurve(
   test   = fixed("treatmentTreatment", method = "t"),
   within = "hospital",
   breaks = c(5, 8, 10, 15, 20, 25, 30),
-  nsim   = 100
+  nsim   = 100,
+  progress = FALSE
 )
 
 print(power_curve)
@@ -555,7 +556,8 @@ power_curve_hospitals <- powerCurve(
   test   = fixed("treatmentTreatment", method = "t"),
   along  = "hospital",
   breaks = c(5, 6, 8, 10, 15, 20),
-  nsim   = 100
+  nsim   = 100,
+  progress = FALSE
 )
 
 print(power_curve_hospitals)
