@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Anicet Ebou">
+
+<title>1&nbsp; What is ANOVA, Really ? – Modern Analysis of Variance</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02b-assumptions.html" rel="next">
+<link href="./02-foundations.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-foundations.html">Foundations</a></li><li class="breadcrumb-item"><a href="./02a-what-is-anova.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is ANOVA, Really ?</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Analysis of Variance</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Ebedthan/maov/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02a-what-is-anova.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is ANOVA, Really ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02b-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Assumptions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03-classical-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical ANOVA Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03a-one-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03b-multiple-comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03c-two-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03d-repeated-measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03e-split-plot-nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Split-Plot and Nested Designs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04-modern-framework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Modern Framework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04a-anova-as-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANOVA as a Linear Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04b-mixed-effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed-Effects Models: Beyond Classical ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04c-when-assumptions-fail.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">When Assumptions Fail, What to Do ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04d-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Generalised Linear Mixed Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./05-good-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Good Practice and Reproductibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05a-experimental-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Experimental Design Principles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05b-reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reporting ANOVA Results</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05c-reproducible-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducible Analysis with R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Maths of the Book</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets and R Packages</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-decision-tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Decision Trees for Model Selection</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-variance-decomposition-idea" id="toc-the-variance-decomposition-idea" class="nav-link active" data-scroll-target="#the-variance-decomposition-idea"><span class="header-section-number">1.1</span> The variance decomposition idea</a>
+  <ul class="collapse">
+  <li><a href="#the-grand-mean-and-group-means" id="toc-the-grand-mean-and-group-means" class="nav-link" data-scroll-target="#the-grand-mean-and-group-means"><span class="header-section-number">1.1.1</span> The Grand Mean and Group Means</a></li>
+  <li><a href="#among-group-variation-the-signal" id="toc-among-group-variation-the-signal" class="nav-link" data-scroll-target="#among-group-variation-the-signal"><span class="header-section-number">1.1.2</span> Among-Group Variation: The Signal</a></li>
+  <li><a href="#sec-within-group" id="toc-sec-within-group" class="nav-link" data-scroll-target="#sec-within-group"><span class="header-section-number">1.1.3</span> Within-Group Variation: The Noise</a></li>
+  <li><a href="#the-f-ratio" id="toc-the-f-ratio" class="nav-link" data-scroll-target="#the-f-ratio"><span class="header-section-number">1.1.4</span> The <span class="math inline">\(F\)</span> Ratio</a></li>
+  <li><a href="#assessing-the-f-ratio-is-it-large-enough" id="toc-assessing-the-f-ratio-is-it-large-enough" class="nav-link" data-scroll-target="#assessing-the-f-ratio-is-it-large-enough"><span class="header-section-number">1.1.5</span> Assessing the <span class="math inline">\(F\)</span> Ratio: Is It Large Enough?</a></li>
+  </ul></li>
+  <li><a href="#a-brief-history-of-anova" id="toc-a-brief-history-of-anova" class="nav-link" data-scroll-target="#a-brief-history-of-anova"><span class="header-section-number">1.2</span> A Brief History of ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#origins-in-agriculture" id="toc-origins-in-agriculture" class="nav-link" data-scroll-target="#origins-in-agriculture"><span class="header-section-number">1.2.1</span> Origins in Agriculture</a></li>
+  <li><a href="#the-key-publications" id="toc-the-key-publications" class="nav-link" data-scroll-target="#the-key-publications"><span class="header-section-number">1.2.2</span> The Key Publications</a></li>
+  <li><a href="#the-f-statistic" id="toc-the-f-statistic" class="nav-link" data-scroll-target="#the-f-statistic"><span class="header-section-number">1.2.3</span> The <span class="math inline">\(F\)</span> Statistic</a></li>
+  <li><a href="#from-agriculture-to-all-of-science" id="toc-from-agriculture-to-all-of-science" class="nav-link" data-scroll-target="#from-agriculture-to-all-of-science"><span class="header-section-number">1.2.4</span> From Agriculture to All of Science</a></li>
+  </ul></li>
+  <li><a href="#anova-as-a-special-case-of-linear-models" id="toc-anova-as-a-special-case-of-linear-models" class="nav-link" data-scroll-target="#anova-as-a-special-case-of-linear-models"><span class="header-section-number">1.3</span> ANOVA as a Special Case of Linear Models</a>
+  <ul class="collapse">
+  <li><a href="#the-linear-model-idea" id="toc-the-linear-model-idea" class="nav-link" data-scroll-target="#the-linear-model-idea"><span class="header-section-number">1.3.1</span> The Linear Model Idea</a></li>
+  <li><a href="#recoding-groups-as-numbers-dummy-variables" id="toc-recoding-groups-as-numbers-dummy-variables" class="nav-link" data-scroll-target="#recoding-groups-as-numbers-dummy-variables"><span class="header-section-number">1.3.2</span> Recoding Groups as Numbers: Dummy Variables</a></li>
+  <li><a href="#writing-the-model" id="toc-writing-the-model" class="nav-link" data-scroll-target="#writing-the-model"><span class="header-section-number">1.3.3</span> Writing the model</a></li>
+  <li><a href="#the-connection-to-the-f-test" id="toc-the-connection-to-the-f-test" class="nav-link" data-scroll-target="#the-connection-to-the-f-test"><span class="header-section-number">1.3.4</span> The connection to the <span class="math inline">\(F\)</span> test</a></li>
+  <li><a href="#why-does-this-matter" id="toc-why-does-this-matter" class="nav-link" data-scroll-target="#why-does-this-matter"><span class="header-section-number">1.3.5</span> Why Does This Matter?</a></li>
+  </ul></li>
+  <li><a href="#what-anova-is-not-common-misconceptions" id="toc-what-anova-is-not-common-misconceptions" class="nav-link" data-scroll-target="#what-anova-is-not-common-misconceptions"><span class="header-section-number">1.4</span> What ANOVA is <strong>not</strong>: Common Misconceptions</a>
+  <ul class="collapse">
+  <li><a href="#anova-does-not-tell-you-which-groups-differ" id="toc-anova-does-not-tell-you-which-groups-differ" class="nav-link" data-scroll-target="#anova-does-not-tell-you-which-groups-differ"><span class="header-section-number">1.4.1</span> ANOVA Does Not Tell You Which Groups Differ</a></li>
+  <li><a href="#a-non-significant-result-does-not-mean-the-groups-are-equal" id="toc-a-non-significant-result-does-not-mean-the-groups-are-equal" class="nav-link" data-scroll-target="#a-non-significant-result-does-not-mean-the-groups-are-equal"><span class="header-section-number">1.4.2</span> A Non-Significant Result Does Not Mean the Groups Are Equal</a></li>
+  <li><a href="#anova-does-not-require-equal-sample-sizes-but-imbalance-has-consequences" id="toc-anova-does-not-require-equal-sample-sizes-but-imbalance-has-consequences" class="nav-link" data-scroll-target="#anova-does-not-require-equal-sample-sizes-but-imbalance-has-consequences"><span class="header-section-number">1.4.3</span> ANOVA Does Not Require Equal Sample Sizes, But Imbalance Has Consequences</a></li>
+  <li><a href="#anova-is-not-robust-to-all-assumption-violations" id="toc-anova-is-not-robust-to-all-assumption-violations" class="nav-link" data-scroll-target="#anova-is-not-robust-to-all-assumption-violations"><span class="header-section-number">1.4.4</span> ANOVA is not robust to all assumption violations</a></li>
+  <li><a href="#anova-is-not-a-test-of-means-alone" id="toc-anova-is-not-a-test-of-means-alone" class="nav-link" data-scroll-target="#anova-is-not-a-test-of-means-alone"><span class="header-section-number">1.4.5</span> ANOVA is Not a Test of Means Alone</a></li>
+  <li><a href="#anova-is-not-a-substitute-for-good-experimental-design" id="toc-anova-is-not-a-substitute-for-good-experimental-design" class="nav-link" data-scroll-target="#anova-is-not-a-substitute-for-good-experimental-design"><span class="header-section-number">1.4.6</span> ANOVA is not a Substitute for Good Experimental Design</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/02a-what-is-anova.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-foundations.html">Foundations</a></li><li class="breadcrumb-item"><a href="./02a-what-is-anova.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is ANOVA, Really ?</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-chap1" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is ANOVA, Really ?</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-variance-decomposition-idea" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-variance-decomposition-idea"><span class="header-section-number">1.1</span> The variance decomposition idea</h2>
+<p>Imagine you are investigating whether the type of fertiliser applied to wheat plants affects how tall they grow. You have 12 identical pots of wheat seedlings. Four pots receive no fertiliser (control), four receive a nitrogen-based fertiliser, and four receive a phosphorus-based fertiliser. After six weeks, you measure the height of each plant.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fig1.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1. Fertiliser experiment. Seedling growth observed after 6 weeks. The pots received same soils and were treated equally except from fertiliser they received.</figcaption>
+</figure>
+</div>
+<p>Your starting assumption is that <em>there is no difference in mean plant height among the three groups.</em> The alternative is that at least one fertiliser produces a different mean height.</p>
+<p>Now consider the height of any single plant. Why does it differ from the average height of all 12 plants (we will call this average height the grand mean) ? There are two reasons.</p>
+<p><strong>First</strong>, that plant received a particular fertiliser, and that fertiliser may genuinely promote or inhibit growth. This is what we will call the <em>treatment effect</em>. We use the term <em>treatment</em> because the fertilier is what was applied to the plant, and <em>effect</em> because it is the change in height that the fertiliser brings about.</p>
+<p><strong>Second</strong>, even plants given the same fertiliser will not grow identically. Tiny differences like seed quality, pot position, light exposure, and watering can make each plant slightly different from its neighbours. This uncontrollable scatter is what we will call <em>residual</em> or <em>error</em>. We use the term <em>residual</em> because this second source of variation comes from all the factors that influence plant height but are not measurd in the experiment, they are leftover, the part of the story that the treament alone cannot tell.</p>
+<p>The height of any single plant is therefore:</p>
+<p><span class="math display">\[\text{Plant height} = \text{fertiliser effect} + \text{residual}\]</span></p>
+<p>Suppose that we obtain the data below from the experiment:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Treatment</th>
+<th>Plant height (cm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Control</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>Control</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>Control</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Control</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Nitrogen</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Nitrogen</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>Nitrogen</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td>Nitrogen</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>Phosphorus</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>Phosphorus</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>Phosphorus</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>Phosphorus</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>We have three groups of treatments: Control, Nitrogen, and Phosphorus. Each treatment was <em>randomly</em> assigned to a plant.</p>
+<section id="the-grand-mean-and-group-means" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="the-grand-mean-and-group-means"><span class="header-section-number">1.1.1</span> The Grand Mean and Group Means</h3>
+<p>Let us start with the bigger picture. By computing the mean of all 12 plant heights we obtain the <strong>grand mean</strong>:</p>
+<p><span class="math display">\[\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
+          = \frac{1}{12}(4 + 5 + 2 + 1 + 10 + 8 + 11 + 7 + 8 + 4 + 7 + 5)
+          = 6 \text{ cm}\]</span></p>
+<p>Computing the mean within each treatment group gives:</p>
+<p><span class="math display">\[\bar{x}_{\text{control}} = \frac{1}{4}(4 + 5 + 2 + 1) = 3 \text{ cm}\]</span></p>
+<p><span class="math display">\[\bar{x}_{\text{nitrogen}} = \frac{1}{4}(10 + 8 + 11 + 7) = 9 \text{ cm}\]</span></p>
+<p><span class="math display">\[\bar{x}_{\text{phosphorus}} = \frac{1}{4}(8 + 4 + 7 + 5) = 6 \text{ cm}\]</span></p>
+<p>Each group mean carries the effect of its treatment, but also the influence of any unmeasured factor like differences in seed quality, sunlight, watering, and so on. The nitrogen group mean of 9 cm, for example, reflects both the genuine effect of nitrogen fertiliser on growth <em>and</em> the small random differences that existed between those four plants regardless of what fertiliser they received.</p>
+</section>
+<section id="among-group-variation-the-signal" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="among-group-variation-the-signal"><span class="header-section-number">1.1.2</span> Among-Group Variation: The Signal</h3>
+<p>If we compare each group mean to the grand mean, the control sits 3 cm <em>below</em> the grand mean (<span class="math inline">\(\bar{x}_{\text{control}} = 3 \text{ cm} &lt; \bar{x} = 6 \text{ cm}\)</span>), nitrogen sits 3 cm <em>above</em> it (<span class="math inline">\(\bar{x}_{\text{nitrogen}} = 9 \text{ cm} &gt; \bar{x} = 6 \text{ cm}\)</span>), and phosphorus sits right on it (<span class="math inline">\(\bar{x}_{\text{phosphorus}} = 6 \text{ cm} = \bar{x} = 6 \text{ cm}\)</span>).</p>
+<p>Any displacement of a group mean from the grand mean can come from two sources: the effect of the treatment, and random error.</p>
+<ul>
+<li><p>If fertiliser has no effect whatsoever, the three group means will cluster close to the grand mean, displaced only by chance.</p></li>
+<li><p>If fertiliser genuinely matters, some means will be pulled far from the grand mean, and the spread among group means will be large. This spread is what we call <strong>among-group variation</strong>, and it is our window onto the treatment effect.</p></li>
+</ul>
+</section>
+<section id="sec-within-group" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="sec-within-group"><span class="header-section-number">1.1.3</span> Within-Group Variation: The Noise</h3>
+<p>Now look inside each group. Even though all four plants in the control group received exactly the same treatment, no fertiliser at all, their heights (4, 5, 2, 1 cm) are not identical. This scatter cannot come from the fertiliser, since all four plants received the same one. It can only reflect the residual, the unmeasured sources of variation we discussed earlier. We can quantify this scatter with the within-group variance. For the control group:</p>
+<p><span class="math display">\[s^2_{\text{control}}
+  = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x}_{\text{control}})^2\]</span></p>
+<p><span class="math display">\[= \frac{(4-3)^2 + (5-3)^2 + (2-3)^2 + (1-3)^2}{3}
+  = \frac{1 + 4 + 1 + 4}{3}
+  = 3.33 \text{ cm}^2\]</span></p>
+<p>This within-group scatter, present in every group regardless of which fertiliser was applied, is our estimate of background noise i.e.&nbsp;the residual variation the experiment cannot control. This is what we call <strong>within-group variation</strong>.</p>
+</section>
+<section id="the-f-ratio" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="the-f-ratio"><span class="header-section-number">1.1.4</span> The <span class="math inline">\(F\)</span> Ratio</h3>
+<p>We now have two variance estimates that tell very different stories: the among-group variance, which reflects the treatment effect plus noise, and the within-group variance, which reflects noise alone. The natural thing to do is form their ratio:</p>
+<p><span class="math display">\[F = \frac{\text{Among-group variance (fertiliser + residual)}}
+          {\text{Within-group variance (residual only)}}\]</span></p>
+<p>When fertiliser has no effect, both the numerator and the denominator are estimating the same background noise, and their ratio will hover around 1. As the true differences among fertilisers grow larger, the numerator grows, because the group means are being pulled further apart by the treatment, while the denominator stays anchored to the background noise. The ratio therefore climbs above 1, and the larger it becomes, the harder it is to believe that the differences among groups arose by chance alone.</p>
+</section>
+<section id="assessing-the-f-ratio-is-it-large-enough" class="level3" data-number="1.1.5">
+<h3 data-number="1.1.5" class="anchored" data-anchor-id="assessing-the-f-ratio-is-it-large-enough"><span class="header-section-number">1.1.5</span> Assessing the <span class="math inline">\(F\)</span> Ratio: Is It Large Enough?</h3>
+<p>Knowing that <span class="math inline">\(F\)</span> is greater than 1 is not enough on its own, we need to know how much greater than 1 it would have to be before we can confidently say the differences are real. This is where probability comes in.</p>
+<p>When there is truly no treatment effect, the <span class="math inline">\(F\)</span> ratio still varies from experiment to experiment simply due to chance. Mathematical statistics tells us that, under this condition, <span class="math inline">\(F\)</span> follows a known probability distribution called the <strong>Fisher distribution</strong> (or <span class="math inline">\(F\)</span>-distribution), whose shape depends on the degrees of freedom of the two variance estimates. This distribution acts as a reference: it tells us exactly how large <span class="math inline">\(F\)</span> would typically be if there were no fertiliser effect at all.</p>
+<p>In practice, we choose a threshold probability in advance, conventionally <span class="math inline">\(\alpha = 0.05\)</span>, which defines a critical value of <span class="math inline">\(F\)</span>. If our observed <span class="math inline">\(F\)</span> exceeds this critical value, it means that the probability of seeing a ratio this large by chance alone is less than 5%. We then conclude that the differences among fertiliser groups are unlikely to be due to chance.</p>
+<p>If our observed <span class="math inline">\(F\)</span> does not reach the critical value, we do not have sufficient evidence to rule out chance as an explanation.</p>
+<p>This is the core logic of the ANOVA test, and as we will see in the next section, it is also the core logic of a much broader family of statistical models.</p>
+</section>
+</section>
+<section id="a-brief-history-of-anova" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="a-brief-history-of-anova"><span class="header-section-number">1.2</span> A Brief History of ANOVA</h2>
+<section id="origins-in-agriculture" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="origins-in-agriculture"><span class="header-section-number">1.2.1</span> Origins in Agriculture</h3>
+<p>The analysis of variance was developed in the early twentieth century by the British statistician and geneticist Ronald A. Fisher, widely regarded as the founder of modern statistics. Fisher developed the method during his time at the Rothamsted Experimental Station in Hertfordshire, England, where he worked from 1919 to 1933 <span class="citation" data-cites="fisher1919xv">(<a href="references.html#ref-fisher1919xv" role="doc-biblioref">Ronald A. Fisher 1919</a>)</span>. Rothamsted was, and remains, one of the oldest agricultural research institutions in the world, and it was here that Fisher was confronted with a practical problem: how to make sense of large volumes of messy experimental data on crop yields, soil treatments, and fertiliser effects.</p>
+<p>The core challenge was not merely computational but conceptual. Agricultural field experiments are inherently noisy. Soil fertility varies across a field, weather is unpredictable, and individual plants differ in ways that cannot be controlled. Fisher needed a principled way to separate the variation caused by experimental treatments, different fertilisers, crop varieties, tillage methods, from the background variation that existed regardless of what the experimenter did. His solution was the decomposition of total variance into distinct, interpretable components: a idea that became the conceptual backbone of ANOVA <span class="citation" data-cites="fisher1970statistical">(<a href="references.html#ref-fisher1970statistical" role="doc-biblioref">Ronald Aylmer Fisher 1970</a>)</span>.</p>
+</section>
+<section id="the-key-publications" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="the-key-publications"><span class="header-section-number">1.2.2</span> The Key Publications</h3>
+<p>Fisher first introduced the F statistic and the logic of variance decomposition in his landmark 1925 textbook <em>Statistical Methods for Research Workers</em> <span class="citation" data-cites="fisher1970statistical">(<a href="references.html#ref-fisher1970statistical" role="doc-biblioref">Ronald Aylmer Fisher 1970</a>)</span>. This work presented ANOVA not as an abstract mathematical construction but as a practical tool for scientists, illustrated throughout with agricultural and biological examples. The book went through fourteen editions over Fisher’s lifetime and was enormously influential in spreading statistical thinking across the life sciences.</p>
+<p>Fisher elaborated the theory further in <em>The Design of Experiments</em>, published in 1935 <span class="citation" data-cites="fisher1935design">(<a href="references.html#ref-fisher1935design" role="doc-biblioref">Ronald A. Fisher 1935</a>)</span>. This second major work introduced the principles of randomisation, replication, and blocking that underpin valid experimental design to this day, and showed how ANOVA was inseparable from the way an experiment should be planned. The famous example of the lady tasting tea, introduced in this book, illustrated the logic of hypothesis testing in a way that remains a staple of introductory statistics courses.</p>
+</section>
+<section id="the-f-statistic" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="the-f-statistic"><span class="header-section-number">1.2.3</span> The <span class="math inline">\(F\)</span> Statistic</h3>
+<p>The ratio of variances that lies at the heart of ANOVA, what we now call the <span class="math inline">\(F\)</span> statistic, was named in Fisher’s honour by George W. Snedecor, the American statistician who popularised and extended Fisher’s methods in the United States <span class="citation" data-cites="snedecor1934">(<a href="references.html#ref-snedecor1934" role="doc-biblioref">Snedecor 1934</a>)</span>. Snedecor introduced the notation <span class="math inline">\(F\)</span> explicitly as a tribute, and the name has remained standard ever since.</p>
+</section>
+<section id="from-agriculture-to-all-of-science" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="from-agriculture-to-all-of-science"><span class="header-section-number">1.2.4</span> From Agriculture to All of Science</h3>
+<p>Although ANOVA was born from the needs of agricultural research, its logic proved universal. By the mid-twentieth century it had been adopted across medicine, psychology, ecology, and engineering, wherever researchers needed to compare means across multiple groups while accounting for background noise. Today it remains one of the most widely used statistical procedures in empirical science <span class="citation" data-cites="montgomery2017design">(<a href="references.html#ref-montgomery2017design" role="doc-biblioref">Montgomery 2017</a>)</span>.</p>
+<p>The enduring power of ANOVA lies precisely in the simplicity of the idea Fisher identified at Rothamsted: that variation is not an obstacle to understanding, but a quantity that can be measured, partitioned, and interpreted.</p>
+</section>
+</section>
+<section id="anova-as-a-special-case-of-linear-models" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="anova-as-a-special-case-of-linear-models"><span class="header-section-number">1.3</span> ANOVA as a Special Case of Linear Models</h2>
+<section id="the-linear-model-idea" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="the-linear-model-idea"><span class="header-section-number">1.3.1</span> The Linear Model Idea</h3>
+<p>You may have already encountered simple linear regression: the idea that you can predict one variable from another using a straight line. For example, you might predict plant height from the amount of rainfall received. The equation looks like this:</p>
+<p><span class="math display">\[\text{Plant height} = \beta_0 + \beta_1 \times \text{Rainfall} + \varepsilon\]</span></p>
+<p>where <span class="math inline">\(\beta_0\)</span> is the intercept (the expected height when rainfall is zero), <span class="math inline">\(\beta_1\)</span> is the slope (how much height changes for each additional unit of rainfall), and <span class="math inline">\(\varepsilon\)</span> is the error, the residual scatter around the line that rainfall alone cannot explain.</p>
+<p>This is called a <strong>linear model</strong>: we are modelling the response variable (plant height) as a linear combination of some predictor plus error.</p>
+<p><strong>ANOVA is in fact the same thing</strong>. The only difference is that instead of a continuous predictor like rainfall, <em>our predictor is a categorical variable</em> that is variable with group label like <em>control</em>, <em>nitrogen</em>, or <em>phosphorus</em>.</p>
+</section>
+<section id="recoding-groups-as-numbers-dummy-variables" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="recoding-groups-as-numbers-dummy-variables"><span class="header-section-number">1.3.2</span> Recoding Groups as Numbers: Dummy Variables</h3>
+<p>A computer cannot do arithmetic on the words “control” or “nitrogen”, so we recode the group labels as numbers. This is done using <strong>dummy variables</strong> (also called indicator variables). The idea is simple: we pick one group as the reference, say, the control, and then create one dummy variable for each of the other groups.</p>
+<p>For our fertiliser experiment with <strong>three groups</strong>, we create <strong>two dummy variables</strong>:</p>
+<p><span class="math display">\[X_1 = \begin{cases} 1 &amp; \text{if the plant received nitrogen} \\
+0 &amp; \text{otherwise} \end{cases}\]</span></p>
+<p><span class="math display">\[X_2 = \begin{cases} 1 &amp; \text{if the plant received phosphorus} \\
+0 &amp; \text{otherwise} \end{cases}\]</span></p>
+<p>Notice that a control plant gets <span class="math inline">\(X_1 = 0\)</span> and <span class="math inline">\(X_2 = 0\)</span>: it is identified by the absence of both flags. <strong>We never need a third dummy variable for the control group because it is already fully described this way.</strong></p>
+<p>The table below shows how the 12 plants in our experiment are recoded:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Plant</th>
+<th>Group</th>
+<th style="text-align: center;"><span class="math inline">\(X_1\)</span> (nitrogen)</th>
+<th style="text-align: center;"><span class="math inline">\(X_2\)</span> (phosphorus)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Control</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Control</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Control</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Control</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Nitrogen</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Nitrogen</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Nitrogen</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Nitrogen</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Phosphorus</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Phosphorus</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Phosphorus</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Phosphorus</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p>Notice the pattern: each group has its own “signature” of zeros and ones. The control group is the only group with zeros in <em>both</em> columns, which is why it serves naturally as the reference against which the other groups are compared.</p>
+</section>
+<section id="writing-the-model" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="writing-the-model"><span class="header-section-number">1.3.3</span> Writing the model</h3>
+<p>We can now write the ANOVA as a linear model:</p>
+<p><span class="math display">\[\text{Plant height} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon\]</span></p>
+<p>The coefficients have a beautifully simple interpretation:</p>
+<ul>
+<li><p><span class="math inline">\(\beta_0\)</span> is the mean height of the <strong>control</strong> group (when <span class="math inline">\(X_1 = 0\)</span> and <span class="math inline">\(X_2 = 0\)</span>).</p></li>
+<li><p><span class="math inline">\(\beta_1\)</span> is the <strong>difference</strong> in mean height between the nitrogen group and the control group.</p></li>
+<li><p><span class="math inline">\(\beta_2\)</span> is the <strong>difference</strong> in mean height between the phosphorus group and the control group.</p></li>
+<li><p><span class="math inline">\(\varepsilon\)</span> is the residual error for each individual plant.</p></li>
+</ul>
+<p>Let us check this with a concrete example. Suppose the estimated coefficients are:</p>
+<p><span class="math display">\[\hat{\beta}_0 = 20 \text{ cm}, \quad \hat{\beta}_1 = 5 \text{ cm},
+\quad \hat{\beta}_2 = 2 \text{ cm}\]</span></p>
+<p>Then the model predicts:</p>
+<ul>
+<li>A <strong>control</strong> plant: <span class="math inline">\(20 + 5 \times 0 + 2 \times 0 = 20\)</span> cm</li>
+<li>A <strong>nitrogen</strong> plant: <span class="math inline">\(20 + 5 \times 1 + 2 \times 0 = 25\)</span> cm</li>
+<li>A <strong>phosphorus</strong> plant: <span class="math inline">\(20 + 5 \times 0 + 2 \times 1 = 22\)</span> cm</li>
+</ul>
+<p>In other words, nitrogen fertiliser is associated with plants that are on average 5 cm taller than the control, and phosphorus with plants that are 2 cm taller.</p>
+</section>
+<section id="the-connection-to-the-f-test" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="the-connection-to-the-f-test"><span class="header-section-number">1.3.4</span> The connection to the <span class="math inline">\(F\)</span> test</h3>
+<p>In the linear model framework, the null hypothesis of ANOVA, <em>no difference in mean height among groups</em>, translates directly into:</p>
+<p><span class="math display">\[H_0: \beta_1 = 0 \quad \text{and} \quad \beta_2 = 0\]</span></p>
+<p>That is, we are testing whether all the group coefficients are simultaneously zero. If they are, then the group labels carry no information and the model reduces to:</p>
+<p><span class="math display">\[\text{Plant height} = \beta_0 + \varepsilon\]</span></p>
+<p>which simply says every plant has the same expected height (the grand mean) plus noise. <strong>The <span class="math inline">\(F\)</span> test in ANOVA is exactly the test of this hypothesis: it compares how much better the full model (with group labels) fits the data compared to this reduced model (with no group labels).</strong> A large <span class="math inline">\(F\)</span> means the group labels explain a meaningful amount of the variation in height, and we reject <span class="math inline">\(H_0\)</span>.</p>
+</section>
+<section id="why-does-this-matter" class="level3" data-number="1.3.5">
+<h3 data-number="1.3.5" class="anchored" data-anchor-id="why-does-this-matter"><span class="header-section-number">1.3.5</span> Why Does This Matter?</h3>
+<p>Recognising ANOVA as a linear model is more than a mathematical curiosity. It means that <strong>ANOVA and regression are not two separate tools you need to learn independently, they are both special cases of a single unified framework, the general linear model</strong>. Once you are comfortable with this framework, you can naturally extend your analyses to situations that mix categorical and continuous predictors (called ANCOVA), include multiple categorical factors (two-way ANOVA), or handle more complex experimental designs, all within exactly the same logic you have already learned here.</p>
+</section>
+</section>
+<section id="what-anova-is-not-common-misconceptions" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="what-anova-is-not-common-misconceptions"><span class="header-section-number">1.4</span> What ANOVA is <strong>not</strong>: Common Misconceptions</h2>
+<section id="anova-does-not-tell-you-which-groups-differ" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="anova-does-not-tell-you-which-groups-differ"><span class="header-section-number">1.4.1</span> ANOVA Does Not Tell You Which Groups Differ</h3>
+<p>This is perhaps the most common source of confusion among newcomers. A significant <span class="math inline">\(F\)</span> test tells you that the group means are not all equal i.e that somewhere among your groups there is a real difference. It does not tell you <em>where</em> that difference lies.</p>
+<p>In our fertiliser example, a significant result tells you that fertiliser type matters, but it does not tell you whether nitrogen differs from the control, whether phosphorus differs from the control, or whether nitrogen and phosphorus differ from each other. Identifying which specific pairs of groups differ requires additional <strong>post-hoc tests</strong>, such as Tukey’s HSD or pairwise <span class="math inline">\(t\)</span>-tests with corrected significance thresholds, which are conducted after the ANOVA, and only when the <span class="math inline">\(F\)</span> test is significant.</p>
+</section>
+<section id="a-non-significant-result-does-not-mean-the-groups-are-equal" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="a-non-significant-result-does-not-mean-the-groups-are-equal"><span class="header-section-number">1.4.2</span> A Non-Significant Result Does Not Mean the Groups Are Equal</h3>
+<p>If your <span class="math inline">\(F\)</span> test returns <span class="math inline">\(p &gt; 0.05\)</span>, it is tempting to conclude that the fertilisers have no effect on plant height. <strong>This conclusion is not warranted.</strong> A non-significant result means only that <em>you did not find sufficient evidence of a difference given your data</em>. There are many reasons this can happen even when a true difference exists:</p>
+<ul>
+<li>Your sample size may have been too small to detect a modest effect.</li>
+<li>The within-group variation (error) may have been large, drowning out a real treatment signal.</li>
+<li>The effect of the treatment may be genuine but smaller than your experiment was designed to detect.</li>
+</ul>
+<p><strong>The absence of evidence is not evidence of absence.</strong> A non-significant ANOVA should prompt you to think about the <strong>statistical power</strong> of your experiment: its ability to detect an effect of a given size, rather than to simply accept the null hypothesis.</p>
+</section>
+<section id="anova-does-not-require-equal-sample-sizes-but-imbalance-has-consequences" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="anova-does-not-require-equal-sample-sizes-but-imbalance-has-consequences"><span class="header-section-number">1.4.3</span> ANOVA Does Not Require Equal Sample Sizes, But Imbalance Has Consequences</h3>
+<p>It is a common belief that ANOVA requires the same number of observations in each group. This is not strictly true: ANOVA can be performed on unbalanced designs where group sizes differ. However, equal sample sizes are strongly preferred. Balanced designs are more statistically efficient, more robust to violations of the assumption of equal variances, and considerably simpler to interpret. If your groups are very unequal in size, the results of the <span class="math inline">\(F\)</span> test can become sensitive to assumptions you might not have checked carefully.</p>
+</section>
+<section id="anova-is-not-robust-to-all-assumption-violations" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="anova-is-not-robust-to-all-assumption-violations"><span class="header-section-number">1.4.4</span> ANOVA is not robust to all assumption violations</h3>
+<p>ANOVA rests on three key assumptions:</p>
+<ol type="1">
+<li><strong>Independence</strong>: the observations are independent of one another.</li>
+<li><strong>Normality</strong>: the residuals (errors) are approximately normally distributed within each group.</li>
+<li><strong>Homogeneity of variance</strong>: the variance within each group is approximately the same (also called homoscedasticity).</li>
+</ol>
+<p>Students sometimes assume that ANOVA is so widely used that it must be safe to apply in any situation. <strong>This is not the case</strong>. Of the three assumptions above, independence is by far the most critical. Violating it, for example by measuring the same plant twice and treating the two measurements as independent observations, can severely inflate your false positive rate and lead to entirely spurious conclusions. Violations of normality are generally less serious, especially with larger sample sizes, thanks to the central limit theorem. Violations of homogeneity of variance are intermediate in severity and can be addressed with modified versions of the test, such as Welch’s ANOVA.</p>
+<p>We will explore the assumptions of ANOVA in the following chapter.</p>
+</section>
+<section id="anova-is-not-a-test-of-means-alone" class="level3" data-number="1.4.5">
+<h3 data-number="1.4.5" class="anchored" data-anchor-id="anova-is-not-a-test-of-means-alone"><span class="header-section-number">1.4.5</span> ANOVA is Not a Test of Means Alone</h3>
+<p>Although ANOVA is typically introduced as a way to compare means, what it actually does is partition and compare <em>variances</em>. The <span class="math inline">\(F\)</span> ratio is a ratio of two variance estimates, not a direct comparison of means. The connection to means is real, a large among-group variance arises precisely because the group means are far apart, but it is important to understand that ANOVA is fundamentally a test about the structure of variation in your data. This is why, as we saw in the previous section, ANOVA fits so naturally within the linear model framework: both are concerned with explaining variation, not merely comparing averages.</p>
+</section>
+<section id="anova-is-not-a-substitute-for-good-experimental-design" class="level3" data-number="1.4.6">
+<h3 data-number="1.4.6" class="anchored" data-anchor-id="anova-is-not-a-substitute-for-good-experimental-design"><span class="header-section-number">1.4.6</span> ANOVA is not a Substitute for Good Experimental Design</h3>
+<p>Finally, and perhaps most importantly, no statistical test can rescue a poorly designed experiment. ANOVA assumes that your groups were formed by proper randomisation, that your replicates are genuine independent observations, and that sources of systematic bias have been controlled or accounted for. If your four control plants were all placed on one side of the greenhouse and your four nitrogen plants on the other, then any difference you observe might reflect a light or temperature gradient rather than a fertiliser effect. ANOVA will dutifully compute an <span class="math inline">\(F\)</span> statistic and a <span class="math inline">\(p\)</span>-value in this situation, but the result will be meaningless. As Fisher himself understood from his years at Rothamsted, the validity of the analysis begins not at the computer but at the moment the experiment is designed.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-fisher1919xv" class="csl-entry" role="listitem">
+Fisher, Ronald A. 1919. <span>“XV.—the Correlation Between Relatives on the Supposition of Mendelian Inheritance.”</span> <em>Earth and Environmental Science Transactions of the Royal Society of Edinburgh</em> 52 (2): 399–433.
+</div>
+<div id="ref-fisher1935design" class="csl-entry" role="listitem">
+Fisher, Ronald A. 1935. <span>“The Design of Experiments. Oliver and Boyd.”</span> <em>London and Edinburgh.</em>
+</div>
+<div id="ref-fisher1970statistical" class="csl-entry" role="listitem">
+Fisher, Ronald Aylmer. 1970. <span>“Statistical Methods for Research Workers.”</span> In <em>Breakthroughs in Statistics: Methodology and Distribution</em>, 66–70. Springer.
+</div>
+<div id="ref-montgomery2017design" class="csl-entry" role="listitem">
+Montgomery, Douglas C. 2017. <em>Design and Analysis of Experiments</em>. John wiley &amp; sons.
+</div>
+<div id="ref-snedecor1934" class="csl-entry" role="listitem">
+Snedecor, George W. 1934. <span>“Calculation and Interpretation of Analysis of Variance and Covariance.”</span> <em>Agronomy Journal</em> 26 (3): 255–56. https://doi.org/<a href="https://doi.org/10.2134/agronj1934.00021962002600030019x">https://doi.org/10.2134/agronj1934.00021962002600030019x</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ebedthan\.github\.io\/maov\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-foundations.html" class="pagination-link" aria-label="Foundations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Foundations</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02b-assumptions.html" class="pagination-link" aria-label="The Assumptions">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Assumptions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Modern Analysis of Variance by Anicet Ebou.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/02a-what-is-anova.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

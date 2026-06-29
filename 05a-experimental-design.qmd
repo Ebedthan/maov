@@ -26,7 +26,7 @@ set.seed(42)
 
 # Proper randomisation: every plant has equal probability
 # of receiving any treatment
-n_plants   <- 24
+n_plants <- 24
 treatments <- rep(c("Control", "Nitrogen", "Phosphorus"), each = n_plants / 3)
 
 # Randomly permute treatment assignments
@@ -39,9 +39,9 @@ print(random_assignment)
 randomise_blocks <- function(n_blocks, treatments) {
   do.call(rbind, lapply(seq_len(n_blocks), function(b) {
     data.frame(
-      block     = b,
+      block = b,
       treatment = sample(treatments),
-      unit      = seq_along(treatments)
+      unit = seq_along(treatments)
     )
   }))
 }
@@ -106,17 +106,18 @@ where $b$ is the number of blocks. The block sum of squares $SS_{\text{block}}$ 
 set.seed(42)
 
 df_field <- data.frame(
-  block     = factor(rep(c("South", "Middle", "North"),
-                         each = 3),
-                     levels = c("South", "Middle", "North")),
+  block = factor(rep(c("South", "Middle", "North"), each = 3),
+  levels = c("South", "Middle", "North")),
   treatment = factor(c(
     "Control",    "Nitrogen",   "Phosphorus",  # South block
     "Nitrogen",   "Phosphorus", "Control",     # Middle block
     "Phosphorus", "Control",    "Nitrogen"     # North block
   ), levels = c("Control", "Nitrogen", "Phosphorus")),
+  
   # Block fertility gradient: South = low, North = high
   # adds 0, 8, 16 units to yields within each block
   block_effect = rep(c(0, 8, 16), each = 3),
+  
   # True treatment effects: Control = 0, N = 6, P = 3
   treatment_effect = c(0, 6, 3,   # South
                        6, 3, 0,   # Middle
@@ -140,33 +141,35 @@ print(df_field[, c("block", "treatment", "yield")])
 
 ```{r blocking-error-comparison}
 #| cache: true
-# --- Analysis WITHOUT blocking ---
+
+# Analysis WITHOUT blocking
 # All variation not explained by treatment goes into the error
 fit_no_block <- aov(yield ~ treatment, data = df_field)
 
-ss_treat_nb  <- summary(fit_no_block)[[1]]["treatment", "Sum Sq"]
-ss_error_nb  <- summary(fit_no_block)[[1]]["Residuals", "Sum Sq"]
-df_error_nb  <- summary(fit_no_block)[[1]]["Residuals", "Df"]
-ms_error_nb  <- ss_error_nb / df_error_nb
+ss_treat_nb <- summary(fit_no_block)[[1]]["treatment", "Sum Sq"]
+ss_error_nb <- summary(fit_no_block)[[1]]["Residuals", "Sum Sq"]
+df_error_nb <- summary(fit_no_block)[[1]]["Residuals", "Df"]
+ms_error_nb <- ss_error_nb / df_error_nb
 f_nb <- summary(fit_no_block)[[1]]["treatment", "F value"]
 p_nb <- summary(fit_no_block)[[1]]["treatment", "Pr(>F)"]
 
-# --- Analysis WITH blocking ---
+# Analysis WITH blocking 
 # Block variation is extracted from the error
-fit_blocked  <- aov(yield ~ treatment + block, data = df_field)
+fit_blocked <- aov(yield ~ treatment + block, data = df_field)
 
-ss_treat_b   <- summary(fit_blocked)[[1]]["treatment", "Sum Sq"]
-ss_block     <- summary(fit_blocked)[[1]]["block",     "Sum Sq"]
-ss_error_b   <- summary(fit_blocked)[[1]]["Residuals", "Sum Sq"]
-df_error_b   <- summary(fit_blocked)[[1]]["Residuals", "Df"]
-ms_error_b   <- ss_error_b / df_error_b
+ss_treat_b <- summary(fit_blocked)[[1]]["treatment", "Sum Sq"]
+ss_block <- summary(fit_blocked)[[1]]["block", "Sum Sq"]
+ss_error_b <- summary(fit_blocked)[[1]]["Residuals", "Sum Sq"]
+df_error_b <- summary(fit_blocked)[[1]]["Residuals", "Df"]
+ms_error_b <- ss_error_b / df_error_b
 f_b <- summary(fit_blocked)[[1]]["treatment", "F value"]
 p_b <- summary(fit_blocked)[[1]]["treatment", "Pr(>F)"]
 
 ```
 
 ```{r}
-# cache: true
+#| cache: true
+#| code-fold: true
 cat(
   "=== WITHOUT blocking ===\nSS treatment: ",
   round(ss_treat_nb, 2), 
@@ -196,35 +199,18 @@ cat(
   round(f_nb, 3), "to", round(f_b, 3), "\n")
 ```
 
-The two analyses use identical data, the same nine yield
-observations from the same nine plots. The only difference is
-whether the block structure is accounted for in the model.
+The two analyses use identical data, the same nine yield observations from the same nine plots. The only difference is whether the block structure is accounted for in the model.
 
-Without blocking, the $SS_{\text{error}}$ includes both the
-genuine residual plot noise and the large fertility gradient
-running from south to north. This inflates $MS_{\text{error}}$,
-shrinks the F ratio, and makes the treatment differences harder
-to detect.
+Without blocking, the $SS_{\text{error}}$ includes both the genuine residual plot noise and the large fertility gradient running from south to north. This inflates $MS_{\text{error}}$, shrinks the F ratio, and makes the treatment differences harder to detect.
 
-With blocking, the $SS_{\text{block}}$ is extracted from what
-would otherwise be the error. The $SS_{\text{error}}$ now
-contains only the genuine residual noise — the small,
-uncontrollable plot-to-plot differences that remain after
-removing both the treatment effect and the block gradient.
-The $MS_{\text{error}}$ drops substantially, the F ratio rises,
-and the p-value falls — not because the data have changed, but
-because the analysis is now asking the right question: do
-treatments differ after accounting for the known gradient?
+With blocking, the $SS_{\text{block}}$ is extracted from what would otherwise be the error. The $SS_{\text{error}}$ now contains only the genuine residual noise that is the small, uncontrollable plot-to-plot differences that remain after removing both the treatment effect and the block gradient.
+The $MS_{\text{error}}$ drops substantially, the F ratio rises, and the p-value falls. This happens not because the data have changed, but because the analysis is now asking the right question: do treatments differ after accounting for the known gradient?
 
-This is the mechanical benefit of blocking stated precisely:
-it moves known variation out of the error term, leaving a
-cleaner and smaller noise estimate against which the treatment
-effect is judged.
+This is the mechanical benefit of blocking stated precisely: it moves known variation out of the error term, leaving a cleaner and smaller noise estimate against which the treatment effect is judged.
 
 ### Reading the Numbers
 
-The two analyses use identical data, the same nine yield observations from the same nine plots. The only difference is whether the block structure is accounted for in the model, and
-the consequences are dramatic.
+The two analyses use identical data, the same nine yield observations from the same nine plots. The only difference is whether the block structure is accounted for in the model, and the consequences are dramatic.
 
 **Without blocking**, $SS_{\text{error}} = 436.75$ against a $SS_{\text{treatment}} = 60.93$. The error sum of squares is more than seven times larger than the treatment sum of squares because it contains the entire north-south fertility gradient, 430 units worth of variation that has nothing to do with fertiliser but is lumped into the noise. The resulting $MS_{\text{error}} = 72.79$ overwhelms the treatment signal, producing $F_{2,6} = 0.418$ and $p = 0.676$. A researcher using this analysis would conclude that fertiliser has no detectable effect which would be a false negative caused entirely by a preventable design flaw.
 
@@ -254,7 +240,9 @@ The most common design error in biology is designing an experiment without think
 
 The practical discipline is to write the analysis plan, including the model formula (in R), before collecting any data:
 
-```{r analysis-planning, eval=FALSE}
+```{r analysis-planning}
+#| cache: true
+#| eval: false
 # Write your intended model formula before data collection
 # One-way ANOVA
 aov(response ~ treatment, data = df)
@@ -270,8 +258,7 @@ aov(response ~ whole_plot_factor * subplot_factor +
       Error(whole_plot_unit / subplot_factor), data = df)
 
 # Repeated measures
-lmerTest::lmer(response ~ treatment * time + (1 | subject),
-               data = df)
+lmerTest::lmer(response ~ treatment * time + (1 | subject), data = df)
 
 # Nested design
 aov(response ~ treatment + Error(block / subplot), data = df)
@@ -286,18 +273,17 @@ The experimental unit, the entity that received the treatment independently, mus
 A decision tree for identifying the experimental unit:
 
 - What was randomly assigned to receive the treatment?
-- Could two observations have received different treatments?
-  If no, they are from the same experimental unit.
-- Is the treatment applied to groups of individuals, or to
-  individuals separately?
+- Could two observations have received different treatments? If no, they are from the same experimental unit.
+- Is the treatment applied to groups of individuals, or to individuals separately?
 
 ```{r experimental-unit-examples}
+#| cache: true
 # Example 1: Correct, individual plants randomised to treatment
 # Experimental unit = plant, n = 20 per treatment
 df_correct <- data.frame(
-  yield     = rnorm(60, mean = 20, sd = 3),
+  yield = rnorm(60, mean = 20, sd = 3),
   treatment = rep(c("A", "B", "C"), each = 20),
-  plant     = 1:60
+  plant = 1:60
 )
 # Correct analysis: plant is the unit
 summary(aov(yield ~ treatment, data = df_correct))
@@ -308,12 +294,12 @@ summary(aov(yield ~ treatment, data = df_correct))
 # not animal (n = 20 per treatment)
 set.seed(42)
 cage_effect <- rnorm(12, 0, 2)   # 4 cages per treatment
-df_pseudo   <- data.frame(
-  weight    = c(sapply(1:12, function(c) {
+df_pseudo <- data.frame(
+  weight = c(sapply(1:12, function(c) {
     rnorm(5, mean = 20 + cage_effect[c], sd = 0.5)
   })),
   treatment = rep(rep(c("A", "B", "C"), each = 4), each = 5),
-  cage      = rep(1:12, each = 5)
+  cage = rep(1:12, each = 5)
 )
 
 # Wrong: treats animals as independent
@@ -323,7 +309,7 @@ cat("Wrong analysis df (error):",
 
 # Correct: uses cage means
 cage_means <- aggregate(weight ~ treatment + cage,
-                         data = df_pseudo, FUN = mean)
+                        data = df_pseudo, FUN = mean)
 correct_fit <- aov(weight ~ treatment, data = cage_means)
 cat("Correct analysis df (error):",
     summary(correct_fit)[[1]]["Residuals", "Df"], "\n")
@@ -356,37 +342,34 @@ library(patchwork)
 
 # Confounded design
 df_confounded <- data.frame(
-  yield     = c(rnorm(10, mean = 18, sd = 2),  # Control, shaded
+  yield = c(rnorm(10, mean = 18, sd = 2),  # Control, shaded
                 rnorm(10, mean = 24, sd = 2)),  # Nitrogen, sunny
   treatment = rep(c("Control", "Nitrogen"), each = 10),
-  position  = rep(c("Shaded", "Sunny"), each = 10)
+  position = rep(c("Shaded", "Sunny"), each = 10)
 )
 
 # Randomised design
 df_randomised <- data.frame(
-  yield     = c(rnorm(10, mean = 20, sd = 2),  # Control, mixed
+  yield = c(rnorm(10, mean = 20, sd = 2),  # Control, mixed
                 rnorm(10, mean = 24, sd = 2)),  # Nitrogen, mixed
   treatment = rep(c("Control", "Nitrogen"), each = 10),
-  position  = sample(rep(c("Shaded", "Sunny"), 10))
+  position = sample(rep(c("Shaded", "Sunny"), 10))
 )
 
-p1 <- ggplot(df_confounded,
-             aes(x = treatment, y = yield,
-                 colour = position, shape = position)) +
+p1 <- ggplot(df_confounded, aes(x = treatment, y = yield, colour = position, shape = position)) +
   geom_jitter(width = 0.1, size = 3, alpha = 0.8) +
   scale_colour_manual(values = c("#2E86AB", "#F6AE2D")) +
-  labs(title    = "Confounded design",
+  labs(title = "Confounded design",
        subtitle = "Treatment perfectly correlated with position",
        x = NULL, y = "Yield",
        colour = "Position", shape = "Position") +
   theme_bw()
 
-p2 <- ggplot(df_randomised,
-             aes(x = treatment, y = yield,
+p2 <- ggplot(df_randomised, aes(x = treatment, y = yield,
                  colour = position, shape = position)) +
   geom_jitter(width = 0.1, size = 3, alpha = 0.8) +
   scale_colour_manual(values = c("#2E86AB", "#F6AE2D")) +
-  labs(title    = "Randomised design",
+  labs(title = "Randomised design",
        subtitle = "Both positions represented in both treatments",
        x = NULL, y = "Yield",
        colour = "Position", shape = "Position") +
@@ -448,8 +431,7 @@ The `pwr` package handles power analysis for standard ANOVA designs. For mixed m
 library(pwr)
 
 # One-way ANOVA: medium effect, 80% power, 3 groups
-pwr.anova.test(k = 3, f = 0.25,
-               sig.level = 0.05, power = 0.80)
+pwr.anova.test(k = 3, f = 0.25, sig.level = 0.05, power = 0.80)
 
 # Two-way ANOVA: using simulation for more complex designs
 # How many subjects per cell for a 2x3 factorial
@@ -584,17 +566,17 @@ Students familiar with Chapter [-@sec-chap9] will notice that we used `method = 
 
 The Satterthwaite method (`method = "t"`) works directly on the summary output of the refitted model and does not attempt any internal model comparison, making it compatible with `simr`'s simulation loop.
 
-For power analysis purposes, the difference between Satterthwaite and Kenward-Roger is small and does not materially affect the sample size recommendation. Both methods give conservative tests relative to the naive z-test, and for the sample sizes relevant to power analysis, where you are asking whether a study is large enough, the distinction is negligible. The Kenward-Roger correction matters most when reporting the final analysis of a completed study with a small number of groups; at that stage, use `anova(fit, ddf = "Kenward-Roger")` as recommended in Chapter [-@sec-chap9]. For the prospective power calculation, Satterthwaite is an entirely acceptable and stable choice.
+**For power analysis purposes, the difference between Satterthwaite and Kenward-Roger is small and does not materially affect the sample size recommendation**. Both methods give conservative tests relative to the naive z-test, and for the sample sizes relevant to power analysis where you are asking whether a study is large enough, the distinction is negligible. The Kenward-Roger correction matters most when reporting the final analysis of a completed study with a small number of groups; at that stage, use `anova(fit, ddf = "Kenward-Roger")` as recommended in Chapter [-@sec-chap9]. For the prospective power calculation, Satterthwaite is an entirely acceptable and stable choice.
 
 ### The Key Advantage Over Analytical Power Formulas
 
-The `simr` approach has three advantages that matter for complex designs.
+The `simr` approach has three advantages that matter for complex designs:
 
-**It respects the actual model structure.** The power calculation uses the estimated variance components, the hospital-level variance and the residual variance, from the fitted model directly, rather than requiring you to specify them separately as inputs to a formula. If your pilot data suggest that hospital-level variation is large, the power estimate will reflect this automatically.
+1. **It respects the actual model structure.** The power calculation uses the estimated variance components, the hospital-level variance and the residual variance, from the fitted model directly, rather than requiring you to specify them separately as inputs to a formula. If your pilot data suggest that hospital-level variation is large, the power estimate will reflect this automatically.
 
-**It can test any effect in any model.** `powerSim()` works for any fixed effect in any model that `lme4` can fit, crossed random effects, random slopes, interaction terms, and GLMMs via `glmer`. There is no analytical formula for the power of an interaction term in a three-level nested GLMM; `simr` handles it without modification.
+2. **It can test any effect in any model.** `powerSim()` works for any fixed effect in any model that `lme4` can fit, crossed random effects, random slopes, interaction terms, and GLMMs via `glmer`. There is no analytical formula for the power of an interaction term in a three-level nested GLMM; `simr` handles it without modification.
 
-**It separates two design decisions.** `extend()` can vary the number of higher-level units (hospitals) or the number of lower-level units (patients per hospital) independently, allowing you to ask which dimension of replication is more valuable for a given budget. In hierarchical designs, adding higher-level units (more hospitals) almost always increases power more efficiently than adding lower-level units (more patients per hospital), because the treatment is tested against between-hospital variation, not between-patient variation. `powerCurve()` with both `along` and `within` makes this trade-off visible.
+3. **It separates two design decisions.** `extend()` can vary the number of higher-level units (hospitals) or the number of lower-level units (patients per hospital) independently, allowing you to ask which dimension of replication is more valuable for a given budget. In hierarchical designs, adding higher-level units (more hospitals) almost always increases power more efficiently than adding lower-level units (more patients per hospital), because the treatment is tested against between-hospital variation, not between-patient variation. `powerCurve()` with both `along` and `within` makes this trade-off visible.
 
 ### Practical Recommendations for Using `simr`
 

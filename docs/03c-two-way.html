@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Anicet Ebou">
+<title>5&nbsp; Two-Way ANOVA and Factorial Designs – Modern Analysis of Variance</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03d-repeated-measures.html" rel="next">
+<link href="./03b-multiple-comparisons.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-classical-anova.html">Classical ANOVA Models</a></li><li class="breadcrumb-item"><a href="./03c-two-way.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Analysis of Variance</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Ebedthan/maov/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02a-what-is-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is ANOVA, Really ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02b-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Assumptions</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03-classical-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical ANOVA Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03a-one-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03b-multiple-comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03c-two-way.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03d-repeated-measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03e-split-plot-nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Split-Plot and Nested Designs</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04-modern-framework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Modern Framework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04a-anova-as-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANOVA as a Linear Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04b-mixed-effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed-Effects Models: Beyond Classical ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04c-when-assumptions-fail.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">When Assumptions Fail, What to Do ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04d-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Generalised Linear Mixed Models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./05-good-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Good Practice and Reproductibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05a-experimental-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Experimental Design Principles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05b-reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reporting ANOVA Results</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05c-reproducible-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducible Analysis with R</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Maths of the Book</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets and R Packages</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-decision-tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Decision Trees for Model Selection</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#factorial-designs-the-logic-and-the-advantage" id="toc-factorial-designs-the-logic-and-the-advantage" class="nav-link active" data-scroll-target="#factorial-designs-the-logic-and-the-advantage"><span class="header-section-number">5.1</span> Factorial Designs: The Logic and the Advantage</a>
+  <ul class="collapse">
+<li><a href="#the-one-factor-at-a-time-trap" id="toc-the-one-factor-at-a-time-trap" class="nav-link" data-scroll-target="#the-one-factor-at-a-time-trap"><span class="header-section-number">5.1.1</span> The One-Factor-at-a-Time Trap</a></li>
+  <li><a href="#what-is-a-factorial-design" id="toc-what-is-a-factorial-design" class="nav-link" data-scroll-target="#what-is-a-factorial-design"><span class="header-section-number">5.1.2</span> What Is a Factorial Design?</a></li>
+  <li><a href="#the-efficiency-advantage" id="toc-the-efficiency-advantage" class="nav-link" data-scroll-target="#the-efficiency-advantage"><span class="header-section-number">5.1.3</span> The Efficiency Advantage</a></li>
+  <li><a href="#common-factorial-design-structures" id="toc-common-factorial-design-structures" class="nav-link" data-scroll-target="#common-factorial-design-structures"><span class="header-section-number">5.1.4</span> Common Factorial Design Structures</a></li>
+  <li><a href="#balanced-vs-unbalanced-factorial-designs" id="toc-balanced-vs-unbalanced-factorial-designs" class="nav-link" data-scroll-target="#balanced-vs-unbalanced-factorial-designs"><span class="header-section-number">5.1.5</span> Balanced vs Unbalanced Factorial Designs</a></li>
+  <li><a href="#fixed-random-and-mixed-factorial-designs" id="toc-fixed-random-and-mixed-factorial-designs" class="nav-link" data-scroll-target="#fixed-random-and-mixed-factorial-designs"><span class="header-section-number">5.1.6</span> Fixed, Random, and Mixed Factorial Designs</a></li>
+  <li><a href="#randomisation-in-factorial-designs" id="toc-randomisation-in-factorial-designs" class="nav-link" data-scroll-target="#randomisation-in-factorial-designs"><span class="header-section-number">5.1.7</span> Randomisation in Factorial Designs</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#main-effects-and-interactions" id="toc-main-effects-and-interactions" class="nav-link" data-scroll-target="#main-effects-and-interactions"><span class="header-section-number">5.2</span> Main Effects and Interactions</a>
+  <ul class="collapse">
+<li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model"><span class="header-section-number">5.2.1</span> The Model</a></li>
+  <li><a href="#main-effects" id="toc-main-effects" class="nav-link" data-scroll-target="#main-effects"><span class="header-section-number">5.2.2</span> Main Effects</a></li>
+  <li><a href="#interactions" id="toc-interactions" class="nav-link" data-scroll-target="#interactions"><span class="header-section-number">5.2.3</span> Interactions</a></li>
+  <li><a href="#the-three-f-tests" id="toc-the-three-f-tests" class="nav-link" data-scroll-target="#the-three-f-tests"><span class="header-section-number">5.2.4</span> The Three <span class="math inline">\(F\)</span> Tests</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#interpreting-interaction-plots-a-critical-skill" id="toc-interpreting-interaction-plots-a-critical-skill" class="nav-link" data-scroll-target="#interpreting-interaction-plots-a-critical-skill"><span class="header-section-number">5.3</span> Interpreting Interaction Plots: A Critical Skill</a>
+  <ul class="collapse">
+<li><a href="#why-interaction-plots-matter" id="toc-why-interaction-plots-matter" class="nav-link" data-scroll-target="#why-interaction-plots-matter"><span class="header-section-number">5.3.1</span> Why Interaction Plots Matter</a></li>
+  <li><a href="#reading-the-plots" id="toc-reading-the-plots" class="nav-link" data-scroll-target="#reading-the-plots"><span class="header-section-number">5.3.2</span> Reading the Plots</a></li>
+  <li><a href="#a-practical-warning" id="toc-a-practical-warning" class="nav-link" data-scroll-target="#a-practical-warning"><span class="header-section-number">5.3.3</span> A Practical Warning</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-unbalanced" id="toc-sec-unbalanced" class="nav-link" data-scroll-target="#sec-unbalanced"><span class="header-section-number">5.4</span> Unbalanced Designs and Type I, II, and III Sums of Squares</a>
+  <ul class="collapse">
+<li><a href="#what-is-an-unbalanced-design" id="toc-what-is-an-unbalanced-design" class="nav-link" data-scroll-target="#what-is-an-unbalanced-design"><span class="header-section-number">5.4.1</span> What Is an Unbalanced Design?</a></li>
+  <li><a href="#type-i-sums-of-squares-sequential" id="toc-type-i-sums-of-squares-sequential" class="nav-link" data-scroll-target="#type-i-sums-of-squares-sequential"><span class="header-section-number">5.4.2</span> Type I Sums of Squares (Sequential)</a></li>
+  <li><a href="#type-ii-sums-of-squares" id="toc-type-ii-sums-of-squares" class="nav-link" data-scroll-target="#type-ii-sums-of-squares"><span class="header-section-number">5.4.3</span> Type II Sums of Squares</a></li>
+  <li><a href="#sec-type3" id="toc-sec-type3" class="nav-link" data-scroll-target="#sec-type3"><span class="header-section-number">5.4.4</span> Type III Sums of Squares</a></li>
+  <li><a href="#a-direct-comparison" id="toc-a-direct-comparison" class="nav-link" data-scroll-target="#a-direct-comparison"><span class="header-section-number">5.4.5</span> A Direct Comparison</a></li>
+  <li><a href="#a-practical-decision-rule" id="toc-a-practical-decision-rule" class="nav-link" data-scroll-target="#a-practical-decision-rule"><span class="header-section-number">5.4.6</span> A Practical Decision Rule</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#example-genotype-environment-in-agronomy" id="toc-example-genotype-environment-in-agronomy" class="nav-link" data-scroll-target="#example-genotype-environment-in-agronomy"><span class="header-section-number">5.5</span> Example: Genotype × Environment in Agronomy</a>
+  <ul class="collapse">
+<li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">5.5.1</span> Background</a></li>
+  <li><a href="#visualising-the-ge-interaction" id="toc-visualising-the-ge-interaction" class="nav-link" data-scroll-target="#visualising-the-ge-interaction"><span class="header-section-number">5.5.2</span> Visualising the G×E Interaction</a></li>
+  <li><a href="#fitting-the-model" id="toc-fitting-the-model" class="nav-link" data-scroll-target="#fitting-the-model"><span class="header-section-number">5.5.3</span> Fitting the Model</a></li>
+  <li><a href="#diagnosing-the-model" id="toc-diagnosing-the-model" class="nav-link" data-scroll-target="#diagnosing-the-model"><span class="header-section-number">5.5.4</span> Diagnosing the Model</a></li>
+  <li><a href="#interpreting-and-reporting-the-result" id="toc-interpreting-and-reporting-the-result" class="nav-link" data-scroll-target="#interpreting-and-reporting-the-result"><span class="header-section-number">5.5.5</span> Interpreting and Reporting the Result</a></li>
+  <li><a href="#post-hoc-comparisons-in-two-way-anova" id="toc-post-hoc-comparisons-in-two-way-anova" class="nav-link" data-scroll-target="#post-hoc-comparisons-in-two-way-anova"><span class="header-section-number">5.5.6</span> Post-Hoc Comparisons in Two-Way ANOVA</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/03c-two-way.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-classical-anova.html">Classical ANOVA Models</a></li><li class="breadcrumb-item"><a href="./03c-two-way.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-chap5" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>One-way ANOVA asks whether a single factor, a fertiliser, a drug, or a diet, affects the response. But most biological systems are not that simple. Plant growth depends on both the fertiliser applied and the soil type it is applied to. Drug efficacy depends on both the dose and the genetic background of the patient. Yield depends on both the crop variety and the environment in which it is grown.</p>
+<p>Two-way ANOVA extends the one-way framework to handle two factors simultaneously. This is not merely a convenience, it is a more honest representation of how biological systems work. And it introduces one of the most important concepts in all of applied statistics: the <strong>interaction</strong>, the situation where the effect of one factor depends on the level of another.</p>
+<section id="factorial-designs-the-logic-and-the-advantage" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="factorial-designs-the-logic-and-the-advantage">
+<span class="header-section-number">5.1</span> Factorial Designs: The Logic and the Advantage</h2>
+<section id="the-one-factor-at-a-time-trap" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="the-one-factor-at-a-time-trap">
+<span class="header-section-number">5.1.1</span> The One-Factor-at-a-Time Trap</h3>
+<p>Before introducing the statistics, it is worth asking a more fundamental question: why run a factorial experiment at all? The intuitive alternative, varying one factor at a time while holding everything else constant, seems safer and easier to interpret. In practice, it is neither.</p>
+<p>Suppose you want to understand how both fertiliser type and watering regime affect wheat yield. The one-factor-at-a-time approach would run two separate experiments: first vary the fertiliser while keeping watering constant, then vary watering while keeping fertiliser constant. This requires two experiments, two sets of plants, and twice the resources. More importantly, it answers two questions in isolation: what does fertiliser do when watering is fixed at one level? rather than the richer question of how fertiliser and watering work <em>together</em> across the full range of conditions you care about.</p>
+<p>Worst of all, the one-factor-at-a-time approach cannot detect interactions. If nitrogen fertiliser triples yield under well-watered conditions but has no effect under drought, two separate experiments, one fixing watering at “well-watered” and one fixing fertiliser at “nitrogen”, will never reveal this. You would need to have been lucky enough to choose the right fixed level in each experiment, and even then you would have no statistical framework for testing whether the discrepancy is real or due to chance.</p>
+<p>Fisher recognised this limitation at Rothamsted in the 1920s and proposed the factorial design as the solution: vary all factors simultaneously, in all combinations, within a single experiment.</p>
+</section><section id="what-is-a-factorial-design" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="what-is-a-factorial-design">
+<span class="header-section-number">5.1.2</span> What Is a Factorial Design?</h3>
+<p>A <strong>factorial design</strong> is an experiment in which every level of every factor is combined with every level of every other factor. If factor <span class="math inline">\(A\)</span> has <span class="math inline">\(a\)</span> levels and factor <span class="math inline">\(B\)</span> has <span class="math inline">\(b\)</span> levels, a complete factorial design has <span class="math inline">\(a \times b\)</span> treatment combinations, called <strong>cells</strong>. With replication, <span class="math inline">\(n\)</span> observations per cell, the total number of observations is <span class="math inline">\(a \times b \times n\)</span>.</p>
+<p>For our fertiliser and watering experiment with two fertiliser levels (none, nitrogen) and two watering levels (dry, watered), a <span class="math inline">\(2 \times 2\)</span> factorial design produces four cells:</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th></th>
+<th style="text-align: center;">Dry</th>
+<th style="text-align: center;">Watered</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>No fertiliser</strong></td>
+<td style="text-align: center;">Cell 1</td>
+<td style="text-align: center;">Cell 2</td>
+</tr>
+<tr class="even">
+<td><strong>Nitrogen</strong></td>
+<td style="text-align: center;">Cell 3</td>
+<td style="text-align: center;">Cell 4</td>
+</tr>
+</tbody>
+</table>
+<p>Each cell receives its own random set of experimental units, here, pots of wheat plants. With <span class="math inline">\(n = 5\)</span> plants per cell, the total experiment requires <span class="math inline">\(2 \times 2 \times 5 = 20\)</span> plants.</p>
+</section><section id="the-efficiency-advantage" class="level3" data-number="5.1.3"><h3 data-number="5.1.3" class="anchored" data-anchor-id="the-efficiency-advantage">
+<span class="header-section-number">5.1.3</span> The Efficiency Advantage</h3>
+<p>A factorial design extracts more information from the same data than a one-factor-at-a-time experiment of the same size. Consider a <span class="math inline">\(2 \times 2\)</span> factorial with <span class="math inline">\(n\)</span> observations per cell, giving <span class="math inline">\(4n\)</span> observations in total. The main effect of fertiliser is estimated by comparing the <span class="math inline">\(2n\)</span> observations in the nitrogen rows to the <span class="math inline">\(2n\)</span> observations in the no-fertiliser rows with all <span class="math inline">\(4n\)</span> observations contribute to this estimate. The main effect of watering is estimated similarly, using all <span class="math inline">\(4n\)</span> observations. A one-factor-at-a-time experiment of the same total size would dedicate only <span class="math inline">\(2n\)</span> observations to each factor.</p>
+<p>Fisher called this the <strong>hidden replication</strong> of factorial designs: every observation simultaneously contributes to the estimation of every main effect and every interaction. No observation is wasted.</p>
+</section><section id="common-factorial-design-structures" class="level3" data-number="5.1.4"><h3 data-number="5.1.4" class="anchored" data-anchor-id="common-factorial-design-structures">
+<span class="header-section-number">5.1.4</span> Common Factorial Design Structures</h3>
+<p>Factorial designs come in several standard forms, differing in the number of factors and levels involved.</p>
+<ul>
+<li><p><strong><span class="math inline">\(2 \times 2\)</span> factorial (two factors, two levels each).</strong> The simplest factorial design. Produces four cells and allows estimation of two main effects and one interaction. Common in clinical trials (drug A yes/no <span class="math inline">\(\times\)</span> drug B yes/no) and agricultural experiments (fertiliser yes/no <span class="math inline">\(\times\)</span> irrigation yes/no).</p></li>
+<li><p><strong><span class="math inline">\(2^k\)</span> factorial (k factors, two levels each).</strong> A natural extension of the <span class="math inline">\(2 \times 2\)</span> design to <span class="math inline">\(k\)</span> factors. With <span class="math inline">\(k = 3\)</span> factors there are <span class="math inline">\(2^3 = 8\)</span> cells; with <span class="math inline">\(k = 4\)</span> there are <span class="math inline">\(2^4 = 16\)</span> cells. These designs are widely used in industrial and agricultural screening experiments where many factors must be evaluated efficiently.</p></li>
+<li><p><strong><span class="math inline">\(a \times b\)</span> factorial (two factors, multiple levels).</strong> The general case, as in our fertiliser-by-environment example (see below) with four varieties and three environments (<span class="math inline">\(4 \times 3 = 12\)</span> cells). This is the most common structure in biological research.</p></li>
+<li><p><strong>Higher-order factorials.</strong> Three or more factors can be combined in a single experiment (<span class="math inline">\(a \times b \times c\)</span>, and so on). These designs become large quickly: a <span class="math inline">\(3 \times 3 \times 3\)</span> factorial already requires 27 cells and their higher-order interactions are often difficult to interpret biologically. In practice, three-way and higher interactions are rarely interpretable and the experiments that produce them often require <strong>fractional factorial designs</strong>, which are beyond the scope of this book.</p></li>
+</ul></section><section id="balanced-vs-unbalanced-factorial-designs" class="level3" data-number="5.1.5"><h3 data-number="5.1.5" class="anchored" data-anchor-id="balanced-vs-unbalanced-factorial-designs">
+<span class="header-section-number">5.1.5</span> Balanced vs Unbalanced Factorial Designs</h3>
+<p>A factorial design is <strong>balanced</strong> when every cell contains exactly the same number of observations. Balanced designs have important advantages: the main effects and interaction are orthogonal (statistically independent), the sums of squares partition cleanly and unambiguously, and the analysis is straightforward. Whenever possible, factorial experiments should be designed to be balanced.</p>
+<p>In practice, balance is often lost. Animals die, plants fail to germinate, patients drop out of trials, soil cores are contaminated. The result is an <strong>unbalanced design</strong> (unequal cell sizes) which introduces the sums of squares complications discussed in <a href="#sec-unbalanced" class="quarto-xref"><span>Section 5.4</span></a>. The key practical message is that unbalanced designs are manageable, but they require more care in analysis and should be anticipated at the design stage by slightly over-recruiting to each cell.</p>
+</section><section id="fixed-random-and-mixed-factorial-designs" class="level3" data-number="5.1.6"><h3 data-number="5.1.6" class="anchored" data-anchor-id="fixed-random-and-mixed-factorial-designs">
+<span class="header-section-number">5.1.6</span> Fixed, Random, and Mixed Factorial Designs</h3>
+<p>Just as in one-way ANOVA (<span class="quarto-unresolved-ref">?sec-one-way</span>), the factors in a factorial design can be fixed or random, and this distinction determines both the model and the correct F test.</p>
+<p>A <strong>fixed factor</strong> is one whose levels are specifically chosen by the experimenter and whose conclusions apply only to those levels. Fertiliser type (none, nitrogen, phosphorus) is a fixed factor: the conclusions are about those three specific treatments.</p>
+<p>A <strong>random factor</strong> is one whose levels are a random sample from a larger population of levels, and whose conclusions are intended to generalise to that population. Field sites selected at random from a region, batches of reagents drawn from a production run, or patients recruited from a hospital are random factors.</p>
+<p>A <strong>mixed factorial design</strong> contains both fixed and random factors. This is extremely common in biology: a treatment applied across randomly selected sites, a drug tested across randomly recruited patients, or a crop variety evaluated across randomly selected growing seasons. The statistical model for a mixed factorial design is a <strong>mixed-effects model</strong>, and the correct F tests for the fixed effects differ from those in an all-fixed design. This will be developed fully in Part III. For now, the two-way ANOVA presented in this chapter assumes both factors are fixed.</p>
+</section><section id="randomisation-in-factorial-designs" class="level3" data-number="5.1.7"><h3 data-number="5.1.7" class="anchored" data-anchor-id="randomisation-in-factorial-designs">
+<span class="header-section-number">5.1.7</span> Randomisation in Factorial Designs</h3>
+<p>As Fisher emphasised at Rothamsted, the validity of a factorial experiment depends on proper randomisation. Each experimental unit must be randomly assigned to one of the <span class="math inline">\(a \times b\)</span> treatment combinations. This randomisation ensures that the treatment effects are not confounded with any systematic difference between units such as position in a greenhouse, order of processing in a laboratory, or any other nuisance variable that might vary across the experiment.</p>
+<p>In practice, randomisation in factorial experiments is sometimes constrained. If one factor is difficult or expensive to change (the temperature of a growth chamber, the irrigation regime of a field) it may be more practical to change it less frequently than the other factor. This leads to <strong>split-plot designs</strong>, in which the randomisation is done in two stages and the two factors have different levels of replication. Split-plot designs require a modified analysis and are covered in Chapter 7.</p>
+<p>The diagram below summarises the common factorial design structures discussed in this section:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-factorial-design-diagram" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-factorial-design-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03c-two-way_files/figure-html/fig-factorial-design-diagram-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-factorial-design-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Common factorial design structures. Left: a 2x2 factorial with two factors at two levels each, producing four cells. Centre: a 2x3 factorial with two factors at two and three levels respectively, producing six cells. Right: a 2x2x2 factorial with three factors at two levels each, producing eight cells. Cell shading indicates a different treatment combination; n denotes the number of replicate observations per cell.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section></section><section id="main-effects-and-interactions" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="main-effects-and-interactions">
+<span class="header-section-number">5.2</span> Main Effects and Interactions</h2>
+<section id="the-model" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="the-model">
+<span class="header-section-number">5.2.1</span> The Model</h3>
+<p>With two factors <span class="math inline">\(A\)</span> (with <span class="math inline">\(a\)</span> levels) and <span class="math inline">\(B\)</span> (with <span class="math inline">\(b\)</span> levels), the two-way ANOVA model is:</p>
+<p><span class="math display">\[y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}\]</span></p>
+<p>where:</p>
+<ul>
+<li>
+<span class="math inline">\(\mu\)</span> is the grand mean.</li>
+<li>
+<span class="math inline">\(\alpha_i\)</span> is the <strong>main effect</strong> of factor <span class="math inline">\(A\)</span> at level <span class="math inline">\(i\)</span>: the average effect of being in level <span class="math inline">\(i\)</span> of <span class="math inline">\(A\)</span>, averaged across all levels of <span class="math inline">\(B\)</span>.</li>
+<li>
+<span class="math inline">\(\beta_j\)</span> is the <strong>main effect</strong> of factor <span class="math inline">\(B\)</span> at level <span class="math inline">\(j\)</span>: the average effect of being in level <span class="math inline">\(j\)</span> of <span class="math inline">\(B\)</span>, averaged across all levels of <span class="math inline">\(A\)</span>.</li>
+<li>
+<span class="math inline">\((\alpha\beta)_{ij}\)</span> is the <strong>interaction effect</strong>: the extent to which the effect of factor <span class="math inline">\(A\)</span> at level <span class="math inline">\(i\)</span> differs depending on which level of <span class="math inline">\(B\)</span> is present, and vice versa.</li>
+<li>
+<span class="math inline">\(\varepsilon_{ijk}\)</span> is the residual for the <span class="math inline">\(k\)</span>th observation in cell <span class="math inline">\((i, j)\)</span>, assumed <span class="math inline">\(\varepsilon_{ijk} \sim \mathcal{N}(0, \sigma^2)\)</span>.</li>
+</ul>
+<p>The constraints are <span class="math inline">\(\sum_i \alpha_i = 0\)</span>, <span class="math inline">\(\sum_j \beta_j = 0\)</span>, <span class="math inline">\(\sum_i (\alpha\beta)_{ij} = 0\)</span> for all <span class="math inline">\(j\)</span>, and <span class="math inline">\(\sum_j (\alpha\beta)_{ij} = 0\)</span> for all <span class="math inline">\(i\)</span>.</p>
+</section><section id="main-effects" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="main-effects">
+<span class="header-section-number">5.2.2</span> Main Effects</h3>
+<p>A <strong>main effect</strong> is the average effect of one factor, collapsing across all levels of the other. In a fertiliser-by-watering experiment, the main effect of fertiliser is the average difference in plant height between fertilised and unfertilised plants, averaging over both watered and unwatered conditions.</p>
+<p>Main effects are straightforward to interpret, but only when the interaction is absent or negligible. When a substantial interaction is present, main effects can be misleading, as we will see shortly.</p>
+</section><section id="interactions" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="interactions">
+<span class="header-section-number">5.2.3</span> Interactions</h3>
+<p>An <strong>interaction</strong> occurs when the effect of one factor is not the same at every level of the other factor. This is not a statistical artefact or a complication to be wished away, it is a genuine biological phenomenon, and recognising it is often the most scientifically interesting finding in an experiment.</p>
+<p>Three situations are worth distinguishing:</p>
+<p><strong>No interaction (additivity).</strong> The effect of factor <span class="math inline">\(A\)</span> is the same regardless of which level of <span class="math inline">\(B\)</span> is present. The two factors act independently and their effects simply add together. The lines in an interaction plot are parallel.</p>
+<p><strong>Quantitative interaction.</strong> The effect of factor <span class="math inline">\(A\)</span> differs in <em>magnitude</em> across levels of <span class="math inline">\(B\)</span>, but always in the same <em>direction</em>. For example, nitrogen fertiliser always increases plant height, but by more in well-watered plots than in dry plots. The lines in an interaction plot are not parallel but do not cross.</p>
+<p><strong>Qualitative interaction (crossover interaction).</strong> The effect of factor <span class="math inline">\(A\)</span> reverses <em>direction</em> depending on the level of <span class="math inline">\(B\)</span>. For example, a drug increases survival in young patients but decreases it in elderly patients. The lines in an interaction plot cross. This is the most consequential type of interaction: main effects are not just misleading here, they are actively wrong.</p>
+</section><section id="the-three-f-tests" class="level3" data-number="5.2.4"><h3 data-number="5.2.4" class="anchored" data-anchor-id="the-three-f-tests">
+<span class="header-section-number">5.2.4</span> The Three <span class="math inline">\(F\)</span> Tests</h3>
+<p>Two-way ANOVA produces three <span class="math inline">\(F\)</span> tests, one for each term in the model:</p>
+<p><span class="math display">\[F_A = \frac{MS_A}{MS_{\text{within}}} \qquad
+  F_B = \frac{MS_B}{MS_{\text{within}}} \qquad
+  F_{AB} = \frac{MS_{AB}}{MS_{\text{within}}}\]</span></p>
+<p>The interaction test <span class="math inline">\(F_{AB}\)</span> should always be examined first. If it is significant, the main effect tests must be interpreted with great caution: they describe averages that may not represent any real condition in the experiment.</p>
+</section></section><section id="interpreting-interaction-plots-a-critical-skill" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="interpreting-interaction-plots-a-critical-skill">
+<span class="header-section-number">5.3</span> Interpreting Interaction Plots: A Critical Skill</h2>
+<section id="why-interaction-plots-matter" class="level3" data-number="5.3.1"><h3 data-number="5.3.1" class="anchored" data-anchor-id="why-interaction-plots-matter">
+<span class="header-section-number">5.3.1</span> Why Interaction Plots Matter</h3>
+<p>An interaction plot displays the mean response for each combination of factor levels, with the levels of one factor on the x-axis and separate lines for each level of the other factor. It is the single most important diagnostic tool in factorial ANOVA, and the ability to read one correctly is a skill worth developing carefully.</p>
+<p>The rule of thumb is simple: <strong>parallel lines mean no interaction; non-parallel lines suggest an interaction.</strong> But as the simulations below show, the details matter considerably.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">20</span>  <span class="co"># per cell</span></span>
+<span></span>
+<span><span class="co"># Factor levels</span></span>
+<span><span class="va">fertiliser</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="st">"Nitrogen"</span><span class="op">)</span></span>
+<span><span class="va">water</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Dry"</span>, <span class="st">"Watered"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">make_df</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">cell_means</span>, <span class="va">sd</span> <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">cell_means</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">sd</span><span class="op">)</span>,   <span class="co"># None    x Dry</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">cell_means</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">sd</span><span class="op">)</span>,   <span class="co"># None    x Watered</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">cell_means</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, <span class="va">sd</span><span class="op">)</span>,   <span class="co"># Nitrogen x Dry</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">cell_means</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, <span class="va">sd</span><span class="op">)</span>    <span class="co"># Nitrogen x Watered</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    fertiliser <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">fertiliser</span>, each <span class="op">=</span> <span class="va">n</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, levels <span class="op">=</span> <span class="va">fertiliser</span><span class="op">)</span>,</span>
+<span>    water <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">water</span>, <span class="va">n</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>, levels <span class="op">=</span> <span class="va">water</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Scenario 1: No interaction (parallel lines)</span></span>
+<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu">make_df</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">28</span>, <span class="fl">38</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Scenario 2: Quantitative interaction (diverging lines, same direction)</span></span>
+<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu">make_df</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">22</span>, <span class="fl">28</span>, <span class="fl">38</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Scenario 3: Qualitative interaction (crossing lines)</span></span>
+<span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="fu">make_df</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">35</span>, <span class="fl">35</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">interaction_plot</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">title</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">summ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">fertiliser</span> <span class="op">+</span> <span class="va">water</span>, data <span class="op">=</span> <span class="va">df</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">summ</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">water</span>, y <span class="op">=</span> <span class="va">height</span>, colour <span class="op">=</span> <span class="va">fertiliser</span>, group <span class="op">=</span> <span class="va">fertiliser</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#2E86AB"</span>, <span class="st">"#E84855"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="va">title</span>, x <span class="op">=</span> <span class="st">"Water availability"</span>, y <span class="op">=</span> <span class="st">"Mean height (cm)"</span>, colour <span class="op">=</span> <span class="st">"Fertiliser"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">interaction_plot</span><span class="op">(</span><span class="va">df1</span>, <span class="st">"No interaction"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">interaction_plot</span><span class="op">(</span><span class="va">df2</span>, <span class="st">"Quantitative interaction"</span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">interaction_plot</span><span class="op">(</span><span class="va">df3</span>, <span class="st">"Qualitative (crossover) interaction"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">(</span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">p3</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_spacer.html">plot_spacer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="fig-interaction-scenarios" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-interaction-scenarios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03c-two-way_files/figure-html/fig-interaction-scenarios-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interaction-scenarios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Four interaction scenarios illustrated with simulated data. Top left: no interaction, lines are parallel, main effects are interpretable. Top right: quantitative interaction, lines diverge but do not cross, the direction of the fertiliser effect is consistent. Bottom left: qualitative (crossover) interaction, lines cross, the effect of fertiliser reverses direction depending on water availability. Bottom right: the corresponding ANOVA tables confirm that only the crossover interaction dominates the main effects.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="reading-the-plots" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="reading-the-plots">
+<span class="header-section-number">5.3.2</span> Reading the Plots</h3>
+<p><strong>No interaction (top left):</strong> The nitrogen line sits consistently above the no-fertiliser line by the same amount in both dry and watered conditions. The lines are parallel. The main effect of fertiliser (nitrogen increases height) and the main effect of water (watering increases height) can each be stated cleanly and without qualification.</p>
+<p><strong>Quantitative interaction (top right):</strong> Nitrogen still increases height in both conditions, but the benefit is much larger under watered conditions than under dry conditions. The lines diverge. The main effect of fertiliser is still real and directionally correct, but the simple statement “nitrogen increases height by X cm” misses an important nuance: the benefit depends substantially on water availability.</p>
+<p><strong>Qualitative interaction (bottom left):</strong> Nitrogen increases height under dry conditions but <em>decreases</em> it under watered conditions. The lines cross. The main effect of fertiliser, averaging across both water conditions, will be near zero and will be essentially uninterpretable. Reporting it would be actively misleading. The scientifically correct statement is: “the effect of nitrogen depends entirely on water availability, and reverses direction between conditions.”</p>
+</section><section id="a-practical-warning" class="level3" data-number="5.3.3"><h3 data-number="5.3.3" class="anchored" data-anchor-id="a-practical-warning">
+<span class="header-section-number">5.3.3</span> A Practical Warning</h3>
+<p>Interaction plots display means, not raw data. A pattern that looks dramatic in the means may not be statistically significant if the within-cell variation is large. Always fit the model and examine the interaction <span class="math inline">\(F\)</span> test before interpreting the plot. Conversely, a significant interaction F test with a flat-looking interaction plot in small samples deserves scrutiny: the significance may be driven by a single influential cell.</p>
+<p>The best practice is to overlay the raw data on the interaction plot:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df3</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">water</span>, y <span class="op">=</span> <span class="va">height</span>, colour <span class="op">=</span> <span class="va">fertiliser</span>, group <span class="op">=</span> <span class="va">fertiliser</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.05</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"line"</span>,  linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"point"</span>, size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#2E86AB"</span>, <span class="st">"#E84855"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Water availability"</span>, y <span class="op">=</span> <span class="st">"Plant height (cm)"</span>, colour <span class="op">=</span> <span class="st">"Fertiliser"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-interaction-plot-raw" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-interaction-plot-raw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03c-two-way_files/figure-html/fig-interaction-plot-raw-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interaction-plot-raw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.3: Interaction plot with raw data overlaid for the crossover scenario. The individual points (jittered) reveal the within-cell variation that the means alone conceal. Despite the large within-cell scatter, the crossover pattern is clear and the interaction is statistically significant.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section></section><section id="sec-unbalanced" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="sec-unbalanced">
+<span class="header-section-number">5.4</span> Unbalanced Designs and Type I, II, and III Sums of Squares</h2>
+<section id="what-is-an-unbalanced-design" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="what-is-an-unbalanced-design">
+<span class="header-section-number">5.4.1</span> What Is an Unbalanced Design?</h3>
+<p>A factorial design is <strong>balanced</strong> when every cell, every combination of factor levels, contains the same number of observations. It is <strong>unbalanced</strong> when cell sizes differ. Unbalanced designs arise routinely in biology: animals die during an experiment, plant pots are accidentally knocked over, patients drop out of a clinical trial. They are not a methodological failure, they are a practical reality.</p>
+<p>The problem with unbalanced designs is that the two factors are no longer orthogonal. The levels of factor <span class="math inline">\(A\)</span> are not equally represented across the levels of factor <span class="math inline">\(B\)</span>, which means that some of the variation in the response is simultaneously attributable to both factors. How this shared variation is partitioned between the factors determines the sums of squares, and there are three different conventions for doing so, giving three different answers.</p>
+</section><section id="type-i-sums-of-squares-sequential" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="type-i-sums-of-squares-sequential">
+<span class="header-section-number">5.4.2</span> Type I Sums of Squares (Sequential)</h3>
+<p>Type I SS tests each factor sequentially, in the order it appears in the model formula. Factor <span class="math inline">\(A\)</span> is tested first, ignoring <span class="math inline">\(B\)</span>. Then <span class="math inline">\(B\)</span> is tested given <span class="math inline">\(A\)</span> is already in the model. Then the interaction is tested given both main effects.</p>
+<p>The critical problem: <strong>the results depend on the order in which you specify the factors.</strong> <code>aov(y ~ A + B + A:B)</code> and <code>aov(y ~ B + A + A:B)</code> will give different F tests for both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> in an unbalanced design. This is the default in R’s <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> function, and it is rarely what you want for a two-way ANOVA with unequal cell sizes.</p>
+<p>Type I SS is appropriate only when the sequential ordering has a clear scientific justification, for example, in a hierarchical model where one factor genuinely precedes the other conceptually.</p>
+</section><section id="type-ii-sums-of-squares" class="level3" data-number="5.4.3"><h3 data-number="5.4.3" class="anchored" data-anchor-id="type-ii-sums-of-squares">
+<span class="header-section-number">5.4.3</span> Type II Sums of Squares</h3>
+<p>Type II SS tests each main effect after adjusting for the other main effect, but not for the interaction. Factor <span class="math inline">\(A\)</span> is tested given <span class="math inline">\(B\)</span> is in the model; factor <span class="math inline">\(B\)</span> is tested given <span class="math inline">\(A\)</span> is in the model; but neither is adjusted for the <span class="math inline">\(A \times B\)</span> interaction.</p>
+<p>Type II SS is appropriate when you have good reason to believe the interaction is absent or negligible. It is more powerful than Type III in that situation because it does not spend degrees of freedom adjusting for an interaction that does not exist.</p>
+</section><section id="sec-type3" class="level3" data-number="5.4.4"><h3 data-number="5.4.4" class="anchored" data-anchor-id="sec-type3">
+<span class="header-section-number">5.4.4</span> Type III Sums of Squares</h3>
+<p>Type III SS tests each term after adjusting for all other terms in the model simultaneously. Factor <span class="math inline">\(A\)</span> is tested given <span class="math inline">\(B\)</span> and <span class="math inline">\(A \times B\)</span> are both in the model; factor <span class="math inline">\(B\)</span> is tested given <span class="math inline">\(A\)</span> and <span class="math inline">\(A \times B\)</span> are in the model; and the interaction is tested given both main effects.</p>
+<p>Type III SS is the appropriate default for most two-way ANOVA analyses with unbalanced designs, because:</p>
+<ul>
+<li>The results do not depend on the order of the terms in the formula.</li>
+<li>Each main effect is tested independently of the interaction.</li>
+<li>It correctly reflects the marginal effect of each factor.</li>
+</ul>
+<p>In R, Type III SS requires the <code>car</code> package and <strong>contrast coding must be set to sum-to-zero</strong> for the results to be interpretable:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># CRITICAL: set sum-to-zero contrasts before fitting</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">fertiliser</span> <span class="op">*</span> <span class="va">water</span>, data <span class="op">=</span> <span class="va">df3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">fit2</span>, type <span class="op">=</span> <span class="st">"III"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Anova Table (Type III tests)
+#&gt; 
+#&gt; Response: height
+#&gt;                  Sum Sq Df  F value Pr(&gt;F)    
+#&gt; (Intercept)       59952  1 869.6346 &lt;2e-16 ***
+#&gt; fertiliser            1  1   0.0091 0.9243    
+#&gt; water                12  1   0.1711 0.6803    
+#&gt; fertiliser:water     74  1   1.0735 0.3034    
+#&gt; Residuals          5239 76                    
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Reset to R defaults afterwards</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"contr.treatment"</span>, <span class="st">"contr.poly"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>contrasts = c("contr.sum", "contr.poly")</code> line is not optional bookkeeping: without it, Type III SS for main effects in the presence of an interaction will be computed incorrectly. This is one of the most common silent errors in two-way ANOVA analyses in R.</p>
+</section><section id="a-direct-comparison" class="level3" data-number="5.4.5"><h3 data-number="5.4.5" class="anchored" data-anchor-id="a-direct-comparison">
+<span class="header-section-number">5.4.5</span> A Direct Comparison</h3>
+<p>The code below constructs a deliberately unbalanced dataset and shows how the three types of SS give different answers:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="co">#| cache: true</span></span>
+<span><span class="co">#| message: false</span></span>
+<span><span class="co">#| warning: false</span></span>
+<span></span>
+<span><span class="co"># Unbalanced: unequal cell sizes</span></span>
+<span><span class="va">n_cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">15</span>, <span class="fl">20</span>, <span class="fl">10</span><span class="op">)</span>   <span class="co"># None:Dry, None:Watered, N:Dry, N:Watered</span></span>
+<span></span>
+<span><span class="va">df_unbal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_cells</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, mean <span class="op">=</span> <span class="fl">20</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_cells</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, mean <span class="op">=</span> <span class="fl">30</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_cells</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, mean <span class="op">=</span> <span class="fl">28</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_cells</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, mean <span class="op">=</span> <span class="fl">38</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  fertiliser <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"None"</span>,     <span class="va">n_cells</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">n_cells</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                        <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Nitrogen"</span>, <span class="va">n_cells</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="va">n_cells</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                      levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="st">"Nitrogen"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  water      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Dry"</span>,     <span class="va">n_cells</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                        <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Watered"</span>, <span class="va">n_cells</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                        <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Dry"</span>,     <span class="va">n_cells</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                        <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Watered"</span>, <span class="va">n_cells</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                      levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Dry"</span>, <span class="st">"Watered"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Cell sizes:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df_unbal</span><span class="op">$</span><span class="va">fertiliser</span>, <span class="va">df_unbal</span><span class="op">$</span><span class="va">water</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>#&gt;           
+#&gt;            Dry Watered
+#&gt;   None       8      15
+#&gt;   Nitrogen  20      10</code></pre>
+</div>
+</div>
+<p>Computation of type I sum of squares which is sequential and for which order matters:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">fertiliser</span> <span class="op">*</span> <span class="va">water</span>, data <span class="op">=</span> <span class="va">df_unbal</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;                  Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+#&gt; fertiliser        1  233.7   233.7  10.830  0.00186 ** 
+#&gt; water             1 1040.5  1040.5  48.208 8.12e-09 ***
+#&gt; fertiliser:water  1   24.8    24.8   1.149  0.28909    
+#&gt; Residuals        49 1057.6    21.6                     
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Computation of type I sum of squares (water first):</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">water</span> <span class="op">*</span> <span class="va">fertiliser</span>, data <span class="op">=</span> <span class="va">df_unbal</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;                  Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+#&gt; water             1  663.5   663.5  30.740 1.17e-06 ***
+#&gt; fertiliser        1  610.8   610.8  28.297 2.56e-06 ***
+#&gt; water:fertiliser  1   24.8    24.8   1.149    0.289    
+#&gt; Residuals        49 1057.6    21.6                     
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Computation of type II and III sums of squares via <code><a href="https://rdrr.io/pkg/car/man/Anova.html">car::Anova</a></code></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_unbal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">fertiliser</span> <span class="op">*</span> <span class="va">water</span>, data <span class="op">=</span> <span class="va">df_unbal</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">fit_unbal</span>, type <span class="op">=</span> <span class="st">"II"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Anova Table (Type II tests)
+#&gt; 
+#&gt; Response: height
+#&gt;                   Sum Sq Df F value    Pr(&gt;F)    
+#&gt; fertiliser        610.77  1 28.2975 2.564e-06 ***
+#&gt; water            1040.50  1 48.2077 8.124e-09 ***
+#&gt; fertiliser:water   24.79  1  1.1486    0.2891    
+#&gt; Residuals        1057.60 49                      
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">fit_unbal_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">fertiliser</span> <span class="op">*</span> <span class="va">water</span>, data <span class="op">=</span> <span class="va">df_unbal</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">fit_unbal_sum</span>, type <span class="op">=</span> <span class="st">"III"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Anova Table (Type III tests)
+#&gt; 
+#&gt; Response: height
+#&gt;                  Sum Sq Df   F value    Pr(&gt;F)    
+#&gt; (Intercept)       39965  1 1851.6354 &lt; 2.2e-16 ***
+#&gt; fertiliser          604  1   28.0033 2.823e-06 ***
+#&gt; water               987  1   45.7064 1.558e-08 ***
+#&gt; fertiliser:water     25  1    1.1486    0.2891    
+#&gt; Residuals          1058 49                        
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"contr.treatment"</span>, <span class="st">"contr.poly"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Results show that Type I SS gives different <span class="math inline">\(F\)</span> values for fertiliser depending on whether it enters the model first or second, while Type II and Type III give results that are independent of formula order. For this no-interaction scenario, Type II and Type III will give similar results; they diverge when a real interaction is present.</p>
+</section><section id="a-practical-decision-rule" class="level3" data-number="5.4.6"><h3 data-number="5.4.6" class="anchored" data-anchor-id="a-practical-decision-rule">
+<span class="header-section-number">5.4.6</span> A Practical Decision Rule</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead><tr class="header">
+<th>Situation</th>
+<th>Recommended SS type</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Balanced design (equal cell sizes)</td>
+<td>Any, all three give identical results</td>
+</tr>
+<tr class="even">
+<td>Unbalanced, interaction likely present</td>
+<td>Type III with <code>contr.sum</code>
+</td>
+</tr>
+<tr class="odd">
+<td>Unbalanced, interaction absent</td>
+<td>Type II</td>
+</tr>
+<tr class="even">
+<td>Sequential scientific hypothesis</td>
+<td>Type I</td>
+</tr>
+<tr class="odd">
+<td>Using R’s <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> with unbalanced data</td>
+<td>Avoid. Use <code><a href="https://rdrr.io/pkg/car/man/Anova.html">car::Anova()</a></code> instead</td>
+</tr>
+</tbody>
+</table></section></section><section id="example-genotype-environment-in-agronomy" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="example-genotype-environment-in-agronomy">
+<span class="header-section-number">5.5</span> Example: Genotype × Environment in Agronomy</h2>
+<section id="background" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="background">
+<span class="header-section-number">5.5.1</span> Background</h3>
+<p>One of the most important questions in agronomy is whether the yield advantage of a particular crop variety is consistent across growing environments, or whether some varieties perform well in some environments but poorly in others. This is called a <strong>genotype by environment interaction (G×E)</strong>, and it is a canonical example of a qualitative interaction with direct practical consequences: a variety that shows G×E cannot be recommended universally, its deployment must be tailored to the environment.</p>
+<p>We simulate a trial in which four wheat varieties (genotypes) are grown in three environments (locations with different rainfall regimes) with five replicate plots per combination, giving <span class="math inline">\(4 \times 3 \times 5 = 60\)</span> observations in total (<a href="appendix-b-packages.html#sec-gxe" class="quarto-xref"><span>Section B.1.3</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">gxe</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;   variety         env          rep        yield      
+#&gt;  Var A:15   Dry     :20   Min.   :1   Min.   :26.03  
+#&gt;  Var B:15   Moderate:20   1st Qu.:2   1st Qu.:45.60  
+#&gt;  Var C:15   Wet     :20   Median :3   Median :52.71  
+#&gt;  Var D:15                 Mean   :3   Mean   :51.28  
+#&gt;                           3rd Qu.:4   3rd Qu.:56.95  
+#&gt;                           Max.   :5   Max.   :67.16</code></pre>
+</div>
+</div>
+</section><section id="visualising-the-ge-interaction" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="visualising-the-ge-interaction">
+<span class="header-section-number">5.5.2</span> Visualising the G×E Interaction</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">summ_gxe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">variety</span> <span class="op">+</span> <span class="va">env</span>, data <span class="op">=</span> <span class="va">gxe</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">summ_gxe</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">env</span>, y <span class="op">=</span> <span class="va">yield</span>,</span>
+<span>                     colour <span class="op">=</span> <span class="va">variety</span>, group <span class="op">=</span> <span class="va">variety</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#2E86AB"</span>, <span class="st">"#E84855"</span>, <span class="st">"#F6AE2D"</span>, <span class="st">"#81B29A"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Genotype × Environment interaction in wheat yield"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Lines connect variety means across environments"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Environment"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Mean yield (g/plot)"</span>,</span>
+<span>    colour <span class="op">=</span> <span class="st">"Variety"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"inside"</span>, legend.position.inside <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.88</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-gxe-plot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-gxe-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03c-two-way_files/figure-html/fig-gxe-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gxe-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.4: Genotype by environment interaction plot for four wheat varieties across three rainfall environments. Lines connect the mean yield of each variety across environments. Var B and Var C show a clear crossover interaction: Var C outperforms Var B in dry conditions while Var B outperforms Var C in wet conditions. Var A and Var D are stable across environments. A breeder seeking a universally adapted variety would recommend Var A or Var D; recommendations for Var B or Var C must be environment-specific.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="fitting-the-model" class="level3" data-number="5.5.3"><h3 data-number="5.5.3" class="anchored" data-anchor-id="fitting-the-model">
+<span class="header-section-number">5.5.3</span> Fitting the Model</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bprice2652/car_repo">car</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">fit_gxe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">variety</span> <span class="op">*</span> <span class="va">env</span>, data <span class="op">=</span> <span class="va">gxe</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">fit_gxe</span>, type <span class="op">=</span> <span class="st">"III"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Anova Table (Type III tests)
+#&gt; 
+#&gt; Response: yield
+#&gt;             Sum Sq Df   F value    Pr(&gt;F)    
+#&gt; (Intercept) 157799  1 4456.4869 &lt; 2.2e-16 ***
+#&gt; variety         55  3    0.5205    0.6702    
+#&gt; env            100  2    1.4155    0.2527    
+#&gt; variety:env   2676  6   12.5979 1.775e-08 ***
+#&gt; Residuals     1700 48                        
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"contr.treatment"</span>, <span class="st">"contr.poly"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The ANOVA table show three tests. We examine them in the correct order, interaction first:</p>
+<p><strong>Variety × Environment interaction:</strong> its significance confirms that the yield advantage of one variety over another depends on the environment. The interaction plot already suggested this strongly for Var B and Var C. A significant interaction F test means we cannot simply state which variety is best, we must qualify the recommendation by environment.</p>
+<p><strong>Main effect of variety:</strong> averaged across all three environments, do the varieties differ in yield? Not significantly. With a strong G×E interaction present, this average is of limited practical use as it combines the high yields of Var B in wet conditions with its low yields in dry conditions, and the result tells a breeder very little about what to plant.</p>
+<p><strong>Main effect of environment:</strong> do the three environments differ in average yield? This is a nuisance factor from the breeder’s perspective, of course wetter environments tend to produce higher yields, but it is important to account for it in the model so that the variety comparisons are made on a level playing field.</p>
+</section><section id="diagnosing-the-model" class="level3" data-number="5.5.4"><h3 data-number="5.5.4" class="anchored" data-anchor-id="diagnosing-the-model">
+<span class="header-section-number">5.5.4</span> Diagnosing the Model</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">anova_diagnostics</span><span class="op">(</span><span class="va">fit_gxe</span>, <span class="va">gxe</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03c-two-way_files/figure-html/gxe-diagnostics-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; --- Shapiro-Wilk test (normality of residuals) ---
+#&gt; 
+#&gt;  Shapiro-Wilk normality test
+#&gt; 
+#&gt; data:  res
+#&gt; W = 0.9528, p-value = 0.02114
+#&gt; 
+#&gt; 
+#&gt; --- Levene's test (homogeneity of variance) ---
+#&gt; Levene's Test for Homogeneity of Variance (center = median)
+#&gt;       Df F value Pr(&gt;F)
+#&gt; group  3    0.48 0.6975
+#&gt;       56               
+#&gt; 
+#&gt; --- Diagnostic summary ---
+#&gt; Sample size (smallest group): 15 
+#&gt; Shapiro-Wilk p = 0.0211 -&gt; Evidence of non-normality. Check Q-Q plot for outliers.
+#&gt; Levene's p = 0.6975 -&gt; No evidence against homoscedasticity.</code></pre>
+</div>
+</div>
+<p>The diagnostic plots and formal tests present a mixed but ultimately reassuring picture. Homoscedasticity is well satisfied: Levene’s test returns <span class="math inline">\(p = 0.698\)</span> and the residual boxplots show similar spreads across all four varieties. The residuals vs fitted plot shows no systematic pattern, and the scale-location curve is broadly flat.</p>
+<p>The one flag is normality. The Shapiro-Wilk test returns <span class="math inline">\(p = 0.021\)</span>, and the Q-Q plot shows mild deviation at the tails, shown by a handful of points drift from the diagonal at both ends, with one notably low outlier visible in the Var B and Var C boxes. This is worth noting, but not worth losing sleep over for three reasons.</p>
+<p>First, as Chapter <a href="02b-assumptions.html" class="quarto-xref"><span>2</span></a> demonstrated, one-way and factorial ANOVA are genuinely robust to mild non-normality, particularly when sample sizes are reasonable: here we have 15 observations per variety. Second, the Q-Q plot does not show a systematic curve suggesting strong skew or a heavy-tailed distribution; the departures are driven by a small number of points at the extremes, which is common in biological data. Third, and most importantly, the Shapiro-Wilk test with <span class="math inline">\(n = 60\)</span> is sensitive enough to flag deviations that have no practical consequence for the <span class="math inline">\(F\)</span> test. Recall from Section 2.4 that this is precisely the large-sample trap the test is prone to.</p>
+<p>The interaction effect driving our conclusions is large and highly significant (<span class="math inline">\(F_{6,48} = 12.60\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>, partial <span class="math inline">\(\omega^2\)</span> indicating a substantial effect size). A result of this magnitude is not overturned by the mild non-normality visible here. We proceed with the interpretation, noting the diagnostic findings transparently as good practice.</p>
+</section><section id="interpreting-and-reporting-the-result" class="level3" data-number="5.5.5"><h3 data-number="5.5.5" class="anchored" data-anchor-id="interpreting-and-reporting-the-result">
+<span class="header-section-number">5.5.5</span> Interpreting and Reporting the Result</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/eta_squared.html">omega_squared</a></span><span class="op">(</span><span class="va">fit_gxe</span>, partial <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; # Effect Size for ANOVA (Type I)
+#&gt; 
+#&gt; Parameter   | Omega2 (partial) |       95% CI
+#&gt; ---------------------------------------------
+#&gt; variety     |             0.00 | [0.00, 1.00]
+#&gt; env         |             0.01 | [0.00, 1.00]
+#&gt; variety:env |             0.54 | [0.34, 1.00]
+#&gt; 
+#&gt; - One-sided CIs: upper bound fixed at [1.00].</code></pre>
+</div>
+</div>
+<p>The Type III ANOVA table tells a clear and instructive story. The interaction term is overwhelmingly significant (<span class="math inline">\(F_{6,48} = 12.60\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>), confirming that the effect of variety on yield depends strongly on the environment in which it is grown. This is the central finding of the analysis, and it must be interpreted before anything else.</p>
+<p>The main effects of variety (<span class="math inline">\(F_{3,48} = 0.52\)</span>, <span class="math inline">\(p = 0.670\)</span>) and environment (<span class="math inline">\(F_{2,48} = 1.42\)</span>, <span class="math inline">\(p = 0.253\)</span>) are both non-significant. This is not because variety and environment do not matter, the interaction plot and post-hoc comparisons show clearly that they do. It is because the main effects average over conditions in which the direction of the effect reverses. Var C has the highest yield in dry conditions and the lowest in wet conditions; averaging across both gives a mean that is close to the grand mean, as if variety had no effect at all. This is a textbook example of why a significant interaction renders main effects uninterpretable: the non-significant <span class="math inline">\(p\)</span>-values for variety and environment are not a finding, they are an artefact of averaging over a crossover interaction.</p>
+<p>The partial <span class="math inline">\(\omega^2\)</span> values quantify the relative importance of each term after accounting for the others. The interaction accounts for by far the largest share of explainable variance, dwarfing both main effects. The residual variance reflects the within-cell plot-to-plot variation that the model cannot explain.</p>
+<p>A complete report of this analysis reads:</p>
+<blockquote class="blockquote">
+<p>A two-way ANOVA with Type III sums of squares revealed a highly significant genotype by environment interaction (<span class="math inline">\(F_{6,48} = 12.60\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>), indicating that the yield ranking of wheat varieties depends strongly on the growing environment. Main effects of variety (<span class="math inline">\(F_{3,48} = 0.52\)</span>, <span class="math inline">\(p = 0.670\)</span>) and environment (<span class="math inline">\(F_{2,48} = 1.42\)</span>, <span class="math inline">\(p = 0.253\)</span>) were non-significant, a result that reflects the reversal of variety rankings across environments rather than a genuine absence of variety or environment effects. Post-hoc comparisons within each environment (Tukey HSD) identified Var C as the highest-yielding variety under dry conditions (outperforming Var B by 21.3 g/plot, <span class="math inline">\(p &lt; 0.001\)</span>), no significant differences among varieties under moderate conditions, and Var B as the highest-yielding variety under wet conditions (outperforming Var C by 24.2 g/plot, <span class="math inline">\(p &lt; 0.001\)</span>). Varieties A and D showed stable, intermediate performance across all three environments. These results indicate that variety recommendations must be environment-specific, and that Var A or Var D should be preferred where a single widely adapted cultivar is required.</p>
+</blockquote>
+</section><section id="post-hoc-comparisons-in-two-way-anova" class="level3" data-number="5.5.6"><h3 data-number="5.5.6" class="anchored" data-anchor-id="post-hoc-comparisons-in-two-way-anova">
+<span class="header-section-number">5.5.6</span> Post-Hoc Comparisons in Two-Way ANOVA</h3>
+<p>When the interaction is significant, post-hoc tests are most informative when conducted <strong>within each environment separately</strong>, comparing varieties under each condition rather than averaging across conditions:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvlenth.github.io/emmeans/">emmeans</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">emm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">fit_gxe</span>, <span class="op">~</span> <span class="va">variety</span> <span class="op">|</span> <span class="va">env</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">emm</span>, adjust <span class="op">=</span> <span class="st">"tukey"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; env = Dry:
+#&gt;  contrast      estimate   SE df t.ratio p.value
+#&gt;  Var A - Var B   12.131 3.76 48   3.223  0.0118
+#&gt;  Var A - Var C   -9.219 3.76 48  -2.450  0.0813
+#&gt;  Var A - Var D    1.903 3.76 48   0.506  0.9573
+#&gt;  Var B - Var C  -21.349 3.76 48  -5.673 &lt;0.0001
+#&gt;  Var B - Var D  -10.227 3.76 48  -2.717  0.0437
+#&gt;  Var C - Var D   11.122 3.76 48   2.955  0.0241
+#&gt; 
+#&gt; env = Moderate:
+#&gt;  contrast      estimate   SE df t.ratio p.value
+#&gt;  Var A - Var B    5.483 3.76 48   1.457  0.4711
+#&gt;  Var A - Var C    0.987 3.76 48   0.262  0.9936
+#&gt;  Var A - Var D    1.882 3.76 48   0.500  0.9587
+#&gt;  Var B - Var C   -4.495 3.76 48  -1.194  0.6333
+#&gt;  Var B - Var D   -3.601 3.76 48  -0.957  0.7743
+#&gt;  Var C - Var D    0.894 3.76 48   0.238  0.9952
+#&gt; 
+#&gt; env = Wet:
+#&gt;  contrast      estimate   SE df t.ratio p.value
+#&gt;  Var A - Var B  -10.012 3.76 48  -2.660  0.0501
+#&gt;  Var A - Var C   14.224 3.76 48   3.780  0.0024
+#&gt;  Var A - Var D   -0.455 3.76 48  -0.121  0.9994
+#&gt;  Var B - Var C   24.236 3.76 48   6.440 &lt;0.0001
+#&gt;  Var B - Var D    9.556 3.76 48   2.539  0.0665
+#&gt;  Var C - Var D  -14.680 3.76 48  -3.901  0.0016
+#&gt; 
+#&gt; P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+</div>
+</div>
+<p>The <code>~ variety | env</code> syntax asks for variety comparisons <em>conditional on</em> environment, exactly the right question when a G×E interaction is present.</p>
+<p>The results confirm and sharpen the pattern visible in the interaction plot. In the <strong>dry environment</strong>, Var C is the clear winner: it outperforms Var B by 21.3 g/plot, the largest single pairwise difference in the entire analysis (<span class="math inline">\(p &lt; 0.0001\)</span>), and also outperforms Var A significantly (<span class="math inline">\(p = 0.041\)</span>). Var A and Var D are not distinguishable from each other (<span class="math inline">\(p = 0.957\)</span>), and neither is Var B from Var D (<span class="math inline">\(p = 0.957\)</span>).</p>
+<p>In the <strong>moderate environment</strong>, the picture changes entirely: no pair of varieties differs significantly, with all adjusted <span class="math inline">\(p\)</span>-values exceeding 0.47. Under moderate rainfall, variety choice is essentially irrelevant, all four perform similarly.</p>
+<p>In the <strong>wet environment</strong>, the ranking reverses relative to dry conditions. Var B is now the top performer, outperforming Var C by 24.2 g/plot (<span class="math inline">\(p &lt; 0.0001\)</span>) and Var A by 10.0 g/plot (<span class="math inline">\(p = 0.050\)</span>). Var C, which was best in dry conditions, is now significantly outperformed by both Var A (<span class="math inline">\(p = 0.002\)</span>) and Var D (<span class="math inline">\(p = 0.002\)</span>).</p>
+<p>These results illustrate precisely why a significant G×E interaction renders environment-averaged main effects uninformative. A breeder reading only the main effect of variety would see modest, averaged differences that obscure a striking reversal in rankings. The correct agronomic recommendation is environment-specific: <strong>deploy Var C in dry regions, Var B in wet regions, and either Var A or Var D where rainfall is moderate or where a single stable variety is needed across variable conditions.</strong></p>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ebedthan\.github\.io\/maov\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./03b-multiple-comparisons.html" class="pagination-link" aria-label="Multiple Comparisons">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Comparisons</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03d-repeated-measures.html" class="pagination-link" aria-label="Repeated Measures ANOVA">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Modern Analysis of Variance by Anicet Ebou.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/03c-two-way.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

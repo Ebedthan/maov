@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Anicet Ebou">
+<title>10&nbsp; When Assumptions Fail, What to Do ? – Modern Analysis of Variance</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04d-glmm.html" rel="next">
+<link href="./04b-mixed-effects.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="site_libs/quarto-diagram/mermaid.min.js"></script><script src="site_libs/quarto-diagram/mermaid-init.js"></script><link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-modern-framework.html">The Modern Framework</a></li><li class="breadcrumb-item"><a href="./04c-when-assumptions-fail.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">When Assumptions Fail, What to Do ?</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Analysis of Variance</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Ebedthan/maov/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02a-what-is-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is ANOVA, Really ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02b-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Assumptions</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03-classical-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical ANOVA Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03a-one-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03b-multiple-comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03c-two-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03d-repeated-measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03e-split-plot-nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Split-Plot and Nested Designs</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04-modern-framework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Modern Framework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04a-anova-as-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANOVA as a Linear Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04b-mixed-effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed-Effects Models: Beyond Classical ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04c-when-assumptions-fail.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">When Assumptions Fail, What to Do ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04d-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Generalised Linear Mixed Models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./05-good-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Good Practice and Reproductibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05a-experimental-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Experimental Design Principles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05b-reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reporting ANOVA Results</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05c-reproducible-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducible Analysis with R</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Maths of the Book</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets and R Packages</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-decision-tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Decision Trees for Model Selection</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#transformations-log-square-root-arcsine-and-their-modern-critics" id="toc-transformations-log-square-root-arcsine-and-their-modern-critics" class="nav-link active" data-scroll-target="#transformations-log-square-root-arcsine-and-their-modern-critics"><span class="header-section-number">10.1</span> Transformations: Log, Square Root, Arcsine and Their Modern Critics</a>
+  <ul class="collapse">
+<li><a href="#the-classical-rationale" id="toc-the-classical-rationale" class="nav-link" data-scroll-target="#the-classical-rationale"><span class="header-section-number">10.1.1</span> The Classical Rationale</a></li>
+  <li><a href="#the-log-transformation" id="toc-the-log-transformation" class="nav-link" data-scroll-target="#the-log-transformation"><span class="header-section-number">10.1.2</span> The Log Transformation</a></li>
+  <li><a href="#the-square-root-transformation" id="toc-the-square-root-transformation" class="nav-link" data-scroll-target="#the-square-root-transformation"><span class="header-section-number">10.1.3</span> The Square Root Transformation</a></li>
+  <li><a href="#the-arcsine-square-root-transformation" id="toc-the-arcsine-square-root-transformation" class="nav-link" data-scroll-target="#the-arcsine-square-root-transformation"><span class="header-section-number">10.1.4</span> The Arcsine Square Root Transformation</a></li>
+  <li><a href="#the-modern-critique-of-transformations" id="toc-the-modern-critique-of-transformations" class="nav-link" data-scroll-target="#the-modern-critique-of-transformations"><span class="header-section-number">10.1.5</span> The Modern Critique of Transformations</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#non-parametric-alternatives" id="toc-non-parametric-alternatives" class="nav-link" data-scroll-target="#non-parametric-alternatives"><span class="header-section-number">10.2</span> Non-Parametric Alternatives</a>
+  <ul class="collapse">
+<li><a href="#kruskal-wallis-test" id="toc-kruskal-wallis-test" class="nav-link" data-scroll-target="#kruskal-wallis-test"><span class="header-section-number">10.2.1</span> Kruskal-Wallis Test</a></li>
+  <li><a href="#friedman-test" id="toc-friedman-test" class="nav-link" data-scroll-target="#friedman-test"><span class="header-section-number">10.2.2</span> 10.2.2 Friedman Test</a></li>
+  <li><a href="#permutation-tests" id="toc-permutation-tests" class="nav-link" data-scroll-target="#permutation-tests"><span class="header-section-number">10.2.3</span> Permutation Tests</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#robust-anova-with-wrs2" id="toc-robust-anova-with-wrs2" class="nav-link" data-scroll-target="#robust-anova-with-wrs2"><span class="header-section-number">10.3</span> Robust ANOVA with WRS2</a>
+  <ul class="collapse">
+<li><a href="#one-way-robust-anova" id="toc-one-way-robust-anova" class="nav-link" data-scroll-target="#one-way-robust-anova"><span class="header-section-number">10.3.1</span> One-Way Robust ANOVA</a></li>
+  <li><a href="#robust-repeated-measures-anova" id="toc-robust-repeated-measures-anova" class="nav-link" data-scroll-target="#robust-repeated-measures-anova"><span class="header-section-number">10.3.2</span> Robust Repeated Measures ANOVA</a></li>
+  <li><a href="#when-to-use-robust-methods" id="toc-when-to-use-robust-methods" class="nav-link" data-scroll-target="#when-to-use-robust-methods"><span class="header-section-number">10.3.3</span> When to Use Robust Methods</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#generalised-linear-models-as-the-real-solution" id="toc-generalised-linear-models-as-the-real-solution" class="nav-link" data-scroll-target="#generalised-linear-models-as-the-real-solution"><span class="header-section-number">10.4</span> Generalised Linear Models as the Real Solution</a>
+  <ul class="collapse">
+<li><a href="#the-fundamental-problem-with-transformations" id="toc-the-fundamental-problem-with-transformations" class="nav-link" data-scroll-target="#the-fundamental-problem-with-transformations"><span class="header-section-number">10.4.1</span> The Fundamental Problem with Transformations</a></li>
+  <li><a href="#sec-glm-intro" id="toc-sec-glm-intro" class="nav-link" data-scroll-target="#sec-glm-intro"><span class="header-section-number">10.4.2</span> The GLM Framework</a></li>
+  <li><a href="#common-glms-in-biology" id="toc-common-glms-in-biology" class="nav-link" data-scroll-target="#common-glms-in-biology"><span class="header-section-number">10.4.3</span> Common GLMs in Biology</a></li>
+  <li><a href="#example-count-data" id="toc-example-count-data" class="nav-link" data-scroll-target="#example-count-data"><span class="header-section-number">10.4.4</span> Example: Count Data</a></li>
+  <li><a href="#example-proportion-data" id="toc-example-proportion-data" class="nav-link" data-scroll-target="#example-proportion-data"><span class="header-section-number">10.4.5</span> Example: Proportion Data</a></li>
+  <li><a href="#glms-vs-transformations-a-direct-comparison" id="toc-glms-vs-transformations-a-direct-comparison" class="nav-link" data-scroll-target="#glms-vs-transformations-a-direct-comparison"><span class="header-section-number">10.4.6</span> GLMs vs Transformations: A Direct Comparison</a></li>
+  <li><a href="#a-decision-framework" id="toc-a-decision-framework" class="nav-link" data-scroll-target="#a-decision-framework"><span class="header-section-number">10.4.7</span> A Decision Framework</a></li>
+  <li><a href="#the-bottom-line" id="toc-the-bottom-line" class="nav-link" data-scroll-target="#the-bottom-line"><span class="header-section-number">10.4.8</span> The Bottom Line</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/04c-when-assumptions-fail.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-modern-framework.html">The Modern Framework</a></li><li class="breadcrumb-item"><a href="./04c-when-assumptions-fail.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">When Assumptions Fail, What to Do ?</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-chap10" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">When Assumptions Fail, What to Do ?</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Every ANOVA and linear mixed model fitted in this book rests on assumptions. Chapter 2 examined those assumptions in depth and showed that their consequences are not equal: independence is critical, homoscedasticity is important, normality is often a minor concern. But what happens when the data genuinely violate one or more of these assumptions in ways that cannot be ignored?</p>
+<p>This chapter provides a practical toolkit. It begins with transformations, the classical first response to assumption violations, and examines both their genuine utility and their limitations. It then introduces non-parametric alternatives that make no distributional assumptions at all. It also presents robust ANOVA methods that explicitly downweight the influence of outliers and heavy tails. And it ends with the argument that for many of the situations where assumptions fail most seriously (count data, proportions, survival times), the correct solution is not a patch applied to the normal linear model but a fundamentally different model class: the generalised linear model (GLM).</p>
+<section id="transformations-log-square-root-arcsine-and-their-modern-critics" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="transformations-log-square-root-arcsine-and-their-modern-critics">
+<span class="header-section-number">10.1</span> Transformations: Log, Square Root, Arcsine and Their Modern Critics</h2>
+<section id="the-classical-rationale" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="the-classical-rationale">
+<span class="header-section-number">10.1.1</span> The Classical Rationale</h3>
+<p>Transformations have been the standard first response to non-normality and heteroscedasticity in biological data since Fisher’s time. The logic is simple: if the response variable <span class="math inline">\(y\)</span> violates the assumptions of ANOVA on its original scale, perhaps a transformed version <span class="math inline">\(f(y)\)</span> will not. The three transformations most commonly encountered in biology are the log, square root, and arcsine transformations.</p>
+</section><section id="the-log-transformation" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="the-log-transformation">
+<span class="header-section-number">10.1.2</span> The Log Transformation</h3>
+<p>The log transformation is appropriate when the response is strictly positive and the within-group standard deviation is proportional to the mean, a pattern called <strong>multiplicative variation</strong> or <strong>constant coefficient of variation</strong>. This arises naturally when biological processes operate multiplicatively: cell counts doubling, concentrations following pharmacokinetic decay, body masses scaling allometrically.</p>
+<p><span class="math display">\[y' = \log(y) \quad \text{or} \quad y' = \log(y + 1) \text{ if zeros are present}\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
+<span></span>
+<span><span class="co"># Multiplicative data: sd proportional to mean</span></span>
+<span><span class="va">group</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Treatment A"</span>, <span class="st">"Treatment B"</span><span class="op">)</span>, each <span class="op">=</span> <span class="va">n</span><span class="op">)</span>,</span>
+<span>                 levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Treatment A"</span>, <span class="st">"Treatment B"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y_raw</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">2.0</span>, sdlog <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">2.8</span>, sdlog <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">3.5</span>, sdlog <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y_log</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">y_raw</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_trans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">y_raw</span>, <span class="va">y_log</span>, <span class="va">group</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df_trans</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">y_raw</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#2E86AB"</span>, <span class="st">"#F6AE2D"</span>, <span class="st">"#E84855"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Raw scale"</span>, x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Response"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df_trans</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">y_log</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#2E86AB"</span>, <span class="st">"#F6AE2D"</span>, <span class="st">"#E84855"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Log scale"</span>, x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"log(Response)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-log-transform-demo" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-log-transform-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04c-when-assumptions-fail_files/figure-html/fig-log-transform-demo-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-transform-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: Effect of log transformation on a right-skewed response. Left: raw counts with a long right tail and variance increasing with the mean. Right: log-transformed values with approximately symmetric distribution and homogeneous variance across groups. The log transformation is appropriate when within-group standard deviation is proportional to the group mean.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>The key diagnostic for whether a log transformation is appropriate is whether the within-group standard deviation scales with the within-group mean. A plot of group standard deviation against group mean (Section 5.1) will reveal this pattern. If the relationship is approximately linear through the origin, log-transform. If it is not, the log transformation may not be the right choice.</p>
+</section><section id="the-square-root-transformation" class="level3" data-number="10.1.3"><h3 data-number="10.1.3" class="anchored" data-anchor-id="the-square-root-transformation">
+<span class="header-section-number">10.1.3</span> The Square Root Transformation</h3>
+<p>The square root transformation is appropriate for count data where the variance is approximately equal to the mean, the pattern expected from a Poisson distribution:</p>
+<p><span class="math display">\[y' = \sqrt{y} \quad \text{or} \quad y' = \sqrt{y + 0.5} \text{ if zeros are present}\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Poisson-like count data</span></span>
+<span><span class="va">y_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">rpois</a></span><span class="op">(</span><span class="va">n</span>, lambda <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">rpois</a></span><span class="op">(</span><span class="va">n</span>, lambda <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">rpois</a></span><span class="op">(</span><span class="va">n</span>, lambda <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  y <span class="op">=</span> <span class="va">y_count</span>,</span>
+<span>  y_sqrt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">y_count</span><span class="op">)</span>,</span>
+<span>  group <span class="op">=</span> <span class="va">group</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compare residual variance before and after transformation</span></span>
+<span><span class="va">fit_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_count</span><span class="op">)</span></span>
+<span><span class="va">fit_sqrt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">y_sqrt</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_count</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Levene's test on raw counts:\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Levene's test on raw counts:</code></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_count</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Levene's Test for Homogeneity of Variance (center = median)
+#&gt;       Df F value   Pr(&gt;F)   
+#&gt; group  2  6.4379 0.002469 **
+#&gt;       87                    
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\nLevene's test on square root transformed counts:\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; Levene's test on square root transformed counts:</code></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">y_sqrt</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_count</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Levene's Test for Homogeneity of Variance (center = median)
+#&gt;       Df F value Pr(&gt;F)
+#&gt; group  2  0.2219 0.8014
+#&gt;       87</code></pre>
+</div>
+</div>
+<p>The Levene’s test results demonstrate the variance-stabilising effect of the square root transformation clearly. On the raw count scale, the variances differ significantly across groups (<span class="math inline">\(F_{2,87} = 6.44\)</span>, <span class="math inline">\(p = 0.002\)</span>) which is a direct consequence of the Poisson-like structure where variance scales with the mean. The control group, with a small mean (<span class="math inline">\(\lambda = 3\)</span>), has much less spread than the high group (<span class="math inline">\(\lambda = 20\)</span>), producing the heteroscedasticity that would distort a standard ANOVA F test.</p>
+<p>After square root transformation, the heteroscedasticity disappears entirely: Levene’s test is non-significant (<span class="math inline">\(F_{2,87} = 0.22\)</span>, <span class="math inline">\(p = 0.801\)</span>) and the variances are now approximately equal across groups. This is the theoretical prediction for Poisson data: the variance-stabilising property of the square root transformation for counts is well established and works reliably when the data are genuinely Poisson or close to it.</p>
+<p>Two caveats are worth noting for students. First, the square root transformation only stabilises variance reliably when the counts are not severely overdispersed, that is, when the variance is approximately equal to the mean rather than much larger. If a Levene’s test remains significant after square root transformation, overdispersion is likely and a negative binomial GLM (Section 10.4) is the more appropriate solution. Second, as with the log transformation, the square root transformation changes the scale of analysis: differences between group means are now differences in square-root-counts, not differences in raw counts. Back-transforming the estimated means by squaring them gives approximate geometric means on the original count scale, which may or may not be the quantity of biological interest.</p>
+</section><section id="the-arcsine-square-root-transformation" class="level3" data-number="10.1.4"><h3 data-number="10.1.4" class="anchored" data-anchor-id="the-arcsine-square-root-transformation">
+<span class="header-section-number">10.1.4</span> The Arcsine Square Root Transformation</h3>
+<p>The arcsine square root transformation was historically recommended for proportions and percentages, with the goal of stabilising the variance of binomial data:</p>
+<p><span class="math display">\[y' = \arcsin(\sqrt{p})\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Simulate binomial proportions across three groups</span></span>
+<span><span class="co"># with equal true proportions but different sample sizes</span></span>
+<span><span class="co"># Variance of a binomial proportion is p(1-p)/n</span></span>
+<span><span class="co"># it depends on p, which is what the arcsine transformation</span></span>
+<span><span class="co"># is designed to stabilise</span></span>
+<span></span>
+<span><span class="va">n_obs</span> <span class="op">&lt;-</span> <span class="fl">50</span>    <span class="co"># observations per group</span></span>
+<span><span class="va">n_trials</span> <span class="op">&lt;-</span> <span class="fl">20</span>   <span class="co"># number of trials per observation</span></span>
+<span></span>
+<span><span class="co"># Three groups with different true proportions</span></span>
+<span><span class="va">true_p</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.10</span>, <span class="fl">0.45</span>, <span class="fl">0.85</span><span class="op">)</span></span>
+<span><span class="va">groups</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Mid"</span>, <span class="st">"High"</span><span class="op">)</span>, each <span class="op">=</span> <span class="va">n_obs</span><span class="op">)</span>,</span>
+<span>                  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Mid"</span>, <span class="st">"High"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Simulate observed proportions</span></span>
+<span><span class="va">props</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">n_obs</span>, <span class="va">n_trials</span>, <span class="va">true_p</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_trials</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">n_obs</span>, <span class="va">n_trials</span>, <span class="va">true_p</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_trials</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">n_obs</span>, <span class="va">n_trials</span>, <span class="va">true_p</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_trials</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_asin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  p      <span class="op">=</span> <span class="va">props</span>,</span>
+<span>  p_asin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">props</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  group  <span class="op">=</span> <span class="va">groups</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Variance of raw proportions per group</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Variance of raw proportions by group:\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Variance of raw proportions by group:</code></pre>
+</div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">df_asin</span><span class="op">$</span><span class="va">p</span>, <span class="va">df_asin</span><span class="op">$</span><span class="va">group</span>, <span class="va">var</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;         Low         Mid        High 
+#&gt; 0.005739796 0.013383673 0.005918367</code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Variance after arcsine transformation</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\nVariance of arcsine-transformed proportions by group:\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; Variance of arcsine-transformed proportions by group:</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">df_asin</span><span class="op">$</span><span class="va">p_asin</span>, <span class="va">df_asin</span><span class="op">$</span><span class="va">group</span>, <span class="va">var</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;        Low        Mid       High 
+#&gt; 0.02134563 0.01532025 0.01606443</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Levene's test on raw proportions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\nLevene's test on raw proportions:\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; Levene's test on raw proportions:</code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">p</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_asin</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Levene's Test for Homogeneity of Variance (center = median)
+#&gt;        Df F value  Pr(&gt;F)  
+#&gt; group   2  4.5503 0.01209 *
+#&gt;       147                  
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Levene's test on arcsine-transformed proportions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\nLevene's test on arcsine-transformed proportions:\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; Levene's test on arcsine-transformed proportions:</code></pre>
+</div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">p_asin</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_asin</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Levene's Test for Homogeneity of Variance (center = median)
+#&gt;        Df F value Pr(&gt;F)
+#&gt; group   2  0.6611 0.5178
+#&gt;       147</code></pre>
+</div>
+</div>
+<p>The raw proportions show the classical binomial pattern: the group near 0.10 and the group near 0.85 have low variance (because <span class="math inline">\(p(1−p)/n\)</span> is small when <span class="math inline">\(p\)</span> is near 0 or 1), while the group near 0.45 has the highest variance (because <span class="math inline">\(p(1−p)/n\)</span> is maximised near <span class="math inline">\(p=0.5\)</span>). Levene’s test on the raw proportions is significant. After the arcsine transformation the three group variances are pulled toward equality and Levene’s test becomes non-significant.</p>
+</section><section id="the-modern-critique-of-transformations" class="level3" data-number="10.1.5"><h3 data-number="10.1.5" class="anchored" data-anchor-id="the-modern-critique-of-transformations">
+<span class="header-section-number">10.1.5</span> The Modern Critique of Transformations</h3>
+<p>Despite their long history, transformations have attracted serious criticism, and it is important to understand the limitations <strong>before</strong> applying them reflexively.</p>
+<p><strong>The arcsine transformation is now largely discredited for proportions.</strong> Warton and Hui <span class="citation" data-cites="Warton2011">(<a href="references.html#ref-Warton2011" role="doc-biblioref">2011</a>)</span> showed in an influential paper that the arcsine square root transformation performs poorly compared to directly modelling proportions with a binomial GLM. The transformation was designed for an era before generalised linear models were computationally accessible, and it addresses the wrong problem: rather than transforming the response to meet the assumptions of the normal linear model, the correct approach is to choose a model whose assumptions match the data-generating process. A proportion is generated by a binomial process ? model it with a binomial model.</p>
+<p><strong>Transformations change the question being asked.</strong> When you log-transform a response and analyse it with ANOVA, you are testing hypotheses about group differences on the log scale which correspond to differences in geometric means, not arithmetic means. Back-transforming the estimated differences gives <em>ratios</em>, not differences. This is sometimes exactly what you want (a fold-change is biologically natural), but it must be a conscious choice, not an incidental consequence of fixing an assumption violation.</p>
+<p>A concrete example makes this concrete. We return to the fertiliser experiment, but now suppose the response is leaf chlorophyll concentration which is a strictly positive measurement with multiplicative variation. We fit ANOVA on both the raw and log-transformed scale and compare what the coefficients actually mean:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
+<span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Nitrogen"</span>, <span class="st">"Phosphorus"</span><span class="op">)</span>, each <span class="op">=</span> <span class="va">n</span><span class="op">)</span>,</span>
+<span>                levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Nitrogen"</span>, <span class="st">"Phosphorus"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Simulate multiplicative data: nitrogen doubles concentration,</span></span>
+<span><span class="co"># phosphorus increases it by 50%</span></span>
+<span><span class="va">conc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, sdlog <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>,   <span class="co"># Control:    mean ~10</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>, sdlog <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>,   <span class="co"># Nitrogen:   mean ~20</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span>, sdlog <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>    <span class="co"># Phosphorus: mean ~15</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_conc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">conc</span>, log_conc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">conc</span><span class="op">)</span>, <span class="va">group</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Model 1: ANOVA on raw scale</span></span>
+<span><span class="va">fit_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">conc</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_conc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"=== Coefficients on raw scale ===\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; === Coefficients on raw scale ===</code></pre>
+</div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit_raw</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;     (Intercept)   groupNitrogen groupPhosphorus 
+#&gt;       11.342339        8.078672        4.270734</code></pre>
+</div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Model 2: ANOVA on log scale</span></span>
+<span><span class="va">fit_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">log_conc</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_conc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n=== Coefficients on log scale ===\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; === Coefficients on log scale ===</code></pre>
+</div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit_log</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;     (Intercept)   groupNitrogen groupPhosphorus 
+#&gt;       2.3601611       0.5542736       0.3476159</code></pre>
+</div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n=== Back-transformed log coefficients (exp) ===\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; === Back-transformed log coefficients (exp) ===</code></pre>
+</div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit_log</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;     (Intercept)   groupNitrogen groupPhosphorus 
+#&gt;       10.592658        1.740676        1.415688</code></pre>
+</div>
+</div>
+<p>Reading the two outputs side by side reveals the shift in question.</p>
+<p>On the <strong>raw scale</strong>, the intercept (11.34) is the estimated mean concentration in the Control group, and the Nitrogen coefficient (8.07) is the estimated <em>arithmetic difference</em> in mean concentration between Nitrogen and Control: nitrogen adds approximately 8 units of chlorophyll on average.</p>
+<p>On the <strong>log scale</strong>, the intercept is the estimated log-mean of the Control group, and the Nitrogen coefficient (0.55) is the estimated difference in log-means. This is not an arithmetic difference, it is a <em>log-ratio</em>. Back-transforming by exponentiating gives <span class="math inline">\(e^{0.55} \approx 1.74\)</span>: the Nitrogen group has approximately twice the chlorophyll concentration of the Control group, a <strong>ratio</strong> or <strong>fold-change</strong>.</p>
+<p>These are genuinely different questions:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 42%">
+<col style="width: 42%">
+</colgroup>
+<thead><tr class="header">
+<th>Scale</th>
+<th>Coefficient meaning</th>
+<th>Biological statement</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Raw</td>
+<td><span class="math inline">\(\bar{y}_N - \bar{y}_C \approx 8.07\)</span></td>
+<td>Nitrogen adds 8 units of chlorophyll</td>
+</tr>
+<tr class="even">
+<td>Log</td>
+<td><span class="math inline">\(\exp(\hat{\beta}_N) \approx 1.74\)</span></td>
+<td>Nitrogen doubles chlorophyll concentration</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Neither is wrong, but they are not interchangeable</strong>. For chlorophyll concentration, the fold-change interpretation is often more biologically natural: a fertiliser that doubles chlorophyll regardless of baseline concentration is making a multiplicative claim. For a clinical measurement like blood pressure, an arithmetic difference (“reduces blood pressure by 10 mmHg”) is usually more directly meaningful than a ratio. <em>The choice of scale should be driven by which question is scientifically relevant, not by which transformation fixes the residual diagnostics.</em></p>
+<p><strong>Transformations do not always fix both problems simultaneously.</strong> A transformation chosen to stabilise variance may worsen normality, and vice versa. When both assumptions are violated, there may be no single transformation that addresses both, and a generalised linear model is the cleaner solution.</p>
+<p><strong>The practical recommendation:</strong> use log transformations for multiplicative, positive data where the log scale has a natural biological interpretation (concentrations, fold-changes, ratios). Use square root for counts when overdispersion is modest. Avoid arcsine for proportions, use a binomial GLM instead. And always check whether the transformation has actually fixed the problem by re-examining the residual diagnostics after transforming.</p>
+</section></section><section id="non-parametric-alternatives" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="non-parametric-alternatives">
+<span class="header-section-number">10.2</span> Non-Parametric Alternatives</h2>
+<p>Non-parametric tests replace the raw observations with their ranks before analysis. Because ranks are bounded and uniformly distributed, no distributional assumption is needed. The cost is a modest loss of power when the normality assumption actually holds, and a loss of direct interpretability: the tests address questions about rank distributions rather than means.</p>
+<section id="kruskal-wallis-test" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="kruskal-wallis-test">
+<span class="header-section-number">10.2.1</span> Kruskal-Wallis Test</h3>
+<p>The Kruskal-Wallis test is the non-parametric equivalent of one-way ANOVA. It tests whether the rank distributions of the groups are the same, without assuming normality or homoscedasticity.</p>
+<p>The test statistic is:</p>
+<p><span class="math display">\[H = \frac{12}{N(N+1)} \sum_{j=1}^{k} \frac{R_j^2}{n_j} - 3(N+1)\]</span></p>
+<p>where <span class="math inline">\(R_j\)</span> is the sum of ranks in group <span class="math inline">\(j\)</span>, <span class="math inline">\(n_j\)</span> is the group size, and <span class="math inline">\(N\)</span> is the total number of observations. Under the null hypothesis of identical distributions, <span class="math inline">\(H\)</span> follows approximately a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(k - 1\)</span> degrees of freedom.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Strongly skewed data, normality assumption clearly violated</span></span>
+<span><span class="va">y_skew</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="fl">15</span>, meanlog <span class="op">=</span> <span class="fl">0</span>, sdlog <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="fl">15</span>, meanlog <span class="op">=</span> <span class="fl">0.8</span>, sdlog <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="fl">15</span>, meanlog <span class="op">=</span> <span class="fl">1.5</span>, sdlog <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Low"</span>, <span class="st">"High"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df_kw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_skew</span>, group <span class="op">=</span> <span class="va">group</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Kruskal-Wallis test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_kw</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt;  Kruskal-Wallis rank sum test
+#&gt; 
+#&gt; data:  y by group
+#&gt; Kruskal-Wallis chi-squared = 0.97932, df = 2, p-value = 0.6128</code></pre>
+</div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Post-hoc pairwise comparisons after Kruskal-Wallis</span></span>
+<span><span class="co"># using Dunn's test with Holm correction</span></span>
+<span><span class="co"># install.packages("dunn.test") if needed</span></span>
+<span><span class="fu">dunn.test</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dunn.test/man/dunn.test.html">dunn.test</a></span><span class="op">(</span><span class="va">df_kw</span><span class="op">$</span><span class="va">y</span>, <span class="va">df_kw</span><span class="op">$</span><span class="va">group</span>, method <span class="op">=</span> <span class="st">"holm"</span>, kw <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; 
+#&gt;                     Dunn's Pairwise Comparison of x by group                    
+#&gt;                                      (Holm)                                     
+#&gt; 
+#&gt; Col Mean-│
+#&gt; Row Mean │    Control       High
+#&gt; ─────────┼──────────────────────
+#&gt;     High │  -0.556038
+#&gt;          │     0.5782 
+#&gt;          │
+#&gt;      Low │   0.430930   0.986968
+#&gt;          │     0.3333     0.4855 
+#&gt; 
+#&gt; FWER = 0.05
+#&gt; Reject Ho if adjusted p ≤ FWER/2 with stopping rule, where (unadjusted) p = Pr(Z ≥ |z|)</code></pre>
+</div>
+</div>
+<p>The Kruskal-Wallis test is the right choice when:</p>
+<ul>
+<li>Sample sizes are small (<span class="math inline">\(n &lt; 10\)</span> per group) and residuals are clearly non-normal.</li>
+<li>The response contains extreme outliers that are genuine biological observations rather than measurement errors.</li>
+<li>The response is an ordinal scale where the numerical values do not have a natural arithmetic interpretation.</li>
+</ul>
+<p>It is <strong>not</strong> a universal replacement for ANOVA. I repeat, it is <strong>not</strong> a universal replacement for ANOVA. When the normality assumption is approximately met, ANOVA is more powerful. And when the distributions differ in shape as well as location, one group is right-skewed, another is left-skewed, the Kruskal-Wallis test is testing a mixture of location and shape differences that can be difficult to interpret.</p>
+</section><section id="friedman-test" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="friedman-test">
+<span class="header-section-number">10.2.2</span> 10.2.2 Friedman Test</h3>
+<p>The Friedman test is the non-parametric equivalent of one-way repeated measures ANOVA. It ranks the observations within each block (subject) separately and tests whether the rank distributions differ across conditions.</p>
+<p><span class="math display">\[F_r = \frac{12}{nk(k+1)} \sum_{j=1}^{k} R_j^2 - 3n(k+1)\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the number of blocks (subjects), <span class="math inline">\(k\)</span> is the number of conditions, and <span class="math inline">\(R_j\)</span> is the sum of ranks for condition <span class="math inline">\(j\)</span> across all blocks.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n_subj</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
+<span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
+<span></span>
+<span><span class="co"># Simulate non-normal within-subject data in long format</span></span>
+<span><span class="va">df_friedman</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="va">n_subj</span>, rate <span class="op">=</span> <span class="fl">0.50</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="va">n_subj</span>, rate <span class="op">=</span> <span class="fl">0.40</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="va">n_subj</span>, rate <span class="op">=</span> <span class="fl">0.30</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="va">n_subj</span>, rate <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  subject <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n_subj</span>, times <span class="op">=</span> <span class="va">k</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">k</span>, each <span class="op">=</span> <span class="va">n_subj</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Friedman test using long format</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/friedman.test.html">friedman.test</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">time</span> <span class="op">|</span> <span class="va">subject</span>, data <span class="op">=</span> <span class="va">df_friedman</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt;  Friedman rank sum test
+#&gt; 
+#&gt; data:  y and time and subject
+#&gt; Friedman chi-squared = 6.36, df = 3, p-value = 0.09535</code></pre>
+</div>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Post-hoc pairwise comparisons after Friedman test</span></span>
+<span><span class="co"># PMCMRplus expects y, groups, blocks as separate vectors</span></span>
+<span><span class="fu">PMCMRplus</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/PMCMRplus/man/frdAllPairsNemenyiTest.html">frdAllPairsNemenyiTest</a></span><span class="op">(</span></span>
+<span>  y <span class="op">=</span> <span class="va">df_friedman</span><span class="op">$</span><span class="va">y</span>,</span>
+<span>  groups <span class="op">=</span> <span class="va">df_friedman</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  blocks <span class="op">=</span> <span class="va">df_friedman</span><span class="op">$</span><span class="va">subject</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;   1     2     3    
+#&gt; 2 0.611 -     -    
+#&gt; 3 0.068 0.611 -    
+#&gt; 4 0.316 0.961 0.883</code></pre>
+</div>
+</div>
+<p>The Friedman test should be considered when:</p>
+<ul>
+<li>The within-subject response is clearly non-normal even after transformation.</li>
+<li>The response is ordinal.</li>
+<li>Sample sizes are very small (fewer than 10 subjects).</li>
+</ul>
+<p>For larger samples with continuous responses, the repeated measures mixed model from Chapter <a href="04b-mixed-effects.html#sec-repeat-mixed" class="quarto-xref"><span>9.6</span></a> is more powerful and more flexible, and the normality assumption for the residuals is approximately satisfied by the central limit theorem.</p>
+</section><section id="permutation-tests" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="permutation-tests">
+<span class="header-section-number">10.2.3</span> Permutation Tests</h3>
+<p>Permutation tests are the most general non-parametric approach. Rather than deriving a reference distribution from mathematical theory (the <span class="math inline">\(F\)</span> distribution, the <span class="math inline">\(\chi^2\)</span> distribution), they construct an empirical reference distribution by repeatedly shuffling the data and recomputing the test statistic. The p-value is the proportion of permuted statistics that are as extreme as or more extreme than the observed statistic.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/futureverse/furrr">furrr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Observed F statistic</span></span>
+<span><span class="va">fit_obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_kw</span><span class="op">)</span></span>
+<span><span class="va">obs_F</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit_obs</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"F value"</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Permutation distribution: shuffle group labels 4999 times</span></span>
+<span><span class="va">n_perm</span> <span class="op">&lt;-</span> <span class="fl">4999</span></span>
+<span><span class="va">perm_F</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html">future_map_dbl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n_perm</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">df_perm</span> <span class="op">&lt;-</span> <span class="va">df_kw</span></span>
+<span>  <span class="va">df_perm</span><span class="op">$</span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">df_kw</span><span class="op">$</span><span class="va">group</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_perm</span><span class="op">)</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"F value"</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="op">}</span>, .options <span class="op">=</span> <span class="fu"><a href="https://furrr.futureverse.org/reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Permutation p-value</span></span>
+<span><span class="va">p_perm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">perm_F</span>, <span class="va">obs_F</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="va">obs_F</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Observed F:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">obs_F</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  <span class="st">"\nPermutation p-value:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p_perm</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"\n"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Observed F: 0 
+#&gt; Permutation p-value: 1</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">perm_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>F <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">perm_F</span>, <span class="va">obs_F</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">perm_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.2</span>, fill <span class="op">=</span> <span class="st">"#2E86AB"</span>,</span>
+<span>                 colour <span class="op">=</span> <span class="st">"white"</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">obs_F</span>,</span>
+<span>             colour <span class="op">=</span> <span class="st">"red"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="va">obs_F</span> <span class="op">+</span> <span class="fl">0.3</span>, y <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>           label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Observed F = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">obs_F</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>           colour <span class="op">=</span> <span class="st">"red"</span>, hjust <span class="op">=</span> <span class="fl">0</span>, vjust <span class="op">=</span> <span class="fl">2</span>, size <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"F statistic"</span>, y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-permutation-plot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-permutation-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04c-when-assumptions-fail_files/figure-html/fig-permutation-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-permutation-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: Permutation distribution of the <span class="math inline">\(F\)</span> statistic under the null hypothesis (4999 permutations). The red dashed line marks the observed <span class="math inline">\(F\)</span> statistic. The permutation p-value is the proportion of permuted F values to the right of this line.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Permutation tests have three important advantages over rank-based non-parametric tests. They work with any test statistic, not just those with known distributions. They make no assumptions about the shape of the residual distribution. And they are exact in the sense that their type I error rate is exactly <span class="math inline">\(\alpha\)</span> in finite samples, whereas rank tests rely on large-sample approximations.</p>
+<p>Their limitation is computational cost: each permutation requires refitting the model, and with thousands of permutations and large datasets this can be slow. Parallelisation with <code>furrr</code>, as shown above, mitigates this considerably.</p>
+</section></section><section id="robust-anova-with-wrs2" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="robust-anova-with-wrs2">
+<span class="header-section-number">10.3</span> Robust ANOVA with WRS2</h2>
+<p>Robust statistical methods are a middle ground between classical ANOVA and non-parametric tests. Rather than discarding the distributional framework entirely, they modify it to be less sensitive to outliers and heavy tails by replacing the sample mean with more resistant location estimators like trimmed means or M-estimators.</p>
+<p>The <code>WRS2</code> package <span class="citation" data-cites="Mair2020">(<a href="references.html#ref-Mair2020" role="doc-biblioref">Mair and Wilcox 2020</a>)</span> implements a comprehensive suite of robust ANOVA methods in R.</p>
+<section id="one-way-robust-anova" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="one-way-robust-anova">
+<span class="header-section-number">10.3.1</span> One-Way Robust ANOVA</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("WRS2") if needed</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/psychor/">WRS2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Data with outliers — classical ANOVA will be distorted</span></span>
+<span><span class="va">y_out</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">15</span>, mean <span class="op">=</span> <span class="fl">20</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">15</span>, mean <span class="op">=</span> <span class="fl">25</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">15</span>, mean <span class="op">=</span> <span class="fl">22</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Inject two extreme outliers into the control group</span></span>
+<span><span class="va">y_out</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">62</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">group_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Nitrogen"</span>, <span class="st">"Phosphorus"</span><span class="op">)</span>,</span>
+<span>                        each <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df_out</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_out</span>, group <span class="op">=</span> <span class="va">group_out</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Classical ANOVA — affected by outliers</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_out</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;             Df Sum Sq Mean Sq F value Pr(&gt;F)
+#&gt; group        2  207.1  103.53   1.494  0.236
+#&gt; Residuals   42 2909.9   69.28</code></pre>
+</div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Robust one-way ANOVA using trimmed means (tr = 0.2 = 20% trimming)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/WRS2/man/t1way.html">t1way</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_out</span>, tr <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Call:
+#&gt; t1way(formula = y ~ group, data = df_out, tr = 0.2)
+#&gt; 
+#&gt; Test statistic: F = 1.7046 
+#&gt; Degrees of freedom 1: 2 
+#&gt; Degrees of freedom 2: 15.2 
+#&gt; p-value: 0.21483 
+#&gt; 
+#&gt; Explanatory measure of effect size: 0.41 
+#&gt; Bootstrap CI: [0.08; 1.06]</code></pre>
+</div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Post-hoc comparisons with robust method</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/WRS2/man/t1way.html">lincon</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_out</span>, tr <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Call:
+#&gt; lincon(formula = y ~ group, data = df_out, tr = 0.2)
+#&gt; 
+#&gt;                           psihat ci.lower ci.upper p.value
+#&gt; Control vs. Nitrogen    -2.30259 -6.99682  2.39163 0.42412
+#&gt; Control vs. Phosphorus   0.48803 -3.51947  4.49553 0.74733
+#&gt; Nitrogen vs. Phosphorus  2.79062 -1.23348  6.81473 0.24823</code></pre>
+</div>
+</div>
+<p>The <code><a href="https://rdrr.io/pkg/WRS2/man/t1way.html">t1way()</a></code> function tests for differences in trimmed means across groups, using a heteroscedastic test statistic that is robust to both outliers and unequal variances simultaneously. The trimming proportion <code>tr = 0.2</code> removes the most extreme 20% of observations from each tail before computing the mean. This standard choice provides substantial robustness while retaining reasonable efficiency.</p>
+</section><section id="robust-repeated-measures-anova" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="robust-repeated-measures-anova">
+<span class="header-section-number">10.3.2</span> Robust Repeated Measures ANOVA</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n_subj</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
+<span></span>
+<span><span class="co"># Repeated measures data with outliers in long format</span></span>
+<span><span class="va">df_rm_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  y       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_subj</span>, <span class="fl">80</span>, <span class="fl">8</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_subj</span>, <span class="fl">75</span>, <span class="fl">8</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_subj</span>, <span class="fl">70</span>, <span class="fl">8</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_subj</span>, <span class="fl">68</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  subject <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n_subj</span>, times <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  time    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, each <span class="op">=</span> <span class="va">n_subj</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Inject two extreme outliers</span></span>
+<span><span class="va">df_rm_out</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">38</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">130</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Robust repeated measures ANOVA</span></span>
+<span><span class="co"># rmanova() requires explicit vectors, not a formula</span></span>
+<span><span class="fu">WRS2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/WRS2/man/rmanova.html">rmanova</a></span><span class="op">(</span></span>
+<span>  y      <span class="op">=</span> <span class="va">df_rm_out</span><span class="op">$</span><span class="va">y</span>,</span>
+<span>  groups <span class="op">=</span> <span class="va">df_rm_out</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  blocks <span class="op">=</span> <span class="va">df_rm_out</span><span class="op">$</span><span class="va">subject</span>,</span>
+<span>  tr     <span class="op">=</span> <span class="fl">0.2</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Call:
+#&gt; WRS2::rmanova(y = df_rm_out$y, groups = df_rm_out$time, blocks = df_rm_out$subject, 
+#&gt;     tr = 0.2)
+#&gt; 
+#&gt; Test statistic: F = 7.809 
+#&gt; Degrees of freedom 1: 2.43 
+#&gt; Degrees of freedom 2: 26.7 
+#&gt; p-value: 0.00126</code></pre>
+</div>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Post-hoc robust pairwise comparisons</span></span>
+<span><span class="fu">WRS2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/WRS2/man/rmanova.html">rmmcp</a></span><span class="op">(</span></span>
+<span>  y      <span class="op">=</span> <span class="va">df_rm_out</span><span class="op">$</span><span class="va">y</span>,</span>
+<span>  groups <span class="op">=</span> <span class="va">df_rm_out</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  blocks <span class="op">=</span> <span class="va">df_rm_out</span><span class="op">$</span><span class="va">subject</span>,</span>
+<span>  tr     <span class="op">=</span> <span class="fl">0.2</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Call:
+#&gt; WRS2::rmmcp(y = df_rm_out$y, groups = df_rm_out$time, blocks = df_rm_out$subject, 
+#&gt;     tr = 0.2)
+#&gt; 
+#&gt;           psihat ci.lower ci.upper p.value  p.crit   sig
+#&gt; 1 vs. 2 13.06885  7.29720 18.84050 0.00002 0.00851  TRUE
+#&gt; 1 vs. 3 11.63598  2.45949 20.81248 0.00186 0.01020  TRUE
+#&gt; 1 vs. 4 12.29738  0.84291 23.75185 0.00548 0.01270  TRUE
+#&gt; 2 vs. 3  1.41241 -6.77034  9.59516 0.59083 0.02500 FALSE
+#&gt; 2 vs. 4  2.62953 -7.40725 12.66631 0.41853 0.01690 FALSE
+#&gt; 3 vs. 4  0.80307 -5.15229  6.75843 0.67366 0.05000 FALSE</code></pre>
+</div>
+</div>
+</section><section id="when-to-use-robust-methods" class="level3" data-number="10.3.3"><h3 data-number="10.3.3" class="anchored" data-anchor-id="when-to-use-robust-methods">
+<span class="header-section-number">10.3.3</span> When to Use Robust Methods</h3>
+<p>Robust ANOVA methods are particularly valuable when:</p>
+<ul>
+<li>Outliers are genuine biological observations. Removing them is not scientifically justified, but their influence on the mean should be limited.</li>
+<li>The response distribution is heavy-tailed but not severely skewed. In such case, the trimmed mean is still a meaningful location estimator.</li>
+<li>You want results that are directly interpretable in terms of location differences, unlike rank-based tests.</li>
+</ul>
+<p>Their main limitation is that trimmed mean differences are less familiar to most biological audiences than ordinary mean differences, and reporting them requires more explanation.</p>
+</section></section><section id="generalised-linear-models-as-the-real-solution" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="generalised-linear-models-as-the-real-solution">
+<span class="header-section-number">10.4</span> Generalised Linear Models as the Real Solution</h2>
+<section id="the-fundamental-problem-with-transformations" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="the-fundamental-problem-with-transformations">
+<span class="header-section-number">10.4.1</span> The Fundamental Problem with Transformations</h3>
+<p>All of the methods discussed so far, transformations, rank tests, robust ANOVA, are <strong>workarounds</strong> applied to a model that was not designed for the data at hand. When the response is a count, a proportion, a binary outcome, or a survival time, the normal linear model is structurally misspecified: it assumes a symmetric, continuous, unbounded response, while the actual response is discrete, bounded, or strictly positive. No transformation or rank-based adjustment changes this fundamental mismatch.</p>
+<p>The correct solution is to choose a model whose structure matches the data-generating process. <strong>Generalised linear models (GLMs)</strong> provide exactly this: a unified framework that extends the linear model to non-normal response distributions through two modifications.</p>
+</section><section id="sec-glm-intro" class="level3" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="sec-glm-intro">
+<span class="header-section-number">10.4.2</span> The GLM Framework</h3>
+<p>A GLM has three components:</p>
+<ol type="1">
+<li>A <strong>random component</strong>: the distribution of the response, chosen from the exponential family (normal, Poisson, binomial, gamma, negative binomial, etc.).</li>
+<li>A <strong>systematic component</strong>: the linear predictor <span class="math inline">\(\eta_i = \mathbf{x}_i^T \boldsymbol{\beta}\)</span>, the same linear combination of predictors as in the normal linear model.</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the maths!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Found <span class="math inline">\(\eta_i = \mathbf{x}_i^T \boldsymbol{\beta}\)</span>, the bold symbols and superscript <span class="math inline">\(T\)</span> unfamiliar, We have you covered! See <a href="appendix-a-math.html#sec-matrix-notation" class="quarto-xref"><span>Section A.2</span></a> for a simple and complete explanation.</p>
+</div>
+</div>
+<ol start="3" type="1">
+<li>A <strong>link function</strong> <span class="math inline">\(g(\cdot)\)</span> connecting the expected response to the linear predictor: <span class="math inline">\(g(\mu_i) = \eta_i\)</span>.</li>
+</ol>
+<p>The model is fitted by maximum likelihood rather than ordinary least squares, and inference is based on likelihood ratio tests and Wald tests rather than F tests.</p>
+</section><section id="common-glms-in-biology" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="common-glms-in-biology">
+<span class="header-section-number">10.4.3</span> Common GLMs in Biology</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 24%">
+<col style="width: 28%">
+<col style="width: 18%">
+</colgroup>
+<thead><tr class="header">
+<th>Response type</th>
+<th>Distribution</th>
+<th>Link function</th>
+<th>R family</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Counts (no overdispersion)</td>
+<td>Poisson</td>
+<td>log</td>
+<td><code>poisson</code></td>
+</tr>
+<tr class="even">
+<td>Counts (overdispersed)</td>
+<td>Negative binomial</td>
+<td>log</td>
+<td><code><a href="https://rdrr.io/pkg/MASS/man/negative.binomial.html">MASS::negative.binomial</a></code></td>
+</tr>
+<tr class="odd">
+<td>Proportions</td>
+<td>Binomial</td>
+<td>logit</td>
+<td><code>binomial</code></td>
+</tr>
+<tr class="even">
+<td>Binary outcomes</td>
+<td>Binomial</td>
+<td>logit</td>
+<td><code>binomial</code></td>
+</tr>
+<tr class="odd">
+<td>Positive continuous</td>
+<td>Gamma</td>
+<td>log or inverse</td>
+<td><code>Gamma</code></td>
+</tr>
+<tr class="even">
+<td>Positive continuous (log-normal)</td>
+<td>Gaussian</td>
+<td>log</td>
+<td><code>gaussian(link="log")</code></td>
+</tr>
+</tbody>
+</table></section><section id="example-count-data" class="level3" data-number="10.4.4"><h3 data-number="10.4.4" class="anchored" data-anchor-id="example-count-data">
+<span class="header-section-number">10.4.4</span> Example: Count Data</h3>
+<p>Suppose you are counting the number of insect damage events on plants under three pesticide treatments. The response is a count, non-negative integers with variance likely proportional to the mean. The correct model is a Poisson GLM or, if the counts are overdispersed, a negative binomial GLM.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
+<span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Low dose"</span>, <span class="st">"High dose"</span><span class="op">)</span>, each <span class="op">=</span> <span class="va">n</span><span class="op">)</span>,</span>
+<span>                  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Low dose"</span>, <span class="st">"High dose"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">rpois</a></span><span class="op">(</span><span class="va">n</span>, lambda <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">rpois</a></span><span class="op">(</span><span class="va">n</span>, lambda <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">rpois</a></span><span class="op">(</span><span class="va">n</span>, lambda <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">counts</span>, <span class="va">group</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Wrong approach: ANOVA on raw counts</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">counts</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_glm</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+#&gt; group        2 2651.3  1325.6   150.9 &lt;2e-16 ***
+#&gt; Residuals   87  764.1     8.8                   
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Correct approach: Poisson GLM</span></span>
+<span><span class="va">fit_pois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">counts</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_glm</span>,</span>
+<span>                family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit_pois</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; Call:
+#&gt; glm(formula = counts ~ group, family = poisson(link = "log"), 
+#&gt;     data = df_glm)
+#&gt; 
+#&gt; Coefficients:
+#&gt;                Estimate Std. Error z value Pr(&gt;|z|)    
+#&gt; (Intercept)     2.77050    0.04569   60.63   &lt;2e-16 ***
+#&gt; groupLow dose  -0.84869    0.08346  -10.17   &lt;2e-16 ***
+#&gt; groupHigh dose -1.66084    0.11435  -14.52   &lt;2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; (Dispersion parameter for poisson family taken to be 1)
+#&gt; 
+#&gt;     Null deviance: 406.639  on 89  degrees of freedom
+#&gt; Residual deviance:  99.828  on 87  degrees of freedom
+#&gt; AIC: 435.75
+#&gt; 
+#&gt; Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Check for overdispersion</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Residual deviance / df:"</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/deviance.html">deviance</a></span><span class="op">(</span><span class="va">fit_pois</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/df.residual.html">df.residual</a></span><span class="op">(</span><span class="va">fit_pois</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Residual deviance / df: 1.147</code></pre>
+</div>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># If overdispersed (ratio &gt;&gt; 1), use negative binomial</span></span>
+<span><span class="va">fit_nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html">glm.nb</a></span><span class="op">(</span><span class="va">counts</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_glm</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =
+#&gt; control$trace &gt; : iteration limit reached
+#&gt; Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =
+#&gt; control$trace &gt; : iteration limit reached</code></pre>
+</div>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit_nb</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; Call:
+#&gt; glm.nb(formula = counts ~ group, data = df_glm, init.theta = 37871.48654, 
+#&gt;     link = log)
+#&gt; 
+#&gt; Coefficients:
+#&gt;                Estimate Std. Error z value Pr(&gt;|z|)    
+#&gt; (Intercept)     2.77050    0.04570   60.62   &lt;2e-16 ***
+#&gt; groupLow dose  -0.84869    0.08347  -10.17   &lt;2e-16 ***
+#&gt; groupHigh dose -1.66084    0.11436  -14.52   &lt;2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; (Dispersion parameter for Negative Binomial(37871.49) family taken to be 1)
+#&gt; 
+#&gt;     Null deviance: 406.549  on 89  degrees of freedom
+#&gt; Residual deviance:  99.808  on 87  degrees of freedom
+#&gt; AIC: 437.75
+#&gt; 
+#&gt; Number of Fisher Scoring iterations: 1
+#&gt; 
+#&gt; 
+#&gt;               Theta:  37871 
+#&gt;           Std. Err.:  1198071 
+#&gt; Warning while fitting theta: iteration limit reached 
+#&gt; 
+#&gt;  2 x log-likelihood:  -429.755</code></pre>
+</div>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># ANOVA-style table for GLM</span></span>
+<span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">fit_pois</span>, type <span class="op">=</span> <span class="st">"III"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Analysis of Deviance Table (Type III tests)
+#&gt; 
+#&gt; Response: counts
+#&gt;       LR Chisq Df Pr(&gt;Chisq)    
+#&gt; group   306.81  2  &lt; 2.2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">fit_nb</span>,   type <span class="op">=</span> <span class="st">"III"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Analysis of Deviance Table (Type III tests)
+#&gt; 
+#&gt; Response: counts
+#&gt;       LR Chisq Df Pr(&gt;Chisq)    
+#&gt; group   306.74  2  &lt; 2.2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Both the ANOVA and the Poisson GLM detect a highly significant group effect, but comparing them reveals important differences in what each analysis is actually doing and how trustworthy its results are.</p>
+<p>The standard ANOVA (<span class="math inline">\(F_{2,87} = 150.9\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>) treats the counts as if they were continuous normally distributed measurements. It finds a significant result, but its residual mean square (8.8) has no meaningful interpretation for count data, and the <span class="math inline">\(F\)</span> distribution used to compute the p-value is only an approximation whose quality depends on assumptions that are structurally wrong for integer-valued responses.</p>
+<p>The Poisson GLM produces coefficients on the log scale that have a direct multiplicative interpretation. The intercept (<span class="math inline">\(\hat{\beta}_0 = 2.771\)</span>) is the log of the expected count in the Control group: <span class="math inline">\(e^{2.771} \approx 16\)</span> which is close to the true <span class="math inline">\(\lambda = 15\)</span>. The Low dose coefficient (<span class="math inline">\(\hat{\beta} = -0.849\)</span>) gives a rate ratio of <span class="math inline">\(e^{-0.849} \approx 0.43\)</span>: the Low dose group has approximately 43% of the count of the Control group. The High dose coefficient gives <span class="math inline">\(e^{-1.661} \approx 0.19\)</span>: the High dose group has only about 19% of the Control count. These are the scientifically natural quantities for count data, rate ratios, not arithmetic differences.</p>
+<p>The overdispersion ratio of 1.147 is reassuringly close to 1, indicating that the Poisson model is adequate for these data and overdispersion is not a concern here. This is expected since the data were generated from a Poisson distribution. The negative binomial model confirms this: its estimated dispersion parameter <span class="math inline">\(\hat{\theta} = 37{,}871\)</span> is enormous, meaning the negative binomial has converged to a Poisson (the negative binomial approaches Poisson as <span class="math inline">\(\theta \to \infty\)</span>). The iteration limit warning and the unstable standard error on <span class="math inline">\(\hat{\theta}\)</span> (<span class="math inline">\(SE = 1{,}198{,}071\)</span>) are further confirmation that the extra dispersion parameter is not needed indicating that the Poisson model is sufficient. The AIC for the Poisson model (435.75) is lower than for the negative binomial (437.75), correctly penalising the unnecessary extra parameter.</p>
+<p>The ANOVA-style deviance table from <code><a href="https://rdrr.io/pkg/car/man/Anova.html">car::Anova()</a></code> gives a likelihood ratio test for the group effect: <span class="math inline">\(\chi^2_2 = 306.81\)</span>, <span class="math inline">\(p &lt; 0.001\)</span> for the Poisson model, essentially identical to the negative binomial result (<span class="math inline">\(\chi^2_2 = 306.74\)</span>). This is the appropriate test statistic for a GLM, not an <span class="math inline">\(F\)</span> statistic, but a likelihood ratio chi-squared, and it is this value, not the ANOVA <span class="math inline">\(F\)</span> statistic, that should be reported when analysing count data with a Poisson GLM.</p>
+</section><section id="example-proportion-data" class="level3" data-number="10.4.5"><h3 data-number="10.4.5" class="anchored" data-anchor-id="example-proportion-data">
+<span class="header-section-number">10.4.5</span> Example: Proportion Data</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Number of plants showing disease symptoms out of n_total</span></span>
+<span><span class="va">n_total</span>   <span class="op">&lt;-</span> <span class="fl">20</span></span>
+<span><span class="va">n_disease</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">10</span>, <span class="va">n_total</span>, prob <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,   <span class="co"># Control</span></span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">10</span>, <span class="va">n_total</span>, prob <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>,   <span class="co"># Low dose</span></span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">10</span>, <span class="va">n_total</span>, prob <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span><span class="op">)</span>  <span class="co"># High dose</span></span>
+<span><span class="va">group_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Low dose"</span>, <span class="st">"High dose"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>                    levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Low dose"</span>, <span class="st">"High dose"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  n_disease <span class="op">=</span> <span class="va">n_disease</span>,</span>
+<span>  n_healthy <span class="op">=</span> <span class="va">n_total</span> <span class="op">-</span> <span class="va">n_disease</span>,</span>
+<span>  group <span class="op">=</span> <span class="va">group_p</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Correct approach: binomial GLM</span></span>
+<span><span class="co"># cbind(successes, failures) for proportion data</span></span>
+<span><span class="va">fit_binom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">n_disease</span>, <span class="va">n_healthy</span><span class="op">)</span> <span class="op">~</span> <span class="va">group</span>,</span>
+<span>                 data   <span class="op">=</span> <span class="va">df_prop</span>,</span>
+<span>                 family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit_binom</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; 
+#&gt; Call:
+#&gt; glm(formula = cbind(n_disease, n_healthy) ~ group, family = binomial(link = "logit"), 
+#&gt;     data = df_prop)
+#&gt; 
+#&gt; Coefficients:
+#&gt;                Estimate Std. Error z value Pr(&gt;|z|)    
+#&gt; (Intercept)      0.6411     0.1487   4.310 1.63e-05 ***
+#&gt; groupLow dose   -0.9026     0.2061  -4.380 1.19e-05 ***
+#&gt; groupHigh dose  -2.0911     0.2337  -8.948  &lt; 2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; (Dispersion parameter for binomial family taken to be 1)
+#&gt; 
+#&gt;     Null deviance: 120.232  on 29  degrees of freedom
+#&gt; Residual deviance:  27.486  on 27  degrees of freedom
+#&gt; AIC: 129.38
+#&gt; 
+#&gt; Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html">Anova</a></span><span class="op">(</span><span class="va">fit_binom</span>, type <span class="op">=</span> <span class="st">"III"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; Analysis of Deviance Table (Type III tests)
+#&gt; 
+#&gt; Response: cbind(n_disease, n_healthy)
+#&gt;       LR Chisq Df Pr(&gt;Chisq)    
+#&gt; group   92.746  2  &lt; 2.2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Back-transform coefficients to probability scale</span></span>
+<span><span class="co"># using the inverse logit</span></span>
+<span><span class="va">pred_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">group_p</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">pred_df</span><span class="op">$</span><span class="va">prob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit_binom</span>,</span>
+<span>                        newdata <span class="op">=</span> <span class="va">pred_df</span>,</span>
+<span>                        type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pred_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;       group  prob
+#&gt; 1   Control 0.655
+#&gt; 2  Low dose 0.435
+#&gt; 3 High dose 0.190</code></pre>
+</div>
+</div>
+<p>The binomial GLM produces a clear and directly interpretable result.</p>
+<p>The intercept (<span class="math inline">\(\hat{\beta}_0 = 0.641\)</span>) is the log-odds of disease in the Control group. Back-transforming via the inverse logit gives <span class="math inline">\(\text{plogis}(0.641) = 0.655\)</span>, a 65.5% probability of showing disease symptoms in the control group, consistent with the true simulation probability of 0.70. The Low dose coefficient (<span class="math inline">\(\hat{\beta} = -0.903\)</span>) is a log-odds ratio: exponentiated, <span class="math inline">\(e^{-0.903} = 0.41\)</span>, meaning the odds of disease in the Low dose group are 59% lower than in the Control group. The High dose coefficient gives <span class="math inline">\(e^{-2.091} = 0.12\)</span>, an 88% reduction in the odds of disease relative to Control. These are the scientifically natural quantities for proportion data: odds ratios and predicted probabilities, not arithmetic differences in means.</p>
+<p>The back-transformed predicted probabilities make the dose-response relationship immediately readable: disease probability declines from 65.5% in the Control group to 43.5% under low dose treatment and to 19.0% under high dose treatment, a near-linear decline in probability across the three groups that the model has estimated honestly on the logit scale without any transformation of the response.</p>
+<p>The residual deviance (27.49 on 27 degrees of freedom) is encouragingly close to its expected value under a well-fitting Poisson or binomial model and the ratio of 1.02 gives no indication of overdispersion. Had this ratio been substantially greater than 1, a quasi-binomial model or a beta-binomial model (Section 11.3) would be warranted.</p>
+<p>The likelihood ratio test from <code><a href="https://rdrr.io/pkg/car/man/Anova.html">car::Anova()</a></code> gives <span class="math inline">\(\chi^2_2 = 92.75\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>, confirming that pesticide treatment has a highly significant effect on disease incidence. As with the count example, this chi-squared statistic, not an <span class="math inline">\(F\)</span> statistic, is the appropriate test for a binomial GLM and is what should be reported in the methods section of a paper.</p>
+<p>A complete result report reads:</p>
+<blockquote class="blockquote">
+<p>The effect of pesticide dose on disease incidence was analysed using a binomial GLM with a logit link. Pesticide treatment had a significant effect on the probability of disease symptoms (<span class="math inline">\(\chi^2_2 = 92.75\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>). Predicted disease probabilities were 65.5% (Control), 43.5% (Low dose), and 19.0% (High dose). Relative to the Control group, Low dose reduced the odds of disease by 59% (OR = 0.41, 95% CI: …) and High dose reduced them by 88% (OR = 0.12, 95% CI: …).</p>
+</blockquote>
+</section><section id="glms-vs-transformations-a-direct-comparison" class="level3" data-number="10.4.6"><h3 data-number="10.4.6" class="anchored" data-anchor-id="glms-vs-transformations-a-direct-comparison">
+<span class="header-section-number">10.4.6</span> GLMs vs Transformations: A Direct Comparison</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_raw_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">counts</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_glm</span><span class="op">)</span></span>
+<span><span class="va">fit_log_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">counts</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">df_glm</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  residuals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">fit_raw_aov</span><span class="op">)</span>,</span>
+<span>                <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">fit_log_aov</span><span class="op">)</span>,</span>
+<span>                <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">fit_pois</span>, type <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ANOVA (raw)"</span>, </span>
+<span>                <span class="st">"ANOVA (log)"</span>,</span>
+<span>                <span class="st">"Poisson GLM"</span><span class="op">)</span>,</span>
+<span>                each <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df_glm</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">res_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">residuals</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#2E86AB"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#E84855"</span>, linewidth <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">model</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Theoretical quantiles"</span>, y <span class="op">=</span> <span class="st">"Sample quantiles"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-glm-vs-transform" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-glm-vs-transform-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04c-when-assumptions-fail_files/figure-html/fig-glm-vs-transform-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-glm-vs-transform-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.3: Comparison of three approaches to analysing count data: ANOVA on raw counts (top left), ANOVA on log-transformed counts (top right), and a Poisson GLM (bottom). The Poisson GLM produces the most appropriate residual structure — the Q-Q plot is closest to the diagonal — because it models the data-generating process directly rather than approximating it through a transformation.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="a-decision-framework" class="level3" data-number="10.4.7"><h3 data-number="10.4.7" class="anchored" data-anchor-id="a-decision-framework">
+<span class="header-section-number">10.4.7</span> A Decision Framework</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-assumption-failure-tree" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-assumption-failure-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-assumption-failure-tree">flowchart TD
+    A[Assumption\nviolation detected] --&gt; B{What type\nof response?}
+
+    B -- Continuous\npositive --&gt; C{Multiplicative\nvariation?}
+    B -- Count data --&gt; D[Poisson or\nNegative Binomial GLM]
+    B -- Proportion\nor binary --&gt; E[Binomial GLM]
+    B -- Continuous\nunbounded --&gt; F{Outliers or\nheavy tails?}
+
+    C -- Yes --&gt; G[Log transform\nor Gamma GLM]
+    C -- No --&gt; H[Square root\nor robust ANOVA]
+
+    F -- Outliers --&gt; I[Robust ANOVA\nWRS2]
+    F -- Heavy tails --&gt; J[Permutation test\nor Kruskal-Wallis]
+    F -- Neither --&gt; K[Proceed with\nANOVA]
+
+    style A fill:#555555,color:#ffffff
+    style B fill:#F6AE2D,color:#ffffff
+    style C fill:#2E86AB,color:#ffffff
+    style D fill:#81B29A,color:#ffffff
+    style E fill:#81B29A,color:#ffffff
+    style F fill:#2E86AB,color:#ffffff
+    style G fill:#81B29A,color:#ffffff
+    style H fill:#81B29A,color:#ffffff
+    style I fill:#81B29A,color:#ffffff
+    style J fill:#81B29A,color:#ffffff
+    style K fill:#81B29A,color:#ffffff
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-assumption-failure-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.4: Decision framework for choosing an analysis strategy when ANOVA assumptions are violated.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="the-bottom-line" class="level3" data-number="10.4.8"><h3 data-number="10.4.8" class="anchored" data-anchor-id="the-bottom-line">
+<span class="header-section-number">10.4.8</span> The Bottom Line</h3>
+<p>The hierarchy of approaches for dealing with assumption violations reflects an important principle: <strong>the further a remedy is from the data-generating process, the less satisfying it is</strong>. A log transformation is a reasonable approximation for multiplicative data; a Poisson GLM is the correct model. A rank test avoids distributional assumptions; a GLM with the right family makes the right assumptions. Robust ANOVA limits the influence of extreme values; a heavy-tailed distribution models them explicitly.</p>
+<p>For continuous responses with approximately normal residuals and minor violations, ANOVA and its extensions remain the right tools. For discrete, bounded, or structurally non-normal responses, the investment in learning GLMs pays dividends not only in statistical correctness but in interpretability: a log-odds ratio from a logistic regression, a rate ratio from a Poisson regression, or a mean ratio from a gamma regression all have direct biological meaning that a rank difference or a trimmed mean difference does not.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Mair2020" class="csl-entry" role="listitem">
+Mair, Patrick, and Rand Wilcox. 2020. <span>“Robust Statistical Methods in <span>R</span> Using the <span>WRS2</span> Package.”</span> <em>Behavior Research Methods</em> 52 (2): 464–88. <a href="https://doi.org/10.3758/s13428-019-01246-w">https://doi.org/10.3758/s13428-019-01246-w</a>.
+</div>
+<div id="ref-Warton2011" class="csl-entry" role="listitem">
+Warton, David I., and Francis K. C. Hui. 2011. <span>“The Arcsine Is Asinine: The Analysis of Proportions in Ecology.”</span> <em>Ecology</em> 92 (1): 3–10. <a href="https://doi.org/10.1890/10-0340.1">https://doi.org/10.1890/10-0340.1</a>.
+</div>
+</div>
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ebedthan\.github\.io\/maov\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./04b-mixed-effects.html" class="pagination-link" aria-label="Mixed-Effects Models: Beyond Classical ANOVA">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed-Effects Models: Beyond Classical ANOVA</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04d-glmm.html" class="pagination-link" aria-label="Generalised Linear Mixed Models">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Generalised Linear Mixed Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Modern Analysis of Variance by Anicet Ebou.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/04c-when-assumptions-fail.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>
