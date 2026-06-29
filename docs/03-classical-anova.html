@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -223,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./05-good-practice.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Good Practice and Reproductibility</span></a>
+ <span class="menu-text">Good Practice and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -297,7 +326,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Classical ANOVA Models</h1>
+<h1 class="title"><span id="sec-part2" class="quarto-section-identifier">Classical ANOVA Models</span></h1>
 </div>
 
 
@@ -318,6 +347,10 @@ ul.task-list li input[type="checkbox"] {
 <p>You are unlikely to discover something new without a lot of practice on old stuff.</p>
 <p>— Richard Feynman</p>
 </div>
+<p>The designs in this part of the book have been the workhorses of biological research for nearly a century. One-way ANOVA, factorial designs, repeated measures, split-plot. These are not historical curiosities, they are the analytical frameworks behind the majority of published experiments in agronomy, ecology, medicine, and the life sciences, and they will remain so for the foreseeable future.</p>
+<p>Feynman’s remark was aimed at physicists, but it applies with equal force to statisticians and biologists. The classical ANOVA framework is old in the sense that its foundations were laid by Fisher in the 1920s. It is not old in the sense of being superseded or obsolete. Understanding it deeply, not just how to run it but why it works, what it assumes, and what it cannot do, is the prerequisite for everything that follows in Part III. The modern framework of mixed models and generalised linear models is not a replacement for classical ANOVA. It is a generalisation of it. Students who reach for <code>lmer()</code> without understanding <code>aov()</code> are building on sand.</p>
+<p>This part covers six chapters. Chapter <a href="03a-one-way.html" class="quarto-xref"><span>3&nbsp; One-Way ANOVA</span></a> develops the one-way ANOVA from its mathematical foundations, works through a complete clinical example, and introduces effect sizes and power analysis. Chapter <a href="03b-multiple-comparisons.html" class="quarto-xref"><span>4&nbsp; Multiple Comparisons</span></a> addresses multiple comparisons, the question that a significant <span class="math inline">\(F\)</span> test always raises but never answers on its own. Chapter <a href="03c-two-way.html" class="quarto-xref"><span>5&nbsp; Two-Way ANOVA and Factorial Designs</span></a> extends the framework to two factors and introduces the interaction, arguably the most important concept in all of applied statistics. Chapter <a href="03d-repeated-measures.html" class="quarto-xref"><span>6&nbsp; Repeated Measures ANOVA</span></a> handles repeated measures, where the same individual is measured more than once and the independence assumption requires explicit attention. Chapter <a href="03e-split-plot-nested.html" class="quarto-xref"><span>7&nbsp; Split-Plot and Nested Designs</span></a> covers split-plot and nested designs which are the hierarchical structures that pervade field biology and agricultural research.</p>
+<p>Each chapter follows the same structure: the statistical model, the assumptions, a worked example with real diagnostic output, and a template for reporting. By the end of Part II, you will have a complete and practically grounded command of the classical framework, and you will be ready to understand, rather than merely use, the modern extensions that follow.</p>
 
 
 

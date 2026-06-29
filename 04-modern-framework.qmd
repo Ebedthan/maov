@@ -1,11 +1,19 @@
-# The Modern Framework
+# The Modern Framework {#sec-part3}
 
-:::{.epigraph}
-
+::: {.epigraph}
 None of the models we will use in this book are true. But some
 are useful. The goal is to use imperfect models to learn about
 the world — carefully, critically, and honestly.
 
---- Richard McElreath, Statistical Rethinking
-
+--- Richard McElreath, *Statistical Rethinking*, 2020
 :::
+
+Part II showed that classical ANOVA is a powerful and well-developed tradition. It also showed, repeatedly and honestly, where that tradition runs into trouble. Non-independent observations cannot be handled by adding an error term. Missing data cannot be handled by listwise deletion without bias. Count data and proportions cannot be handled by assuming normality. Hierarchies with more than two levels cannot be handled by the `Error()` specification in `aov()`. And throughout Part II, the recurring message was the same: when the data depart from the idealised conditions that classical ANOVA was designed for, you need a richer model.
+
+Part III provides that richer model, or rather, a family of richer models that share a common mathematical foundation. The key insight, introduced in Chapter [-@sec-chap8], is that ANOVA is already a linear model in disguise. Once that connection is clear, the path forward is natural: mixed-effects models extend the linear model to handle random effects and hierarchical data; generalised linear models extend it to handle non-normal responses; and generalised linear mixed models combine both extensions into a single unified framework that can handle almost any biological data structure you are likely to encounter.
+
+This is not a part about advanced techniques for specialists. It is a part about the natural destination of ideas you have already been developing since Chapter 1. The variance decomposition at the heart of ANOVA, the design principles of Chapter [-@sec-chap12], the assumption checking of Chapter [-@sec-chap2], all of these carry forward directly into the modern framework. What changes is not the conceptual foundation but the tools available to build on it.
+
+Chapter [-@sec-chap8] makes the connection between ANOVA and the linear model explicit, showing that `aov()` and `lm()` fit the same model and that the choice of coding scheme determines what the coefficients mean. Chapter [-@sec-chap9] introduces mixed-effects models, develops the distinction between random intercepts and random slopes, and works through a three-level nested clinical example. Chapter [-@sec-chap10] addresses what to do when the assumptions of the linear model fail structurally, not because the data are messy but because the response variable is a count, a proportion, or an ordinal category that the normal distribution cannot describe. Chapter [-@sec-chap11] combines everything into generalised linear mixed models, the framework that handles non-normal responses in hierarchical data simultaneously.
+
+McElreath's caution, that no model is true, only useful, is the right spirit in which to read this part. The models here are more flexible and more honest about biological data structures than their classical counterparts. They are not more true. Every model is a simplification, and the goal is always to find the simplification that is useful for the question at hand, honest about its assumptions, and transparent enough that others can evaluate it. That goal has not changed since Fisher at Rothamsted. Only the tools have.

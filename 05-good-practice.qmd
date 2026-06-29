@@ -1,1 +1,19 @@
-# Good Practice and Reproductibility
+# Good Practice and Reproducibility
+
+::: {.epigraph}
+The important thing in science is not so much to obtain new facts as to discover new ways of thinking about them.
+
+--- Sir William Lawrence Bragg
+:::
+
+The previous two parts of this book were concerned with what to do: which model to fit, which assumption to check, which correction to apply. This final part is concerned with something equally important and far less often taught: how to do it well.
+
+Statistical analysis does not happen in a vacuum. It happens in the context of a study that was designed by someone, on data that were collected by someone, with analytical choices that were made by someone, and reported in a form that will be read, evaluated, and built upon by others. Every one of these steps is an opportunity for error, bias, and miscommunication, and every one of them is also an opportunity to do things right. The chapters in this part address the practices that separate analyses that are merely correct from analyses that are trustworthy.
+
+Chapter [-@sec-chap12] returns to experimental design, now from the perspective of someone who has read the preceding eleven chapters and understands what the analysis requires. The central argument is simple but frequently ignored: the validity of any statistical analysis is determined before the first observation is collected, by the decisions made about randomisation, replication, and blocking. No model, however sophisticated, can compensate for a confounded design or a pseudoreplicated experiment. Fisher knew this at Rothamsted, and a century of painful experience in the biological literature confirms it.
+
+Chapter [-@sec-chap13] addresses reporting which is the translation of a completed analysis into prose and figures that communicate the findings honestly and completely. The chapter argues that the p-value alone is never sufficient, that visualisation choices carry implicit claims about the data that should be made explicit, and that the Methods and Results sections of a biological paper should contain enough information for a competent reader to evaluate every analytical decision that was made. Templates are provided for every major model type covered in the book.
+
+Chapter [-@sec-chap14] addresses reproducibility, the property that makes a scientific analysis permanently verifiable rather than temporarily plausible. It covers literate programming with [Quarto](https://quarto.org), version control with [git](https://git-scm.com), package management with `renv`, pre-registration, and data sharing. These are not bureaucratic requirements imposed from outside. They are the natural consequence of taking seriously the obligation to be honest about how conclusions were reached.
+
+Bragg's remark, made in a different scientific context, captures something important about the spirit of this part. New analytical tools, the mixed models and GLMMs of Part III, are genuinely valuable. But the most important advances in the practice of biological statistics over the past two decades have not been new models. They have been new ways of thinking about how analyses should be designed, conducted, reported, and shared. Pre-registration, open data, reproducible workflows, honest effect size reporting, these are new ways of thinking about the relationship between statistical analysis and scientific knowledge. They are what this part of the book is about.

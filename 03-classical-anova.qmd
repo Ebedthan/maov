@@ -1,7 +1,16 @@
-# Classical ANOVA Models
+# Classical ANOVA Models {#sec-part2}
 
 ::: {.epigraph}
-You are unlikely to discover something new without a lot of practice on old stuff.
+You are unlikely to discover something new without a lot of practice
+on old stuff.
 
 --- Richard Feynman
 :::
+
+The designs in this part of the book have been the workhorses of biological research for nearly a century. One-way ANOVA, factorial designs, repeated measures, split-plot. These are not historical curiosities, they are the analytical frameworks behind the majority of published experiments in agronomy, ecology, medicine, and the life sciences, and they will remain so for the foreseeable future.
+
+Feynman's remark was aimed at physicists, but it applies with equal force to statisticians and biologists. The classical ANOVA framework is old in the sense that its foundations were laid by Fisher in the 1920s. It is not old in the sense of being superseded or obsolete. Understanding it deeply, not just how to run it but why it works, what it assumes, and what it cannot do, is the prerequisite for everything that follows in Part III. The modern framework of mixed models and generalised linear models is not a replacement for classical ANOVA. It is a generalisation of it. Students who reach for `lmer()` without understanding `aov()` are building on sand.
+
+This part covers six chapters. Chapter [-@sec-chap3] develops the one-way ANOVA from its mathematical foundations, works through a complete clinical example, and introduces effect sizes and power analysis. Chapter [-@sec-chap4] addresses multiple comparisons, the question that a significant $F$ test always raises but never answers on its own. Chapter [-@sec-chap5] extends the framework to two factors and introduces the interaction, arguably the most important concept in all of applied statistics. Chapter [-@sec-chap6] handles repeated measures, where the same individual is measured more than once and the independence assumption requires explicit attention. Chapter [-@sec-chap7] covers split-plot and nested designs which are the hierarchical structures that pervade field biology and agricultural research.
+
+Each chapter follows the same structure: the statistical model, the assumptions, a worked example with real diagnostic output, and a template for reporting. By the end of Part II, you will have a complete and practically grounded command of the classical framework, and you will be ready to understand, rather than merely use, the modern extensions that follow.

@@ -223,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./05-good-practice.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Good Practice and Reproductibility</span></a>
+ <span class="menu-text">Good Practice and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -297,7 +297,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The Modern Framework</h1>
+<h1 class="title"><span id="sec-part3" class="quarto-section-identifier">The Modern Framework</span></h1>
 </div>
 
 
@@ -316,8 +316,13 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="epigraph">
 <p>None of the models we will use in this book are true. But some are useful. The goal is to use imperfect models to learn about the world — carefully, critically, and honestly.</p>
-<p>— Richard McElreath, Statistical Rethinking</p>
+<p>— Richard McElreath, <em>Statistical Rethinking</em>, 2020</p>
 </div>
+<p>Part II showed that classical ANOVA is a powerful and well-developed tradition. It also showed, repeatedly and honestly, where that tradition runs into trouble. Non-independent observations cannot be handled by adding an error term. Missing data cannot be handled by listwise deletion without bias. Count data and proportions cannot be handled by assuming normality. Hierarchies with more than two levels cannot be handled by the <code>Error()</code> specification in <code>aov()</code>. And throughout Part II, the recurring message was the same: when the data depart from the idealised conditions that classical ANOVA was designed for, you need a richer model.</p>
+<p>Part III provides that richer model, or rather, a family of richer models that share a common mathematical foundation. The key insight, introduced in Chapter <a href="04a-anova-as-lm.html" class="quarto-xref"><span>8&nbsp; ANOVA as a Linear Model</span></a>, is that ANOVA is already a linear model in disguise. Once that connection is clear, the path forward is natural: mixed-effects models extend the linear model to handle random effects and hierarchical data; generalised linear models extend it to handle non-normal responses; and generalised linear mixed models combine both extensions into a single unified framework that can handle almost any biological data structure you are likely to encounter.</p>
+<p>This is not a part about advanced techniques for specialists. It is a part about the natural destination of ideas you have already been developing since Chapter 1. The variance decomposition at the heart of ANOVA, the design principles of Chapter <a href="05a-experimental-design.html" class="quarto-xref"><span>12&nbsp; Experimental Design Principles</span></a>, the assumption checking of Chapter <a href="02b-assumptions.html" class="quarto-xref"><span>2&nbsp; The Assumptions</span></a>, all of these carry forward directly into the modern framework. What changes is not the conceptual foundation but the tools available to build on it.</p>
+<p>Chapter <a href="04a-anova-as-lm.html" class="quarto-xref"><span>8&nbsp; ANOVA as a Linear Model</span></a> makes the connection between ANOVA and the linear model explicit, showing that <code>aov()</code> and <code>lm()</code> fit the same model and that the choice of coding scheme determines what the coefficients mean. Chapter <a href="04b-mixed-effects.html" class="quarto-xref"><span>9&nbsp; Mixed-Effects Models: Beyond Classical ANOVA</span></a> introduces mixed-effects models, develops the distinction between random intercepts and random slopes, and works through a three-level nested clinical example. Chapter <a href="04c-when-assumptions-fail.html" class="quarto-xref"><span>10&nbsp; When Assumptions Fail, What to Do ?</span></a> addresses what to do when the assumptions of the linear model fail structurally, not because the data are messy but because the response variable is a count, a proportion, or an ordinal category that the normal distribution cannot describe. Chapter <a href="04d-glmm.html" class="quarto-xref"><span>11&nbsp; Generalised Linear Mixed Models</span></a> combines everything into generalised linear mixed models, the framework that handles non-normal responses in hierarchical data simultaneously.</p>
+<p>McElreath’s caution, that no model is true, only useful, is the right spirit in which to read this part. The models here are more flexible and more honest about biological data structures than their classical counterparts. They are not more true. Every model is a simplification, and the goal is always to find the simplification that is useful for the question at hand, honest about its assumptions, and transparent enough that others can evaluate it. That goal has not changed since Fisher at Rothamsted. Only the tools have.</p>
 
 
 
