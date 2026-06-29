@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Anicet Ebou">
+<title>Appendix A — The Maths of the Book – Modern Analysis of Variance</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./appendix-b-packages.html" rel="next">
+<link href="./references.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-a-math.html">Appendices</a></li><li class="breadcrumb-item"><a href="./appendix-a-math.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Maths of the Book</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Analysis of Variance</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Ebedthan/maov/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02a-what-is-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is ANOVA, Really ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02b-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Assumptions</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03-classical-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical ANOVA Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03a-one-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03b-multiple-comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03c-two-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03d-repeated-measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03e-split-plot-nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Split-Plot and Nested Designs</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04-modern-framework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Modern Framework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04a-anova-as-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANOVA as a Linear Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04b-mixed-effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed-Effects Models: Beyond Classical ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04c-when-assumptions-fail.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">When Assumptions Fail, What to Do ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04d-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Generalised Linear Mixed Models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./05-good-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Good Practice and Reproductibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05a-experimental-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Experimental Design Principles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05b-reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reporting ANOVA Results</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05c-reproducible-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducible Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-a-math.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Maths of the Book</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-b-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets and R Packages</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-c-decision-tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Decision Trees for Model Selection</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#sec-ftest-normality-maths" id="toc-sec-ftest-normality-maths" class="nav-link active" data-scroll-target="#sec-ftest-normality-maths"><span class="header-section-number">A.1</span> Why the F Test Needs Normal Residuals</a>
+  <ul class="collapse">
+<li><a href="#step-1-normal-residuals-produce-chi-squared-sums-of-squares" id="toc-step-1-normal-residuals-produce-chi-squared-sums-of-squares" class="nav-link" data-scroll-target="#step-1-normal-residuals-produce-chi-squared-sums-of-squares"><span class="header-section-number">A.1.1</span> Step 1: Normal Residuals Produce Chi-Squared Sums of Squares</a></li>
+  <li><a href="#step-2-independence-of-the-two-sums-of-squares" id="toc-step-2-independence-of-the-two-sums-of-squares" class="nav-link" data-scroll-target="#step-2-independence-of-the-two-sums-of-squares"><span class="header-section-number">A.1.2</span> Step 2: Independence of the Two Sums of Squares</a></li>
+  <li><a href="#step-3-the-ratio-of-two-chi-squared-variables-is-f-distributed" id="toc-step-3-the-ratio-of-two-chi-squared-variables-is-f-distributed" class="nav-link" data-scroll-target="#step-3-the-ratio-of-two-chi-squared-variables-is-f-distributed"><span class="header-section-number">A.1.3</span> Step 3: The Ratio of Two Chi-Squared Variables Is F-Distributed</a></li>
+  <li><a href="#why-the-test-remains-approximately-valid-without-normality" id="toc-why-the-test-remains-approximately-valid-without-normality" class="nav-link" data-scroll-target="#why-the-test-remains-approximately-valid-without-normality"><span class="header-section-number">A.1.4</span> Why the Test Remains Approximately Valid Without Normality</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-matrix-notation" id="toc-sec-matrix-notation" class="nav-link" data-scroll-target="#sec-matrix-notation"><span class="header-section-number">A.2</span> From Equations to Matrices: Understanding the Linear Predictor</a>
+  <ul class="collapse">
+<li><a href="#starting-point-a-single-observation" id="toc-starting-point-a-single-observation" class="nav-link" data-scroll-target="#starting-point-a-single-observation"><span class="header-section-number">A.2.1</span> Starting Point: A Single Observation</a></li>
+  <li><a href="#step-1-collect-the-predictors-into-a-vector" id="toc-step-1-collect-the-predictors-into-a-vector" class="nav-link" data-scroll-target="#step-1-collect-the-predictors-into-a-vector"><span class="header-section-number">A.2.2</span> Step 1: Collect the Predictors Into a Vector</a></li>
+  <li><a href="#step-2-the-transpose" id="toc-step-2-the-transpose" class="nav-link" data-scroll-target="#step-2-the-transpose"><span class="header-section-number">A.2.3</span> Step 2: The Transpose</a></li>
+  <li><a href="#step-3-the-dot-product" id="toc-step-3-the-dot-product" class="nav-link" data-scroll-target="#step-3-the-dot-product"><span class="header-section-number">A.2.4</span> Step 3: The Dot Product</a></li>
+  <li><a href="#step-4-all-observations-at-once" id="toc-step-4-all-observations-at-once" class="nav-link" data-scroll-target="#step-4-all-observations-at-once"><span class="header-section-number">A.2.5</span> Step 4: All Observations at Once</a></li>
+  <li><a href="#a-concrete-example" id="toc-a-concrete-example" class="nav-link" data-scroll-target="#a-concrete-example"><span class="header-section-number">A.2.6</span> A Concrete Example</a></li>
+  <li><a href="#why-this-matters-for-glms-and-mixed-models" id="toc-why-this-matters-for-glms-and-mixed-models" class="nav-link" data-scroll-target="#why-this-matters-for-glms-and-mixed-models"><span class="header-section-number">A.2.7</span> Why This Matters for GLMs and Mixed Models</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-random-effects-distribution" id="toc-sec-random-effects-distribution" class="nav-link" data-scroll-target="#sec-random-effects-distribution"><span class="header-section-number">A.3</span> The Random Effects Distribution: <span class="math inline">\(\mathbf{b}_j \sim \mathcal{N}(\mathbf{0}, \mathbf{G})\)</span></a>
+  <ul class="collapse">
+<li><a href="#starting-point-a-single-random-effect" id="toc-starting-point-a-single-random-effect" class="nav-link" data-scroll-target="#starting-point-a-single-random-effect"><span class="header-section-number">A.3.1</span> Starting Point: A Single Random Effect</a></li>
+  <li><a href="#step-1-multiple-random-effects-per-group" id="toc-step-1-multiple-random-effects-per-group" class="nav-link" data-scroll-target="#step-1-multiple-random-effects-per-group"><span class="header-section-number">A.3.2</span> Step 1: Multiple Random Effects Per Group</a></li>
+  <li><a href="#step-2-the-mean-vector-mathbf0" id="toc-step-2-the-mean-vector-mathbf0" class="nav-link" data-scroll-target="#step-2-the-mean-vector-mathbf0"><span class="header-section-number">A.3.3</span> Step 2: The Mean Vector <span class="math inline">\(\mathbf{0}\)</span></a></li>
+  <li><a href="#step-3-the-covariance-matrix-mathbfg" id="toc-step-3-the-covariance-matrix-mathbfg" class="nav-link" data-scroll-target="#step-3-the-covariance-matrix-mathbfg"><span class="header-section-number">A.3.4</span> Step 3: The Covariance Matrix <span class="math inline">\(\mathbf{G}\)</span></a></li>
+  <li><a href="#step-4-from-covariance-to-correlation" id="toc-step-4-from-covariance-to-correlation" class="nav-link" data-scroll-target="#step-4-from-covariance-to-correlation"><span class="header-section-number">A.3.5</span> Step 4: From Covariance to Correlation</a></li>
+  <li><a href="#step-5-the-full-statement" id="toc-step-5-the-full-statement" class="nav-link" data-scroll-target="#step-5-the-full-statement"><span class="header-section-number">A.3.6</span> Step 5: The Full Statement</a></li>
+  <li><a href="#a-geometric-intuition" id="toc-a-geometric-intuition" class="nav-link" data-scroll-target="#a-geometric-intuition"><span class="header-section-number">A.3.7</span> A Geometric Intuition</a></li>
+  <li><a href="#what-mathbfg-is-not" id="toc-what-mathbfg-is-not" class="nav-link" data-scroll-target="#what-mathbfg-is-not"><span class="header-section-number">A.3.8</span> What <span class="math inline">\(\mathbf{G}\)</span> Is Not</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/appendix-a-math.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-a-math.html">Appendices</a></li><li class="breadcrumb-item"><a href="./appendix-a-math.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Maths of the Book</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">Appendix A — The Maths of the Book</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><div class="epigraph">
+<p>Mathematics is not about numbers, equations, computations, or algorithms: it is about understanding.</p>
+<p>— Terence Tao</p>
+</div>
+<section id="sec-ftest-normality-maths" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="sec-ftest-normality-maths">
+<span class="header-section-number">A.1</span> Why the F Test Needs Normal Residuals</h2>
+<p>The connection between normal residuals and the F distribution is not an arbitrary convention — it follows from a precise chain of mathematical results. Here we trace that chain step by step.</p>
+<section id="step-1-normal-residuals-produce-chi-squared-sums-of-squares" class="level3" data-number="A.1.1"><h3 data-number="A.1.1" class="anchored" data-anchor-id="step-1-normal-residuals-produce-chi-squared-sums-of-squares">
+<span class="header-section-number">A.1.1</span> Step 1: Normal Residuals Produce Chi-Squared Sums of Squares</h3>
+<p>If the residuals <span class="math inline">\(\varepsilon_{ij} \sim \mathcal{N}(0, \sigma^2)\)</span> independently, then any sum of squared standard normal variables follows a <strong>chi-squared distribution</strong>. Specifically, if <span class="math inline">\(Z \sim \mathcal{N}(0, 1)\)</span>, then <span class="math inline">\(Z^2 \sim \chi^2_1\)</span>, and the sum of <span class="math inline">\(\nu\)</span> independent squared standard normals follows <span class="math inline">\(\chi^2_\nu\)</span>.</p>
+<p>The within-group sum of squares can be written as:</p>
+<p><span class="math display">\[\frac{SS_{\text{within}}}{\sigma^2}
+  = \sum_{j=1}^{k}\sum_{i=1}^{n_j}
+    \left(\frac{y_{ij} - \bar{y}_j}{\sigma}\right)^2
+  \sim \chi^2_{N-k}\]</span></p>
+<p>because each standardised residual <span class="math inline">\((y_{ij} - \bar{y}_j)/\sigma\)</span> is a standard normal variable (under the normality assumption), and there are <span class="math inline">\(N - k\)</span> independent squared terms after accounting for the <span class="math inline">\(k\)</span> estimated group means.</p>
+<p>Similarly, under <span class="math inline">\(H_0\)</span>, the among-group sum of squares satisfies:</p>
+<p><span class="math display">\[\frac{SS_{\text{among}}}{\sigma^2}
+  = \sum_{j=1}^{k} n_j
+    \left(\frac{\bar{y}_j - \bar{y}}{\sigma}\right)^2
+  \sim \chi^2_{k-1}\]</span></p>
+</section><section id="step-2-independence-of-the-two-sums-of-squares" class="level3" data-number="A.1.2"><h3 data-number="A.1.2" class="anchored" data-anchor-id="step-2-independence-of-the-two-sums-of-squares">
+<span class="header-section-number">A.1.2</span> Step 2: Independence of the Two Sums of Squares</h3>
+<p>For the ratio of two chi-squared variables to follow an F distribution, the two variables must be <strong>independent</strong>. This independence — <span class="math inline">\(SS_{\text{among}}\)</span> and <span class="math inline">\(SS_{\text{within}}\)</span> are independent — is guaranteed by Cochran’s theorem, which states that for normally distributed data, sums of squares arising from an orthogonal decomposition of the total sum of squares are independent of one another. This is a non-trivial result that relies critically on the normality of the residuals.</p>
+<p>Without normality, Cochran’s theorem does not apply, and <span class="math inline">\(SS_{\text{among}}\)</span> and <span class="math inline">\(SS_{\text{within}}\)</span> are not guaranteed to be independent.</p>
+</section><section id="step-3-the-ratio-of-two-chi-squared-variables-is-f-distributed" class="level3" data-number="A.1.3"><h3 data-number="A.1.3" class="anchored" data-anchor-id="step-3-the-ratio-of-two-chi-squared-variables-is-f-distributed">
+<span class="header-section-number">A.1.3</span> Step 3: The Ratio of Two Chi-Squared Variables Is F-Distributed</h3>
+<p>By definition, if <span class="math inline">\(U \sim \chi^2_{d_1}\)</span> and <span class="math inline">\(V \sim \chi^2_{d_2}\)</span> are <strong>independent</strong>, then:</p>
+<p><span class="math display">\[\frac{U/d_1}{V/d_2} \sim F_{d_1, d_2}\]</span></p>
+<p>Substituting our two sums of squares:</p>
+<p><span class="math display">\[F = \frac{MS_{\text{among}}}{MS_{\text{within}}}
+    = \frac{SS_{\text{among}} / (k-1)}
+           {SS_{\text{within}} / (N-k)}
+    = \frac{\chi^2_{k-1} / (k-1)}
+           {\chi^2_{N-k} / (N-k)}
+    \sim F_{k-1,\, N-k}\]</span></p>
+<p>This is the F distribution used to compute the p-value. The entire derivation rests on two steps that both require normality:</p>
+<ol type="1">
+<li>The sums of squares are chi-squared distributed <strong>only if</strong> the residuals are normal.</li>
+<li>The two sums of squares are independent <strong>only if</strong> the residuals are normal (via Cochran’s theorem).</li>
+</ol></section><section id="why-the-test-remains-approximately-valid-without-normality" class="level3" data-number="A.1.4"><h3 data-number="A.1.4" class="anchored" data-anchor-id="why-the-test-remains-approximately-valid-without-normality">
+<span class="header-section-number">A.1.4</span> Why the Test Remains Approximately Valid Without Normality</h3>
+<p>The central limit theorem provides some protection. As group sample sizes <span class="math inline">\(n_j\)</span> grow, the group means <span class="math inline">\(\bar{y}_j\)</span> converge to normality regardless of the distribution of the residuals. This means the among-group sum of squares, which is computed from group means, becomes approximately chi-squared distributed even when individual residuals are not normal. The approximation improves with sample size, which is why the F test is robust to non-normality in large samples — but it is an approximation, not an exact result, and it degrades with small samples and severe departures from normality.</p>
+</section></section><section id="sec-matrix-notation" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="sec-matrix-notation">
+<span class="header-section-number">A.2</span> From Equations to Matrices: Understanding the Linear Predictor</h2>
+<p>If you have encountered the expression <span class="math inline">\(\eta_i = \mathbf{x}_i^T \boldsymbol{\beta}\)</span> and found the bold symbols and superscript <span class="math inline">\(T\)</span> unfamiliar, this section is for you. We will build up to this notation step by step, starting from the simple regression equation you already know.</p>
+<section id="starting-point-a-single-observation" class="level3" data-number="A.2.1"><h3 data-number="A.2.1" class="anchored" data-anchor-id="starting-point-a-single-observation">
+<span class="header-section-number">A.2.1</span> Starting Point: A Single Observation</h3>
+<p>Consider the simplest linear model: predicting plant height <span class="math inline">\(y\)</span> from a single predictor, say the amount of fertiliser applied <span class="math inline">\(x\)</span>. For one plant <span class="math inline">\(i\)</span>, the model is:</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1 x_i + \varepsilon_i\]</span></p>
+<p>The <strong>linear predictor</strong> <span class="math inline">\(\eta_i\)</span> is the systematic part — everything except the error:</p>
+<p><span class="math display">\[\eta_i = \beta_0 + \beta_1 x_i\]</span></p>
+<p>This is straightforward. Now suppose you have two predictors: the amount of fertiliser <span class="math inline">\(x_{i1}\)</span> and the amount of water <span class="math inline">\(x_{i2}\)</span>. The linear predictor becomes:</p>
+<p><span class="math display">\[\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\]</span></p>
+<p>With five predictors it becomes:</p>
+<p><span class="math display">\[\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} +
+           \beta_3 x_{i3} + \beta_4 x_{i4} + \beta_5 x_{i5}\]</span></p>
+<p>Writing this out for every observation in a dataset of 100 plants would require 100 such equations. This is where matrix notation becomes indispensable — it lets us write all 100 equations at once in a single compact expression.</p>
+</section><section id="step-1-collect-the-predictors-into-a-vector" class="level3" data-number="A.2.2"><h3 data-number="A.2.2" class="anchored" data-anchor-id="step-1-collect-the-predictors-into-a-vector">
+<span class="header-section-number">A.2.2</span> Step 1: Collect the Predictors Into a Vector</h3>
+<p>For observation <span class="math inline">\(i\)</span>, we collect all its predictor values — including a 1 for the intercept — into a single column vector <span class="math inline">\(\mathbf{x}_i\)</span>:</p>
+<p><span class="math display">\[\mathbf{x}_i =
+\begin{pmatrix} 1 \\ x_{i1} \\ x_{i2} \end{pmatrix}\]</span></p>
+<p>The leading 1 is not an accident — it is a placeholder that will multiply <span class="math inline">\(\beta_0\)</span>, giving us the intercept term for free.</p>
+<p>We also collect all the coefficients into a column vector <span class="math inline">\(\boldsymbol{\beta}\)</span>:</p>
+<p><span class="math display">\[\boldsymbol{\beta} =
+\begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \end{pmatrix}\]</span></p>
+</section><section id="step-2-the-transpose" class="level3" data-number="A.2.3"><h3 data-number="A.2.3" class="anchored" data-anchor-id="step-2-the-transpose">
+<span class="header-section-number">A.2.3</span> Step 2: The Transpose</h3>
+<p>The superscript <span class="math inline">\(T\)</span> in <span class="math inline">\(\mathbf{x}_i^T\)</span> means <strong>transpose</strong> — rotate the column vector <span class="math inline">\(\mathbf{x}_i\)</span> onto its side to make it a row vector:</p>
+<p><span class="math display">\[\mathbf{x}_i^T =
+\begin{pmatrix} 1 &amp; x_{i1} &amp; x_{i2} \end{pmatrix}\]</span></p>
+</section><section id="step-3-the-dot-product" class="level3" data-number="A.2.4"><h3 data-number="A.2.4" class="anchored" data-anchor-id="step-3-the-dot-product">
+<span class="header-section-number">A.2.4</span> Step 3: The Dot Product</h3>
+<p>Multiplying a row vector by a column vector of the same length gives a single number — the <strong>dot product</strong> or <strong>inner product</strong>. Each element of the row is multiplied by the corresponding element of the column, and the results are summed:</p>
+<p><span class="math display">\[\mathbf{x}_i^T \boldsymbol{\beta} =
+\begin{pmatrix} 1 &amp; x_{i1} &amp; x_{i2} \end{pmatrix}
+\begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \end{pmatrix}
+= 1 \cdot \beta_0 + x_{i1} \cdot \beta_1 + x_{i2} \cdot \beta_2
+= \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\]</span></p>
+<p>This is exactly the linear predictor we started with. The compact notation <span class="math inline">\(\eta_i = \mathbf{x}_i^T \boldsymbol{\beta}\)</span> is therefore just a concise way of writing a sum of products — nothing more.</p>
+</section><section id="step-4-all-observations-at-once" class="level3" data-number="A.2.5"><h3 data-number="A.2.5" class="anchored" data-anchor-id="step-4-all-observations-at-once">
+<span class="header-section-number">A.2.5</span> Step 4: All Observations at Once</h3>
+<p>Now suppose we have <span class="math inline">\(n = 4\)</span> plants. Rather than writing four separate equations, we stack all the predictor vectors as rows into a single matrix <span class="math inline">\(\mathbf{X}\)</span>, called the <strong>design matrix</strong>:</p>
+<p><span class="math display">\[\mathbf{X} =
+\begin{pmatrix}
+1 &amp; x_{11} &amp; x_{12} \\
+1 &amp; x_{21} &amp; x_{22} \\
+1 &amp; x_{31} &amp; x_{32} \\
+1 &amp; x_{41} &amp; x_{42}
+\end{pmatrix}\]</span></p>
+<p>Each row is one observation; each column is one predictor (plus the leading column of ones for the intercept). Multiplying <span class="math inline">\(\mathbf{X}\)</span> by the coefficient vector <span class="math inline">\(\boldsymbol{\beta}\)</span> produces a vector of linear predictors, one per observation:</p>
+<p><span class="math display">\[\boldsymbol{\eta} = \mathbf{X}\boldsymbol{\beta} =
+\begin{pmatrix}
+1 &amp; x_{11} &amp; x_{12} \\
+1 &amp; x_{21} &amp; x_{22} \\
+1 &amp; x_{31} &amp; x_{32} \\
+1 &amp; x_{41} &amp; x_{42}
+\end{pmatrix}
+\begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \end{pmatrix} =
+\begin{pmatrix}
+\beta_0 + \beta_1 x_{11} + \beta_2 x_{12} \\
+\beta_0 + \beta_1 x_{21} + \beta_2 x_{22} \\
+\beta_0 + \beta_1 x_{31} + \beta_2 x_{32} \\
+\beta_0 + \beta_1 x_{41} + \beta_2 x_{42}
+\end{pmatrix}\]</span></p>
+<p>The full linear model for all <span class="math inline">\(n\)</span> observations is then:</p>
+<p><span class="math display">\[\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}\]</span></p>
+<p>where <span class="math inline">\(\mathbf{y}\)</span> is the vector of responses, <span class="math inline">\(\mathbf{X}\)</span> is the design matrix, <span class="math inline">\(\boldsymbol{\beta}\)</span> is the vector of coefficients, and <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> is the vector of residuals. This single line replaces <span class="math inline">\(n\)</span> separate equations.</p>
+</section><section id="a-concrete-example" class="level3" data-number="A.2.6"><h3 data-number="A.2.6" class="anchored" data-anchor-id="a-concrete-example">
+<span class="header-section-number">A.2.6</span> A Concrete Example</h3>
+<p>Suppose we have 4 plants: two control and two nitrogen-treated, with fertiliser amounts 0, 0, 10, and 15 grams. The response is height in centimetres.</p>
+<p><span class="math display">\[\mathbf{y} = \begin{pmatrix} 18 \\ 21 \\ 28 \\ 35 \end{pmatrix},
+\qquad
+\mathbf{X} = \begin{pmatrix}
+1 &amp; 0  \\
+1 &amp; 0  \\
+1 &amp; 10 \\
+1 &amp; 15
+\end{pmatrix},
+\qquad
+\boldsymbol{\beta} = \begin{pmatrix} \beta_0 \\ \beta_1 \end{pmatrix}\]</span></p>
+<p>The linear predictor for plant 3 (10 g fertiliser) is:</p>
+<p><span class="math display">\[\eta_3 = \mathbf{x}_3^T \boldsymbol{\beta} =
+\begin{pmatrix} 1 &amp; 10 \end{pmatrix}
+\begin{pmatrix} \beta_0 \\ \beta_1 \end{pmatrix} =
+\beta_0 + 10\beta_1\]</span></p>
+<p>If the fitted model gives <span class="math inline">\(\hat{\beta}_0 = 20\)</span> and <span class="math inline">\(\hat{\beta}_1 =
+1.2\)</span>, then <span class="math inline">\(\hat{\eta}_3 = 20 + 10 \times 1.2 = 32\)</span> cm — the model’s prediction for plant 3. The residual is <span class="math inline">\(y_3 - \hat{\eta}_3 = 28 -
+32 = -4\)</span> cm.</p>
+</section><section id="why-this-matters-for-glms-and-mixed-models" class="level3" data-number="A.2.7"><h3 data-number="A.2.7" class="anchored" data-anchor-id="why-this-matters-for-glms-and-mixed-models">
+<span class="header-section-number">A.2.7</span> Why This Matters for GLMs and Mixed Models</h3>
+<p>In a standard linear model, the linear predictor <span class="math inline">\(\eta_i\)</span> is directly the expected response: <span class="math inline">\(\mu_i = \eta_i\)</span>. In a GLM, a link function <span class="math inline">\(g(\cdot)\)</span> separates them: <span class="math inline">\(g(\mu_i) = \eta_i\)</span>. The matrix notation <span class="math inline">\(\eta_i = \mathbf{x}_i^T \boldsymbol{\beta}\)</span> remains exactly the same — only what happens to <span class="math inline">\(\eta_i\)</span> afterwards changes.</p>
+<p>In a linear mixed model, random effects are added to the linear predictor:</p>
+<p><span class="math display">\[\eta_i = \mathbf{x}_i^T \boldsymbol{\beta} +
+           \mathbf{z}_i^T \mathbf{b}\]</span></p>
+<p>where <span class="math inline">\(\mathbf{z}_i\)</span> is a vector of random effect indicators for observation <span class="math inline">\(i\)</span> (analogous to <span class="math inline">\(\mathbf{x}_i\)</span> for fixed effects) and <span class="math inline">\(\mathbf{b}\)</span> is the vector of random effect values. Again, the compact notation is simply a sum of products written efficiently.</p>
+<p>Once you recognise <span class="math inline">\(\mathbf{x}_i^T \boldsymbol{\beta}\)</span> as “multiply each predictor value by its coefficient and add them up”, the notation loses its mystery. Every model in this book — one-way ANOVA, two-way factorial, repeated measures, mixed model, GLMM, is built on this same simple operation.</p>
+</section></section><section id="sec-random-effects-distribution" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="sec-random-effects-distribution">
+<span class="header-section-number">A.3</span> The Random Effects Distribution: <span class="math inline">\(\mathbf{b}_j \sim \mathcal{N}(\mathbf{0}, \mathbf{G})\)</span>
+</h2>
+<p>The notation <span class="math inline">\(\mathbf{b}_j \sim \mathcal{N}(\mathbf{0}, \mathbf{G})\)</span> appears in every mixed model equation in this book. Like the linear predictor notation of the previous section, it compresses a rich mathematical idea into a compact expression. This section unpacks it layer by layer.</p>
+<section id="starting-point-a-single-random-effect" class="level3" data-number="A.3.1"><h3 data-number="A.3.1" class="anchored" data-anchor-id="starting-point-a-single-random-effect">
+<span class="header-section-number">A.3.1</span> Starting Point: A Single Random Effect</h3>
+<p>In the simplest mixed model — a random intercept model — each group <span class="math inline">\(j\)</span> has its own intercept deviation <span class="math inline">\(b_j\)</span>. We assume these deviations are drawn from a normal distribution centred on zero:</p>
+<p><span class="math display">\[b_j \sim \mathcal{N}(0, \sigma^2_b)\]</span></p>
+<p>This says three things:</p>
+<ul>
+<li>The random effects are <strong>normally distributed</strong> — their histogram across groups would look like a bell curve.</li>
+<li>Their <strong>mean is zero</strong> — on average, groups do not deviate from the population mean. Some groups are above average and some below, but they balance out.</li>
+<li>Their <strong>variance is <span class="math inline">\(\sigma^2_b\)</span></strong> — this single number controls how spread out the group-level deviations are. A large <span class="math inline">\(\sigma^2_b\)</span> means groups differ substantially from each other; a small <span class="math inline">\(\sigma^2_b\)</span> means they are all similar.</li>
+</ul>
+<p>This is a scalar (single-number) normal distribution. The bold notation <span class="math inline">\(\mathcal{N}(\mathbf{0}, \mathbf{G})\)</span> is its generalisation to the case where each group has multiple random effects — for example, both a random intercept and a random slope.</p>
+</section><section id="step-1-multiple-random-effects-per-group" class="level3" data-number="A.3.2"><h3 data-number="A.3.2" class="anchored" data-anchor-id="step-1-multiple-random-effects-per-group">
+<span class="header-section-number">A.3.2</span> Step 1: Multiple Random Effects Per Group</h3>
+<p>Suppose each group <span class="math inline">\(j\)</span> has two random effects: a random intercept <span class="math inline">\(b_{0j}\)</span> (how much the group’s baseline differs from average) and a random slope <span class="math inline">\(b_{1j}\)</span> (how much the group’s response to a predictor differs from average). We collect these into a vector:</p>
+<p><span class="math display">\[\mathbf{b}_j = \begin{pmatrix} b_{0j} \\ b_{1j} \end{pmatrix}\]</span></p>
+<p>Now we need a distribution for this two-dimensional vector. The natural generalisation of the univariate normal is the <strong>multivariate normal distribution</strong>.</p>
+</section><section id="step-2-the-mean-vector-mathbf0" class="level3" data-number="A.3.3"><h3 data-number="A.3.3" class="anchored" data-anchor-id="step-2-the-mean-vector-mathbf0">
+<span class="header-section-number">A.3.3</span> Step 2: The Mean Vector <span class="math inline">\(\mathbf{0}\)</span>
+</h3>
+<p>The bold zero <span class="math inline">\(\mathbf{0}\)</span> is a vector of zeros — one zero for each random effect:</p>
+<p><span class="math display">\[\mathbf{0} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}\]</span></p>
+<p>This says that both the random intercept and the random slope have mean zero across groups. On average, no group deviates from the population intercept or the population slope. Individual groups deviate, but their deviations are centred on zero.</p>
+</section><section id="step-3-the-covariance-matrix-mathbfg" class="level3" data-number="A.3.4"><h3 data-number="A.3.4" class="anchored" data-anchor-id="step-3-the-covariance-matrix-mathbfg">
+<span class="header-section-number">A.3.4</span> Step 3: The Covariance Matrix <span class="math inline">\(\mathbf{G}\)</span>
+</h3>
+<p>The scalar variance <span class="math inline">\(\sigma^2_b\)</span> generalises to a <strong>covariance matrix</strong> <span class="math inline">\(\mathbf{G}\)</span> — also called the variance-covariance matrix of the random effects. For a model with a random intercept and a random slope, <span class="math inline">\(\mathbf{G}\)</span> is a <span class="math inline">\(2 \times 2\)</span> matrix:</p>
+<p><span class="math display">\[\mathbf{G} =
+\begin{pmatrix}
+\sigma^2_0 &amp; \sigma_{01} \\
+\sigma_{01} &amp; \sigma^2_1
+\end{pmatrix}\]</span></p>
+<p>Each element has a specific meaning:</p>
+<ul>
+<li>
+<span class="math inline">\(\sigma^2_0\)</span>: the <strong>variance of the random intercepts</strong> across groups. How much do groups differ in their baseline level?</li>
+<li>
+<span class="math inline">\(\sigma^2_1\)</span>: the <strong>variance of the random slopes</strong> across groups. How much do groups differ in their response to the predictor?</li>
+<li>
+<span class="math inline">\(\sigma_{01}\)</span>: the <strong>covariance between random intercepts and random slopes</strong>. Do groups with a higher baseline also tend to have a steeper (or shallower) slope?</li>
+</ul>
+<p>The diagonal of <span class="math inline">\(\mathbf{G}\)</span> contains the variances; the off-diagonal contains the covariances. Because the matrix is symmetric (<span class="math inline">\(\sigma_{01}\)</span> appears in both off-diagonal positions), we only need three numbers to fully specify it for a two-random-effect model.</p>
+</section><section id="step-4-from-covariance-to-correlation" class="level3" data-number="A.3.5"><h3 data-number="A.3.5" class="anchored" data-anchor-id="step-4-from-covariance-to-correlation">
+<span class="header-section-number">A.3.5</span> Step 4: From Covariance to Correlation</h3>
+<p>The covariance <span class="math inline">\(\sigma_{01}\)</span> can be difficult to interpret directly because its magnitude depends on the scales of <span class="math inline">\(b_{0j}\)</span> and <span class="math inline">\(b_{1j}\)</span>. The standardised version is the <strong>correlation</strong>:</p>
+<p><span class="math display">\[\rho_{01} = \frac{\sigma_{01}}{\sigma_0 \cdot \sigma_1}\]</span></p>
+<p>where <span class="math inline">\(\sigma_0 = \sqrt{\sigma^2_0}\)</span> and <span class="math inline">\(\sigma_1 = \sqrt{\sigma^2_1}\)</span> are the standard deviations. The correlation <span class="math inline">\(\rho_{01}\)</span> always lies between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span> and is directly interpretable:</p>
+<ul>
+<li>
+<span class="math inline">\(\rho_{01} &gt; 0\)</span>: groups that start higher also tend to improve more rapidly (or decline less steeply) — a positive association between intercept and slope.</li>
+<li>
+<span class="math inline">\(\rho_{01} &lt; 0\)</span>: groups that start higher tend to improve less rapidly — a negative association, suggesting regression to the mean.</li>
+<li>
+<span class="math inline">\(\rho_{01} = 0\)</span>: the baseline level of a group tells you nothing about the slope — intercepts and slopes vary independently.</li>
+</ul>
+<p>In <code>lme4</code> and <code>lmerTest</code> output, both the standard deviations and the correlation are reported in the random effects summary:</p>
+<pre><code>Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ subject  (Intercept) 4.84     2.20
+          time        0.16     0.40     -0.32
+ Residual             1.96     1.40</code></pre>
+<p>Here <span class="math inline">\(\hat{\sigma}_0 = 2.20\)</span>, <span class="math inline">\(\hat{\sigma}_1 = 0.40\)</span>, and <span class="math inline">\(\hat{\rho}_{01} = -0.32\)</span> — subjects who start with higher values tend to improve slightly less rapidly, a mild negative intercept-slope correlation.</p>
+</section><section id="step-5-the-full-statement" class="level3" data-number="A.3.6"><h3 data-number="A.3.6" class="anchored" data-anchor-id="step-5-the-full-statement">
+<span class="header-section-number">A.3.6</span> Step 5: The Full Statement</h3>
+<p>Putting it all together, <span class="math inline">\(\mathbf{b}_j \sim \mathcal{N}(\mathbf{0},
+\mathbf{G})\)</span> states:</p>
+<blockquote class="blockquote">
+<p>The vector of random effects for group <span class="math inline">\(j\)</span> is drawn from a multivariate normal distribution with mean vector <span class="math inline">\(\mathbf{0}\)</span> (all random effects average to zero across groups) and covariance matrix <span class="math inline">\(\mathbf{G}\)</span> (whose diagonal entries are the variances of each random effect and whose off-diagonal entries are the covariances between pairs of random effects).</p>
+</blockquote>
+<p>For a random intercept-only model, this reduces to the familiar scalar statement <span class="math inline">\(b_j \sim \mathcal{N}(0, \sigma^2_b)\)</span>, since <span class="math inline">\(\mathbf{G}\)</span> collapses to a <span class="math inline">\(1 \times 1\)</span> matrix containing only <span class="math inline">\(\sigma^2_b\)</span>.</p>
+</section><section id="a-geometric-intuition" class="level3" data-number="A.3.7"><h3 data-number="A.3.7" class="anchored" data-anchor-id="a-geometric-intuition">
+<span class="header-section-number">A.3.7</span> A Geometric Intuition</h3>
+<p>The multivariate normal distribution <span class="math inline">\(\mathcal{N}(\mathbf{0},
+\mathbf{G})\)</span> can be visualised as a cloud of points centred on the origin in two-dimensional space (for two random effects). The shape of the cloud is determined by <span class="math inline">\(\mathbf{G}\)</span>:</p>
+<ul>
+<li>If <span class="math inline">\(\sigma^2_0 = \sigma^2_1\)</span> and <span class="math inline">\(\sigma_{01} = 0\)</span>, the cloud is a perfect circle — intercepts and slopes vary equally and independently.</li>
+<li>If <span class="math inline">\(\sigma^2_0 \gg \sigma^2_1\)</span>, the cloud is an ellipse stretched along the intercept axis — groups vary more in their baselines than in their slopes.</li>
+<li>If <span class="math inline">\(\sigma_{01} \neq 0\)</span>, the ellipse is tilted — there is a linear association between the intercept and slope deviations across groups.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#| cache: true</span></span>
+<span><span class="co">#| fig-cap: "Simulated random effect pairs (intercepts and slopes) drawn from three different bivariate normal distributions. Left: independent random effects with equal variances — circular cloud. Centre: unequal variances, no correlation — ellipse aligned with the axes. Right: unequal variances with negative correlation — tilted ellipse. Each point represents one group's random intercept and slope deviation."</span></span>
+<span><span class="co">#| label: fig-re-distribution-plot</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">n_groups</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
+<span></span>
+<span><span class="va">scenarios</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    G     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"Equal variances, no correlation\n(circular cloud)"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    G     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0.25</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"Unequal variances, no correlation\n(axis-aligned ellipse)"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    G     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="op">-</span><span class="fl">0.8</span>, <span class="op">-</span><span class="fl">0.8</span>, <span class="fl">0.25</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="st">"Unequal variances, negative correlation\n(tilted ellipse)"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">re_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">scenarios</span>, <span class="kw">function</span><span class="op">(</span><span class="va">s</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">re</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/mvrnorm.html">mvrnorm</a></span><span class="op">(</span><span class="va">n_groups</span>, mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, Sigma <span class="op">=</span> <span class="va">s</span><span class="op">$</span><span class="va">G</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    intercept <span class="op">=</span> <span class="va">re</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>,</span>
+<span>    slope     <span class="op">=</span> <span class="va">re</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>,</span>
+<span>    scenario  <span class="op">=</span> <span class="va">s</span><span class="op">$</span><span class="va">label</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">re_df</span><span class="op">$</span><span class="va">scenario</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">re_df</span><span class="op">$</span><span class="va">scenario</span>,</span>
+<span>                          levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">scenarios</span>, <span class="va">`[[`</span>, <span class="st">"label"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">re_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">intercept</span>, y <span class="op">=</span> <span class="va">slope</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#2E86AB"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">1.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             colour <span class="op">=</span> <span class="st">"grey50"</span>, linewidth <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             colour <span class="op">=</span> <span class="st">"grey50"</span>, linewidth <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html">stat_ellipse</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#E84855"</span>, linewidth <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span>               level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, ncol <span class="op">=</span> <span class="fl">2</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Random effect distributions under different G matrices"</span>,</span>
+<span>    x     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">b</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span><span class="op">~</span><span class="op">~</span><span class="st">"(random intercept)"</span><span class="op">)</span>,</span>
+<span>    y     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">b</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">~</span><span class="op">~</span><span class="st">"(random slope)"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    strip.text       <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">9</span>, lineheight <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span>,</span>
+<span>    strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#f0f0f0"</span>, colour <span class="op">=</span> <span class="st">"grey70"</span><span class="op">)</span>,</span>
+<span>    panel.spacing    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">1.2</span>, <span class="st">"lines"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="appendix-a-math_files/figure-html/re-distribution-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="what-mathbfg-is-not" class="level3" data-number="A.3.8"><h3 data-number="A.3.8" class="anchored" data-anchor-id="what-mathbfg-is-not">
+<span class="header-section-number">A.3.8</span> What <span class="math inline">\(\mathbf{G}\)</span> Is Not</h3>
+<p>Two common misconceptions are worth correcting explicitly.</p>
+<p><strong><span class="math inline">\(\mathbf{G}\)</span> is not known in advance.</strong> It is estimated from the data, along with <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2_\varepsilon\)</span>. The estimated <span class="math inline">\(\hat{\mathbf{G}}\)</span> appears in the random effects section of the model summary. With few groups, the estimates will be uncertain — especially the off-diagonal covariance, which requires sufficient spread in both dimensions to estimate reliably.</p>
+<p><strong><span class="math inline">\(\mathbf{G}\)</span> is not the same as the residual covariance matrix.</strong> <span class="math inline">\(\mathbf{G}\)</span> describes the distribution of random effects across groups — between-group variation. The residual variance <span class="math inline">\(\sigma^2_\varepsilon\)</span> describes the variation within groups after accounting for the fixed and random effects. These are separate variance components at different levels of the hierarchy, as discussed in Section 9.2.</p>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ebedthan\.github\.io\/maov\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">References</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./appendix-b-packages.html" class="pagination-link" aria-label="Datasets and R Packages">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets and R Packages</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Modern Analysis of Variance by Anicet Ebou.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/appendix-a-math.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>
