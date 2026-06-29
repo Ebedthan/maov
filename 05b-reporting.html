@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.5.56" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+<meta name="author" content="Anicet Ebou" />
+
+<title>13  Reporting ANOVA Results – Modern Analysis of Variance</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<!-- htmldependencies:E3FAD763 -->
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn"
+      data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" 
+      aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
+      onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <h1 class="quarto-secondary-nav-title no-breadcrumbs"></h1>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" role="link"
+        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
+        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="/">
+      Modern Analysis of Variance
+      </a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Ebedthan/maov/"  title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/02-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/02a-what-is-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>What is ANOVA, Really ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/02b-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>2</span>  <span class='chapter-title'>The Assumptions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/03-classical-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical ANOVA Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/03a-one-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/03b-multiple-comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>4</span>  <span class='chapter-title'>Multiple Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/03c-two-way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Two-Way ANOVA and Factorial Designs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/03d-repeated-measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>6</span>  <span class='chapter-title'>Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/03e-split-plot-nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>Split-Plot and Nested Designs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/04-modern-framework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Modern Framework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/04a-anova-as-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>8</span>  <span class='chapter-title'>ANOVA as a Linear Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/04b-mixed-effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>9</span>  <span class='chapter-title'>Mixed-Effects Models: Beyond Classical ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/04c-when-assumptions-fail.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>10</span>  <span class='chapter-title'>When Assumptions Fail, What to Do ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/04d-glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>11</span>  <span class='chapter-title'>Generalised Linear Mixed Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/05-good-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Good Practice and Reproductibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/05a-experimental-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>12</span>  <span class='chapter-title'>Experimental Design Principles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/05b-reporting.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class='chapter-number'>13</span>  <span class='chapter-title'>Reporting ANOVA Results</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/05c-reproducible-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>14</span>  <span class='chapter-title'>Reproducible Analysis with R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5"  role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/appendix-a-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>A</span>  <span class='chapter-title'>The Maths of the Book</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/appendix-b-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>B</span>  <span class='chapter-title'>Datasets and R Packages</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/appendix-c-decision-tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>C</span>  <span class='chapter-title'>Decision Trees for Model Selection</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" ></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <div id="quarto-toc-target"></div>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-chap13" class="quarto-section-identifier"><span class="chapter-number">13</span>  <span class="chapter-title">Reporting ANOVA Results</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-must-appear-in-a-paper" id="toc-what-must-appear-in-a-paper"><span class="header-section-number">13.1</span> What Must Appear in a Paper</a>
+  <ul>
+  <li><a href="#the-minimum-reporting-standard" id="toc-the-minimum-reporting-standard"><span class="header-section-number">13.1.1</span> The Minimum Reporting Standard</a></li>
+  <li><a href="#reporting-mixed-models" id="toc-reporting-mixed-models"><span class="header-section-number">13.1.2</span> Reporting Mixed Models</a></li>
+  <li><a href="#reporting-glmms" id="toc-reporting-glmms"><span class="header-section-number">13.1.3</span> Reporting GLMMs</a></li>
+  <li><a href="#common-reporting-mistakes" id="toc-common-reporting-mistakes"><span class="header-section-number">13.1.4</span> Common Reporting Mistakes</a></li>
+  </ul></li>
+  <li><a href="#visualisation" id="toc-visualisation"><span class="header-section-number">13.2</span> Visualisation</a>
+  <ul>
+  <li><a href="#means-plots" id="toc-means-plots"><span class="header-section-number">13.2.1</span> Means Plots</a></li>
+  <li><a href="#boxplots" id="toc-boxplots"><span class="header-section-number">13.2.2</span> Boxplots</a></li>
+  <li><a href="#violin-plots" id="toc-violin-plots"><span class="header-section-number">13.2.3</span> Violin Plots</a></li>
+  <li><a href="#adding-significance-annotations" id="toc-adding-significance-annotations"><span class="header-section-number">13.2.4</span> Adding Significance Annotations</a></li>
+  <li><a href="#forest-plots-for-multi-study-or-multi-comparison-results" id="toc-forest-plots-for-multi-study-or-multi-comparison-results"><span class="header-section-number">13.2.5</span> Forest Plots for Multi-Study or Multi-Comparison Results</a></li>
+  <li><a href="#choosing-the-right-visualisation" id="toc-choosing-the-right-visualisation"><span class="header-section-number">13.2.6</span> Choosing the Right Visualisation</a></li>
+  </ul></li>
+  <li><a href="#a-template-for-methods-and-results-sections" id="toc-a-template-for-methods-and-results-sections"><span class="header-section-number">13.3</span> A Template for Methods and Results Sections</a>
+  <ul>
+  <li><a href="#one-way-anova" id="toc-one-way-anova"><span class="header-section-number">13.3.1</span> One-Way ANOVA</a></li>
+  <li><a href="#two-way-anova" id="toc-two-way-anova"><span class="header-section-number">13.3.2</span> Two-Way ANOVA</a></li>
+  <li><a href="#linear-mixed-model" id="toc-linear-mixed-model"><span class="header-section-number">13.3.3</span> Linear Mixed Model</a></li>
+  <li><a href="#glmm" id="toc-glmm"><span class="header-section-number">13.3.4</span> GLMM</a></li>
+  <li><a href="#inline-reporting-with-quarto" id="toc-inline-reporting-with-quarto"><span class="header-section-number">13.3.5</span> Inline Reporting with Quarto</a></li>
+  </ul></li>
+  </ul>
+</nav>
+<p>Running a correct analysis is necessary but not sufficient. The analysis must also be reported in a way that allows readers to evaluate the evidence, reproduce the findings, and build on the work. Poorly reported statistics are a persistent problem in the biological literature, not always because the analysis was wrong, but because essential information was omitted, the visualisation was misleading, or the narrative obscured rather than illuminated the findings.</p>
+<p>This chapter covers what must appear in a paper, how to visualise results honestly and effectively, and provides templates for the Methods and Results sections that can be adapted for any ANOVA design covered in this book.</p>
+<section id="what-must-appear-in-a-paper" class="level2" data-number="13.1">
+<h2 data-number="13.1"><span class="header-section-number">13.1</span> What Must Appear in a Paper</h2>
+<section id="the-minimum-reporting-standard" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1"><span class="header-section-number">13.1.1</span> The Minimum Reporting Standard</h3>
+<p>Every reported ANOVA result should contain, at minimum, the following information:</p>
+<p><strong>The test statistic and its degrees of freedom.</strong> For an <span class="math inline">\(F\)</span> test: <span class="math inline">\(F_{df_1, df_2} = x.xx\)</span>. Both degrees of freedom are required, the numerator (<span class="math inline">\(df_1\)</span>) and the denominator (<span class="math inline">\(df_2\)</span>). A reported <span class="math inline">\(F\)</span> without degrees of freedom cannot be verified or reproduced.</p>
+<p><strong>The p-value.</strong> Report exact p-values to two or three significant figures (e.g. <span class="math inline">\(p = 0.023\)</span>, <span class="math inline">\(p = 0.003\)</span>), not as inequalities unless the value is below a reporting threshold (e.g. <span class="math inline">\(p &lt; 0.001\)</span>). The convention of reporting <span class="math inline">\(p &lt; 0.05\)</span> as “significant” and <span class="math inline">\(p &gt; 0.05\)</span> as “not significant” without the actual value discards information that readers need to form their own judgements.</p>
+<p><strong>An effect size with a confidence interval.</strong> As Chapter <a href="#sec-chap3" class="quarto-xref"><span class="quarto-unresolved-ref ref-noprefix">sec-chap3</span></a> demonstrated, the p-value conflates the size of the effect with the size of the study. Always accompany the <span class="math inline">\(F\)</span> test with <span class="math inline">\(\eta^2\)</span>, <span class="math inline">\(\omega^2\)</span>, or partial <span class="math inline">\(\omega^2\)</span> as appropriate, with a 95% confidence interval. For pairwise comparisons, report the estimated difference (or ratio for log-link models) and its confidence interval.</p>
+<p><strong>The sample size.</strong> Total <span class="math inline">\(N\)</span> and the number of observations per group. For nested or hierarchical designs, report the sample size at every relevant level, the number of subjects, the number of observations per subject, and the number of groups.</p>
+<p><strong>The software and packages used.</strong> Specify R version and the version of every package used in the analysis. Results from <code>lme4</code>, <code>glmmTMB</code>, <code>emmeans</code>, and <code>effectsize</code> can differ across versions.</p>
+</section>
+<section id="reporting-mixed-models" class="level3" data-number="13.1.2">
+<h3 data-number="13.1.2"><span class="header-section-number">13.1.2</span> Reporting Mixed Models</h3>
+<p>Mixed models require additional reporting beyond standard ANOVA:</p>
+<ul>
+<li>The full model formula, ideally in R notation.</li>
+<li>The estimation method (REML or ML) and the rationale.</li>
+<li>The method used for degrees of freedom and p-values (Satterthwaite or Kenward-Roger).</li>
+<li>The variance components (<span class="math inline">\(\hat{\sigma}^2_b\)</span> and <span class="math inline">\(\hat{\sigma}^2_\varepsilon\)</span>) and the ICC.</li>
+<li>The conditional and marginal <span class="math inline">\(R^2\)</span> values.</li>
+</ul>
+</section>
+<section id="reporting-glmms" class="level3" data-number="13.1.3">
+<h3 data-number="13.1.3"><span class="header-section-number">13.1.3</span> Reporting GLMMs</h3>
+<p>For GLMMs, report additionally:</p>
+<ul>
+<li>The response distribution and link function.</li>
+<li>Evidence that the model was adequately specified (DHARMa diagnostics, overdispersion ratio).</li>
+<li>Coefficients on both the link scale (for statistical inference) and the response scale (for biological interpretation), e.g. log-odds ratios and odds ratios for binomial models, log-rate ratios and rate ratios for Poisson models.</li>
+<li>For zero-inflated models, report the zero-inflation component separately from the conditional component.</li>
+</ul>
+</section>
+<section id="common-reporting-mistakes" class="level3" data-number="13.1.4">
+<h3 data-number="13.1.4"><span class="header-section-number">13.1.4</span> Common Reporting Mistakes</h3>
+<p>The following are frequently seen in published papers and should be avoided:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mistake</th>
+<th>Correct practice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reporting only <span class="math inline">\(p &lt; 0.05\)</span></td>
+<td>Report exact <span class="math inline">\(p\)</span>-value</td>
+</tr>
+<tr class="even">
+<td>Omitting degrees of freedom</td>
+<td>Always report <span class="math inline">\(F_{df_1, df_2}\)</span></td>
+</tr>
+<tr class="odd">
+<td>No effect size</td>
+<td>Report <span class="math inline">\(\omega^2\)</span> or partial <span class="math inline">\(\omega^2\)</span></td>
+</tr>
+<tr class="even">
+<td>“Mean ± SE” without stating what SE means</td>
+<td>State standard error of the mean explicitly</td>
+</tr>
+<tr class="odd">
+<td>No post-hoc method specified</td>
+<td>Name the correction (Tukey, Holm, etc.)</td>
+</tr>
+<tr class="even">
+<td>No software version</td>
+<td>Cite R version and package versions</td>
+</tr>
+<tr class="odd">
+<td>No model formula for mixed models</td>
+<td>Include full <code>lmer()</code> formula</td>
+</tr>
+<tr class="even">
+<td>Reporting ANOVA without assumption checks</td>
+<td>Report key diagnostics</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="visualisation" class="level2" data-number="13.2">
+<h2 data-number="13.2"><span class="header-section-number">13.2</span> Visualisation</h2>
+<p>Good visualisation shows the data, not just the summary. The most common visualisation mistake in biology is replacing individual observations with bars and error bars, a format that hides the distribution of the data and makes it impossible to assess assumptions visually. The sections below progress from least to most informative.</p>
+<section id="means-plots" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1"><span class="header-section-number">13.2.1</span> Means Plots</h3>
+<p>Means plots display the group mean with an error bar representing either the standard error or the 95% confidence interval. They are familiar and compact but convey almost no information about the distribution of the data.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Nitrogen&quot;</span>, <span class="st">&quot;Phosphorus&quot;</span>), <span class="at">each =</span> n),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Nitrogen&quot;</span>, <span class="st">&quot;Phosphorus&quot;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(n, <span class="dv">20</span>, <span class="dv">3</span>), <span class="fu">rnorm</span>(n, <span class="dv">25</span>, <span class="dv">3</span>), <span class="fu">rnorm</span>(n, <span class="dv">22</span>, <span class="dv">3</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, group)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute means and CIs</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>summ <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">levels</span>(group), <span class="cf">function</span>(g) {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> df<span class="sc">$</span>y[df<span class="sc">$</span>group <span class="sc">==</span> g]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">&lt;-</span> <span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(x))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  ci <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">group =</span> g, <span class="at">mean =</span> m, <span class="at">lower =</span> m <span class="sc">-</span> ci, <span class="at">upper =</span> m <span class="sc">+</span> ci)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>summ<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(summ<span class="sc">$</span>group, <span class="at">levels =</span> <span class="fu">levels</span>(group))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summ, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> mean, <span class="at">colour =</span> group)) <span class="sc">+</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#2E86AB&quot;</span>, <span class="st">&quot;#F6AE2D&quot;</span>, <span class="st">&quot;#E84855&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Means plot with 95% confidence intervals&quot;</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Error bars show 95% CI&quot;</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">&quot;Plant height (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div id="fig-means-plot" class="quarto-float quarto-figure quarto-figure-center" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-means-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05b-reporting_files/figure-html/fig-means-plot-1.png" class="img-fluid quarto-figure quarto-figure-center" style="width:90.0%" />
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-means-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 13.1: Means plot with 95% confidence intervals for the fertiliser experiment. While compact and familiar, this format hides the distribution of the data, two datasets with identical means and CIs can have completely different distributions. Use with caution and always accompany with a more informative display.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>If you use a means plot, always:</p>
+<ul>
+<li>State explicitly what the error bars represent (SE, SD, or CI).</li>
+<li>Use 95% CIs rather than SE: CIs are directly interpretable for inference, SE bars are not.</li>
+<li>Accompany with the sample size per group in the figure caption.</li>
+</ul>
+</section>
+<section id="boxplots" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2"><span class="header-section-number">13.2.2</span> Boxplots</h3>
+<p>Boxplots display the median, interquartile range, and outliers. They convey more information than a means plot and are appropriate for moderate sample sizes (<span class="math inline">\(n \geq 10\)</span> per group). For small samples they can be misleading, a boxplot of five points looks authoritative but represents very little data.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> y, <span class="at">fill =</span> group)) <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="fu">aes</span>(<span class="at">colour =</span> group)) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#2E86AB&quot;</span>, <span class="st">&quot;#F6AE2D&quot;</span>, <span class="st">&quot;#E84855&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#2E86AB&quot;</span>, <span class="st">&quot;#F6AE2D&quot;</span>, <span class="st">&quot;#E84855&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Boxplot with individual observations&quot;</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">&quot;n = &quot;</span>, n, <span class="st">&quot; per group&quot;</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">&quot;Plant height (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div id="fig-boxplot" class="quarto-float quarto-figure quarto-figure-center" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05b-reporting_files/figure-html/fig-boxplot-1.png" class="img-fluid quarto-figure quarto-figure-center" style="width:90.0%" />
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 13.2: Boxplot with individual observations overlaid for the fertiliser experiment. The boxplot shows the median, interquartile range, and outliers; the jittered points show every individual observation. This combination is the minimum acceptable display for biological data.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Always overlay the individual data points when <span class="math inline">\(n &lt; 50\)</span> per group. The <code>outlier.shape = NA</code> argument removes the duplicate outlier points that <code>geom_boxplot</code> would otherwise add, since all points are shown by <code>geom_jitter</code>, the boxplot outliers become redundant and confusing.</p>
+</section>
+<section id="violin-plots" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3"><span class="header-section-number">13.2.3</span> Violin Plots</h3>
+<p>Violin plots show the full distribution as a kernel density estimate, mirrored to form a symmetric shape. They are more informative than boxplots for large samples (<span class="math inline">\(n &gt; 30\)</span> per group) where the shape of the distribution matters.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> y, <span class="at">fill =</span> group)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.05</span>, <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="fu">aes</span>(<span class="at">colour =</span> group)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#2E86AB&quot;</span>, <span class="st">&quot;#F6AE2D&quot;</span>, <span class="st">&quot;#E84855&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#2E86AB&quot;</span>, <span class="st">&quot;#F6AE2D&quot;</span>, <span class="st">&quot;#E84855&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Violin plot with embedded boxplot&quot;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">&quot;n = &quot;</span>, n, <span class="st">&quot; per group&quot;</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">&quot;Plant height (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div id="fig-violin-plot" class="quarto-float quarto-figure quarto-figure-center" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-violin-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05b-reporting_files/figure-html/fig-violin-plot-1.png" class="img-fluid quarto-figure quarto-figure-center" style="width:90.0%" />
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-violin-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 13.3: Violin plot with embedded boxplot and individual observations for the fertiliser experiment. The violin shape shows the full distribution; the inner boxplot provides the summary statistics; the points show individual observations. This is the most complete single-panel display for group comparisons.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-significance-annotations" class="level3" data-number="13.2.4">
+<h3 data-number="13.2.4"><span class="header-section-number">13.2.4</span> Adding Significance Annotations</h3>
+<p>Post-hoc comparison results can be added directly to the plot using the <code>ggpubr</code> or <code>ggsignif</code> packages:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;ggsignif&quot;) if needed</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggsignif)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Tukey HSD first</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> group, <span class="at">data =</span> df)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>tukey <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(fit)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tukey)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;   Tukey multiple comparisons of means
+#&gt;     95% family-wise confidence level
+#&gt; 
+#&gt; Fit: aov(formula = y ~ group, data = df)
+#&gt; 
+#&gt; $group
+#&gt;                          diff       lwr       upr     p adj
+#&gt; Nitrogen-Control     3.611265  0.974554 6.2479751 0.0047467
+#&gt; Phosphorus-Control   1.421508 -1.215203 4.0582183 0.4025112
+#&gt; Phosphorus-Nitrogen -2.189757 -4.826467 0.4469538 0.1218054</code></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> y, <span class="at">fill =</span> group)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha   =</span> <span class="fl">0.4</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">width   =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="fu">aes</span>(<span class="at">colour =</span> group)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_signif</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">comparisons =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Nitrogen&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Phosphorus&quot;</span>)),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">map_signif_level =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">tip_length =</span> <span class="fl">0.02</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_position =</span> <span class="fu">c</span>(<span class="dv">29</span>, <span class="dv">31</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values   =</span> <span class="fu">c</span>(<span class="st">&quot;#2E86AB&quot;</span>, <span class="st">&quot;#F6AE2D&quot;</span>, <span class="st">&quot;#E84855&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#2E86AB&quot;</span>, <span class="st">&quot;#F6AE2D&quot;</span>, <span class="st">&quot;#E84855&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Post-hoc comparisons on a boxplot&quot;</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Tukey HSD; * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001&quot;</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">&quot;Plant height (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div id="fig-significance-annotation" class="quarto-float quarto-figure quarto-figure-center" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-significance-annotation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05b-reporting_files/figure-html/fig-significance-annotation-1.png" class="img-fluid quarto-figure quarto-figure-center" style="width:90.0%" />
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-significance-annotation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 13.4: Boxplot with Tukey HSD significance annotations. Only significant comparisons are annotated; non-significant pairs are left unannotated. The annotation style follows the convention of placing brackets between compared groups with the adjusted p-value or significance stars.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="forest-plots-for-multi-study-or-multi-comparison-results" class="level3" data-number="13.2.5">
+<h3 data-number="13.2.5"><span class="header-section-number">13.2.5</span> Forest Plots for Multi-Study or Multi-Comparison Results</h3>
+<p>Forest plots display point estimates and confidence intervals for multiple comparisons or studies simultaneously, making it easy to compare effect sizes and their uncertainty across a set of results. They are standard in meta-analysis but are equally valuable for displaying a set of post-hoc comparisons or the results of multiple related ANOVA models.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Tukey HSD results into a data frame</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tukey_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(tukey<span class="sc">$</span>group)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>tukey_df<span class="sc">$</span>comparison <span class="ot">&lt;-</span> <span class="fu">rownames</span>(tukey_df)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tukey_df)[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;lower&quot;</span>, <span class="st">&quot;upper&quot;</span>, <span class="st">&quot;p_adj&quot;</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>tukey_df<span class="sc">$</span>significant <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(tukey_df<span class="sc">$</span>p_adj <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;Significant&quot;</span>, <span class="st">&quot;Non-significant&quot;</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>tukey_df<span class="sc">$</span>comparison <span class="ot">&lt;-</span> <span class="fu">factor</span>(tukey_df<span class="sc">$</span>comparison,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">rev</span>(tukey_df<span class="sc">$</span>comparison))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tukey_df,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> estimate, <span class="at">y =</span> comparison, </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">xmin =</span> lower, <span class="at">xmax =</span> upper, <span class="at">colour =</span> significant)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;grey50&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="at">height =</span> <span class="fl">0.2</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Significant&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E84855&quot;</span>, <span class="st">&quot;Non-significant&quot;</span> <span class="ot">=</span> <span class="st">&quot;#2E86AB&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Tukey HSD pairwise comparisons&quot;</span>,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Points = estimated mean difference; lines = 95% CI&quot;</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Mean difference in plant height (cm)&quot;</span>,</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="cn">NULL</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; Warning: `geom_errorbarh()` was deprecated in ggplot2 4.0.0.
+#&gt; ℹ Please use the `orientation` argument of `geom_errorbar()` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#&gt; `height` was translated to `width`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-forest-plot" class="quarto-float quarto-figure quarto-figure-center" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-forest-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05b-reporting_files/figure-html/fig-forest-plot-1.png" class="img-fluid quarto-figure quarto-figure-center" style="width:90.0%" />
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forest-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 13.5: Forest plot of Tukey HSD pairwise comparisons from the fertiliser experiment. Each row is one comparison; points show the estimated mean difference; horizontal lines show the 95% CI. The vertical dashed line at zero marks no difference, comparisons whose CI does not cross zero are significant after Tukey correction.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Forest plots become particularly valuable when you have many comparisons to display, for example, the results of a two-way ANOVA with post-hoc comparisons within each level of one factor, or the treatment effects from the same model fitted to multiple response variables. They are superior to tables for communicating patterns across many estimates because the eye can immediately detect which estimates are large, which are imprecise, and which are consistent in direction.</p>
+</section>
+<section id="choosing-the-right-visualisation" class="level3" data-number="13.2.6">
+<h3 data-number="13.2.6"><span class="header-section-number">13.2.6</span> Choosing the Right Visualisation</h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Recommended plot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(n &lt; 10\)</span> per group</td>
+<td>Dot plot with all points shown</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10 \leq n &lt; 30\)</span></td>
+<td>Boxplot with jittered points</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(n \geq 30\)</span></td>
+<td>Violin plot with embedded boxplot</td>
+</tr>
+<tr class="even">
+<td>Many groups (<span class="math inline">\(k &gt; 6\)</span>)</td>
+<td>Horizontal boxplot or dot plot</td>
+</tr>
+<tr class="odd">
+<td>Longitudinal data</td>
+<td>Line plot with individual trajectories</td>
+</tr>
+<tr class="even">
+<td>Post-hoc comparisons</td>
+<td>Forest plot</td>
+</tr>
+<tr class="odd">
+<td>Interaction effects</td>
+<td>Interaction plot with CIs</td>
+</tr>
+<tr class="even">
+<td>Effect sizes across studies</td>
+<td>Forest plot</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="a-template-for-methods-and-results-sections" class="level2" data-number="13.3">
+<h2 data-number="13.3"><span class="header-section-number">13.3</span> A Template for Methods and Results Sections</h2>
+<section id="one-way-anova" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1"><span class="header-section-number">13.3.1</span> One-Way ANOVA</h3>
+<p><strong>Methods:</strong></p>
+<blockquote>
+<p>The effect of fertiliser type (control, nitrogen, phosphorus) on plant height was analysed using one-way ANOVA. Residual normality was assessed using a Q-Q plot and the Shapiro-Wilk test; homogeneity of variance was assessed using Levene’s test. Pairwise comparisons between groups were conducted using Tukey’s HSD test. Effect size was quantified using omega-squared (<span class="math inline">\(\omega^2\)</span>) with 95% confidence intervals computed using the <code>effectsize</code> package <span class="citation" data-cites="Ben-Shachar2020">(<a href="#ref-Ben-Shachar2020" role="doc-biblioref">Ben-Shachar, Lüdecke, and Makowski 2020</a>)</span>. All analyses were conducted in R version x.x.x <span class="citation" data-cites="R2024">(<a href="#ref-R2024" role="doc-biblioref"><strong>R2024?</strong></a>)</span> using the <code>car</code> <span class="citation" data-cites="Fox2019">(<a href="#ref-Fox2019" role="doc-biblioref"><strong>Fox2019?</strong></a>)</span> and <code>effectsize</code> packages.</p>
+</blockquote>
+<p><strong>Results:</strong></p>
+<blockquote>
+<p>Fertiliser type had a significant effect on plant height (<span class="math inline">\(F_{2,57} = x.xx\)</span>, <span class="math inline">\(p = x.xxx\)</span>, <span class="math inline">\(\omega^2 = x.xx\)</span>, 95% CI: <span class="math inline">\([x.xx, x.xx]\)</span>). Post-hoc Tukey HSD comparisons revealed that nitrogen-treated plants were significantly taller than control plants (mean difference = <span class="math inline">\(x.x\)</span> cm, 95% CI: <span class="math inline">\([x.x, x.x]\)</span>, <span class="math inline">\(p = x.xxx\)</span>) and phosphorus-treated plants (mean difference = <span class="math inline">\(x.x\)</span> cm, 95% CI: <span class="math inline">\([x.x, x.x]\)</span>, <span class="math inline">\(p = x.xxx\)</span>). Phosphorus-treated and control plants did not differ significantly (mean difference = <span class="math inline">\(x.x\)</span> cm, 95% CI: <span class="math inline">\([x.x, x.x]\)</span>, <span class="math inline">\(p = x.xxx\)</span>). Group means (± SD) were <span class="math inline">\(x.x
+\pm x.x\)</span> cm (control), <span class="math inline">\(x.x \pm x.x\)</span> cm (nitrogen), and <span class="math inline">\(x.x \pm x.x\)</span> cm (phosphorus).</p>
+</blockquote>
+</section>
+<section id="two-way-anova" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2"><span class="header-section-number">13.3.2</span> Two-Way ANOVA</h3>
+<p><strong>Methods:</strong></p>
+<blockquote>
+<p>The effects of fertiliser type (control, nitrogen, phosphorus) and watering regime (dry, watered) on plant yield were analysed using a two-way ANOVA with Type III sums of squares (using sum-to-zero contrasts), fitted with the <code>lm()</code> function in R and tested using <code>car::Anova()</code> <span class="citation" data-cites="Fox2011">(<a href="#ref-Fox2011" role="doc-biblioref"><strong>Fox2011?</strong></a>)</span>. Residual diagnostics were conducted as above. The interaction was examined first; where significant, simple main effects were tested within each level of the other factor using <code>emmeans</code> <span class="citation" data-cites="Lenth2026">(<a href="#ref-Lenth2026" role="doc-biblioref">Lenth and Piaskowski 2026</a>)</span> with Tukey adjustment.</p>
+</blockquote>
+<p><strong>Results:</strong></p>
+<blockquote>
+<p>A significant fertiliser <span class="math inline">\(\times\)</span> watering interaction was found (<span class="math inline">\(F_{2,54} = x.xx\)</span>, <span class="math inline">\(p = x.xxx\)</span>, partial <span class="math inline">\(\omega^2
+= x.xx\)</span>). Simple effects analysis revealed that the effect of fertiliser differed between dry and watered conditions [describe the specific pattern]. Main effects of fertiliser (<span class="math inline">\(F_{2,54} = x.xx\)</span>, <span class="math inline">\(p = x.xxx\)</span>) and watering (<span class="math inline">\(F_{1,54} = x.xx\)</span>, <span class="math inline">\(p = x.xxx\)</span>) are not interpreted independently given the significant interaction.</p>
+</blockquote>
+</section>
+<section id="linear-mixed-model" class="level3" data-number="13.3.3">
+<h3 data-number="13.3.3"><span class="header-section-number">13.3.3</span> Linear Mixed Model</h3>
+<p><strong>Methods:</strong></p>
+<blockquote>
+<p>Recovery scores were analysed using a linear mixed-effects model with treatment (control vs intervention) and time (weeks 0, 4, 8, 12) as fixed effects, their interaction, and a random intercept for subject, fitted by REML using <code>lme4</code> version x.x.x <span class="citation" data-cites="Bates2015">(<a href="#ref-Bates2015" role="doc-biblioref">Bates et al. 2015</a>)</span>. Degrees of freedom were approximated using the Kenward-Roger method via <code>lmerTest</code> <span class="citation" data-cites="Kuznetsova2017">(<a href="#ref-Kuznetsova2017" role="doc-biblioref">Kuznetsova, Brockhoff, and Christensen 2017</a>)</span>. Model assumptions were assessed through Q-Q plots and residual vs fitted plots of the model residuals. Marginal and conditional <span class="math inline">\(R^2\)</span> values were computed using <code>MuMIn</code> <span class="citation" data-cites="Barton2023">(<a href="#ref-Barton2023" role="doc-biblioref"><strong>Barton2023?</strong></a>)</span>.</p>
+</blockquote>
+<p><strong>Results:</strong></p>
+<blockquote>
+<p>The treatment <span class="math inline">\(\times\)</span> time interaction was significant (<span class="math inline">\(F_{x.x, x.x} = x.xx\)</span>, <span class="math inline">\(p = x.xxx\)</span>, partial <span class="math inline">\(\eta^2
+= x.xx\)</span>), indicating that the trajectory of recovery differed between treatment groups. The intervention group showed a steeper decline in resting heart rate over the 12-week period than the control group [describe the pattern with reference to the figure]. The main effect of time was also significant (<span class="math inline">\(F_{x.x, x.x} = x.xx\)</span>, <span class="math inline">\(p = x.xxx\)</span>, partial <span class="math inline">\(\eta^2 = x.xx\)</span>), confirming that heart rate declined over the study period in both groups. The conditional <span class="math inline">\(R^2\)</span> was <span class="math inline">\(x.xx\)</span>, with subject-level random effects accounting for an additional <span class="math inline">\(x.xx\)</span> of variance beyond the fixed effects (<span class="math inline">\(R^2_m = x.xx\)</span>).</p>
+</blockquote>
+</section>
+<section id="glmm" class="level3" data-number="13.3.4">
+<h3 data-number="13.3.4"><span class="header-section-number">13.3.4</span> GLMM</h3>
+<p><strong>Methods:</strong></p>
+<blockquote>
+<p>Bird abundance counts were analysed using a negative binomial generalised linear mixed model with a log link, landscape type as a fixed effect, and a random intercept for site, fitted using <code>glmmTMB</code> version x.x.x <span class="citation" data-cites="Brooks2017">(<a href="#ref-Brooks2017" role="doc-biblioref">Brooks et al. 2017</a>)</span>. A zero-inflated negative binomial model was also fitted and compared using AIC and a likelihood ratio test. Model adequacy was assessed using simulation-based quantile residuals via <code>DHARMa</code> version x.x.x <span class="citation" data-cites="Hartig2022">(<a href="#ref-Hartig2022" role="doc-biblioref">Hartig 2026</a>)</span>. Estimated marginal means and pairwise contrasts (Tukey adjusted) were obtained using <code>emmeans</code> <span class="citation" data-cites="Lenth2023">(<a href="#ref-Lenth2023" role="doc-biblioref"><strong>Lenth2023?</strong></a>)</span>. Effect sizes were computed as marginal and conditional <span class="math inline">\(R^2\)</span> using <code>MuMIn</code> <span class="citation" data-cites="Barton2023">(<a href="#ref-Barton2023" role="doc-biblioref"><strong>Barton2023?</strong></a>)</span>.</p>
+</blockquote>
+<p><strong>Results:</strong></p>
+<blockquote>
+<p>The negative binomial GLMM was retained over the zero-inflated alternative (<span class="math inline">\(\Delta\text{AIC} = x.x\)</span>, LRT: <span class="math inline">\(\chi^2_x = x.xx\)</span>, <span class="math inline">\(p = x.xxx\)</span>). Landscape type had a significant effect on bird abundance (<span class="math inline">\(\chi^2_2 = x.xx\)</span>, <span class="math inline">\(p = x.xxx\)</span>, marginal <span class="math inline">\(R^2 = x.xx\)</span>). Estimated mean counts per transect were <span class="math inline">\(x.xx\)</span> (95% CI: <span class="math inline">\([x.xx, x.xx]\)</span>) in the agricultural matrix, <span class="math inline">\(x.xx\)</span> (<span class="math inline">\([x.xx, x.xx]\)</span>) in fragmented forest, and <span class="math inline">\(x.xx\)</span> (<span class="math inline">\([x.xx, x.xx]\)</span>) in continuous forest. Pairwise Tukey comparisons revealed [describe significant differences]. Site-level variation accounted for an additional <span class="math inline">\(x.xx\)</span> of total variance (conditional <span class="math inline">\(R^2 = x.xx\)</span>).</p>
+</blockquote>
+</section>
+<section id="inline-reporting-with-quarto" class="level3" data-number="13.3.5">
+<h3 data-number="13.3.5"><span class="header-section-number">13.3.5</span> Inline Reporting with Quarto</h3>
+<p>Throughout this book, results have been reported using inline R code to ensure that values in the text are always consistent with the analysis. The following pattern should be used in every Quarto document:</p>
+<blockquote>
+<p>Fertiliser type had a significant effect on plant height (<span class="math inline">\(F_{2,57} = 5.51\)</span>, <span class="math inline">\(p = 0.006\)</span>, <span class="math inline">\(\omega^2 = 0.13\)</span>).</p>
+</blockquote>
+<p>This pattern eliminates transcription errors entirely, the reported values are computed directly from the fitted model and updated automatically whenever the analysis changes.</p>
+<div id="quarto-navigation-envelope" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar-title">Modern Analysis of Variance</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar-title">Modern Analysis of Variance</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-next"><span class="chapter-number">14</span>  <span class="chapter-title">Reproducible Analysis with R</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-prev"><span class="chapter-number">12</span>  <span class="chapter-title">Experimental Design Principles</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/index.htmlPreface">Preface</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:quarto-sidebar-section-1">Foundations</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/02a-what-is-anova.html&lt;span-class=&#39;chapter-number&#39;&gt;1&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;What-is-ANOVA,-Really-?&lt;/span&gt;"><span class="chapter-number">1</span>  <span class="chapter-title">What is ANOVA, Really ?</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/02b-assumptions.html&lt;span-class=&#39;chapter-number&#39;&gt;2&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;The-Assumptions&lt;/span&gt;"><span class="chapter-number">2</span>  <span class="chapter-title">The Assumptions</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:quarto-sidebar-section-2">Classical ANOVA Models</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/03a-one-way.html&lt;span-class=&#39;chapter-number&#39;&gt;3&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;One-Way-ANOVA&lt;/span&gt;"><span class="chapter-number">3</span>  <span class="chapter-title">One-Way ANOVA</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/03b-multiple-comparisons.html&lt;span-class=&#39;chapter-number&#39;&gt;4&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Multiple-Comparisons&lt;/span&gt;"><span class="chapter-number">4</span>  <span class="chapter-title">Multiple Comparisons</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/03c-two-way.html&lt;span-class=&#39;chapter-number&#39;&gt;5&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Two-Way-ANOVA-and-Factorial-Designs&lt;/span&gt;"><span class="chapter-number">5</span>  <span class="chapter-title">Two-Way ANOVA and Factorial Designs</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/03d-repeated-measures.html&lt;span-class=&#39;chapter-number&#39;&gt;6&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Repeated-Measures-ANOVA&lt;/span&gt;"><span class="chapter-number">6</span>  <span class="chapter-title">Repeated Measures ANOVA</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/03e-split-plot-nested.html&lt;span-class=&#39;chapter-number&#39;&gt;7&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Split-Plot-and-Nested-Designs&lt;/span&gt;"><span class="chapter-number">7</span>  <span class="chapter-title">Split-Plot and Nested Designs</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:quarto-sidebar-section-3">The Modern Framework</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/04a-anova-as-lm.html&lt;span-class=&#39;chapter-number&#39;&gt;8&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;ANOVA-as-a-Linear-Model&lt;/span&gt;"><span class="chapter-number">8</span>  <span class="chapter-title">ANOVA as a Linear Model</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/04b-mixed-effects.html&lt;span-class=&#39;chapter-number&#39;&gt;9&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Mixed-Effects-Models:-Beyond-Classical-ANOVA&lt;/span&gt;"><span class="chapter-number">9</span>  <span class="chapter-title">Mixed-Effects Models: Beyond Classical ANOVA</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/04c-when-assumptions-fail.html&lt;span-class=&#39;chapter-number&#39;&gt;10&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;When-Assumptions-Fail,-What-to-Do-?&lt;/span&gt;"><span class="chapter-number">10</span>  <span class="chapter-title">When Assumptions Fail, What to Do ?</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/04d-glmm.html&lt;span-class=&#39;chapter-number&#39;&gt;11&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Generalised-Linear-Mixed-Models&lt;/span&gt;"><span class="chapter-number">11</span>  <span class="chapter-title">Generalised Linear Mixed Models</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:quarto-sidebar-section-4">Good Practice and Reproductibility</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/05a-experimental-design.html&lt;span-class=&#39;chapter-number&#39;&gt;12&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Experimental-Design-Principles&lt;/span&gt;"><span class="chapter-number">12</span>  <span class="chapter-title">Experimental Design Principles</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/05b-reporting.html&lt;span-class=&#39;chapter-number&#39;&gt;13&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Reporting-ANOVA-Results&lt;/span&gt;"><span class="chapter-number">13</span>  <span class="chapter-title">Reporting ANOVA Results</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/05c-reproducible-analysis.html&lt;span-class=&#39;chapter-number&#39;&gt;14&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Reproducible-Analysis-with-R&lt;/span&gt;"><span class="chapter-number">14</span>  <span class="chapter-title">Reproducible Analysis with R</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/references.htmlReferences">References</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:quarto-sidebar-section-5">Appendices</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/appendix-a-math.html&lt;span-class=&#39;chapter-number&#39;&gt;A&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;The-Maths-of-the-Book&lt;/span&gt;"><span class="chapter-number">A</span>  <span class="chapter-title">The Maths of the Book</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/appendix-b-packages.html&lt;span-class=&#39;chapter-number&#39;&gt;B&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Datasets-and-R-Packages&lt;/span&gt;"><span class="chapter-number">B</span>  <span class="chapter-title">Datasets and R Packages</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar:/appendix-c-decision-tree.html&lt;span-class=&#39;chapter-number&#39;&gt;C&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Decision-Trees-for-Model-Selection&lt;/span&gt;"><span class="chapter-number">C</span>  <span class="chapter-title">Decision Trees for Model Selection</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-breadcrumbs-Good-Practice-and-Reproductibility">Good Practice and Reproductibility</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-breadcrumbs-&lt;span-class=&#39;chapter-number&#39;&gt;13&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Reporting-ANOVA-Results&lt;/span&gt;"><span class="chapter-number">13</span>  <span class="chapter-title">Reporting ANOVA Results</span></span></p>
+<div class="hidden quarto-markdown-envelope-contents" data-render-id="footer-left">
+<p>Modern Analysis of Variance by Anicet Ebou.</p>
+</div>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-metatitle"><span id="sec-chap13" class="quarto-section-identifier"><span class="chapter-number">13</span>  <span class="chapter-title">Reporting ANOVA Results</span></span> – Modern Analysis of Variance</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-twittercardtitle"><span id="sec-chap13" class="quarto-section-identifier"><span class="chapter-number">13</span>  <span class="chapter-title">Reporting ANOVA Results</span></span> – Modern Analysis of Variance</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-ogcardtitle"><span id="sec-chap13" class="quarto-section-identifier"><span class="chapter-number">13</span>  <span class="chapter-title">Reporting ANOVA Results</span></span> – Modern Analysis of Variance</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-metasitename">Modern Analysis of Variance</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-twittercarddesc"></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-ogcardddesc"></span></p>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Bates2015" class="csl-entry" role="listitem">
+Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015. <span>“Fitting <span>Linear Mixed-Effects Models Using</span> Lme4.”</span> <em>Journal of Statistical Software</em> 67 (October): 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
+</div>
+<div id="ref-Ben-Shachar2020" class="csl-entry" role="listitem">
+Ben-Shachar, Mattan S., Daniel Lüdecke, and Dominique Makowski. 2020. <span>“Effectsize: <span>Estimation</span> of <span>Effect Size Indices</span> and <span>Standardized Parameters</span>.”</span> <em>Journal of Open Source Software</em> 5 (56): 2815. <a href="https://doi.org/10.21105/joss.02815">https://doi.org/10.21105/joss.02815</a>.
+</div>
+<div id="ref-Brooks2017" class="csl-entry" role="listitem">
+Brooks, Mollie E., Kasper Kristensen, Koen J. van Benthem, Arni Magnusson, Casper W. Berg, Anders Nielsen, Hans J. Skaug, Martin Mächler, and Benjamin M. Bolker. 2017. <span>“<span class="nocase">glmmTMB Balances Speed</span> and <span>Flexibility Among Packages</span> for <span class="nocase">Zero-inflated Generalized Linear Mixed Modeling</span>.”</span> <em>The R Journal</em> 9 (2): 378–400. <a href="https://doi.org/10.32614/RJ-2017-066">https://doi.org/10.32614/RJ-2017-066</a>.
+</div>
+<div id="ref-Hartig2022" class="csl-entry" role="listitem">
+Hartig, Florian. 2026. <em>DHARMa: Residual Diagnostics for Hierarchical (Multi-Level / Mixed) Regression Models</em>. <a href="https://doi.org/10.32614/CRAN.package.DHARMa">https://doi.org/10.32614/CRAN.package.DHARMa</a>.
+</div>
+<div id="ref-Kuznetsova2017" class="csl-entry" role="listitem">
+Kuznetsova, Alexandra, Per B. Brockhoff, and Rune H. B. Christensen. 2017. <span>“<span class="nocase">lmerTest Package</span>: <span>Tests</span> in <span>Linear Mixed Effects Models</span>.”</span> <em>Journal of Statistical Software</em> 82 (December): 1–26. <a href="https://doi.org/10.18637/jss.v082.i13">https://doi.org/10.18637/jss.v082.i13</a>.
+</div>
+<div id="ref-Lenth2026" class="csl-entry" role="listitem">
+Lenth, Russell V., and Julia Piaskowski. 2026. <em>Emmeans: <span>Estimated</span> Marginal Means, Aka Least-Squares Means</em>. Manual.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id = "quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ebedthan\.github\.io\/maov\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a  href="/05a-experimental-design.html" class="pagination-link" aria-label="Experimental Design Principles">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>12</span>  <span class='chapter-title'>Experimental Design Principles</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a  href="/05c-reproducible-analysis.html" class="pagination-link" aria-label="Reproducible Analysis with R">
+        <span class="nav-page-text"><span class='chapter-number'>14</span>  <span class='chapter-title'>Reproducible Analysis with R</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <div class='footer-contents'>Modern Analysis of Variance by Anicet Ebou.
+</div>  
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+</body>
+
+</html>
