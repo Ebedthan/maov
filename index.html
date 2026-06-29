@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Anicet Ebou">
+<meta name="dcterms.date" content="2026-05-01">
 
-<title>References – Modern Analysis of Variance</title>
+<title>Modern Analysis of Variance</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,26 +22,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,8 +32,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix-a-math.html" rel="next">
-<link href="./05c-reproducible-analysis.html" rel="prev">
+<link href="./02-foundations.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -101,7 +82,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -136,7 +117,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -270,7 +251,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -308,22 +289,44 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <ul class="collapse">
+  <li><a href="#why-another-analysis-of-variance-book" id="toc-why-another-analysis-of-variance-book" class="nav-link" data-scroll-target="#why-another-analysis-of-variance-book">Why another analysis of variance book?</a></li>
+  <li><a href="#how-to-use-this-book" id="toc-how-to-use-this-book" class="nav-link" data-scroll-target="#how-to-use-this-book">How to use this book</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title">Modern Analysis of Variance</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Anicet Ebou </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 1, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -333,123 +336,28 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Akaike1974" class="csl-entry" role="listitem">
-Akaike, H. 1974. <span>“A New Look at the Statistical Model
-Identification.”</span> <em>IEEE Transactions on Automatic Control</em>
-19 (6): 716–23. <a href="https://doi.org/10.1109/TAC.1974.1100705">https://doi.org/10.1109/TAC.1974.1100705</a>.
-</div>
-<div id="ref-Bates2015" class="csl-entry" role="listitem">
-Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015.
-<span>“Fitting <span>Linear Mixed-Effects Models Using</span>
-Lme4.”</span> <em>Journal of Statistical Software</em> 67 (October):
-1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
-</div>
-<div id="ref-Benjamini1995" class="csl-entry" role="listitem">
-Benjamini, Yoav, and Yosef Hochberg. 1995. <span>“Controlling the
-<span>False Discovery Rate</span>: <span>A Practical</span> and
-<span>Powerful Approach</span> to <span>Multiple Testing</span>.”</span>
-<em>Journal of the Royal Statistical Society: Series B
-(Methodological)</em> 57 (1): 289–300. <a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x">https://doi.org/10.1111/j.2517-6161.1995.tb02031.x</a>.
-</div>
-<div id="ref-Ben-Shachar2020" class="csl-entry" role="listitem">
-Ben-Shachar, Mattan S., Daniel Lüdecke, and Dominique Makowski. 2020.
-<span>“Effectsize: <span>Estimation</span> of <span>Effect Size
-Indices</span> and <span>Standardized Parameters</span>.”</span>
-<em>Journal of Open Source Software</em> 5 (56): 2815. <a href="https://doi.org/10.21105/joss.02815">https://doi.org/10.21105/joss.02815</a>.
-</div>
-<div id="ref-Brooks2017" class="csl-entry" role="listitem">
-Brooks, Mollie E., Kasper Kristensen, Koen J. van Benthem, Arni
-Magnusson, Casper W. Berg, Anders Nielsen, Hans J. Skaug, Martin
-Mächler, and Benjamin M. Bolker. 2017. <span>“<span class="nocase">glmmTMB Balances Speed</span> and <span>Flexibility Among
-Packages</span> for <span class="nocase">Zero-inflated Generalized
-Linear Mixed Modeling</span>.”</span> <em>The R Journal</em> 9 (2):
-378–400. <a href="https://doi.org/10.32614/RJ-2017-066">https://doi.org/10.32614/RJ-2017-066</a>.
-</div>
-<div id="ref-Cohen1988" class="csl-entry" role="listitem">
-Cohen, Jacob. 1988. <em>Statistical <span>Power Analysis</span> for the
-<span>Behavioral Sciences</span></em>. New York: Routledge. <a href="https://doi.org/10.4324/9780203771587">https://doi.org/10.4324/9780203771587</a>.
-</div>
-<div id="ref-fisher1919xv" class="csl-entry" role="listitem">
-Fisher, Ronald A. 1919. <span>“XV.—the Correlation Between Relatives on
-the Supposition of Mendelian Inheritance.”</span> <em>Earth and
-Environmental Science Transactions of the Royal Society of
-Edinburgh</em> 52 (2): 399–433.
-</div>
-<div id="ref-fisher1935design" class="csl-entry" role="listitem">
-Fisher, Ronald A. 1935. <span>“The Design of Experiments. Oliver and
-Boyd.”</span> <em>London and Edinburgh.</em>
-</div>
-<div id="ref-fisher1970statistical" class="csl-entry" role="listitem">
-Fisher, Ronald Aylmer. 1970. <span>“Statistical Methods for Research
-Workers.”</span> In <em>Breakthroughs in Statistics: Methodology and
-Distribution</em>, 66–70. Springer.
-</div>
-<div id="ref-Green2016" class="csl-entry" role="listitem">
-Green, Peter, and Catriona J. MacLeod. 2016. <span>“<span>SIMR</span>:
-An <span>R</span> Package for Power Analysis of Generalized Linear Mixed
-Models by Simulation.”</span> <em>Methods in Ecology and Evolution</em>
-7 (4): 493–98. <a href="https://doi.org/10.1111/2041-210X.12504">https://doi.org/10.1111/2041-210X.12504</a>.
-</div>
-<div id="ref-Hartig2022" class="csl-entry" role="listitem">
-Hartig, Florian. 2026. <em>DHARMa: Residual Diagnostics for Hierarchical
-(Multi-Level / Mixed) Regression Models</em>. <a href="https://doi.org/10.32614/CRAN.package.DHARMa">https://doi.org/10.32614/CRAN.package.DHARMa</a>.
-</div>
-<div id="ref-hurlbert1984" class="csl-entry" role="listitem">
-Hurlbert, Stuart H. 1984. <span>“Pseudoreplication and the
-<span>Design</span> of <span>Ecological Field
-Experiments</span>.”</span> <em>Ecological Monographs</em> 54 (2):
-187–211. <a href="https://doi.org/10.2307/1942661">https://doi.org/10.2307/1942661</a>.
-</div>
-<div id="ref-Kenward1997" class="csl-entry" role="listitem">
-Kenward, M. G., and J. H. Roger. 1997. <span>“<a href="https://www.ncbi.nlm.nih.gov/pubmed/9333350">Small Sample
-Inference for Fixed Effects from Restricted Maximum
-Likelihood</a>.”</span> <em>Biometrics</em> 53 (3): 983–97.
-</div>
-<div id="ref-Kuznetsova2017" class="csl-entry" role="listitem">
-Kuznetsova, Alexandra, Per B. Brockhoff, and Rune H. B. Christensen.
-2017. <span>“<span class="nocase">lmerTest Package</span>:
-<span>Tests</span> in <span>Linear Mixed Effects Models</span>.”</span>
-<em>Journal of Statistical Software</em> 82 (December): 1–26. <a href="https://doi.org/10.18637/jss.v082.i13">https://doi.org/10.18637/jss.v082.i13</a>.
-</div>
-<div id="ref-Lenth2026" class="csl-entry" role="listitem">
-Lenth, Russell V., and Julia Piaskowski. 2026. <em>Emmeans:
-<span>Estimated</span> Marginal Means, Aka Least-Squares Means</em>.
-Manual.
-</div>
-<div id="ref-Mair2020" class="csl-entry" role="listitem">
-Mair, Patrick, and Rand Wilcox. 2020. <span>“Robust Statistical Methods
-in <span>R</span> Using the <span>WRS2</span> Package.”</span>
-<em>Behavior Research Methods</em> 52 (2): 464–88. <a href="https://doi.org/10.3758/s13428-019-01246-w">https://doi.org/10.3758/s13428-019-01246-w</a>.
-</div>
-<div id="ref-montgomery2017design" class="csl-entry" role="listitem">
-Montgomery, Douglas C. 2017. <em>Design and Analysis of
-Experiments</em>. John wiley &amp; sons.
-</div>
-<div id="ref-Pinheiro2000" class="csl-entry" role="listitem">
-Pinheiro, J., and D. Bates. 2000. <em>Mixed-Effects Models in
-<span>S</span> and s-<span>PLUS</span></em>. Statistics and Computing.
-Springer New York.
-</div>
-<div id="ref-satterthwaite1946" class="csl-entry" role="listitem">
-Satterthwaite, F. E. 1946. <span>“An <span>Approximate
-Distribution</span> of <span>Estimates</span> of <span>Variance
-Components</span>.”</span> <em>Biometrics Bulletin</em> 2 (6): 110–14.
-<a href="https://doi.org/10.2307/3002019">https://doi.org/10.2307/3002019</a>.
-</div>
-<div id="ref-snedecor1934" class="csl-entry" role="listitem">
-Snedecor, George W. 1934. <span>“Calculation and Interpretation of
-Analysis of Variance and Covariance.”</span> <em>Agronomy Journal</em>
-26 (3): 255–56. https://doi.org/<a href="https://doi.org/10.2134/agronj1934.00021962002600030019x">https://doi.org/10.2134/agronj1934.00021962002600030019x</a>.
-</div>
-<div id="ref-Warton2011" class="csl-entry" role="listitem">
-Warton, David I., and Francis K. C. Hui. 2011. <span>“The Arcsine Is
-Asinine: The Analysis of Proportions in Ecology.”</span>
-<em>Ecology</em> 92 (1): 3–10. <a href="https://doi.org/10.1890/10-0340.1">https://doi.org/10.1890/10-0340.1</a>.
-</div>
-</div>
+<section id="preface" class="level1 unnumbered">
+<h1 class="unnumbered">Preface</h1>
+<section id="why-another-analysis-of-variance-book" class="level2">
+<h2 class="anchored" data-anchor-id="why-another-analysis-of-variance-book">Why another analysis of variance book?</h2>
+<p>There are many excellent books on analysis of variance, data modelling, and probability models. But I felt the need to write my own. Why? I see three problems.</p>
+<p>First, many courses assign a huge textbook. It might be possible for the strongest and most motivated students to become familiar with the range of topics covered in these books, but truly mastering them is another matter entirely. A book that tries to cover everything often ends up covering nothing deeply enough.</p>
+<p>Second, and drawing directly from the first point, students typically encounter analysis of variance as one chapter among many in a book that tries to present everything at once. This framing misleads students about the method: it invites them to skim over it rather than understand it, and to treat it as a recipe rather than a tool with conditions of use.</p>
+<p>Third, analysis of variance is a powerful tool, but I have too many times seen it misused, misinterpreted, and misreported, or applied through outdated and inappropriate workflows. In most cases, this does not come from carelessness. It comes from the fact that the method was never really understood in the first place.</p>
+<p>This book is my answer to these problems.</p>
+</section>
+<section id="how-to-use-this-book" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-book">How to use this book</h2>
+<p>This book is tool-oriented and built around a modern R stack. It is designed to be read in order, at least for the first time.</p>
+<p><strong>Start with the foundations.</strong> The first two chapters are the heart of the book. Do not rush past them. They are what will tell you <em>when</em> you can use ANOVA, <em>when</em> you cannot, and <em>what to do</em> when you are not sure. A reader who masters Part I will make fewer analytical mistakes than one who jumps straight to the models.</p>
+<p><strong>Then work through the classical models.</strong> Part II covers the ANOVA designs you will encounter most often, each with worked examples and R code. I particularly invite you to pay careful attention to the last chapter of this section, on nested and split-plot designs. Biological and ecological data are very often hierarchical in structure, and understanding how that hierarchy should be modelled, rather than ignored, is one of the most practically useful things this book can teach.</p>
+<p><strong>Move on to the modern framework</strong>. Part III introduces mixed-effects models and generalised linear mixed models. If you have read this far, you have already encountered the core reason why: Chapter 2 showed that the most damaging violations of ANOVA assumptions (non-independence, pseudoreplication, nested structures, and random effects) cannot be fixed by transforming your data or switching to a non-parametric test. They require a richer model, one that can represent the actual structure of how your data were collected. Mixed-effects models are that richer model. They are not a separate topic bolted onto ANOVA, they are the natural destination of the logic you have already been following. ANOVA is just a special case of the linear model and mixed-effects models are simply the next step in the same direction i.e.&nbsp;a linear model that can also account for the random variation introduced by subjects, plots, cages, clinics, or any other grouping structure in your data. By the end of Part III, the goal is that this framework becomes how you think about your analyses, not an advanced topic you feel you should know about but have never quite understood.</p>
+<p><strong>Close with good practice.</strong> Part IV on experimental design and reproducibility completes the stack. An analysis that cannot be reproduced or reported clearly is an analysis that cannot be trusted. This final part makes sure yours can be both.</p>
+<p>Each chapter includes R code that you can run directly. The book was written using Quarto, and all code chunks are fully reproducible. When you see a chunk, run it, modify it, break it, and fix it. That is how, I believe, the material becomes yours.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -874,13 +782,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05c-reproducible-analysis.html" class="pagination-link" aria-label="Reproducible Analysis">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducible Analysis</span></span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./appendix-a-math.html" class="pagination-link" aria-label="The Maths of the Book">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Maths of the Book</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02-foundations.html" class="pagination-link" aria-label="Foundations">
+        <span class="nav-page-text">Foundations</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -892,7 +797,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/references.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Ebedthan/maov/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/Ebedthan/maov/edit/main/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

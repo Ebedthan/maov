@@ -56,35 +56,6 @@ format:
     callout-appearance: simple
     code-link: true
     number-sections: true
-  pdf:
-    number-sections: true
-    pdf-engine: xelatex
-    documentclass: scrbook
-    classoption: [oneside]
-    papersize: a4
-    fontsize: 11pt
-    linestretch: 1.5
-    toc: true
-    toc-depth: 2
-    lof: true        # list of figures
-    lot: true        # list of tables
-    colorlinks: true
-    keep-tex: false
-    cite-method: natbib
-    mermaid-format: png
-    mainfont: "Libertinus Serif"
-    sansfont: "Libertinus Sans"
-    monofont: "JuliaMono"
-    monofontoptions:
-      - Scale=0.8
-
-knitr:
-  opts_chunk:
-    comment: "#>"
-    fig.align: "center"
-    out.width: "90%"
-    tidy: false
-    width: 72
     
 execute:
   cache: true
