@@ -1,7 +1,583 @@
-# Reproducible Analysis with R {#sec-chap14}
+# Reproducible Analysis {#sec-chap14}
 
-## Project structure and R scripts vs. Quarto/R Markdown
+Science is only as trustworthy as its reproducibility. A statistical analysis that cannot be recreated, because the code was lost, the random seed was not set, the software versions were not recorded, or the steps were not documented, is not a scientific contribution in any meaningful sense. It is an anecdote with a p-value attached.
 
-## `renv` for package management
+Reproducibility has become a central concern in biology and medicine over the past decade, driven by mounting evidence that a substantial fraction of published results cannot be independently verified. The causes are multiple, underpowered studies, publication bias, p-hacking, selective reporting, but one of the most tractable is poor computational practice. An analysis that is scripted, versioned, seeded, and documented can be reproduced exactly, by anyone, at any time. This chapter shows you how to achieve that standard.
 
-## A fully reproducible example
+
+## What Reproducibility Means and Why It Matters
+
+### Three Levels of Reproducibility
+
+Reproducibility exists on a spectrum. It is useful to distinguish three levels, each building on the previous:
+
+1. **Computational reproducibility:** given the same data and the same code, a different analyst on a different computer obtains identical numerical results. This is the minimum standard and the one this chapter focuses on. It requires fixed random seeds, recorded software versions, and self-contained code.
+
+2. **Analytical reproducibility:** given the same data, a different analyst using a different but reasonable analysis obtains the same scientific conclusions. This is a stronger standard that requires transparent reporting of analytical choices that is for example why this model rather than that one, why this correction rather than another.
+
+3. **Empirical reproducibility:** a different research team collecting new data from the same population obtains the same results. This is the gold standard and depends on adequate sample sizes, pre-registered hypotheses, and honest reporting.
+
+This chapter addresses computational reproducibility directly and analytical reproducibility through transparent reporting practices. Empirical reproducibility depends on all of the above plus good experimental design, which Chapter [-@sec-chap12] covered.
+
+### The Reproducibility Checklist
+
+Before submitting any paper or sharing any analysis, verify that:
+
+- Every random number generation call has a fixed `set.seed()`.
+- All software versions (R, packages) are recorded.
+- The code runs from top to bottom without errors on a fresh R session.
+- All file paths are relative, not absolute.
+- The data are available or can be regenerated from documented code.
+- All analytical choices are documented with justifications.
+
+## Project Structure
+
+A well-organised project directory is the foundation of reproducibility. When files are scattered across a desktop, a Downloads folder, and three different project directories, analyses cannot be reliably reproduced, even by the original author six months later.
+
+### The Recommended Structure for a Quarto Book
+
+Your book already follows a good structure. For a standalone analysis project, the following layout is recommended:
+
+````
+my-analysis/
+├── _quarto.yml          # or analysis.Rmd / analysis.qmd
+├── data/
+│   ├── raw/             # original data, never modified
+│   └── processed/       # cleaned data produced by code
+├── R/
+│   └── utils.R          # shared functions
+├── figures/             # generated figures
+├── outputs/             # tables, model summaries
+├── references.bib       # bibliography
+└── README.md            # project description and instructions
+````
+
+### The `here` Package for Portable Paths
+
+Never use absolute file paths like `/home/user/Documents/folder/data/systolic.rds`. These paths work only on your computer and break the moment anyone else tries to reproduce the analysis. Use the `here` package instead:
+
+````r
+library(here)
+
+# here() always resolves relative to the project root
+# regardless of which subdirectory the script is run from
+systolic <- readRDS(here("RDS", "systolic.rds"))
+
+# Equivalently
+source(here("R", "utils.R"))
+````
+
+`here()` finds the project root by looking for a `.Rproj` file, a `_quarto.yml` file, or a `.here` file. As long as one of these exists, paths constructed with `here()` work on any machine.
+
+### The `renv` Package for Package Version Control
+
+Different versions of R packages can produce different results. `renv` creates a project-specific package library with recorded version numbers, so that anyone reproducing the analysis uses exactly the same package versions:
+
+````r
+# Initialize renv in your project (run once)
+# install.packages("renv")
+renv::init()
+
+# After installing or updating packages, snapshot the state
+renv::snapshot()
+
+# This creates renv.lock, commit this file to git
+
+# Anyone reproducing the analysis runs:
+renv::restore()
+# This installs exactly the recorded package versions
+````
+
+The `renv.lock` file records every package name, version, and source. Commit it to your git repository alongside your code.
+
+````r
+# Check which packages are out of sync with the lockfile
+renv::status()
+
+# Update the lockfile after adding new packages
+renv::snapshot()
+````
+
+For more, please see [renv Posit guide](https://docs.posit.co/ide/user/ide/guide/environments/r/renv.html) and [introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
+
+## 14.3 Literate Programming with Quarto
+
+The entire book you are reading was written using Quarto, which implements the principle of **literate programming**: code, output, and prose are woven together in a single document. This is the gold standard for reproducible analysis because the document itself is the analysis: there is no separate step of copying results from R into a Word document, which is where transcription errors enter.
+
+### The Anti-Pattern: Copy-Paste Reporting
+
+The most common reproducibility failure in biological papers is the copy-paste workflow:
+
+1. Run analysis in R.
+2. Read the numbers from the console.
+3. Type them into a Word document.
+4. Revise the analysis.
+5. Forget to update one of the numbers in the document.
+
+This produces papers where the numbers in the text do not match the numbers in the tables, or where changing the dataset requires manually hunting down and updating dozens of values scattered through the manuscript.
+
+### The Solution: Inline Code
+
+Every number in a Quarto document should come directly from R, not from the keyboard. This is achieved with inline code:
+
+```{r setup-inline, echo=FALSE}
+library(effectsize)
+systolic <- readRDS("RDS/systolic.rds")
+fit <- aov(bp ~ group, data = systolic)
+f_val <- summary(fit)[[1]][["F value"]][1]
+df1 <- summary(fit)[[1]][["Df"]][1]
+df2 <- summary(fit)[[1]][["Df"]][2]
+p_val <- summary(fit)[[1]][["Pr(>F)"]][1]
+om <- omega_squared(fit, partial = FALSE)$Omega2
+```
+
+I can include it for example for $df1$ = `r df1`, $df2$ = `r df2`, $F$ = `r f_val`, $p$ = `r round(p_val, 3)` and $\omega^2$ = `r om` with this text in R:
+
+```{r}
+#| eval: false
+sprintf("$F_{%d,%d} = %.2f$, $p = %.3f$, $\\omega^2 = %.2f$",
+df1, df2, f_val, p_val, om)
+```
+
+which will render (in latex) as:
+
+````r
+Treatment had a significant effect on blood pressure
+(`r sprintf("$F_{%d,%d} = %.2f$, $p = %.3f$, $\\omega^2 = %.2f$",
+df1, df2, f_val, p_val, om)`).
+````
+
+Then, when the analysis changes, a new patient is added, an outlier is removed, the model specification is updated, every number in the document updates automatically on the next render. Nothing can fall out of sync because the document and the analysis are the same thing.
+
+### Chunk Options for Clean Documents
+
+For a polished manuscript, use these chunk options to control what appears in the output:
+
+````r
+# In _quarto.yml, apply globally
+knitr:
+  opts_chunk:
+    echo: false       # hide code in output
+    warning: false    # hide warnings
+    message: false    # hide messages
+    fig.align: center
+    out.width: "90%"
+````
+
+Override locally for specific chunks:
+
+```{r model-fit}
+#| echo: true       # show this chunk's code
+#| warning: true    # show warnings for this chunk(
+library(lme4)
+physio <- readRDS("RDS/physio.rds")
+fit <- lmer(recovery ~ treatment + (1 | hospital), data = physio)
+summary(fit)
+```
+
+
+## Version Control with Git
+
+### Why Every Analysis Needs Version Control
+
+Version control is not just for software developers. For a statistician or data analyst, git provides:
+
+- **A complete history** of every change made to the analysis, with timestamps and commit messages explaining why each change was made.
+- **The ability to revert** to any previous state of the analysis which is essential when a "simplification" turns out to be a mistake.
+- **A backup** that is automatically off-site when pushed to GitHub.
+- **Collaboration** with co-authors who can suggest changes through pull requests without overwriting each other's work.
+
+### The Essential Git Workflow for an Analysis Project
+
+````bash
+# Initial setup (once per project)
+git init
+git add -A
+git commit -m "Initial project structure"
+git remote add origin https://github.com/username/project.git
+git push -u origin main
+
+# Daily workflow
+git status                          # what has changed?
+git diff                            # what exactly changed?
+git add analysis.qmd R/utils.R      # stage specific files
+git commit -m "Add power analysis for nested model"
+git push origin main                # backup to GitHub
+````
+
+### Writing Good Commit Messages
+
+A commit message should complete the sentence "This commit...":
+
+````bash
+# Bad: tells you nothing
+git commit -m "update"
+git commit -m "fix"
+git commit -m "changes"
+
+# Good: tells you what changed and why
+git commit -m "Fix overdispersion check in GLMM chapter"
+git commit -m "Add Kenward-Roger df to mixed model reporting template"
+git commit -m "Rewrite blocking example with simulated field data"
+````
+
+### What to Include and Exclude from Git
+
+````bash
+# .gitignore: files that should NOT be committed
+*.Rhistory
+.RData
+.Rproj.user/
+*_cache/           # Quarto cache (large, reproducible)
+*_files/           # Quarto intermediate files
+docs/              # built book (if using CI/CD)
+renv/library/      # renv package library (large, reproducible)
+*.log
+*.aux
+````
+
+````bash
+# Files that SHOULD be committed
+*.qmd              # source documents
+*.R                # R scripts
+*.bib              # bibliography
+renv.lock          # package versions
+_quarto.yml        # project configuration
+utils.R            # shared functions
+RDS/               # saved datasets (if small enough)
+````
+
+For details and in-depth explanation of version control, git and its use within R, check the [Happy Git and GitHub for the useR](https://happygitwithr.com/) by Jenny Brian.
+
+## 14.5 Pre-Registration and the Open Science Framework
+
+Pre-registration is the practice of specifying your hypotheses, design, and analysis plan before collecting data and depositing that specification in a public registry. It is the most effective single intervention against p-hacking and HARKing (Hypothesising After Results are Known).
+
+### What to Pre-Register
+
+A complete pre-registration for an ANOVA-based study includes:
+
+````markdown
+# Pre-registration: [Study Title]
+## Hypotheses
+- Primary: [State H0 and H1 precisely]
+- Secondary: [List any secondary hypotheses]
+
+## Design
+- Design type: [one-way CRD / factorial / split-plot / etc.]
+- Sample size and justification: [power analysis results]
+- Randomisation procedure: [how treatments will be assigned]
+- Blinding: [who is blinded to treatment allocation]
+
+## Primary Analysis
+- Model formula: `lmer(response ~ treatment + (1 | site), data = df)`
+- Degrees of freedom method: Kenward-Roger
+- Significance threshold: alpha = 0.05
+- Effect size: partial omega-squared
+
+## Multiple Comparisons
+- Post-hoc test: Tukey HSD
+- Planned contrasts (if any): [specify exactly]
+
+## Assumption Checks
+- Independence: verified by design [describe]
+- Homoscedasticity: Levene's test + residual plots
+- Normality: Q-Q plot + Shapiro-Wilk
+
+## Deviations from Plan
+- Any deviation from this plan will be reported explicitly
+  in the paper with justification
+````
+
+### Registering on the Open Science Framework
+
+The Open Science Framework (OSF, [https://osf.io](https://osf.io)) provides free pre-registration for biological and medical research:
+
+1. Create an account at https://osf.io
+2. Create a new project for your study
+3. Click **Registrations** => **New Registration**
+4. Choose a registration template (AsPredicted or OSF Standard)
+5. Complete the form and submit, this creates a time-stamped, publicly accessible record
+
+The OSF also hosts data, code, and materials, making it possible to create a single URL that links to everything needed to reproduce a study.
+
+## Sharing Data and Code
+
+### Data Sharing
+
+Raw data should be shared in an open, non-proprietary format:
+
+````r
+# Save data in multiple formats for maximum accessibility
+
+# CSV: universally readable
+write.csv(systolic, "data/systolic.csv", row.names = FALSE)
+
+# RDS: preserves R factor levels and attributes
+saveRDS(systolic, "data/systolic.rds")
+
+# Arrow/Parquet: efficient for large datasets
+# install.packages("arrow")
+arrow::write_parquet(systolic, "data/systolic.parquet")
+````
+
+Always include a data dictionary which is a plain text or markdown file describing every variable:
+
+````markdown
+# Data Dictionary: systolic.csv
+
+## Variables
+
+| Variable | Type | Unit | Description | Values |
+|----------|------|------|-------------|--------|
+| bp | numeric | mmHg | Systolic blood pressure | 100-200 |
+| group | factor | - | Treatment group | Placebo, Low dose, High dose |
+
+## Notes
+- Data simulated with set.seed(42)
+- 20 patients per group, N = 60 total
+- See Chapter 3 for full simulation code
+````
+
+### Code Sharing
+
+Share your analysis code as a self-contained script or Quarto document that runs from top to bottom on a fresh R session:
+
+````r
+# At the top of every shared analysis script
+# 1. Record the R version
+cat("R version:", R.version$version.string, "\n")
+
+# 2. Record package versions
+packages_used <- c("lme4", "lmerTest", "glmmTMB", "emmeans", "effectsize", "car")
+pkg_versions  <- sapply(packages_used, function(p) as.character(packageVersion(p)))
+print(data.frame(Package = packages_used,
+                 Version = pkg_versions,
+                 row.names = NULL))
+
+# 3. Set the random seed
+set.seed(42)
+
+# 4. Use here() for all file paths
+library(here)
+````
+
+### Session Information
+
+Always include a session information block at the end of every analysis document. In Quarto, add this as the last chunk:
+
+```{r session-info}
+#| echo: true
+#| eval: true
+sessionInfo()
+```
+
+Or use the more compact `sessioninfo` package:
+
+```{r session-info-compact}
+# install.packages("sessioninfo")
+sessioninfo::session_info()
+```
+
+The session information records R version, operating system, and every loaded package with its version number. A reader trying to reproduce your analysis can use this to identify any version discrepancies that might explain different results.
+
+## A Reproducibility Workflow for Biological Papers
+
+Putting everything together, here is the complete workflow for a reproducible ANOVA-based biological paper from design to publication:
+
+### Before Data Collection
+
+````r
+# 1. Pre-register the study on OSF
+# 2. Conduct power analysis and record it
+library(simr)
+library(pwr)
+
+# Document the power analysis
+power_analysis <- list(
+  method = "simulation via simr",
+  effect_size = "5 recovery points",
+  between_sd = 3,
+  residual_sd = 8,
+  target_power = 0.80,
+  alpha = 0.05,
+  n_simulations = 1000,
+  result = "n = 10 hospitals x 10 patients = 100 total",
+  date = Sys.Date()
+)
+saveRDS(power_analysis, here("outputs", "power_analysis.rds"))
+
+# 3. Write the analysis script before seeing any data
+# 4. Initialize git and renv
+````
+
+### During Data Collection
+
+````bash
+# Commit the pre-registration and analysis plan
+git add pre-registration.md analysis-plan.qmd
+git commit -m "Add pre-registration and analysis plan before data collection"
+git push origin main
+
+# This commit timestamp proves the plan predates the data
+````
+
+### After Data Collection
+
+```{r data-import}
+#| cache: true
+#| eval: false
+
+# Always import raw data without modification
+raw_data <- read.csv(here::here("data", "raw", "trial_data.csv"))
+
+# Document any data cleaning steps explicitly
+cleaned_data <- raw_data |>
+  # Remove patients who withdrew consent
+  dplyr::filter(consent == "yes") |>
+  # Convert group to factor with reference level
+  dplyr::mutate(
+    group = factor(group,
+                   levels = c("Control", "Treatment"))
+  )
+
+# Record exclusions
+cat("Original N:", nrow(raw_data), "\n")
+cat("After exclusions:", nrow(cleaned_data), "\n")
+cat("Excluded:", nrow(raw_data) - nrow(cleaned_data), "\n")
+
+# Save cleaned data
+saveRDS(cleaned_data, here::here("data", "processed", "cleaned_data.rds"))
+```
+
+
+### Analysis
+
+```{r primary-analysis}
+#| cache: true
+#| eval: false
+
+# Run the pre-specified primary analysis exactly as planned
+fit_primary <- lmerTest::lmer(
+  recovery ~ treatment + (1 | hospital),
+  data = cleaned_data,
+  REML = TRUE
+)
+
+# Any deviation from the pre-registered analysis must be flagged
+# as exploratory and reported as such
+```
+
+### Reporting Deviations
+
+If the analysis deviates from the pre-registered plan, a different model was needed, an additional covariate was added, the primary outcome was changed, document this explicitly:
+
+````markdown
+::: {.callout-important}
+## Deviation from Pre-Registered Analysis
+
+The pre-registered analysis specified a Poisson GLMM for the count outcome. Inspection of the data revealed substantial overdispersion (ratio = 4.2), so a negative binomial GLMM was fitted instead. This decision was made before examining the treatment effects and is consistent with the pre-registered assumption check procedure. The Poisson model results are reported in Supplementary Table S1 for comparison.
+:::
+````
+
+### Final Checks Before Submission
+
+````r
+# 1. Restart R and run the entire analysis from scratch
+# Session > Restart R and Run All Chunks (in RStudio)
+
+# 2. Verify the renv lockfile is up to date
+renv::status()
+renv::snapshot()
+
+# 3. Check that all file paths work
+# (no absolute paths, all here() calls resolve correctly)
+
+# 4. Render the final document
+# quarto render --to html
+# quarto render --to pdf
+
+# 5. Commit the final version
+git add -A
+git commit -m "Final analysis for submission to [journal]"
+git tag -a "submission-v1" -m "Version submitted to journal"
+git push origin main --tags
+````
+
+The `git tag` creates a permanent named marker in the repository
+history, so you can always return to exactly the version that was
+submitted, even after subsequent revisions.
+
+## 14.8 Tools and Resources
+
+### Essential Tools
+
+| Tool | Purpose | Where to get it |
+|------|---------|----------------|
+| Quarto | Literate programming | quarto.org |
+| git | Version control | git-scm.com |
+| GitHub | Remote repository | github.com |
+| `renv` | Package version management | CRAN |
+| `here` | Portable file paths | CRAN |
+| OSF | Pre-registration and data sharing | osf.io |
+| Zenodo | Permanent data archiving with DOI | zenodo.org |
+
+### Getting a DOI for Your Code and Data
+
+For published papers, code and data should have a permanent identifier (DOI) that can be cited. Zenodo integrates directly with GitHub:
+
+1. Go to https://zenodo.org and log in with your GitHub account.
+2. Enable the repository under **GitHub** => **Enabled Repositories**.
+3. Create a release on GitHub and Zenodo automatically archives it and assigns a DOI.
+4. Cite the DOI in your paper's Data Availability statement.
+
+### Checklist for a Reproducible Paper
+
+````markdown
+## Reproducibility Checklist
+
+### Before submission
+- [ ] set.seed() in every chunk that uses random numbers
+- [ ] All file paths use here()
+- [ ] renv.lock committed to repository
+- [ ] Analysis runs from scratch in a fresh R session
+- [ ] Session information included in supplementary materials
+- [ ] All deviations from pre-registration documented
+- [ ] Data dictionary provided for all datasets
+- [ ] Code deposited on GitHub/Zenodo with DOI
+
+### In the Methods section
+- [ ] R version stated
+- [ ] All package names and versions cited
+- [ ] Full model formula reported
+- [ ] Random seed stated if simulation was used
+- [ ] Pre-registration URL cited (if applicable)
+- [ ] Data availability statement included
+
+### In the Results section
+- [ ] All test statistics with degrees of freedom
+- [ ] Exact p-values (not just < 0.05)
+- [ ] Effect sizes with confidence intervals
+- [ ] Sample sizes at every relevant level
+- [ ] Post-hoc method named and justified
+````
+
+## A Note on Artificial Intelligence Tools
+
+Large language models and AI coding assistants are increasingly used in statistical analysis, for writing code, checking syntax, and explaining output. Their use is not inherently problematic, but it introduces specific reproducibility risks worth being explicit about.
+
+1. **AI-generated code should be treated as a first draft, not a final analysis.** AI tools can produce plausible-looking but incorrect code, choose the wrong model for the data structure, or suggest analyses that are inconsistent with the pre-registered plan. Every line of AI-generated code should be understood, verified, and tested before being included in a published analysis.
+
+2. **The analyst remains responsible for the analysis.** Citing an AI tool as the source of an analytical decision, "the model was selected by ChatGPT", is not a valid justification in a scientific paper. The analyst must understand and defend every choice.
+
+3. **Disclose AI tool use** in accordance with the target journal's policy. Many journals now require explicit disclosure of AI assistance in methods or acknowledgements sections.
+
+The most defensible position is to use AI tools for syntax help and code explanation, the same role that Stack Overflow has played for a decade, while making all analytical decisions (model choice, assumption checks, interpretation) independently and documenting the reasoning explicitly.
+
+## Closing Remarks
+
+Reproducibility is not a constraint on scientific creativity, it is the condition that makes scientific creativity trustworthy. An elegant analysis that cannot be reproduced is worthless; a pedestrian analysis that is fully documented, versioned, and shared is a permanent contribution to knowledge.
+
+The tools and practices covered in this chapter, [Quarto](https://quarto.org), [git](https://git-scm.com), `renv`, `here`, pre-registration, open data, require an upfront investment that pays compound returns. The first time you return to a project after six months and find that everything still runs correctly, or the first time a reviewer asks for a minor revision and you can update every number in the paper by changing two lines of code and re-rendering, the value of these practices becomes immediately apparent.
+
+The book began with Fisher at Rothamsted, separating signal from noise in agricultural field trials. A century later, the tools have changed beyond recognition, but the core obligation has not: to be honest about what the data show, transparent about how they were analysed, and open enough that others can verify the work. Reproducibility is how statistics keeps its promises.
