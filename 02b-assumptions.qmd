@@ -79,6 +79,7 @@ Running this code produces output along the lines of:
 
 ```{r}
 #| cache: true
+#| code-fold: true
 cat(
   "False positive rate (correct analysis):",
   round(mean(false_pos_correct), 3),
@@ -141,6 +142,7 @@ Then, we can check the false positive rate:
 
 ```{r}
 #| cache: true
+#| code-fold: true
 cat(
   "False positive rate (correct analysis):",
   round(mean(p_correct < alpha), 3),
@@ -153,6 +155,7 @@ And visualise the distribution of p-values:
 
 ```{r}
 #| cache: true
+#| code-fold: true
 #| fig-cap: "Distribution of p-values under the null hypothesis across 5000 simulations. Under the correct analysis (top), p-values are uniformly spread between 0 and 1, the expected behaviour of a well-calibrated test. Under pseudoreplication (bottom), p-values pile up near zero, producing a large excess of spurious significant results. Red dashed line marks p = 0.05."
 #| label: fig-pval
 
@@ -260,6 +263,7 @@ for (i in seq_len(n_sim)) {
 We then compare the false positive rate of standard ANOVA (which assumes equal variances) against Welch's ANOVA (which does not).
  
 ```{r}
+#| code-fold: true
 cat(
   "False positive rate (standard ANOVA):",
   round(mean(p_standard < alpha), 3),
@@ -276,6 +280,7 @@ It is always good practice to look at your data before running any test. A simpl
 
 ```{r}
 #| cache: true
+#| code-fold: true
 #| fig-cap: "Simulated heart rate data from one realisation of the three-group experiment. The groups share the same true mean but differ dramatically in their spread. This pattern, wider scatter in one group than another, is the signature of heteroscedasticity."
 #| label: fig-homoscedasticity-plot
 library(ggplot2)
@@ -559,6 +564,7 @@ Let us visualise this across the range of distributions tested:
 
 ```{r}
 #| cache: true
+#| code-fold: true
 #| fig-cap: "False positive rate of one-way ANOVA under increasing departures from normality (t-distributions with decreasing degrees of freedom). The dashed red line marks the nominal 5% level. The shaded band shows a 95% Monte Carlo confidence interval around the target rate. The false positive rate stays close to 5% throughout, demonstrating the robustness of ANOVA to non-normality."
 #| label: fig-normality-robustness-plot
 library(ggplot2)
@@ -811,6 +817,7 @@ The random effects model produces a very different kind of output. There is no F
 
 ```{r}
 #| cache: true
+#| code-fold: true
 # Extract variance components
 vc <- as.data.frame(VarCorr(fit_random))
 cat(
@@ -940,6 +947,7 @@ print(results)
 ```{r fig-assumptions-comparison-plot}
 #| fig-cap: "False positive rates of one-way ANOVA under four conditions: no violation, non-independence, heteroscedasticity, and non-normality. The dashed red line marks the nominal 5% level. The shaded band is the 95% Monte Carlo interval. Non-independence is by far the most damaging violation; non-normality is essentially harmless."
 #| cache: true
+#| code-fold: true
 
 library(ggplot2)
 
@@ -1112,6 +1120,7 @@ The simulation below demonstrates both failure modes:
 #| fig-cap: "The Shapiro-Wilk trap illustrated. Left: with small samples (n = 5 per group), the test fails to detect clear non-normality, returning p > 0.05 in the majority of cases. Right: with large samples (n = 200 per group), the test rejects normality almost universally, even for data generated from an exactly normal distribution with only a trivial added skew."
 #| cache: true
 #| label: fig-shapiro-trap
+#| code-fold: true
 set.seed(42)
 n_sim <- 2000
 
@@ -1186,6 +1195,7 @@ However, formal tests for homoscedasticity suffer from exactly the same sample s
 #| fig-cap: "Levene's test suffers from the same sample size sensitivity as the Shapiro-Wilk test. With small samples it misses real heteroscedasticity; with large samples it flags trivial differences as significant."
 #| cache: true
 #| label: fig-levene-trap
+#| code-fold: true
 set.seed(42)
 
 # Small n: misses real heteroscedasticity

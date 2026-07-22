@@ -514,13 +514,13 @@ window.Quarto = {
 </div>
 <p>Running this code produces output along the lines of:</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"False positive rate (correct analysis):"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">false_pos_correct</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>  <span class="st">"\nFalse positive rate (pseudoreplication):"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">false_pos_pseudo</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"\n"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>False positive rate (correct analysis): 0.053 
 False positive rate (pseudoreplication): 0.27 </code></pre>
 </div>
@@ -571,20 +571,20 @@ False positive rate (pseudoreplication): 0.27 </code></pre>
 </div>
 <p>Then, we can check the false positive rate:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"False positive rate (correct analysis):"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">p_correct</span> <span class="op">&lt;</span> <span class="va">alpha</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>  <span class="st">"\nFalse positive rate (pseudoreplication):"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">p_pseudo</span>  <span class="op">&lt;</span> <span class="va">alpha</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"\n"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>False positive rate (correct analysis): 0.053 
 False positive rate (pseudoreplication): 0.27 </code></pre>
 </div>
 </div>
 <p>And visualise the distribution of p-values:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Build a tidy data frame for plotting</span></span>
 <span><span class="va">p_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
@@ -600,7 +600,7 @@ False positive rate (pseudoreplication): 0.27 </code></pre>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"p-value"</span>, y <span class="op">=</span> <span class="st">"Count"</span>, fill <span class="op">=</span> <span class="st">"Analysis type"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div id="fig-pval" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-pval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="02b-assumptions_files/figure-html/fig-pval-1.png" class="img-fluid figure-img" width="672">
@@ -680,13 +680,13 @@ Figure&nbsp;2.1: Distribution of p-values under the null hypothesis across 5000 
 </div>
 <p>We then compare the false positive rate of standard ANOVA (which assumes equal variances) against Welch’s ANOVA (which does not).</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"False positive rate (standard ANOVA):"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">p_standard</span> <span class="op">&lt;</span> <span class="va">alpha</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>  <span class="st">"\nFalse positive rate (Welch's ANOVA):"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">p_welch</span> <span class="op">&lt;</span> <span class="va">alpha</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"\n"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>False positive rate (standard ANOVA): 0.082 
 False positive rate (Welch's ANOVA): 0.05 </code></pre>
 </div>
@@ -696,7 +696,7 @@ False positive rate (Welch's ANOVA): 0.05 </code></pre>
 <span class="header-section-number">2.2.5</span> Visualising the problem</h3>
 <p>It is always good practice to look at your data before running any test. A simple plot of the raw observations by group immediately reveals heteroscedasticity that summary statistics alone might obscure.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span></span>
@@ -719,7 +719,7 @@ False positive rate (Welch's ANOVA): 0.05 </code></pre>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Training programme"</span>, y <span class="op">=</span> <span class="st">"Resting heart rate (bpm)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div id="fig-homoscedasticity-plot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-homoscedasticity-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="02b-assumptions_files/figure-html/fig-homoscedasticity-plot-1.png" class="img-fluid figure-img" width="672">
@@ -990,7 +990,7 @@ Figure&nbsp;2.4: Residuals QQ-plot showing minor divergence from normality.
 <p>The result is striking: even with extremely heavy-tailed distributions (<span class="math inline">\(df = 2\)</span> is very far from normal), the false positive rate never strays far from the nominal 5%. If anything, ANOVA becomes slightly <em>conservative</em> under heavy tails, the false positive rate drops a little below 0.05, meaning the test becomes harder to reject than it should be, not easier. This is the opposite of what most students expect.</p>
 <p>Let us visualise this across the range of distributions tested:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Monte Carlo confidence interval for the false positive rate</span></span>
 <span><span class="co"># given n_sim = 5000 simulations</span></span>
@@ -1008,7 +1008,7 @@ Figure&nbsp;2.4: Residuals QQ-plot showing minor divergence from normality.
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Residual distribution (left = heavy-tailed, right = normal)"</span>, y <span class="op">=</span> <span class="st">"False positive rate"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">30</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div id="fig-normality-robustness-plot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-normality-robustness-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="02b-assumptions_files/figure-html/fig-normality-robustness-plot-1.png" class="img-fluid figure-img" width="672">
@@ -1239,7 +1239,7 @@ Fixed effects:
 <p>The fixed effects ANOVA produces a familiar table. The F test is significant (<span class="math inline">\(F_{5,24} = 3.99\)</span>, <span class="math inline">\(p = 0.009\)</span>), and the conclusion is specific: these six groups, chosen deliberately by the experimenter differ significantly in their means. The analysis says nothing about any other groups beyond these six, it was never designed to.</p>
 <p>The random effects model produces a very different kind of output. There is no F test, no p-value, and no table of group means. Instead, the model decomposes the total variance into two components. The variance among groups is <span class="math inline">\(\hat{\sigma}^2_b = 5.84\)</span>, representing the genuine differences in means across the population of groups from which these six were sampled. The residual variance (the within-group variation) is <span class="math inline">\(\hat{\sigma}^2_\varepsilon = 4.18\)</span>. The only fixed effect is the intercept (<span class="math inline">\(\hat{\mu} = 12.08\)</span>), which estimates the grand mean of the population of groups.</p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Extract variance components</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Extract variance components</span></span>
 <span><span class="va">vc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/VarCorr.html">VarCorr</a></span><span class="op">(</span><span class="va">fit_random</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Variance among groups:"</span>, </span>
@@ -1249,7 +1249,7 @@ Fixed effects:
 <span>  <span class="st">"\nIntraclass correlation (ICC):"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">vc</span><span class="op">$</span><span class="va">vcov</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">vc</span><span class="op">$</span><span class="va">vcov</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"\n"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>Variance among groups: 5.841 
 Variance within groups: 4.175 
 Intraclass correlation (ICC): 0.583 </code></pre>
@@ -1431,7 +1431,7 @@ Intraclass correlation (ICC): 0.583 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mc_lower</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">qbinom</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="va">n_sim</span>, <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_sim</span></span>
 <span><span class="va">mc_upper</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">qbinom</a></span><span class="op">(</span><span class="fl">0.975</span>, <span class="va">n_sim</span>, <span class="va">alpha</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_sim</span></span>
@@ -1447,7 +1447,7 @@ Intraclass correlation (ICC): 0.583 </code></pre>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"False positive rate"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span>, axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div id="fig-assumptions-comparison-plot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-assumptions-comparison-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="02b-assumptions_files/figure-html/fig-assumptions-comparison-plot-1.png" class="img-fluid figure-img" width="672">
@@ -1600,7 +1600,7 @@ Figure&nbsp;2.10: Four residual diagnostic plots for a one-way ANOVA fitted to t
 <p><strong>With large samples</strong>, the Shapiro-Wilk test becomes hypersensitive. It will return <span class="math inline">\(p &lt; 0.05\)</span>, apparently rejecting normality, for trivially small deviations that have no practical consequence for the <span class="math inline">\(F\)</span> test whatsoever. The larger your sample, the more likely you are to get a significant result even when your residuals are, for all practical purposes, perfectly normal.</p>
 <p>The simulation below demonstrates both failure modes:</p>
 <div class="cell">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span><span class="va">n_sim</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
 <span></span>
 <span><span class="co"># Small sample trap: low power to detect real non-normality</span></span>
@@ -1627,11 +1627,11 @@ Figure&nbsp;2.10: Four residual diagnostic plots for a one-way ANOVA fitted to t
 <span>  <span class="st">"\nLarge n: proportion of tests rejecting near-normal data:"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">p_large</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"\n"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>Small n: proportion of tests detecting non-normality: 0.368 
 Large n: proportion of tests rejecting near-normal data: 0.059 </code></pre>
 </div>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot</span></span>
 <span><span class="va">trap_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  p_value  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">p_small</span>, <span class="va">p_large</span><span class="op">)</span>,</span>
 <span>  scenario <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Small n (n=5 per group)\nClearly non-normal data"</span>,</span>
@@ -1647,7 +1647,7 @@ Large n: proportion of tests rejecting near-normal data: 0.059 </code></pre>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Shapiro-Wilk p-value"</span>, y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div id="fig-shapiro-trap" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-shapiro-trap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="02b-assumptions_files/figure-html/fig-shapiro-trap-1.png" class="img-fluid figure-img" width="672">
@@ -1687,7 +1687,7 @@ group  2  0.4118 0.6651
 </div>
 <p>However, formal tests for homoscedasticity suffer from exactly the same sample size problem as the Shapiro-Wilk test. The simulation below demonstrates this for Levene’s test.</p>
 <div class="cell">
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Small n: misses real heteroscedasticity</span></span>
 <span><span class="va">p_lev_small</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">n_sim</span>, <span class="op">{</span></span>
@@ -1709,7 +1709,7 @@ group  2  0.4118 0.6651
 <span>  <span class="st">"\nLarge n: flagging trivial variance differences (sd = 1, 1.1, 1.2):"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">p_lev_large</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"\n"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>Small n: detecting large variance differences (sd = 1, 3, 9): 0.3 
 Large n: flagging trivial variance differences (sd = 1, 1.1, 1.2): 0.552 </code></pre>
 </div>

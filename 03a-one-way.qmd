@@ -147,6 +147,7 @@ A combination of a boxplot and the individual observations gives a much richer p
 #| fig-cap: "Systolic blood pressure (mmHg) by treatment group. Individual observations are shown as points, jittered horizontally to reduce overplotting. The horizontal dashed line marks the grand mean. Even before any formal test, the progressive decrease in both the median and spread of values from placebo to high dose is clearly visible."
 #| cache: true
 #| label: fig-clinical-plot
+#| code-fold: true
 library(ggplot2)
 
 grand_mean <- mean(systolic$bp)
