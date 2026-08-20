@@ -182,9 +182,13 @@ Under the correct analysis, $p$-values are uniformly distributed between 0 and 1
 ### How to detect non-independence
 
 Independence is not something you can test statistically after the fact: it must be assessed by thinking carefully about **how the data were collected**.
+
 Ask yourself:
+
 - Are any observations collected from the same individual at different times?
+
 - Are any observations grouped within a shared physical unit (a cage, a pot, a plot, a classroom, a hospital ward)?
+
 - Could observations close together in space or time be more similar to each other than observations far apart?
 
 If the answer to any of these questions is yes, your observations are likely not fully independent, and a standard ANOVA may not be appropriate.
